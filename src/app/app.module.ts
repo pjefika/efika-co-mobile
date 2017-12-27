@@ -6,14 +6,23 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { RestProvider } from '../providers/rest/rest';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ObjKeysPipe } from '../util/pipes/objKeysPipe';
+import { Capitalize, KeyBeautifyingPipe } from '../util/pipes/beautifyingPipe';
+import { HolderService } from '../providers/holder/holderService';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    ObjKeysPipe,
+    KeyBeautifyingPipe,
+    Capitalize
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -24,7 +33,10 @@ import { HomePage } from '../pages/home/home';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    HttpClientModule,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    RestProvider,
+    HolderService
   ]
 })
 export class AppModule {}
