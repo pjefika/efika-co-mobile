@@ -1,0 +1,15 @@
+<div>
+    <ion-list>
+        <ion-item>
+            <ion-label stacked>Instância/Designador</ion-label>
+            <ion-input type="text" [(ngModel)]="holderService.instancia"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <div padding>
+        <button ion-button color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
+    </div>
+
+    <info-cadastro-component></info-cadastro-component>
+
+</div>

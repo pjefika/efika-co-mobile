@@ -1,43 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { RestProvider } from '../../providers/rest/rest';
 import { HolderService } from '../../providers/holder/holderService';
+import { DynamicRouterHolderService } from '../dynamiccomponent/dynamic-router/dynamic-router-holder.service';
+import { CadastroComponent } from '../cadastro/cadastro.component';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+	selector: 'page-home',
+	templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  countries: any;
-  errorMessage: string;
+	constructor(public navCtrl: NavController,
+		public holderService: HolderService,
+		public dynamicRouterHolderService: DynamicRouterHolderService) {
 
+	}
 
-  constructor(public navCtrl: NavController,
-    public rest: RestProvider,
-    public holderService: HolderService) {
+	public ngOnInit() {
+		this.setToDynamicComponent(CadastroComponent);
+	}
 
-  }
-
-  ionViewDidLoad() {
-    // this.getCountries();
-  }
-
-  getCadastro() {
-    console.log("toaqui")
-    this.rest.getCadastro(this.holderService.instancia)
-      .subscribe(
-      cadastro => this.holderService.cadastro = cadastro,
-      error => this.errorMessage = <any>error);
-  }
-  hasDetail(ob:any){
-    if(typeof(ob.value)==="string"){
-      console.log("farse")
-      return false
-    }
-    console.log("letrue")
-    return true
-  }
-
+	public setToDynamicComponent(component: any) {
+		// Sempre resetar para null antes de setar component
+		this.dynamicRouterHolderService.component = null;
+		// Deixar timeout senão react não entende que mudou variavel na holder.
+		setTimeout(() => {
+			this.dynamicRouterHolderService.component = component;
+		}, 1);
+	}
 
 }
