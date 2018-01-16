@@ -7,9 +7,7 @@
     </ion-list>
 
     <div padding>
-        <button ion-button color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
+        <button ion-button round color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
     </div>
-
-    <info-cadastro-component></info-cadastro-component>
-
+    <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
 </div>

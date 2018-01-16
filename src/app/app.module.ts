@@ -17,6 +17,8 @@ import { InfoCadastroComponent } from '../pages/cadastro/info-cadastro/info-cada
 import { DynamicComponent } from '../pages/dynamiccomponent/dynamic.component';
 import { DynamicRouterComponent } from '../pages/dynamiccomponent/dynamic-router/dynamic-router.component';
 import { DynamicRouterHolderService } from '../pages/dynamiccomponent/dynamic-router/dynamic-router-holder.service';
+import { FulltestResultComponent } from '../pages/fulltest/fulltest-result/fulltest-result.component';
+import { MomentModule } from 'angular2-moment';
 
 @NgModule({
 	declarations: [
@@ -29,18 +31,23 @@ import { DynamicRouterHolderService } from '../pages/dynamiccomponent/dynamic-ro
 		CadastroComponent,
 		InfoCadastroComponent,
 		DynamicComponent,
-		DynamicRouterComponent
+		DynamicRouterComponent,
+		FulltestResultComponent,
 	],
 	imports: [
 		BrowserModule,
 		HttpModule,
-		IonicModule.forRoot(MyApp)
+		IonicModule.forRoot(MyApp),
+		MomentModule
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
 		MyApp,
 		HomePage,
-		CadastroComponent
+		CadastroComponent,
+		InfoCadastroComponent,
+		FulltestComponent,
+		FulltestResultComponent,
 	],
 	providers: [
 		StatusBar,

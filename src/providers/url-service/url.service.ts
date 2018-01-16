@@ -10,6 +10,7 @@ export class UrlService extends SuperService implements RequestAction {
     public urlIp = "http://10.40.195.81:8080/";
 
     public pathStealerAPI = "stealerAPI/"; // stealerAPI_qa
+    public pathFulltestAPI = "fulltestAPI/";
 
     private headersAppJson = new Headers({ 'Content-Type': 'application/json' });
     public options = new RequestOptions({ headers: this.headersAppJson });

@@ -20,6 +20,9 @@ export class CadastroComponent implements OnInit {
     public ngOnInit() { }
 
     public getCadastro() {
+
+        this.holderService.cadastro = null;
+
         let carregando = this.loadingCtrl.create({
             content: "Consultando Cadastro"
         });
