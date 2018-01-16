@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { HolderService } from '../../providers/holder/holderService';
 import { LoadingController } from 'ionic-angular';
 import { FulltestService } from './fulltest.service';
-import { HomePage } from '../home/home';
-import { FulltestResultComponent } from './fulltest-result/fulltest-result.component';
 
 @Component({
     selector: 'fulltest-component',
@@ -15,10 +13,13 @@ export class FulltestComponent {
 
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
-        private fulltestService: FulltestService,
-        public homePage: HomePage) { }
+        private fulltestService: FulltestService) { }
 
-    public ngOnInit() { }
+    public ngOnInit() {
+        // if (!this.holderService.objectValid) {
+        //     this.fazFulltest();
+        // }
+    }
 
     public fazFulltest() {
         let carregando = this.loadingCtrl.create({
@@ -34,15 +35,12 @@ export class FulltestComponent {
             })
             .then(() => {
                 carregando.dismiss();
-                this.homePage.setToDynamicComponent(FulltestResultComponent);
             });
     }
 
     public getValidacaoMock() {
         this.holderService.objectValid = this.fulltestService.getValidacaoMock();
         console.log(this.holderService.objectValid);
-
-        this.homePage.setToDynamicComponent(FulltestResultComponent);
     }
 
 }

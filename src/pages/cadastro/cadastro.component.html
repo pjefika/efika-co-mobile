@@ -1,4 +1,9 @@
-<div>
+<ion-header>
+    <ion-navbar>
+        <ion-title> Consultar Instância_ </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
     <ion-list>
         <ion-item>
             <ion-label stacked>Instância/Designador</ion-label>
@@ -10,4 +15,4 @@
         <button ion-button round color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
     </div>
     <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
-</div>
+</ion-content>

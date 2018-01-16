@@ -1,1 +1,8 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<!-- <ion-nav [root]="rootPage"></ion-nav> -->
+<ion-tabs>
+    <ion-tab tabIcon="home" [root]="homePage"></ion-tab>
+    <ion-tab tabIcon="ios-shuffle" [root]="fulltestResult" *ngIf="holderService.objectValid"></ion-tab>    
+    <!-- <ion-tab tabIcon="list" [root]="cadastro"></ion-tab> -->
+    <!-- <ion-tab tabIcon="trending-up" [root]="fulltest"></ion-tab> -->
+    <!-- <ion-tab tabIcon="contact"></ion-tab> -->
+</ion-tabs>

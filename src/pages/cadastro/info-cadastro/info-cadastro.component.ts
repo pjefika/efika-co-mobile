@@ -13,7 +13,7 @@ export class InfoCadastroComponent implements OnInit {
     constructor() { }
 
     public ngOnInit() {
-
+        
     }
 
 }

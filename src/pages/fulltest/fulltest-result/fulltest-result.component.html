@@ -1,58 +1,63 @@
-<div *ngIf="objectValid">
-    <button ion-button round block color="light" (click)="goToCadastroComponent()">Voltar para Cadastro</button>
-    <h3 style="text-align: center;">Informações gerais Fulltest</h3>
+<ion-header>
+    <ion-navbar>
+        <ion-title> Resultado do Fulltest_ </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="objectValid">
+        <h3 style="text-align: center;">Informações gerais Fulltest</h3>
+        <ion-card>
+            <ion-card-header>
+                Duração do Fulltest: {{objectValid.dataFim | amDifference: objectValid.dataInicio: 'seconds'}} Segundos
+            </ion-card-header>
+            <ion-card-content>
+                <p>
+                    {{objectValid.mensagem}}
+                    <ion-icon name="checkmark" *ngIf="objectValid.resultado" style="color: green;"></ion-icon>
+                    <ion-icon name="close" *ngIf="!objectValid.resultado" style="color: red;"></ion-icon>
+                </p>
+            </ion-card-content>
+        </ion-card>
 
-    <ion-card>
-        <ion-card-header>
-            Duração do Fulltest: {{objectValid.dataFim | amDifference: objectValid.dataInicio: 'seconds'}} Segundos
-        </ion-card-header>
-        <ion-card-content>
-            <p>
-                {{objectValid.mensagem}}
-                <ion-icon name="checkmark" *ngIf="objectValid.resultado" style="color: green;"></ion-icon>
-                <ion-icon name="close" *ngIf="!objectValid.resultado" style="color: red;"></ion-icon>
-            </p>
-        </ion-card-content>
-    </ion-card>
+        <!-- <ion-list>
+                <ion-item-divider color="light">Informações gerais Fulltest</ion-item-divider>
+                <ion-item>
+                    <ion-avatar item-right>
+                        <ion-icon name="checkmark" *ngIf="objectValid.resultado" style="color: green;"></ion-icon>
+                        <ion-icon name="close" *ngIf="!objectValid.resultado" style="color: red;"></ion-icon>
+                    </ion-avatar>
+                    <h2>Duração do Fulltest: {{objectValid.dataFim | amDifference: objectValid.dataInicio: 'seconds'}} Segundos</h2>
+                    <p>{{objectValid.mensagem}}</p>
+                </ion-item>
+            </ion-list> -->
 
-    <!-- <ion-list>
-        <ion-item-divider color="light">Informações gerais Fulltest</ion-item-divider>
-        <ion-item>
-            <ion-avatar item-right>
-                <ion-icon name="checkmark" *ngIf="objectValid.resultado" style="color: green;"></ion-icon>
-                <ion-icon name="close" *ngIf="!objectValid.resultado" style="color: red;"></ion-icon>
-            </ion-avatar>
-            <h2>Duração do Fulltest: {{objectValid.dataFim | amDifference: objectValid.dataInicio: 'seconds'}} Segundos</h2>
-            <p>{{objectValid.mensagem}}</p>
-        </ion-item>
-    </ion-list> -->
+        <h3 style="text-align: center;">Validações Fulltest</h3>
 
-    <h3 style="text-align: center;">Validações Fulltest</h3>
+        <ion-card *ngFor="let valid of objectValid.valids">
 
-    <ion-card *ngFor="let valid of objectValid.valids">
+            <ion-item>
+                <ion-avatar item-right>
+                    <ion-icon name="checkmark" *ngIf="valid.resultado" style="color: green;"></ion-icon>
+                    <ion-icon name="close" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
+                </ion-avatar>
+                <h2>{{valid.nome}}</h2>
+            </ion-item>
 
-        <ion-item>
-            <ion-avatar item-right>
-                <ion-icon name="checkmark" *ngIf="valid.resultado" style="color: green;"></ion-icon>
-                <ion-icon name="close" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
-            </ion-avatar>
-            <h2>{{valid.nome}}</h2>
-        </ion-item>
+            <ion-card-content>
+                {{valid.mensagem}}
+            </ion-card-content>
+        </ion-card>
 
-        <ion-card-content>
-            {{valid.mensagem}}
-        </ion-card-content>
-    </ion-card>
-
-    <!-- <ion-list>
-        <ion-item-divider color="light"> Validações Fulltest</ion-item-divider>
-        <ion-item *ngFor="let valid of objectValid.valids">
-            <ion-avatar item-right>
-                <ion-icon name="checkmark" *ngIf="valid.resultado" style="color: green;"></ion-icon>
-                <ion-icon name="close" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
-            </ion-avatar>
-            <h2>{{valid.nome}}</h2>
-            <p> {{valid.mensagem}}</p>
-        </ion-item>
-    </ion-list> -->
-</div>
+        <!-- <ion-list>
+                <ion-item-divider color="light"> Validações Fulltest</ion-item-divider>
+                <ion-item *ngFor="let valid of objectValid.valids">
+                    <ion-avatar item-right>
+                        <ion-icon name="checkmark" *ngIf="valid.resultado" style="color: green;"></ion-icon>
+                        <ion-icon name="close" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{valid.nome}}</h2>
+                    <p> {{valid.mensagem}}</p>
+                </ion-item>
+            </ion-list> -->
+    </div>
+</ion-content>
