@@ -11,9 +11,9 @@ import { HolderService } from '../providers/holder/holderService';
 })
 export class MyApp {
 
-	homePage: any = CadastroComponent;
-	fulltestResult: any = FulltestResultComponent
-	
+	public cadastro: any = CadastroComponent;
+	public fulltestResult: any = FulltestResultComponent
+
 	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public holderService: HolderService) {
 		platform.ready().then(() => {
 			// Okay, so the platform is ready and our plugins are available.
@@ -22,5 +22,10 @@ export class MyApp {
 			splashScreen.hide();
 		});
 	}
+
+	public goToOtherTab() {
+		
+	}
+
 }
 

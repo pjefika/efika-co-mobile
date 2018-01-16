@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HolderService } from '../../providers/holder/holderService';
 import { LoadingController } from 'ionic-angular';
 import { FulltestService } from './fulltest.service';
+import { NavController } from 'ionic-angular';
 
 @Component({
     selector: 'fulltest-component',
@@ -13,13 +14,10 @@ export class FulltestComponent {
 
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
-        private fulltestService: FulltestService) { }
+        private fulltestService: FulltestService,
+        public navCtrl: NavController) { }
 
-    public ngOnInit() {
-        // if (!this.holderService.objectValid) {
-        //     this.fazFulltest();
-        // }
-    }
+    public ngOnInit() { }
 
     public fazFulltest() {
         let carregando = this.loadingCtrl.create({
@@ -30,6 +28,7 @@ export class FulltestComponent {
             .doFulltest(this.holderService.cadastro)
             .then(response => {
                 this.holderService.objectValid = response;
+                this.navCtrl.parent.select(1);
             }, error => {
                 console.log("Deu erro!!! OMG p(o.o)q");
             })
@@ -40,6 +39,7 @@ export class FulltestComponent {
 
     public getValidacaoMock() {
         this.holderService.objectValid = this.fulltestService.getValidacaoMock();
+        this.navCtrl.parent.select(1);
         console.log(this.holderService.objectValid);
     }
 

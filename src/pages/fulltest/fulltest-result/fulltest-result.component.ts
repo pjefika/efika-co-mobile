@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HolderService } from '../../../providers/holder/holderService';
 import { ObjectValid } from '../../../view-model/fulltest/objectValid';
 

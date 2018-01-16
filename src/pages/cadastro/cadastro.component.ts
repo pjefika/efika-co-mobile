@@ -20,8 +20,9 @@ export class CadastroComponent implements OnInit {
     public ngOnInit() { }
 
     public getCadastro() {
-
+        this.resetHolder();
         this.holderService.cadastro = null;
+        this.holderService.objectValid = null;
 
         let carregando = this.loadingCtrl.create({
             content: "Consultando Cadastro"
@@ -38,5 +39,11 @@ export class CadastroComponent implements OnInit {
                 console.log(this.holderService.cadastro);
                 carregando.dismiss();
             });
+    }
+
+
+    private resetHolder() {        
+        this.holderService.cadastro = null;
+        this.holderService.objectValid = null;
     }
 }
