@@ -47,20 +47,14 @@ $colors: (
 // iOS only Sass variables can go here
 
 
-
-
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
 
-
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
-
 
 
 // App Theme
@@ -69,6 +63,7 @@ $colors: (
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
+
 
 @import "ionic.theme.default";
 

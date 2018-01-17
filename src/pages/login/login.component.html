@@ -3,14 +3,19 @@
         <ion-title> Efika CO Mobile_ </ion-title>
     </ion-navbar>
 </ion-header>
-<ion-content padding class="login-form">
-    <ion-list style="margin-left: auto; margin-right: auto; display: block;">
+<ion-content padding>
+    <div padding>
+        <h5>Seja bem vindo ao</h5>
+        <h4>Efika Mobile CO_</h4>
+        <p>Para entrar digite sua matricula e senha nos campos abaixo.</p>
+    </div>
+    <ion-list inset>
         <ion-item>
-            <ion-label stacked>Matricula</ion-label>
+            <ion-label>Matricula</ion-label>
             <ion-input type="text" [(ngModel)]="usuario.matricula" name="usuario"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label stacked>Senha</ion-label>
+            <ion-label>Senha</ion-label>
             <ion-input type="password" [(ngModel)]="usuario.senha" name="senha"></ion-input>
         </ion-item>
     </ion-list>
@@ -18,7 +23,5 @@
     <div padding>
         <button ion-button round color="primary" block (click)="entrarMock()">Entrar</button>
     </div>
-
     <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
-   
 </ion-content>

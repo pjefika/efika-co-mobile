@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
         public holderService: HolderService) { }
 
     public ngOnInit() { 
-        this.usuario.matricula = "G0034481";
-        this.usuario.senha = "123"
+        // this.usuario.matricula = "G0034481";
+        // this.usuario.senha = "123"
     }
 
     public entrarMock() {
