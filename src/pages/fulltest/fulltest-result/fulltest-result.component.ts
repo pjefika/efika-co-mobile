@@ -17,7 +17,6 @@ export class FulltestResultComponent implements OnInit {
         if (this.holderService.objectValid) {
             this.objectValid = this.holderService.objectValid;
         }
-
     }
 
 }

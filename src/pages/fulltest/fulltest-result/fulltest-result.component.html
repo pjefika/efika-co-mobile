@@ -5,11 +5,12 @@
 </ion-header>
 <ion-content padding>
     <div *ngIf="!holderService.objectValid && !holderService.cadastro">
-        <p>Consulte antes o cadastro inserindo a Instância/Designador</p>
+        <alert-mensagem-component [ativo]="true" [titulo]="'Informativo'" [mensagem]="'Consulte antes o cadastro inserindo a Instância/Designador'"></alert-mensagem-component>
     </div>
     <div *ngIf="!holderService.objectValid && holderService.cadastro">
-        <p>Fulltest ainda não realizado ou comando ainda está em andamento, se você já realizou o comando aguarde...</p>
+        <alert-mensagem-component [ativo]="true" [titulo]="'Informativo'" [mensagem]="'Fulltest ainda não realizado ou comando ainda está em andamento, se você já realizou o comando aguarde...'"></alert-mensagem-component>
     </div>
+
     <div *ngIf="holderService.objectValid">
         <h3 style="text-align: center;">Informações gerais Fulltest</h3>
         <ion-card>
@@ -29,14 +30,12 @@
         <h3 style="text-align: center;">Validações Fulltest</h3>
         <ion-card *ngFor="let valid of holderService.objectValid.valids">
             <ion-item>
-                <ion-avatar item-right>
-                    <ion-icon name="checkmark" *ngIf="valid.resultado" style="color: green;"></ion-icon>
-                    <ion-icon name="close" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
-                </ion-avatar>
                 <h2>{{valid.nome}}</h2>
             </ion-item>
             <ion-card-content>
                 {{valid.mensagem}}
+                <ion-icon name="checkmark" *ngIf="valid.resultado" style="color: green;"></ion-icon>
+                <ion-icon name="close" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
             </ion-card-content>
         </ion-card>
     </div>

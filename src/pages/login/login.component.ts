@@ -11,7 +11,11 @@ import { Usuario } from '../../view-model/usuario/usuario';
 
 export class LoginComponent implements OnInit {
 
-    public usuario = new Usuario;
+    public usuario = new Usuario();
+
+    private ativo: boolean = false;
+    private titulo: string;
+    private mensagem: string;
 
     constructor(private loginService: LoginService,
         public holderService: HolderService) { }
@@ -19,9 +23,17 @@ export class LoginComponent implements OnInit {
     public ngOnInit() { }
 
     public entrarMock() {
-        console.log(this.usuario);
-
-        this.holderService.estalogado = this.loginService.entrarMock(this.usuario);
+        let verify: boolean;
+        verify = this.loginService.entrarMock(this.usuario);
+        if (verify) {
+            this.holderService.estalogado = verify;
+        } else {
+            this.ativo = true;
+            this.titulo = "Erro ao realizar login";
+            this.mensagem = "Login ou senha incorretos, por favor tente novamente.";
+            this.usuario.matricula = "";
+            this.usuario.senha = "";
+        }
     }
 
 }

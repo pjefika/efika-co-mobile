@@ -20,6 +20,7 @@ import { FulltestResultComponent } from '../pages/fulltest/fulltest-result/fullt
 import { MomentModule } from 'angular2-moment';
 import { LoginComponent } from '../pages/login/login.component';
 import { HolderService } from '../providers/holder/holder.service';
+import { AlertMensagemComponent } from '../util/alert-mensagem/alert-mensagem.component';
 
 @NgModule({
 	declarations: [
@@ -34,7 +35,8 @@ import { HolderService } from '../providers/holder/holder.service';
 		DynamicComponent,
 		DynamicRouterComponent,
 		FulltestResultComponent,
-		LoginComponent
+		LoginComponent,
+		AlertMensagemComponent
 	],
 	imports: [
 		BrowserModule,
@@ -50,7 +52,8 @@ import { HolderService } from '../providers/holder/holder.service';
 		InfoCadastroComponent,
 		FulltestComponent,
 		FulltestResultComponent,
-		LoginComponent
+		LoginComponent,
+		AlertMensagemComponent
 	],
 	providers: [
 		StatusBar,
