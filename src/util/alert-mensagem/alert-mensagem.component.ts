@@ -8,11 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AlertMensagemComponent implements OnInit {
 
     @Input() public ativo: boolean = false;
+    @Input() public tipo: string;
     @Input() public titulo: string;
     @Input() public mensagem: string;
     
     constructor() { }
 
-    public ngOnInit() { }
+    public ngOnInit() { 
+        
+    }
 
 }

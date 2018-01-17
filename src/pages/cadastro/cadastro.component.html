@@ -15,4 +15,7 @@
         <button ion-button round color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
     </div>
     <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
+
+    <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
+
 </ion-content>

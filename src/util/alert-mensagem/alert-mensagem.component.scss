@@ -1,0 +1,27 @@
+alert-mensagem-component {
+    text-align: center;
+
+    .info, .sucesso, .cuidado, .erro {
+        border-radius:.5em;
+        box-shadow:1px 1px 3px #888;
+    }
+
+    .info {
+        color: #00529B !important;
+        background-color: #BDE5F8;
+    }
+    .sucesso {
+        color: #4F8A10 !important;
+        background-color: #DFF2BF;
+    }
+    .cuidado {
+        color: #9F6000 !important;
+        background-color: #FEEFB3;
+        border-radius:.5em;
+    }
+    .erro {
+        color: #D8000C !important;
+        background-color: #FFBABA;
+        
+    }
+}

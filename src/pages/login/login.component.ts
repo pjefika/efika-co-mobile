@@ -16,11 +16,15 @@ export class LoginComponent implements OnInit {
     private ativo: boolean = false;
     private titulo: string;
     private mensagem: string;
+    private tipo: string;
 
     constructor(private loginService: LoginService,
         public holderService: HolderService) { }
 
-    public ngOnInit() { }
+    public ngOnInit() { 
+        this.usuario.matricula = "G0034481";
+        this.usuario.senha = "123"
+    }
 
     public entrarMock() {
         let verify: boolean;
@@ -29,6 +33,7 @@ export class LoginComponent implements OnInit {
             this.holderService.estalogado = verify;
         } else {
             this.ativo = true;
+            this.tipo = "erro";
             this.titulo = "Erro ao realizar login";
             this.mensagem = "Login ou senha incorretos, por favor tente novamente.";
             this.usuario.matricula = "";

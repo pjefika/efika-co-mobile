@@ -12,6 +12,11 @@ import { HolderService } from '../../providers/holder/holder.service';
 
 export class CadastroComponent implements OnInit {
 
+    public ativo: boolean = false;
+    public tipo: string;
+    public titulo: string;
+    public mensagem: string;
+
     constructor(public navCtrl: NavController,
         private cadastroService: CadastroService,
         public holderService: HolderService,
@@ -31,18 +36,22 @@ export class CadastroComponent implements OnInit {
         this.cadastroService
             .getCadastro(this.holderService.instancia)
             .then(response => {
+                this.ativo = false;
                 this.holderService.cadastro = response;
             }, error => {
+                this.ativo = true;
+                this.tipo = "erro";
+                this.titulo = "Ops, aconteceu algo.";
+                this.mensagem = "Ocorreu um erro ao realizar a busca do cadastro, por favor verifique a instância.";
                 console.log("Deu erro!!! OMG p(o.o)q");
             })
             .then(() => {
-                console.log(this.holderService.cadastro);
+                //console.log(this.holderService.cadastro);
                 carregando.dismiss();
             });
     }
 
-
-    private resetHolder() {        
+    private resetHolder() {
         this.holderService.cadastro = null;
         this.holderService.objectValid = null;
     }

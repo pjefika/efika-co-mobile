@@ -1,5 +1,5 @@
 <div *ngIf="ativo">
-    <ion-card>
+    <ion-card [class]="tipo == 'info' ? 'info' : '' || tipo == 'sucesso' ? 'sucesso' : '' ||  tipo == 'cuidado' ? 'cuidado' : '' || tipo == 'erro' ? 'erro' : ''">
         <ion-card-header> {{titulo}} </ion-card-header>
         <ion-card-content> {{mensagem}} </ion-card-content>
     </ion-card>
