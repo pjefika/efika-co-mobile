@@ -1,5 +1,6 @@
-<!-- <ion-nav [root]="rootPage"></ion-nav> -->
-<ion-tabs>
+<ion-nav [root]="login" *ngIf="!holderService.estalogado"></ion-nav>
+<ion-tabs *ngIf="holderService.estalogado">
+    <!-- <ion-tab tabIcon="contact" [root]="login" *ngIf="!estalogado"></ion-tab> -->
     <ion-tab tabIcon="home" [root]="cadastro"></ion-tab>
     <ion-tab tabIcon="ios-shuffle" [root]="fulltestResult"></ion-tab>
     <!-- <ion-tab tabIcon="list" [root]="cadastro"></ion-tab> -->

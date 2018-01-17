@@ -9,7 +9,6 @@ import { HomePage } from '../pages/home/home';
 import { HttpModule } from '@angular/http';
 import { ObjKeysPipe } from '../util/pipes/objKeysPipe';
 import { Capitalize, KeyBeautifyingPipe } from '../util/pipes/beautifyingPipe';
-import { HolderService } from '../providers/holder/holderService';
 import { UrlService } from '../providers/url-service/url.service';
 import { FulltestComponent } from '../pages/fulltest/fulltest.component';
 import { CadastroComponent } from '../pages/cadastro/cadastro.component';
@@ -19,6 +18,8 @@ import { DynamicRouterComponent } from '../pages/dynamiccomponent/dynamic-router
 import { DynamicRouterHolderService } from '../pages/dynamiccomponent/dynamic-router/dynamic-router-holder.service';
 import { FulltestResultComponent } from '../pages/fulltest/fulltest-result/fulltest-result.component';
 import { MomentModule } from 'angular2-moment';
+import { LoginComponent } from '../pages/login/login.component';
+import { HolderService } from '../providers/holder/holder.service';
 
 @NgModule({
 	declarations: [
@@ -33,6 +34,7 @@ import { MomentModule } from 'angular2-moment';
 		DynamicComponent,
 		DynamicRouterComponent,
 		FulltestResultComponent,
+		LoginComponent
 	],
 	imports: [
 		BrowserModule,
@@ -48,6 +50,7 @@ import { MomentModule } from 'angular2-moment';
 		InfoCadastroComponent,
 		FulltestComponent,
 		FulltestResultComponent,
+		LoginComponent
 	],
 	providers: [
 		StatusBar,

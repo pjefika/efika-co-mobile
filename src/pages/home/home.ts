@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { HolderService } from '../../providers/holder/holderService';
+import { HolderService } from '../../providers/holder/holder.service';
 
 @Component({
 	selector: 'page-home',

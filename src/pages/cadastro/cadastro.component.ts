@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CadastroService } from './cadastro.service';
-import { HolderService } from '../../providers/holder/holderService';
 import { LoadingController } from 'ionic-angular';
+import { HolderService } from '../../providers/holder/holder.service';
 
 @Component({
     selector: 'cadastro-component',

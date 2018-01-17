@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HolderService } from '../../../providers/holder/holderService';
 import { ObjectValid } from '../../../view-model/fulltest/objectValid';
+import { HolderService } from '../../../providers/holder/holder.service';
 
 @Component({
     selector: 'fulltest-result-component',

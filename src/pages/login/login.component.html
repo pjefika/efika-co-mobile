@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title> Efika CO Mobile_ </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-list style="margin-left: auto; margin-right: auto; display: block;">
+        <ion-item>
+            <ion-label stacked>Matricula</ion-label>
+            <ion-input type="text" [(ngModel)]="usuario.matricula" name="usuario"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Senha</ion-label>
+            <ion-input type="password" [(ngModel)]="usuario.senha" name="senha"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <div padding>
+        <button ion-button round color="primary" block (click)="entrarMock()">Entrar</button>
+    </div>
+   
+</ion-content>

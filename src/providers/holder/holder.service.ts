@@ -9,6 +9,8 @@ export class HolderService {
     public cadastro: Cadastro;
     public objectValid: ObjectValid;
 
+    public estalogado: boolean;
+
     constructor() { }
 
 }

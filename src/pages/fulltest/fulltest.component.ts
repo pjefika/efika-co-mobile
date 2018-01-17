@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { HolderService } from '../../providers/holder/holderService';
 import { LoadingController } from 'ionic-angular';
 import { FulltestService } from './fulltest.service';
 import { NavController } from 'ionic-angular';
+import { HolderService } from '../../providers/holder/holder.service';
 
 @Component({
     selector: 'fulltest-component',
