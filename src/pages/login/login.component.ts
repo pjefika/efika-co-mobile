@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { Usuario } from '../../view-model/usuario/usuario';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController, AlertController } from 'ionic-angular';
 import { SuperComponentService } from '../../providers/component-service/super-compoenent.service';
 
 @Component({
@@ -17,8 +17,9 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     constructor(private loginService: LoginService,
         public holderService: HolderService,
-        public loadingCtrl: LoadingController) {
-        super();
+        public loadingCtrl: LoadingController,
+        public alertCtrl: AlertController) {
+        super(alertCtrl);
     }
 
     public ngOnInit() {
