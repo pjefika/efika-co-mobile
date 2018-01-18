@@ -11,6 +11,7 @@ export class UrlService extends SuperService implements RequestAction {
 
     public pathStealerAPI = "stealerAPI/"; // stealerAPI_qa
     public pathFulltestAPI = "fulltestAPI/";
+    public queueAPI = "queueAPI/";
 
     private headersAppJson = new Headers({ 'Content-Type': 'application/json' });
     public options = new RequestOptions({ headers: this.headersAppJson });
