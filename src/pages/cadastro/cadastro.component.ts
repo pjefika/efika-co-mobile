@@ -23,22 +23,26 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
     public ngOnInit() { }
 
     public getCadastro() {
-        this.resetHolder();
-        let carregando = this.loadingCtrl.create({ content: "Consultando Cadastro" });
-        carregando.present();
-        this.cadastroService
-            .getCadastro(this.holderService.instancia)
-            .then(response => {
-                super.showError(false);
-                this.holderService.cadastro = response.output.customer;
-            }, error => {
-                super.showError(true, "erro", "Ops, aconteceu algo.", "Ocorreu um erro ao realizar a busca do cadastro, por favor verifique a instância.");
-                console.log("Deu erro!!! OMG p(o.o)q");
-            })
-            .then(() => {
-                //console.log(this.holderService.cadastro);
-                carregando.dismiss();
-            });
+        if (!this.holderService.instancia) {
+            super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância, o campo não pode estar vazio.");
+        } else {
+            this.resetHolder();
+            let carregando = this.loadingCtrl.create({ content: "Consultando Cadastro" });
+            carregando.present();
+            this.cadastroService
+                .getCadastro(this.holderService.instancia)
+                .then(response => {
+                    super.showError(false);
+                    this.holderService.cadastro = response.output.customer;
+                }, error => {
+                    super.showError(true, "erro", "Ops, aconteceu algo.", "Ocorreu um erro ao realizar a busca do cadastro, por favor verifique a instância.");
+                    console.log("Deu erro!!! OMG p(o.o)q");
+                })
+                .then(() => {
+                    //console.log(this.holderService.cadastro);
+                    carregando.dismiss();
+                });
+        }
     }
 
     private resetHolder() {
