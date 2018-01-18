@@ -31,7 +31,7 @@ export class CadastroService extends SuperService {
     public getCadastro(instancia: string): Promise<TaskProcess> {
         let userSession = JSON.parse(sessionStorage.getItem("user"));
         let _data: { task: string, input: { type: string, instancia: string }, executor: string };
-        _data = { task: "AUTH", input: { type: "auth", instancia: instancia }, executor: userSession };
+        _data = { task: "CADASTRO", input: { type: "cadastro", instancia: instancia }, executor: userSession };
         this.infoResquest = {
             rqst: "post",
             command: this.urlService.queueAPI + "task/process/",

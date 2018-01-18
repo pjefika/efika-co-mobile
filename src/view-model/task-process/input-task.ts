@@ -11,5 +11,5 @@ export class Input {
     instancia?: string;
 
     //Certification Case
-    cadastro: Cadastro;
+    cadastro?: Cadastro;
 }

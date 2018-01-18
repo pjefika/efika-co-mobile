@@ -1,5 +1,5 @@
 import { Cadastro } from "../cadastro/cadastro";
-import { ObjectValid } from "../fulltest/objectValid";
+import { Certification } from "../certification/certification";
 
 export class Output {
     type: string;
@@ -14,6 +14,6 @@ export class Output {
     customer?: Cadastro;
 
     //Certification Case
-    objectValid: ObjectValid
+    certification?: Certification;
 
 }

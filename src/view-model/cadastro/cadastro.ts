@@ -9,6 +9,7 @@ export class Cadastro {
     designador: string;
     instancia: string;
     designadorAcesso: string;
+    designadorTv: string;
     rede: Rede;
     radius?: Radius;
     servicos: Servicos;

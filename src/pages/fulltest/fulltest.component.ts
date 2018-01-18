@@ -32,7 +32,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         this.fulltestService
             .doFulltest(this.holderService.cadastro)
             .then(response => {
-                this.holderService.objectValid = response.output.objectValid;
+                this.holderService.objectValid = response.output.certification.fulltest;
                 this.navCtrl.parent.select(1);
             }, error => {
                 super.showAlert("Ops, ocorreu algo.", "Fulltest não realizado.");
