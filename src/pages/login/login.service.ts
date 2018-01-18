@@ -20,7 +20,6 @@ export class LoginService extends SuperService {
             _data: _data,
             timeout: 20000
         };
-
         return this.urlService
             .request(this.infoResquest)
             .then(response => {
@@ -30,13 +29,11 @@ export class LoginService extends SuperService {
     }
 
     public entrarMock(usuario: Usuario): boolean {
-
         if (usuario.matricula === "G0034481" && usuario.senha === "123") {
             return true;
         } else {
             return false;
         }
-
     }
 
 }

@@ -23,8 +23,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     }
 
     public ngOnInit() {
-        // this.usuario.matricula = "G0034481";
-        // this.usuario.senha = "123"
+        this.usuario.matricula = "G0034481";
+        this.usuario.senha = "123"
     }
 
     public entrar() {
