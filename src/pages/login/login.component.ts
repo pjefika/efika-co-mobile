@@ -3,6 +3,7 @@ import { LoginService } from './login.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { Usuario } from '../../view-model/usuario/usuario';
 import { LoadingController } from 'ionic-angular';
+import { SuperComponentService } from '../../providers/component-service/super-compoenent.service';
 
 @Component({
     selector: 'login-component',
@@ -10,18 +11,15 @@ import { LoadingController } from 'ionic-angular';
     providers: [LoginService]
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent extends SuperComponentService implements OnInit {
 
     public usuario = new Usuario();
 
-    private ativo: boolean = false;
-    private titulo: string;
-    private mensagem: string;
-    private tipo: string;
-
     constructor(private loginService: LoginService,
         public holderService: HolderService,
-        public loadingCtrl: LoadingController) { }
+        public loadingCtrl: LoadingController) {
+        super();
+    }
 
     public ngOnInit() {
         // this.usuario.matricula = "G0034481";
@@ -29,9 +27,7 @@ export class LoginComponent implements OnInit {
     }
 
     public entrar() {
-        let carregando = this.loadingCtrl.create({
-            content: "Consultando Login"
-        });
+        let carregando = this.loadingCtrl.create({ content: "Consultando Login" });
         carregando.present();
         this.loginService
             .entrar(this.usuario)
@@ -40,13 +36,14 @@ export class LoginComponent implements OnInit {
                 verify = response.output.match;
                 if (verify) {
                     this.holderService.estalogado = verify;
+                    sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
                 } else {
-                    this.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+                    super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
                     this.usuario.matricula = "";
                     this.usuario.senha = "";
                 }
             }, error => {
-                this.showError(true, "erro", "Erro ao realizar login", "Ocorreu um erro ao realizar busca de login.");
+                super.showError(true, "erro", "Erro ao realizar login", "Ocorreu um erro ao realizar busca de login.");
                 this.usuario.matricula = "";
                 this.usuario.senha = "";
             })
@@ -61,20 +58,10 @@ export class LoginComponent implements OnInit {
         if (verify) {
             this.holderService.estalogado = verify;
         } else {
-            this.ativo = true;
-            this.tipo = "erro";
-            this.titulo = "Erro ao realizar login";
-            this.mensagem = "Login ou senha incorretos, por favor tente novamente.";
+            super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
             this.usuario.matricula = "";
             this.usuario.senha = "";
         }
-    }
-
-    private showError(ativo: boolean, tipo: string, titulo: string, mensagem: string) {
-        this.ativo = ativo;
-        this.tipo = tipo;
-        this.titulo = titulo;
-        this.mensagem = mensagem;
     }
 
 }

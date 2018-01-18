@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoadingController } from 'ionic-angular';
 import { FulltestService } from './fulltest.service';
 import { NavController } from 'ionic-angular';
 import { HolderService } from '../../providers/holder/holder.service';
 import { AlertController } from 'ionic-angular';
+import { SuperComponentService } from '../../providers/component-service/super-compoenent.service';
 
 @Component({
     selector: 'fulltest-component',
@@ -11,13 +12,15 @@ import { AlertController } from 'ionic-angular';
     providers: [FulltestService]
 })
 
-export class FulltestComponent {
+export class FulltestComponent extends SuperComponentService implements OnInit {
 
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
         private fulltestService: FulltestService,
         public navCtrl: NavController,
-        public alertCtrl: AlertController) { }
+        public alertCtrl: AlertController) {
+        super(alertCtrl);
+    }
 
     public ngOnInit() { }
 
@@ -28,16 +31,11 @@ export class FulltestComponent {
         carregando.present();
         this.fulltestService
             .doFulltest(this.holderService.cadastro)
-            .then(response => {              
-                this.holderService.objectValid = response;
+            .then(response => {
+                this.holderService.objectValid = response.output.objectValid;
                 this.navCtrl.parent.select(1);
             }, error => {
-                let alert = this.alertCtrl.create({
-                    title: "Ops, ocorreu algo.",
-                    subTitle: "Fulltest não realizado.",
-                    buttons: ["Ok"]
-                });
-                alert.present();
+                super.showAlert("Ops, ocorreu algo.", "Fulltest não realizado.");
                 console.log("Deu erro!!! OMG p(o.o)q");
             })
             .then(() => {

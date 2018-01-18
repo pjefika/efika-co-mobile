@@ -21,6 +21,7 @@ import { MomentModule } from 'angular2-moment';
 import { LoginComponent } from '../pages/login/login.component';
 import { HolderService } from '../providers/holder/holder.service';
 import { AlertMensagemComponent } from '../util/alert-mensagem/alert-mensagem.component';
+import { SuperComponentService } from '../providers/component-service/super-compoenent.service';
 
 @NgModule({
 	declarations: [
@@ -61,7 +62,8 @@ import { AlertMensagemComponent } from '../util/alert-mensagem/alert-mensagem.co
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
 		HolderService,
 		UrlService,
-		DynamicRouterHolderService
+		DynamicRouterHolderService,
+		SuperComponentService
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

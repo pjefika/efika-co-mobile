@@ -3,6 +3,7 @@ import { UrlService } from '../../providers/url-service/url.service';
 import { SuperService } from '../../providers/super-service/super.service';
 import { Cadastro } from '../../view-model/cadastro/cadastro';
 import { ObjectValid } from '../../view-model/fulltest/objectValid';
+import { TaskProcess } from '../../view-model/task-process/task-process';
 
 @Injectable()
 export class FulltestService extends SuperService {
@@ -11,7 +12,7 @@ export class FulltestService extends SuperService {
         super();
     }
 
-    public doFulltest(cadastro: Cadastro) {
+    public _doFulltest(cadastro: Cadastro) {
         let _data: { cust: Cadastro, executor: string };
         _data = { cust: cadastro, executor: "ionicTest" };
         this.infoResquest = {
@@ -23,6 +24,24 @@ export class FulltestService extends SuperService {
         return this.urlService.request(this.infoResquest)
             .then(data => {
                 return data as ObjectValid
+            })
+            .catch(super.handleError);
+    }
+
+    public doFulltest(cadastro: Cadastro): Promise<TaskProcess> {
+        let userSession = JSON.parse(sessionStorage.getItem("user"));
+        let _data: { task: string, input: { type: string, customer: Cadastro }, executor: string };
+        _data = { task: "CERTIFICATION", input: { type: "certification", customer: cadastro }, executor: userSession };
+        this.infoResquest = {
+            rqst: "post",
+            command: this.urlService.queueAPI + "task/process/",
+            _data: _data,
+            timeout: 63000
+        };
+        return this.urlService
+            .request(this.infoResquest)
+            .then(response => {
+                return response as TaskProcess
             })
             .catch(super.handleError);
     }

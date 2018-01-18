@@ -3,6 +3,7 @@ import { SuperService } from '../super-service/super.service';
 import { RequestAction } from './url-service.interface';
 import { InfoRequest } from '../../view-model/url-service/info-request';
 import { Headers, RequestOptions, Http } from '@angular/http';
+import 'rxjs/add/operator/timeout'
 
 @Injectable()
 export class UrlService extends SuperService implements RequestAction {
@@ -34,6 +35,7 @@ export class UrlService extends SuperService implements RequestAction {
     public post(infoResquest: InfoRequest) {
         const url = `${this.url}` + infoResquest.command;
         return this.http.post(url, JSON.stringify(infoResquest._data), this.options)
+            .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
                 return response.json()
@@ -50,6 +52,7 @@ export class UrlService extends SuperService implements RequestAction {
         }
         const url = `${this.url}` + rstlink;
         return this.http.get(url, this.options)
+            .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
                 return response.json()

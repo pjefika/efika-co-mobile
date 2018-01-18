@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
 import { CadastroService } from './cadastro.service';
 import { LoadingController } from 'ionic-angular';
 import { HolderService } from '../../providers/holder/holder.service';
+import { SuperComponentService } from '../../providers/component-service/super-compoenent.service';
 
 @Component({
     selector: 'cadastro-component',
@@ -10,39 +11,28 @@ import { HolderService } from '../../providers/holder/holder.service';
     providers: [CadastroService]
 })
 
-export class CadastroComponent implements OnInit {
+export class CadastroComponent extends SuperComponentService implements OnInit {
 
-    public ativo: boolean = false;
-    public tipo: string;
-    public titulo: string;
-    public mensagem: string;
-
-    constructor(public navCtrl: NavController,
-        private cadastroService: CadastroService,
+    constructor(private cadastroService: CadastroService,
         public holderService: HolderService,
-        public loadingCtrl: LoadingController) { }
+        public loadingCtrl: LoadingController,
+        public alertCtrl: AlertController) {
+        super(alertCtrl);
+    }
 
     public ngOnInit() { }
 
     public getCadastro() {
         this.resetHolder();
-        this.holderService.cadastro = null;
-        this.holderService.objectValid = null;
-
-        let carregando = this.loadingCtrl.create({
-            content: "Consultando Cadastro"
-        });
+        let carregando = this.loadingCtrl.create({ content: "Consultando Cadastro" });
         carregando.present();
         this.cadastroService
             .getCadastro(this.holderService.instancia)
             .then(response => {
-                this.ativo = false;
-                this.holderService.cadastro = response;
+                super.showError(false);
+                this.holderService.cadastro = response.output.customer;
             }, error => {
-                this.ativo = true;
-                this.tipo = "erro";
-                this.titulo = "Ops, aconteceu algo.";
-                this.mensagem = "Ocorreu um erro ao realizar a busca do cadastro, por favor verifique a instância.";
+                super.showError(true, "erro", "Ops, aconteceu algo.", "Ocorreu um erro ao realizar a busca do cadastro, por favor verifique a instância.");
                 console.log("Deu erro!!! OMG p(o.o)q");
             })
             .then(() => {
