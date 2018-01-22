@@ -1,14 +1,8 @@
-<!-- <ion-header>
-    <ion-navbar>
-        <ion-title> Consultar Instância_ </ion-title>
-    </ion-navbar>
-</ion-header> -->
-
 <ion-header>
     <ion-toolbar>
         <ion-title> Consultar Instância_ </ion-title>
         <ion-buttons end>
-            <button ion-button icon-only color="royal">
+            <button ion-button icon-only color="royal" (click)="openPopover();">
                 <ion-icon name="contact"></ion-icon>
             </button>
         </ion-buttons>
@@ -23,7 +17,7 @@
     </ion-list>
 
     <div padding>
-        <button ion-button round color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
+        <button ion-button round color="primary" block (click)="getMockCadastro()">Consultar Cadastro</button>
     </div>
     <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
 

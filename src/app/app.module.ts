@@ -24,6 +24,8 @@ import { AlertMensagemComponent } from '../util/alert-mensagem/alert-mensagem.co
 import { SuperComponentService } from '../providers/component-service/super-compoenent.service';
 import { BlocksCertificationResultComponent } from '../pages/fulltest/fulltest-result/blocks-certification-result/blocks-certification-result.component';
 import { InfoGeraisFulltestComponent } from '../pages/fulltest/fulltest-result/info-gerais-fulltest/info-gerais-fulltest.component';
+import { HeaderPopoverComponent } from '../util/header-popover/header-popover.component';
+import { LoginUtilService } from '../util/login-util/login-util.service';
 
 @NgModule({
 	declarations: [
@@ -41,7 +43,8 @@ import { InfoGeraisFulltestComponent } from '../pages/fulltest/fulltest-result/i
 		LoginComponent,
 		AlertMensagemComponent,
 		BlocksCertificationResultComponent,
-		InfoGeraisFulltestComponent
+		InfoGeraisFulltestComponent,
+		HeaderPopoverComponent
 	],
 	imports: [
 		BrowserModule,
@@ -60,7 +63,8 @@ import { InfoGeraisFulltestComponent } from '../pages/fulltest/fulltest-result/i
 		LoginComponent,
 		AlertMensagemComponent,
 		BlocksCertificationResultComponent,
-		InfoGeraisFulltestComponent
+		InfoGeraisFulltestComponent,
+		HeaderPopoverComponent
 	],
 	providers: [
 		StatusBar,
@@ -69,7 +73,8 @@ import { InfoGeraisFulltestComponent } from '../pages/fulltest/fulltest-result/i
 		HolderService,
 		UrlService,
 		DynamicRouterHolderService,
-		SuperComponentService
+		SuperComponentService,
+		LoginUtilService
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

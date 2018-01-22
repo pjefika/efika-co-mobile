@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController, PopoverController } from 'ionic-angular';
 import { CadastroService } from './cadastro.service';
-import { LoadingController } from 'ionic-angular';
 import { HolderService } from '../../providers/holder/holder.service';
 import { SuperComponentService } from '../../providers/component-service/super-compoenent.service';
+import { HeaderPopoverComponent } from '../../util/header-popover/header-popover.component';
 
 @Component({
     selector: 'cadastro-component',
@@ -13,14 +13,18 @@ import { SuperComponentService } from '../../providers/component-service/super-c
 
 export class CadastroComponent extends SuperComponentService implements OnInit {
 
+
     constructor(private cadastroService: CadastroService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
-        public alertCtrl: AlertController) {
+        public alertCtrl: AlertController,
+        public popoverController: PopoverController) {
         super(alertCtrl);
     }
 
-    public ngOnInit() { }
+    public ngOnInit() {
+
+    }
 
     public getCadastro() {
         if (!this.holderService.instancia) {
@@ -36,10 +40,9 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
                     this.holderService.cadastro = response.output.customer;
                 }, error => {
                     super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
-                    console.log("Deu erro!!! OMG p(o.o)q");                    
+                    console.log("Deu erro!!! OMG p(o.o)q");
                 })
                 .then(() => {
-                    //console.log(this.holderService.cadastro);
                     carregando.dismiss();
                 });
         }
@@ -52,5 +55,20 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
     private resetHolder() {
         this.holderService.cadastro = null;
         this.holderService.objectValid = null;
+    }
+
+    public openPopover() {
+        let popover = this.popoverController.create(HeaderPopoverComponent);
+        let ev = {
+            target: {
+                getBoundingClientRect: () => {
+                    return {
+                        top: '100',
+                        left: '50'
+                    };
+                }
+            }
+        };
+        popover.present({ ev });
     }
 }

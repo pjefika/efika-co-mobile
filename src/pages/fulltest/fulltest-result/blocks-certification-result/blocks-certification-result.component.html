@@ -1,14 +1,6 @@
-<div *ngIf="blocks">
-    <table *ngFor="let block of blocks">
-        <!-- <thead>
-            <tr>
-                <th>{{block.nome}}</th>
-                <th>Resultado</th>
-                <th *ngFor="let assert of block.asserts">
-                    {{assert.orientacao}}
-                </th>
-            </tr>
-        </thead> -->
+<div *ngIf="blocks">    
+    <div class="titulo-pagina">Informações de Fulltest</div>
+    <table *ngFor="let block of blocks">       
         <tbody>
             <tr>
                 <th>{{block.nome}}</th>
