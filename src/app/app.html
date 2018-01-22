@@ -1,5 +1,5 @@
 <ion-nav [root]="login" *ngIf="!holderService.estalogado"></ion-nav>
 <ion-tabs *ngIf="holderService.estalogado">
     <ion-tab tabIcon="home" [root]="cadastro"></ion-tab>
-    <ion-tab tabIcon="ios-shuffle" [root]="fulltestResult"></ion-tab>
+    <ion-tab tabIcon="list-box" [root]="fulltestResult"></ion-tab>
 </ion-tabs>
