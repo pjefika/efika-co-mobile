@@ -18,7 +18,7 @@ export class CadastroService extends SuperService {
             rqst: "post",
             command: this.urlService.pathStealerAPI + "oss/",
             _data: _data,
-            timeout: 63000
+            timeout: 120000
         };
         return this.urlService.request(this.infoResquest)
             .then(response => {
@@ -35,7 +35,7 @@ export class CadastroService extends SuperService {
             rqst: "post",
             command: this.urlService.queueAPI + "task/process/",
             _data: _data,
-            timeout: 63000
+            timeout: 120000
         };
         return this.urlService
             .request(this.infoResquest)
