@@ -4,39 +4,13 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <div *ngIf="!holderService.objectValid && !holderService.cadastro">
-        <alert-mensagem-component [ativo]="true" [tipo]="'erro'" [titulo]="'Informativo'" [mensagem]="'Consulte antes o cadastro inserindo a Instância/Designador'"></alert-mensagem-component>
-    </div>
-    <div *ngIf="!holderService.objectValid && holderService.cadastro">
-        <alert-mensagem-component [ativo]="true" [tipo]="'erro'" [titulo]="'Informativo'" [mensagem]="'Fulltest ainda não realizado ou comando ainda está em andamento, se você já realizou o comando aguarde...'"></alert-mensagem-component>
-    </div>
+    <alert-mensagem-component *ngIf="!holderService.certification && !holderService.cadastro" [ativo]="true" [tipo]="'erro'"
+        [titulo]="'Informativo'" [mensagem]="'Consulte antes o cadastro inserindo a Instância/Designador'"></alert-mensagem-component>
+    <alert-mensagem-component *ngIf="!holderService.certification && holderService.cadastro" [ativo]="true" [tipo]="'erro'" [titulo]="'Informativo'"
+        [mensagem]="'Fulltest ainda não realizado ou comando ainda está em andamento, se você já realizou o comando aguarde...'"></alert-mensagem-component>
 
-    <div *ngIf="holderService.objectValid">
-        <h3 style="text-align: center;">Informações gerais Fulltest</h3>
-        <ion-card>
-            <ion-card-header>
-                Duração do Fulltest: {{holderService.objectValid.dataFim | amDifference: holderService.objectValid.dataInicio: 'seconds'}}
-                Segundos
-            </ion-card-header>
-            <ion-card-content>
-                <p>
-                    {{holderService.objectValid.mensagem}}
-                    <ion-icon name="checkmark" *ngIf="holderService.objectValid.resultado" style="color: green;"></ion-icon>
-                    <ion-icon name="close" *ngIf="!holderService.objectValid.resultado" style="color: red;"></ion-icon>
-                </p>
-            </ion-card-content>
-        </ion-card>
-
-        <h3 style="text-align: center;">Validações Fulltest</h3>
-        <ion-card *ngFor="let valid of holderService.objectValid.valids">
-            <ion-item>
-                <h2>{{valid.nome}}</h2>
-            </ion-item>
-            <ion-card-content>
-                {{valid.mensagem}}
-                <ion-icon name="checkmark" *ngIf="valid.resultado" style="color: green;"></ion-icon>
-                <ion-icon name="close" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
-            </ion-card-content>
-        </ion-card>
+    <div *ngIf="holderService.certification">
+        <info-gerais-fulltest-component [certification]="holderService.certification"></info-gerais-fulltest-component>
+        <blocks-certification-result-component [blocks]="holderService.certification.blocks"></blocks-certification-result-component>
     </div>
 </ion-content>

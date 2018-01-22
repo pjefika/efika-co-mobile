@@ -27,11 +27,10 @@ export class CadastroService extends SuperService {
             .catch(super.handleError);
     }
 
-
     public getCadastro(instancia: string): Promise<TaskProcess> {
-        let userSession = JSON.parse(sessionStorage.getItem("user"));
+        let userSession = JSON.parse(sessionStorage.getItem("user"));        
         let _data: { task: string, input: { type: string, instancia: string }, executor: string };
-        _data = { task: "CADASTRO", input: { type: "cadastro", instancia: instancia }, executor: userSession };
+        _data = { task: "CADASTRO", input: { type: "cadastro", instancia: instancia }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
             command: this.urlService.queueAPI + "task/process/",
@@ -45,6 +44,4 @@ export class CadastroService extends SuperService {
             })
             .catch(super.handleError);
     }
-
-
 }

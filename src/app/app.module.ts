@@ -22,6 +22,8 @@ import { LoginComponent } from '../pages/login/login.component';
 import { HolderService } from '../providers/holder/holder.service';
 import { AlertMensagemComponent } from '../util/alert-mensagem/alert-mensagem.component';
 import { SuperComponentService } from '../providers/component-service/super-compoenent.service';
+import { BlocksCertificationResultComponent } from '../pages/fulltest/fulltest-result/blocks-certification-result/blocks-certification-result.component';
+import { InfoGeraisFulltestComponent } from '../pages/fulltest/fulltest-result/info-gerais-fulltest/info-gerais-fulltest.component';
 
 @NgModule({
 	declarations: [
@@ -37,7 +39,9 @@ import { SuperComponentService } from '../providers/component-service/super-comp
 		DynamicRouterComponent,
 		FulltestResultComponent,
 		LoginComponent,
-		AlertMensagemComponent
+		AlertMensagemComponent,
+		BlocksCertificationResultComponent,
+		InfoGeraisFulltestComponent
 	],
 	imports: [
 		BrowserModule,
@@ -54,7 +58,9 @@ import { SuperComponentService } from '../providers/component-service/super-comp
 		FulltestComponent,
 		FulltestResultComponent,
 		LoginComponent,
-		AlertMensagemComponent
+		AlertMensagemComponent,
+		BlocksCertificationResultComponent,
+		InfoGeraisFulltestComponent
 	],
 	providers: [
 		StatusBar,
