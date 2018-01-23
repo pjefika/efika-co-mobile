@@ -21,7 +21,7 @@ export class InfoGeraisFulltestComponent implements OnInit {
     }
 
     public goToETA() {
-        window.open("https://login.etadirect.com/gvt.etadirect.com", "_blank");
+        window.open("https://login.etadirect.com/gvt/mobility", "_blank");
     }
 
     public numberValid() {
