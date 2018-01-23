@@ -13,9 +13,6 @@ import { UrlService } from '../providers/url-service/url.service';
 import { FulltestComponent } from '../pages/fulltest/fulltest.component';
 import { CadastroComponent } from '../pages/cadastro/cadastro.component';
 import { InfoCadastroComponent } from '../pages/cadastro/info-cadastro/info-cadastro.component';
-import { DynamicComponent } from '../pages/dynamiccomponent/dynamic.component';
-import { DynamicRouterComponent } from '../pages/dynamiccomponent/dynamic-router/dynamic-router.component';
-import { DynamicRouterHolderService } from '../pages/dynamiccomponent/dynamic-router/dynamic-router-holder.service';
 import { FulltestResultComponent } from '../pages/fulltest/fulltest-result/fulltest-result.component';
 import { MomentModule } from 'angular2-moment';
 import { LoginComponent } from '../pages/login/login.component';
@@ -37,8 +34,6 @@ import { LoginUtilService } from '../util/login-util/login-util.service';
 		FulltestComponent,
 		CadastroComponent,
 		InfoCadastroComponent,
-		DynamicComponent,
-		DynamicRouterComponent,
 		FulltestResultComponent,
 		LoginComponent,
 		AlertMensagemComponent,
@@ -72,7 +67,6 @@ import { LoginUtilService } from '../util/login-util/login-util.service';
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
 		HolderService,
 		UrlService,
-		DynamicRouterHolderService,
 		SuperComponentService,
 		LoginUtilService
 	],
