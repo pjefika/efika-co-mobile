@@ -9,7 +9,7 @@
         <h4>Efika Mobile CO_</h4>
         <p>Para entrar digite sua matricula e senha nos campos abaixo.</p>
     </div>
-    <ion-list inset>
+    <ion-list inset (keyup.enter)="entrar()">
         <ion-item>
             <ion-label>Matricula</ion-label>
             <ion-input type="text" [(ngModel)]="usuario.matricula" name="usuario" required></ion-input>

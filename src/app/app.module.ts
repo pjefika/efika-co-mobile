@@ -44,7 +44,10 @@ import { LoginUtilService } from '../util/login-util/login-util.service';
 	imports: [
 		BrowserModule,
 		HttpModule,
-		IonicModule.forRoot(MyApp),
+		IonicModule.forRoot(MyApp, {
+			scrollAssist: true,
+			autoFocusAssist: true
+		}),
 		MomentModule
 	],
 	bootstrap: [IonicApp],
