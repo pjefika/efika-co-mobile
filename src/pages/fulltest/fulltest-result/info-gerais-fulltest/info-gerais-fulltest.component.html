@@ -25,5 +25,8 @@
     </table>
     <div>
         <button ion-button round small block (click)="goToETA()" *ngIf="certification.resultado === 'OK'">Ir para o ETA</button>
+        <a href="tel:+{{numero}}" ion-button round small block>
+            Link Suporte: {{sequencia}}
+        </a>
     </div>
 </div>
