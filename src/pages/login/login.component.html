@@ -12,11 +12,16 @@
     <ion-list inset>
         <ion-item>
             <ion-label>Matricula</ion-label>
-            <ion-input type="text" [(ngModel)]="usuario.matricula" name="usuario"></ion-input>
+            <ion-input type="text" [(ngModel)]="usuario.matricula" name="usuario" required></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Senha</ion-label>
-            <ion-input type="password" [(ngModel)]="usuario.senha" name="senha"></ion-input>
+            <ion-input type="password" [(ngModel)]="usuario.senha" name="senha" required *ngIf="!showHidePassword"></ion-input>
+            <ion-input type="text" [(ngModel)]="usuario.senha" name="senha" required *ngIf="showHidePassword"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Mostrar Senha</ion-label>
+            <ion-checkbox color="dark" checked="true" [(ngModel)]="showHidePassword"></ion-checkbox>
         </ion-item>
     </ion-list>
 

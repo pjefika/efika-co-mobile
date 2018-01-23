@@ -16,6 +16,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     public usuario = new Usuario();
 
+    public showHidePassword: boolean = false;
+
     constructor(private loginService: LoginService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
