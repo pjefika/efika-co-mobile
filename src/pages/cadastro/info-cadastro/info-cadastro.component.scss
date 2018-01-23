@@ -20,7 +20,7 @@ info-cadastro-component {
 
     table th {
         text-align: left;
-        width: 50%;
+        //width: 50%; // fixa o lado esquerdo da tabela com 50%
         padding: .625em;
         font-size: .85em;
         //letter-spacing: .1em;
@@ -34,7 +34,7 @@ info-cadastro-component {
         padding: .625em;
         font-size: .8em;
         font-size: .8em;
-
+        //width: 50%; // fixa o lado direito da tabela com 50%
     }
 
     table tr:last-child {
