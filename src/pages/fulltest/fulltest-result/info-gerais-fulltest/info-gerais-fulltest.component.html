@@ -15,10 +15,10 @@
                 </td>
                 <td data-label="Orientação">{{certification.orientacao}}</td>
                 <td data-label="Resultado">
-                    <ion-icon name="checkmark" *ngIf="certification.resultado === 'OK'" style="color: green;"></ion-icon>
-                    <ion-icon name="close" *ngIf="certification.resultado === 'FISICAL' || certification.resultado === 'FORWARDED_CO' || certification.resultado === 'TO_FIX'"
+                    <ion-icon name="checkmark-circle" *ngIf="certification.resultado === 'OK'" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="certification.resultado === 'FISICAL' || certification.resultado === 'FORWARDED_CO' || certification.resultado === 'TO_FIX'"
                         style="color: red;"></ion-icon>
-                    <ion-icon name="warning" *ngIf="certification.resultado === 'FIXED'" style="color: orange"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="certification.resultado === 'FIXED'" style="color: orange"></ion-icon>
                 </td>
             </tr>
         </tbody>

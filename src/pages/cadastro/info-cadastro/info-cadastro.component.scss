@@ -1,5 +1,4 @@
-blocks-certification-result-component {
-
+info-cadastro-component {
     .titulo-pagina {
         margin: .5em 0 .75em;
         font-size: 1.3em;
@@ -24,8 +23,8 @@ blocks-certification-result-component {
         width: 50%;
         padding: .625em;
         font-size: .85em;
-        // letter-spacing: .1em;
-        // text-transform: uppercase;
+        //letter-spacing: .1em;
+        //text-transform: uppercase;
         font-size: .8em;
 
     }
@@ -41,6 +40,8 @@ blocks-certification-result-component {
     table tr:last-child {
         border-bottom: 3px solid #ddd;
     }
-    
-   
+
+    .th-title {
+        text-align: center;
+    }
 }

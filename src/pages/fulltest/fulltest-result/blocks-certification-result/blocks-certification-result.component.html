@@ -9,10 +9,10 @@
             <tr>
                 <th>Resultado</th>
                 <td>
-                    <ion-icon name="checkmark" *ngIf="block.resultado === 'OK'" style="color: green;"></ion-icon>
-                    <ion-icon name="close" *ngIf="block.resultado === 'FISICAL' || block.resultado === 'FORWARDED_CO' ||block.resultado === 'TO_FIX'"
+                    <ion-icon name="checkmark-circle" *ngIf="block.resultado === 'OK'" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="block.resultado === 'FISICAL' || block.resultado === 'FORWARDED_CO' ||block.resultado === 'TO_FIX'"
                         style="color: red;"></ion-icon>
-                    <ion-icon name="warning" *ngIf="block.resultado === 'FIXED'" style="color: orange"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="block.resultado === 'FIXED'" style="color: orange"></ion-icon>
                 </td>
             </tr>
             <tr *ngFor="let assert of block.asserts">
@@ -20,10 +20,10 @@
                     {{assert.orientacao}}
                 </th>
                 <td>
-                    <ion-icon name="checkmark" *ngIf="assert.resultado === 'OK'" style="color: green;"></ion-icon>
-                    <ion-icon name="close" *ngIf="assert.resultado === 'FISICAL' || assert.resultado === 'FORWARDED_CO' || assert.resultado === 'TO_FIX'"
+                    <ion-icon name="checkmark-circle" *ngIf="assert.resultado === 'OK'" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="assert.resultado === 'FISICAL' || assert.resultado === 'FORWARDED_CO' || assert.resultado === 'TO_FIX'"
                         style="color: red;"></ion-icon>
-                    <ion-icon name="warning" *ngIf="assert.resultado === 'FIXED'" style="color: orange"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="assert.resultado === 'FIXED'" style="color: orange"></ion-icon>
                 </td>
             </tr>
         </tbody>
