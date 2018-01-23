@@ -13,4 +13,8 @@ export class InfoGeraisFulltestComponent implements OnInit {
     constructor() { }
 
     public ngOnInit() { }
+
+    public goToETA() {
+        window.open("https://login.etadirect.com/gvt.etadirect.com", "_blank");
+    }
 }

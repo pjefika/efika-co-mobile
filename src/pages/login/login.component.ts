@@ -28,8 +28,9 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         if (this.loginUtilService.isLogado()) {
             this.holderService.estalogado = true;
         }
-        this.usuario.matricula = "G0034481";
-        this.usuario.senha = "123"
+        //Descomentar quando for para produção;
+        // this.usuario.matricula = "G0034481";
+        // this.usuario.senha = "123"
     }
 
     public entrar() {
