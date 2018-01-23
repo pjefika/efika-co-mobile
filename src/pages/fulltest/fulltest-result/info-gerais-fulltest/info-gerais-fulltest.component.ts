@@ -25,13 +25,14 @@ export class InfoGeraisFulltestComponent implements OnInit {
     }
 
     public numberValid() {
-
+        // Informar se planta é VIVO1 ou VIVO2
+        // Informar sequencia das opções da URA
         if (this.holderService.cadastro.rede.planta === "VIVO2") {
-            this.numero = "1234567890";
-            this.sequencia = "1-3-5";
+            this.numero = "08006009192";
+            //this.sequencia = "1-3-5";
         } else {
-            this.numero = "0987654321";
-            this.sequencia = "3-2-5";
+            this.numero = "08006012032";
+            //this.sequencia = "3-2-5";
         }
 
     }
