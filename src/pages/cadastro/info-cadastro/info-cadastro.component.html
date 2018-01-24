@@ -1,8 +1,9 @@
 <div *ngIf="cadastro">
+    <h3>Informações do cadastro</h3>    
     <table>
         <tbody>
             <tr>
-                <th colspan="2" class="th-title"> Informações </th>
+                <th colspan="2" class="th-title"> Informações Gerais</th>
             </tr>
             <tr>
                 <th> Designador: </th>
@@ -10,7 +11,7 @@
             </tr>
             <tr>
                 <th> Instância: </th>
-                <td> {{cadastro.linha.dn}} </td>
+                <td> {{cadastro.instancia}} </td>
             </tr>
         </tbody>
     </table>

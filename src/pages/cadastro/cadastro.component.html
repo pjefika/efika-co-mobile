@@ -1,7 +1,12 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-title> Consultar Instância_ </ion-title>
+    <ion-toolbar (keyup.enter)="getCadastro()">
+        <ion-title (click)="searchInputOptions(true)" *ngIf="!hideandshowsearch"> {{"Instância: " + holderService.instancia}} </ion-title>
+        <ion-searchbar [(ngModel)]="holderService.instancia" [placeholder]="'Instância/Designador'" *ngIf="hideandshowsearch" (focusout)="searchInputOptions(false)">
+        </ion-searchbar>
         <ion-buttons end>
+            <button ion-button icon-only color="royal" (click)="getCadastro();" *ngIf="hideandshowsearch && holderService.instancia">
+                <ion-icon name="refresh"></ion-icon>
+            </button>
             <button ion-button icon-only color="royal" (click)="openPopover();">
                 <ion-icon name="contact"></ion-icon>
             </button>
@@ -9,34 +14,20 @@
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
-    <ion-list (keyup.enter)="getCadastro()">
-        <ion-item>
-            <ion-label stacked>Instância/Designador</ion-label>
-            <ion-input type="text" [(ngModel)]="holderService.instancia"></ion-input>
-        </ion-item>
-    </ion-list>
+    <div *ngIf="holderService.cadastro">
+        <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
 
-    <button ion-button round color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
+        <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
 
-    <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
-
-    <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
-
-    <!-- <ion-grid *ngIf="!hideandshowsearch">
-        <ion-row>
-            <ion-col>
-                <ion-buttons start>
-                    <button ion-button small color="light" (click)="getCadastro()">Reconsulta</button>
-                </ion-buttons>
-            </ion-col>
-            <ion-col>
-                <ion-buttons end>
-                    <button ion-button small color="light" (click)="novaConsulta()">Nova Consulta</button>
-                </ion-buttons>
-            </ion-col>
-        </ion-row>
-    </ion-grid> -->
-
-    <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
-
+        <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
+    </div>
+    <div *ngIf="!holderService.cadastro">
+        <h4>Seja Bem Vindo ao
+            <br>
+            <b class="mg-left">Efika CO Mobile</b>
+        </h4>
+        <p>Para começar insira a instância no Input de pesquisa e pressione "Enter" e aguarde a busca do cadastro.</p>
+        <br>
+        <img src="../assets/imgs/img_index.jpg" style="width: 100%; height: 100%;"/>
+    </div>
 </ion-content>
