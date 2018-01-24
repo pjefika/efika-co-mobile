@@ -9,20 +9,20 @@
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
-    <ion-list (keyup.enter)="getCadastro()" *ngIf="hideandshowsearch">
+    <ion-list (keyup.enter)="getCadastro()">
         <ion-item>
             <ion-label stacked>Instância/Designador</ion-label>
             <ion-input type="text" [(ngModel)]="holderService.instancia"></ion-input>
         </ion-item>
     </ion-list>
 
-    <button ion-button round color="primary" block (click)="getCadastro()" *ngIf="hideandshowsearch">Consultar Cadastro</button>
+    <button ion-button round color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
 
     <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
 
     <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
 
-    <ion-grid *ngIf="!hideandshowsearch">
+    <!-- <ion-grid *ngIf="!hideandshowsearch">
         <ion-row>
             <ion-col>
                 <ion-buttons start>
@@ -35,7 +35,7 @@
                 </ion-buttons>
             </ion-col>
         </ion-row>
-    </ion-grid>
+    </ion-grid> -->
 
     <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
 
