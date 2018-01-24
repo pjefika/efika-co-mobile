@@ -16,9 +16,12 @@
         </ion-item>
     </ion-list>
 
-    <div padding>
+    <div>
         <button ion-button round color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
+        
+        <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block (click)="entrarEventoMassivos()" class="button-margin-top">Visualizar Eventos Massivos</button>
     </div>
+
     <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
 
     <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>

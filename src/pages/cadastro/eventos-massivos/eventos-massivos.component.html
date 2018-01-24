@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Eventos Massivos_ </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="eventosMassivos.length > 0">
+        <table *ngFor="let evento of eventosMassivos; let i = index">
+            <tbody>
+                <tr>
+                    <th colspan="2" class="titulo-pagina">Evento: {{i + 1}}</th>
+                </tr>
+                <tr>
+                    <th>Tipo - Número Evento</th>
+                    <td>
+                        {{evento.tipoEvento}} - {{evento.numeroEvento}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Tipo Afetacão</th>
+                    <td>
+                        {{evento.tipoAfetacao}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Tipo Falha</th>
+                    <td>
+                        {{evento.tipoFalha}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Tipo Alarme</th>
+                    <td>
+                        {{evento.tipoAlarme}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Data Abertura</th>
+                    <td>
+                        {{((evento.dataAbertura/1000) | amFromUnix) | amDateFormat:'DD/MM/YYYY HH:mm:ss'}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Data Prevista</th>
+                    <td [ngStyle]="{'color':isVencido(evento.dataPrevista)}">
+                        {{((evento.dataPrevista/1000) | amFromUnix) | amDateFormat:'DD/MM/YYYY HH:mm:ss'}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ion-content>

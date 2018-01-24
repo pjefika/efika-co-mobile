@@ -23,6 +23,7 @@ import { BlocksCertificationResultComponent } from '../pages/fulltest/fulltest-r
 import { InfoGeraisFulltestComponent } from '../pages/fulltest/fulltest-result/info-gerais-fulltest/info-gerais-fulltest.component';
 import { HeaderPopoverComponent } from '../util/header-popover/header-popover.component';
 import { LoginUtilService } from '../util/login-util/login-util.service';
+import { EventosMassivosComponent } from '../pages/cadastro/eventos-massivos/eventos-massivos.component';
 
 @NgModule({
 	declarations: [
@@ -39,7 +40,8 @@ import { LoginUtilService } from '../util/login-util/login-util.service';
 		AlertMensagemComponent,
 		BlocksCertificationResultComponent,
 		InfoGeraisFulltestComponent,
-		HeaderPopoverComponent
+		HeaderPopoverComponent,
+		EventosMassivosComponent
 	],
 	imports: [
 		BrowserModule,
@@ -62,7 +64,8 @@ import { LoginUtilService } from '../util/login-util/login-util.service';
 		AlertMensagemComponent,
 		BlocksCertificationResultComponent,
 		InfoGeraisFulltestComponent,
-		HeaderPopoverComponent
+		HeaderPopoverComponent,
+		EventosMassivosComponent
 	],
 	providers: [
 		StatusBar,
