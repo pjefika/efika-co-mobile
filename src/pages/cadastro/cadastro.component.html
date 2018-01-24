@@ -21,7 +21,7 @@
 
         <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
     </div>
-    <div *ngIf="!holderService.cadastro">
+    <div *ngIf="!holderService.cadastro && !jaBuscou">
         <h4>Seja Bem Vindo ao
             <br>
             <b class="mg-left">Efika CO Mobile</b>

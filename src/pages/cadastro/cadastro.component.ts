@@ -16,6 +16,8 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
 
     public hideandshowsearch: boolean = true;
 
+    public jaBuscou: boolean = false;
+
     constructor(private cadastroService: CadastroService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -58,6 +60,7 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
                 .then(() => {
                     carregando.dismiss();
                     this.msgEventoMassivo();
+                    this.jaBuscou = true;
                 });
         }
     }
