@@ -16,7 +16,7 @@
         </ion-item>
     </ion-list>
 
-    <button ion-button round color="primary" block (click)="getMockCadastro()" *ngIf="hideandshowsearch">Consultar Cadastro</button>
+    <button ion-button round color="primary" block (click)="getCadastro()" *ngIf="hideandshowsearch">Consultar Cadastro</button>
 
     <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
 
@@ -26,7 +26,7 @@
         <ion-row>
             <ion-col>
                 <ion-buttons start>
-                    <button ion-button small color="secondary" (click)="getMockCadastro()">Reconsulta</button>
+                    <button ion-button small color="light" (click)="getCadastro()">Reconsulta</button>
                 </ion-buttons>
             </ion-col>
             <ion-col>
