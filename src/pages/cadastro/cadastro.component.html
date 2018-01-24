@@ -16,31 +16,26 @@
         </ion-item>
     </ion-list>
 
-    <button ion-button round color="primary" block (click)="getCadastro()" *ngIf="hideandshowsearch">Consultar Cadastro</button>
+    <button ion-button round color="primary" block (click)="getMockCadastro()" *ngIf="hideandshowsearch">Consultar Cadastro</button>
 
-    <ion-grid>
-        <ion-row *ngIf="!hideandshowsearch">
-            <ion-col col-6>
-                <ion-buttons start>
-                    <button ion-button round (click)="getCadastro()">Refresh</button>
-                </ion-buttons>
-            </ion-col>
-            <ion-col col-6>
-                <ion-buttons end>
-                    <button ion-button round (click)="novaConsulta()">Voltar</button>
-                </ion-buttons>
-            </ion-col>
-        </ion-row>
+    <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
+
+    <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
+
+    <ion-grid *ngIf="!hideandshowsearch">
         <ion-row>
-            <ion-col col-12>
-                <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
+            <ion-col>
+                <ion-buttons start>
+                    <button ion-button small color="secondary" (click)="getMockCadastro()">Reconsulta</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col>
+                <ion-buttons end>
+                    <button ion-button small color="light" (click)="novaConsulta()">Nova Consulta</button>
+                </ion-buttons>
             </ion-col>
         </ion-row>
     </ion-grid>
-
-
-
-    <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
 
     <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
 
