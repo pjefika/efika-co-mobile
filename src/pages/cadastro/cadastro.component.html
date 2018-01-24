@@ -8,19 +8,37 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content padding (keyup.enter)="getCadastro()">
-    <ion-list>
+<ion-content padding>
+    <ion-list (keyup.enter)="getCadastro()" *ngIf="hideandshowsearch">
         <ion-item>
             <ion-label stacked>Instância/Designador</ion-label>
             <ion-input type="text" [(ngModel)]="holderService.instancia"></ion-input>
         </ion-item>
     </ion-list>
 
-    <div>
-        <button ion-button round color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
+    <button ion-button round color="primary" block (click)="getCadastro()" *ngIf="hideandshowsearch">Consultar Cadastro</button>
 
-        <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block (click)="entrarEventoMassivos()" class="button-margin-top">Visualizar Eventos Massivos</button>
-    </div>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-6>
+                <ion-buttons start *ngIf="!hideandshowsearch" (click)="getCadastro()">
+                    <button ion-button round>Refresh</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col col-6>
+                <ion-buttons end *ngIf="!hideandshowsearch" (click)="novaConsulta()">
+                    <button ion-button round>Voltar</button>
+                </ion-buttons>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
 
     <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
 
