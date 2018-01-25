@@ -14,8 +14,6 @@ export class HolderService {
 
     public certification: Certification;
 
-    public disableButtonFulltest: boolean;
-
     constructor() { }
 
 }
