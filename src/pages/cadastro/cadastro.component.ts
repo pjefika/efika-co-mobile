@@ -51,11 +51,13 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
             this.cadastroService
                 .getCadastro(this.holderService.instancia)
                 .then(response => {
-                    super.showError(false);
-                    this.holderService.cadastro = response.output.customer;
+                    if (super.validState(response.output)) {
+                        super.showError(false);
+                        this.holderService.cadastro = response.output.customer;
+                    }
                 }, error => {
                     super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
-                    console.log("Deu erro!!! OMG p(o.o)q");
+                    console.log("Deu erro -- error --!!! AMD p(o.o)q");
                 })
                 .then(() => {
                     carregando.dismiss();

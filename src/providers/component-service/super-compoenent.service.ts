@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
+import { Output } from '../../view-model/task-process/output-task';
 
 @Injectable()
 export class SuperComponentService {
@@ -25,6 +26,21 @@ export class SuperComponentService {
             buttons: ["Ok"]
         });
         alert.present();
+    }
+
+    public validState(output: Output): boolean {
+        let v: boolean;
+        switch (output.state) {
+            case "OK":
+                v = true;
+                break;
+            case "EXCEPTION":
+                v = false;
+                this.showError(true, "erro", "Ops, aconteceu algo.", output.exceptionMessage);
+                console.log("Deu erro -- EXCEPTION IN: " + output.type + " -- !!! AMD p(o.o)q");
+                break;
+        }
+        return v;
     }
 
 }

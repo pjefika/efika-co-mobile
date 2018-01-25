@@ -40,16 +40,17 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         carregando.present();
         this.loginService
             .entrar(this.usuario)
-            .then(response => {                
-                let verify: boolean;
-                verify = response.output.match;
-                if (verify) {
-                    this.holderService.estalogado = verify;
-                    sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));                   
-                } else {
-                    super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
-                    this.usuario.matricula = "";
-                    this.usuario.senha = "";
+            .then(response => {
+                if (super.validState(response.output)) {
+                    let verify: boolean = response.output.match;
+                    if (verify) {
+                        this.holderService.estalogado = verify;
+                        sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
+                    } else {
+                        super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+                        this.usuario.matricula = "";
+                        this.usuario.senha = "";
+                    }
                 }
             }, error => {
                 super.showError(true, "erro", "Erro ao realizar login", "Ocorreu um erro ao realizar busca de login.");
