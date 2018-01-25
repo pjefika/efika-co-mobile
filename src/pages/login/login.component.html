@@ -12,7 +12,7 @@
     <ion-list (keyup.enter)="entrar()">
         <ion-item>
             <ion-label>Matricula</ion-label>
-            <ion-input type="text" [(ngModel)]="usuario.matricula" name="usuario" required></ion-input>
+            <ion-input #input type="text" [(ngModel)]="usuario.matricula" name="usuario" required></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Senha</ion-label>

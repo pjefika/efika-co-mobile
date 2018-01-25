@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from './login.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { Usuario } from '../../view-model/usuario/usuario';
@@ -18,6 +18,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     public showHidePassword: boolean = false;
 
+    @ViewChild('input') private input;
+
     constructor(private loginService: LoginService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -30,6 +32,9 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         if (this.loginUtilService.isLogado()) {
             this.holderService.estalogado = true;
         }
+        setTimeout(() => {
+            this.input.setFocus();
+        }, 150);
         // Comentar quando for para produção;
         // this.usuario.matricula = "G0034481";
         // this.usuario.senha = "123"

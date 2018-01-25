@@ -28,6 +28,12 @@ export class SuperComponentService {
         alert.present();
     }
 
+    /**
+     * 
+     * @param output 
+     * Tratativa do state do Output
+     * Se EXCEPTION faz chamada automatica do showError mostrando informação.
+     */
     public validState(output: Output): boolean {
         let v: boolean;
         switch (output.state) {
