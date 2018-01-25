@@ -4,7 +4,7 @@
         <ion-searchbar [(ngModel)]="holderService.instancia" [placeholder]="'Instância/Designador'" *ngIf="hideandshowsearch" (focusout)="searchInputOptions(false)" [focuser]>
         </ion-searchbar>
         <ion-buttons end>
-            <button ion-button icon-only color="royal" (click)="getCadastro();" *ngIf="hideandshowsearch && holderService.instancia">
+            <button ion-button icon-only color="royal" (click)="getCadastro();" *ngIf="holderService.instancia">
                 <ion-icon name="refresh"></ion-icon>
             </button>
             <button ion-button icon-only color="royal" (click)="openPopover();">
