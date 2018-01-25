@@ -1,10 +1,10 @@
 <ion-header>
-    <ion-toolbar (keyup.enter)="getCadastro()">
+    <ion-toolbar (keyup.enter)="getMockCadastro()">
         <ion-title (click)="searchInputOptions(true)" *ngIf="!hideandshowsearch"> {{"Instância: " + holderService.instancia}} </ion-title>
-        <ion-searchbar [(ngModel)]="holderService.instancia" [placeholder]="'Instância/Designador'" *ngIf="hideandshowsearch" (focusout)="searchInputOptions(false)">
+        <ion-searchbar [(ngModel)]="holderService.instancia" [placeholder]="'Instância/Designador'" *ngIf="hideandshowsearch" (focusout)="searchInputOptions(false)" [focuser]>
         </ion-searchbar>
         <ion-buttons end>
-            <button ion-button icon-only color="royal" (click)="getCadastro();" *ngIf="hideandshowsearch && holderService.instancia">
+            <button ion-button icon-only color="royal" (click)="getMockCadastro();" *ngIf="hideandshowsearch && holderService.instancia">
                 <ion-icon name="refresh"></ion-icon>
             </button>
             <button ion-button icon-only color="royal" (click)="openPopover();">
@@ -17,9 +17,9 @@
     <div *ngIf="holderService.cadastro">
         <div class="titulo-info-cad">Informações do cadastro</div>
 
-        <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
-
         <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
+
+        <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block small (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
 
         <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
     </div>

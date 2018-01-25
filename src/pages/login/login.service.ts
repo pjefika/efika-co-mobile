@@ -29,7 +29,7 @@ export class LoginService extends SuperService {
     }
 
     public entrarMock(usuario: Usuario): boolean {
-        if (usuario.matricula === "G0034481" && usuario.senha === "123") {
+        if (usuario.matricula === "1" && usuario.senha === "1") {
             return true;
         } else {
             return false;

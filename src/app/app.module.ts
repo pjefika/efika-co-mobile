@@ -24,6 +24,7 @@ import { InfoGeraisFulltestComponent } from '../pages/fulltest/fulltest-result/i
 import { HeaderPopoverComponent } from '../util/header-popover/header-popover.component';
 import { LoginUtilService } from '../util/login-util/login-util.service';
 import { EventosMassivosComponent } from '../pages/cadastro/eventos-massivos/eventos-massivos.component';
+import { FocuserDirective } from '../providers/directive/focuser.directive';
 
 @NgModule({
 	declarations: [
@@ -41,7 +42,8 @@ import { EventosMassivosComponent } from '../pages/cadastro/eventos-massivos/eve
 		BlocksCertificationResultComponent,
 		InfoGeraisFulltestComponent,
 		HeaderPopoverComponent,
-		EventosMassivosComponent
+		EventosMassivosComponent,
+		FocuserDirective
 	],
 	imports: [
 		BrowserModule,
