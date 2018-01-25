@@ -1,35 +1,9 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Efika CO_
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar>
+		<ion-title> Efika CO_ </ion-title>
+	</ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-
-    <ion-item>
-      <ion-label stacked>Instância/Designador</ion-label>
-      <ion-input type="text" [(ngModel)]="holderService.instancia"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <div padding>
-    <button ion-button color="primary" block (click)="getCadastro()">Consultar Cadastro</button>
-  </div>
-
-  <ion-list no-lines>
-    <ion-item *ngFor="let ob of holderService.cadastro | objkeys">
-
-      <ion-list-header>
-        {{ob.key}} - {{ob.value}}
-      </ion-list-header>
-      <ng-container *ngIf="hasDetail(ob)">
-        <ion-item *ngFor="let innerOb of ob.value | objkeys">
-          {{innerOb.key}} - {{innerOb.value}}
-        </ion-item>
-      </ng-container>
-    </ion-item>
-  </ion-list>
+	
 </ion-content>

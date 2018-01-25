@@ -1,0 +1,96 @@
+<div *ngIf="cadastro">
+    <table>
+        <tbody>
+            <tr>
+                <th colspan="2" class="th-title"> Informações Gerais</th>
+            </tr>
+            <tr>
+                <th> Designador: </th>
+                <td> {{cadastro.designador}} </td>
+            </tr>
+            <tr>
+                <th> Instância: </th>
+                <td> {{cadastro.instancia}} </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tbody>
+            <tr>
+                <th colspan="2" class="th-title"> Informações de Serviço </th>
+            </tr>
+            <tr>
+                <th> Serviço: </th>
+                <td> {{cadastro.servicos.tipoLinha}} </td>
+            </tr>
+            <tr>
+                <th> TV: </th>
+                <td> {{cadastro.servicos.tipoTv}} </td>
+            </tr>
+            <tr>
+                <th> Velocidade Down/Up: </th>
+                <td> {{cadastro.servicos.velDown}} - {{cadastro.servicos.velUp}} </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tbody>
+            <tr>
+                <th colspan="2" class="th-title"> Informações de Rede </th>
+            </tr>
+            <tr>
+                <th> Planta: </th>
+                <td> {{cadastro.rede.planta}} </td>
+            </tr>
+            <tr>
+                <th> Armario: </th>
+                <td> {{cadastro.radius.armario}} </td>
+            </tr>
+            <tr *ngIf="cadastro.radius.isIpFixo">
+                <th> Ip Fixo: </th>
+                <td> {{cadastro.radius.ipFixo}} </td>
+            </tr>
+            <tr>
+                <th> Slot: </th>
+                <td> {{cadastro.rede.slot}} </td>
+            </tr>
+            <tr>
+                <th> Porta: </th>
+                <td> {{cadastro.rede.porta}} </td>
+            </tr>
+            <tr>
+                <th> Sequencial: </th>
+                <td> {{cadastro.rede.sequencial}} </td>
+            </tr>
+            <tr>
+                <th> DSLAM: </th>
+                <td> {{cadastro.rede.vendorDslam}} - {{cadastro.rede.modeloDslam}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- <ion-item-group>
+        <ion-item-divider color="light">Informações</ion-item-divider>
+        <ion-item>Designador: {{cadastro.designador}}</ion-item>
+        <ion-item>Instância: {{cadastro.linha.dn}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light">Informações de Serviço</ion-item-divider>
+        <ion-item>Linha Serviço: {{cadastro.servicos.tipoLinha}}</ion-item>
+        <ion-item>TV: {{cadastro.servicos.tipoTv}}</ion-item>
+        <ion-item>Velocidade Down/Up: {{cadastro.servicos.velDown}} - {{cadastro.servicos.velUp}}</ion-item>
+    </ion-item-group>
+    <ion-item-group>
+        <ion-item-divider color="light">Informações de Rede</ion-item-divider>
+        <ion-item>Planta: {{cadastro.rede.planta}}</ion-item>
+        <ion-item>Armario: {{cadastro.radius.armario}}</ion-item>
+        <ion-item *ngIf="cadastro.radius.isIpFixo">Ip Fixo: {{cadastro.radius.ipFixo}}</ion-item>
+        <ion-item>Slot: {{cadastro.rede.slot}}</ion-item>
+        <ion-item>Porta: {{cadastro.rede.porta}}</ion-item>
+        <ion-item>Sequencial: {{cadastro.rede.sequencial}}</ion-item>
+        <ion-item>Vendor Dslam: {{cadastro.rede.vendorDslam}}</ion-item>
+    </ion-item-group> -->
+    <fulltest-component></fulltest-component>
+</div>
