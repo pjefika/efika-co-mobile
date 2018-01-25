@@ -1,4 +1,4 @@
-<div *ngIf="cadastro">  
+<div *ngIf="cadastro">
     <table>
         <tbody>
             <tr>
@@ -50,7 +50,7 @@
             </tr>
             <tr *ngIf="cadastro.radius.isIpFixo">
                 <th> Ip Fixo: </th>
-                <td> {{cadastro.servicos.velDown}} - {{cadastro.servicos.velUp}} </td>
+                <td> {{cadastro.radius.ipFixo}} </td>
             </tr>
             <tr>
                 <th> Slot: </th>
@@ -65,8 +65,8 @@
                 <td> {{cadastro.rede.sequencial}} </td>
             </tr>
             <tr>
-                <th> Vendor Dslam: </th>
-                <td> {{cadastro.rede.vendorDslam}} </td>
+                <th> DSLAM: </th>
+                <td> {{cadastro.rede.vendorDslam}} - {{cadastro.rede.modeloDslam}}</td>
             </tr>
         </tbody>
     </table>
