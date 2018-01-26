@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Blocks } from '../../../../view-model/certification/blocks';
 import { NavController } from 'ionic-angular';
 import { ParametrosViewComponent } from '../../../configuracoes-porta/parametros-view/parametros-view.component';
+import { ConfiabilidadeRedeComponent } from '../../../configuracoes-porta/confiabilidade-rede/confiabilidade-rede.component';
 
 @Component({
     selector: 'blocks-certification-result-component',
@@ -18,9 +19,19 @@ export class BlocksCertificationResultComponent implements OnInit {
 
     public openInfos(info: string) {
 
-        if (info === "CONECTIVIDADE") {
-            this.navCtrl.push(ParametrosViewComponent);
-        }
+        switch (info) {
+            case "CONECTIVIDADE":
+                this.navCtrl.push(ParametrosViewComponent);
+                break;
+            case "PERFORMANCE":
+            this.navCtrl.push(ConfiabilidadeRedeComponent);
+                break;
+            case "SERVICOS":
 
+                break;
+            case "CADASTRO":
+
+                break;
+        }
     }
 }

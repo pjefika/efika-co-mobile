@@ -26,6 +26,7 @@ import { LoginUtilService } from '../util/login-util/login-util.service';
 import { EventosMassivosComponent } from '../pages/cadastro/eventos-massivos/eventos-massivos.component';
 import { FocuserDirective } from '../providers/directive/focuser.directive';
 import { ParametrosViewComponent } from '../pages/configuracoes-porta/parametros-view/parametros-view.component';
+import { ConfiabilidadeRedeComponent } from '../pages/configuracoes-porta/confiabilidade-rede/confiabilidade-rede.component';
 
 @NgModule({
 	declarations: [
@@ -45,7 +46,8 @@ import { ParametrosViewComponent } from '../pages/configuracoes-porta/parametros
 		HeaderPopoverComponent,
 		EventosMassivosComponent,
 		FocuserDirective,
-		ParametrosViewComponent
+		ParametrosViewComponent,
+		ConfiabilidadeRedeComponent
 	],
 	imports: [
 		BrowserModule,
@@ -70,7 +72,8 @@ import { ParametrosViewComponent } from '../pages/configuracoes-porta/parametros
 		InfoGeraisFulltestComponent,
 		HeaderPopoverComponent,
 		EventosMassivosComponent,
-		ParametrosViewComponent
+		ParametrosViewComponent,
+		ConfiabilidadeRedeComponent
 	],
 	providers: [
 		StatusBar,

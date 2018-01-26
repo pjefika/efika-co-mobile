@@ -50,4 +50,15 @@ export class Result {
     atnDown2?: number;
     atnUp1?: number;
     atnUp2?: number;
+
+    //[8]
+    crcDown?: number;
+    crcUp?: number;
+    fecDown?: number;
+    fecUp?: number;
+    resync?: number;
+    tempoMedicao?: number;
+    crcOk?: boolean;
+    pctSuficiente?: boolean;
+
 }
