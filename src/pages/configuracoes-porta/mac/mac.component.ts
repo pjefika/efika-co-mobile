@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SuperConfPortaService } from '../service-configuracoes-porta/super-conf-porta.service';
+import { Valids } from '../../../view-model/fulltest/validacao';
 
 @Component({
     selector: 'mac-component',
@@ -7,6 +8,8 @@ import { SuperConfPortaService } from '../service-configuracoes-porta/super-conf
 })
 
 export class MacComponent extends SuperConfPortaService implements OnInit {
+
+    @Input() public valid: Valids;
 
     constructor() {
         super();
