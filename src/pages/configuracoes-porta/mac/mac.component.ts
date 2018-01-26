@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { SuperConfPortaService } from '../service-configuracoes-porta/super-conf-porta.service';
 
 @Component({
-    selector: 'confiabilidade-rede-component',
-    templateUrl: 'confiabilidade-rede.component.html'
+    selector: 'mac-component',
+    templateUrl: 'mac.component.html'
 })
 
-export class ConfiabilidadeRedeComponent extends SuperConfPortaService implements OnInit {
+export class MacComponent extends SuperConfPortaService implements OnInit {
 
     constructor() {
         super();

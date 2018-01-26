@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Blocks } from '../../../../view-model/certification/blocks';
 import { NavController } from 'ionic-angular';
-import { ParametrosViewComponent } from '../../../configuracoes-porta/parametros-view/parametros-view.component';
-import { ConfiabilidadeRedeComponent } from '../../../configuracoes-porta/confiabilidade-rede/confiabilidade-rede.component';
+import { ConectividadeComponent } from '../../../configuracoes-porta/conectividade/conectividade.component';
+import { PerformanceComponent } from '../../../configuracoes-porta/performance/performance.component';
+import { ServicosComponent } from '../../../configuracoes-porta/servicos/servicos.component';
+import { CadastroConfpComponent } from '../../../configuracoes-porta/cadastro/cadastro.component';
 
 @Component({
     selector: 'blocks-certification-result-component',
@@ -18,19 +20,24 @@ export class BlocksCertificationResultComponent implements OnInit {
     public ngOnInit() { }
 
     public openInfos(info: string) {
-
         switch (info) {
             case "CONECTIVIDADE":
-                this.navCtrl.push(ParametrosViewComponent);
+                //Parametros
+                this.navCtrl.push(ConectividadeComponent);
                 break;
             case "PERFORMANCE":
-            this.navCtrl.push(ConfiabilidadeRedeComponent);
+                //Confiabilidade de Rede
+                this.navCtrl.push(PerformanceComponent);
                 break;
             case "SERVICOS":
-
+                //Vlan Banda
+                //Profile
+                this.navCtrl.push(ServicosComponent);
                 break;
             case "CADASTRO":
-
+                //Modulação                
+                //MAC do Equipamento
+                this.navCtrl.push(CadastroConfpComponent);
                 break;
         }
     }

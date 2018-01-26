@@ -27,6 +27,14 @@ import { EventosMassivosComponent } from '../pages/cadastro/eventos-massivos/eve
 import { FocuserDirective } from '../providers/directive/focuser.directive';
 import { ParametrosViewComponent } from '../pages/configuracoes-porta/parametros-view/parametros-view.component';
 import { ConfiabilidadeRedeComponent } from '../pages/configuracoes-porta/confiabilidade-rede/confiabilidade-rede.component';
+import { ConectividadeComponent } from '../pages/configuracoes-porta/conectividade/conectividade.component';
+import { PerformanceComponent } from '../pages/configuracoes-porta/performance/performance.component';
+import { ServicosComponent } from '../pages/configuracoes-porta/servicos/servicos.component';
+import { ProfileComponent } from '../pages/configuracoes-porta/profile/profile.component';
+import { VlanbandaComponent } from '../pages/configuracoes-porta/vlanbanda/vlanbanda.component';
+import { ModulacaoComponent } from '../pages/configuracoes-porta/modulacao/modulacao.component';
+import { CadastroConfpComponent } from '../pages/configuracoes-porta/cadastro/cadastro.component';
+import { MacComponent } from '../pages/configuracoes-porta/mac/mac.component';
 
 @NgModule({
 	declarations: [
@@ -46,8 +54,16 @@ import { ConfiabilidadeRedeComponent } from '../pages/configuracoes-porta/confia
 		HeaderPopoverComponent,
 		EventosMassivosComponent,
 		FocuserDirective,
+		ConectividadeComponent,
+		PerformanceComponent,
 		ParametrosViewComponent,
-		ConfiabilidadeRedeComponent
+		ConfiabilidadeRedeComponent,
+		ServicosComponent,
+		ProfileComponent,
+		VlanbandaComponent,
+		CadastroConfpComponent,
+		ModulacaoComponent,
+		MacComponent
 	],
 	imports: [
 		BrowserModule,
@@ -72,8 +88,16 @@ import { ConfiabilidadeRedeComponent } from '../pages/configuracoes-porta/confia
 		InfoGeraisFulltestComponent,
 		HeaderPopoverComponent,
 		EventosMassivosComponent,
+		ConectividadeComponent,
+		PerformanceComponent,
 		ParametrosViewComponent,
-		ConfiabilidadeRedeComponent
+		ConfiabilidadeRedeComponent,
+		ServicosComponent,
+		ProfileComponent,
+		VlanbandaComponent,
+		CadastroConfpComponent,
+		ModulacaoComponent,
+		MacComponent
 	],
 	providers: [
 		StatusBar,

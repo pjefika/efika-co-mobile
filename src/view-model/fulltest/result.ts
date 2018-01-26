@@ -61,4 +61,8 @@ export class Result {
     crcOk?: boolean;
     pctSuficiente?: boolean;
 
+    //[8]
+    modulacao?: string;
+    modulEnum?: string;
+
 }

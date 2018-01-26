@@ -1,44 +1,37 @@
-<ion-header>
-    <ion-navbar>
-        <ion-title>Confiabilidade de Rede_ </ion-title>
-    </ion-navbar>
-</ion-header>
-<ion-content padding>
-    <div>
-        <table>
-            <tbody>
-                <tr>
-                    <th colspan="2" class="align-title-center">Informações de Rede</th>
-                </tr>
-                <tr>
-                    <th>
-                        Confiabilidade de Rede
-                    </th>
-                    <td>
-                        <ion-icon name="checkmark-circle" *ngIf="valid.resultado" style="color: green;"></ion-icon>
-                        <ion-icon name="ios-alert" *ngIf="!valid.resultado && valid.result.pctSuficiente" style="color: red;"></ion-icon>
-                        <ion-icon name="warning" *ngIf="!valid.resultado && !valid.result.pctSuficiente" style="color: orange;"></ion-icon>
+<div *ngIf="valid">
+    <table>
+        <tbody>
+            <tr>
+                <th colspan="2" class="align-title-center">Informações de Rede</th>
+            </tr>
+            <tr>
+                <th>
+                    Confiabilidade de Rede
+                </th>
+                <td>
+                    <ion-icon name="checkmark-circle" *ngIf="valid.resultado" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="!valid.resultado && valid.result.pctSuficiente" style="color: red;"></ion-icon>
+                    <ion-icon name="warning" *ngIf="!valid.resultado && !valid.result.pctSuficiente" style="color: orange;"></ion-icon>
 
-                    </td>
-                </tr>
-                <tr>
-                    <th>Pacotes Trafegados (Down/Up)</th>
-                    <td>{{valid.result.pctDown}} / {{valid.result.pctUp}}</td>
-                </tr>
-                <tr>
-                    <th>CRC (Down/Up)</th>
-                    <td>{{valid.result.crcDown}} / {{valid.result.crcUp}}</td>
-                </tr>
-                <tr>
-                    <th>FEC (Down/Up)</th>
-                    <td>{{valid.result.fecDown}} / {{valid.result.fecUp}}</td>
-                </tr>
-                <tr>
-                    <th>Ressincronismo</th>
-                    <td>{{valid.result.resync}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <button ion-button round block>Reconsultar Tabela de Rede</button>
-    </div>
-</ion-content>
+                </td>
+            </tr>
+            <tr>
+                <th>Pacotes Trafegados (Down/Up)</th>
+                <td>{{valid.result.pctDown}} / {{valid.result.pctUp}}</td>
+            </tr>
+            <tr>
+                <th>CRC (Down/Up)</th>
+                <td>{{valid.result.crcDown}} / {{valid.result.crcUp}}</td>
+            </tr>
+            <tr>
+                <th>FEC (Down/Up)</th>
+                <td>{{valid.result.fecDown}} / {{valid.result.fecUp}}</td>
+            </tr>
+            <tr>
+                <th>Ressincronismo</th>
+                <td>{{valid.result.resync}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <button ion-button round block>Reconsultar Tabela de Rede</button>
+</div>
