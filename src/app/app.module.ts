@@ -25,6 +25,7 @@ import { HeaderPopoverComponent } from '../util/header-popover/header-popover.co
 import { LoginUtilService } from '../util/login-util/login-util.service';
 import { EventosMassivosComponent } from '../pages/cadastro/eventos-massivos/eventos-massivos.component';
 import { FocuserDirective } from '../providers/directive/focuser.directive';
+import { ParametrosViewComponent } from '../pages/configuracoes-porta/parametros-view/parametros-view.component';
 
 @NgModule({
 	declarations: [
@@ -43,7 +44,8 @@ import { FocuserDirective } from '../providers/directive/focuser.directive';
 		InfoGeraisFulltestComponent,
 		HeaderPopoverComponent,
 		EventosMassivosComponent,
-		FocuserDirective
+		FocuserDirective,
+		ParametrosViewComponent
 	],
 	imports: [
 		BrowserModule,
@@ -67,7 +69,8 @@ import { FocuserDirective } from '../providers/directive/focuser.directive';
 		BlocksCertificationResultComponent,
 		InfoGeraisFulltestComponent,
 		HeaderPopoverComponent,
-		EventosMassivosComponent
+		EventosMassivosComponent,
+		ParametrosViewComponent
 	],
 	providers: [
 		StatusBar,

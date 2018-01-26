@@ -1,6 +1,6 @@
 <div *ngIf="blocks">    
     <div class="titulo-pagina">Informações de Fulltest</div>
-    <table *ngFor="let block of blocks">       
+    <table *ngFor="let block of blocks" (click)="openInfos(block.nome)">       
         <tbody>
             <tr>
                 <th>{{block.nome}}</th>
