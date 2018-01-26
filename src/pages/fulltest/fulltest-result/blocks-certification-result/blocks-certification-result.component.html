@@ -1,6 +1,6 @@
-<div *ngIf="blocks">    
+<div *ngIf="blocks">
     <div class="titulo-pagina">Informações de Fulltest</div>
-    <table *ngFor="let block of blocks" (click)="openInfos(block.nome)">       
+    <table *ngFor="let block of blocks">
         <tbody>
             <tr>
                 <th>{{block.nome}}</th>
@@ -25,6 +25,11 @@
                         style="color: red;"></ion-icon>
                     <ion-icon name="ios-alert" *ngIf="assert.resultado === 'FIXED'" style="color: orange"></ion-icon>
                 </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <button ion-button block small (click)="openInfos(block.nome)">Ver informações adicionais</button>
+                </th>
             </tr>
         </tbody>
     </table>
