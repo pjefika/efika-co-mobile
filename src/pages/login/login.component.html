@@ -9,7 +9,7 @@
         <h4>Efika CO Mobile_</h4>
         <p>Para entrar digite sua matricula e senha nos campos abaixo.</p>
     </div>
-    <ion-list (keyup.enter)="entrar()">
+    <ion-list (keyup.enter)="entrarMock()">
         <ion-item class="ion-item-rounded">
             <ion-label floating>Matricula</ion-label>
             <ion-input #input type="text" [(ngModel)]="usuario.matricula" name="usuario"></ion-input>
@@ -17,8 +17,8 @@
         </ion-item>
         <ion-item class="ion-item-rounded">
             <ion-label floating>Senha</ion-label>
-            <ion-input type="password" [(ngModel)]="usuario.senha" name="senha" *ngIf="!showHidePassword"></ion-input>
             <!-- placeholder="Senha" -->
+            <ion-input type="password" [(ngModel)]="usuario.senha" name="senha" *ngIf="!showHidePassword"></ion-input>            
             <ion-input type="text" [(ngModel)]="usuario.senha" name="senha" *ngIf="showHidePassword"></ion-input>
         </ion-item>
         <ion-item>
@@ -28,7 +28,7 @@
     </ion-list>
 
     <div padding>
-        <button ion-button round color="primary" block (click)="entrar()">Entrar</button>
+        <button ion-button round color="primary" block (click)="entrarMock()">Entrar</button>
     </div>
     <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
 </ion-content>

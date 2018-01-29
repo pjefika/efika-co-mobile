@@ -1,9 +1,16 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title> Fulltest_ </ion-title>        
+        <ion-title> Fulltest_ </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only color="royal" (click)="copiarResumoInfo()">
+                <ion-icon name="clipboard"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
+    <div id="someToHoldClipBoard"></div>
+
     <alert-mensagem-component *ngIf="!holderService.certification && !holderService.cadastro" [ativo]="true" [tipo]="'erro'"
         [titulo]="'Informativo'" [mensagem]="'Consulte antes o cadastro inserindo a Instância/Designador'"></alert-mensagem-component>
     <alert-mensagem-component *ngIf="!holderService.certification && holderService.cadastro" [ativo]="true" [tipo]="'erro'" [titulo]="'Informativo'"

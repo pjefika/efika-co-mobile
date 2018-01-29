@@ -39,6 +39,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     }
 
     public entrar() {
+        this.showHidePassword = false;
         let carregando = this.loadingCtrl.create({ content: "Consultando Login" });
         carregando.present();
         this.loginService
