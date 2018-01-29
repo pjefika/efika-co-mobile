@@ -27,14 +27,15 @@ export class FulltestResultComponent extends SuperComponentService implements On
                 hClip = hClip + "\n\n||** Fulltest **||\n" + this.trataCopy(certification);
             }
         }
-        super.clipboard(hClip);
+        if (super.clipboard(hClip)) {
+            super.showAlert("Clipboard", "Conteúdo copiado com sucesso.");
+        }
     }
 
     private trataCopy(info: any): string {
         let trat: string;
         trat = JSON.stringify(info);
         for (let i = 0; i < trat.length; i++) {
-
             trat = trat
                 .replace("{", "")
                 .replace("}", "")
@@ -44,7 +45,6 @@ export class FulltestResultComponent extends SuperComponentService implements On
                 .replace("\":\"", " : ")
                 .replace(",", "\n")
                 .replace("\"", "");
-
         }
         return trat;
     }

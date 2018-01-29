@@ -67,7 +67,7 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
         }
     }    
 
-    public getMockCadastro() {
+    public getCadastroMock() {
         let carregando = this.loadingCtrl.create({ content: "Consultando Cadastro" });
         carregando.present();
         setTimeout(() => {
