@@ -57,7 +57,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                     }
                 }
             }, error => {
-                super.showError(true, "erro", "Erro ao realizar login", "Ocorreu um erro ao realizar busca de login.");
+                super.showError(true, "erro", "Erro ao realizar login", error.mError);
                 this.usuario.matricula = "";
                 this.usuario.senha = "";
             })
