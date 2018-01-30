@@ -36,7 +36,7 @@ import { ModulacaoComponent } from '../pages/configuracoes-porta/modulacao/modul
 import { CadastroConfpComponent } from '../pages/configuracoes-porta/cadastro/cadastro.component';
 import { MacComponent } from '../pages/configuracoes-porta/mac/mac.component';
 import { AssociacaoOntComponent } from '../pages/configuracoes-porta/associacaoont/associacao-ont.component';
-import { EstadoOperacionalPortaComponent } from '../pages/configuracoes-porta/estado-operacional-porta/estado-operacional-porta.component';
+import { EstadoPortaComponent } from '../pages/configuracoes-porta/estado-porta/estado-porta.component';
 
 @NgModule({
 	declarations: [
@@ -67,7 +67,7 @@ import { EstadoOperacionalPortaComponent } from '../pages/configuracoes-porta/es
 		ModulacaoComponent,
 		MacComponent,
 		AssociacaoOntComponent,
-		EstadoOperacionalPortaComponent
+		EstadoPortaComponent
 	],
 	imports: [
 		BrowserModule,
@@ -103,7 +103,7 @@ import { EstadoOperacionalPortaComponent } from '../pages/configuracoes-porta/es
 		ModulacaoComponent,
 		MacComponent,
 		AssociacaoOntComponent,
-		EstadoOperacionalPortaComponent
+		EstadoPortaComponent
 	],
 	providers: [
 		StatusBar,

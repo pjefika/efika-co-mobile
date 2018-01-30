@@ -11,7 +11,8 @@ import { HolderService } from '../../../providers/holder/holder.service';
 export class ConectividadeComponent extends ConfiguracoesPortaService implements OnInit {
 
     public parametros: Valids;
-    public estOpPorta: Valids;
+    public estadoPorta: Valids[];
+    public assocOnt: Valids;
 
     constructor(public holderService: HolderService) {
         super();
@@ -23,6 +24,8 @@ export class ConectividadeComponent extends ConfiguracoesPortaService implements
 
     private getValid() {
         this.parametros = super.getParameterValid(this.holderService.certification.fulltest.valids, "Parâmetros", "Parâmetros Ópticos");
-        this.estOpPorta = super.getParameterValid(this.holderService.certification.fulltest.valids, "Estado Operacional da Porta");
+        this.estadoPorta = [super.getParameterValid(this.holderService.certification.fulltest.valids, "Estado Operacional da Porta")];
+        this.estadoPorta.push(super.getParameterValid(this.holderService.certification.fulltest.valids, "Estado Administrativo da Porta"));
+        this.assocOnt = super.getParameterValid(this.holderService.certification.fulltest.valids, "Associação Serial ONT");
     }
 }
