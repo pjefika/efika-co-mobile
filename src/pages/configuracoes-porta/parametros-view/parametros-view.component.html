@@ -4,7 +4,7 @@
         <tbody>
             <tr>
                 <th>Mensagem:</th>
-                <td colspan="2">
+                <td colspan="2" class="aln-right">
                     {{valid.mensagem}}
                     <ion-icon name="checkmark-circle" *ngIf="valid.resultado" style="color: green;"></ion-icon>
                     <ion-icon name="ios-alert" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
@@ -12,8 +12,8 @@
             </tr>
             <tr>
                 <th>Informações</th>
-                <th>Download</th>
-                <th>Upload</th>
+                <th class="aln-center">Download</th>
+                <th class="aln-center">Upload</th>
             </tr>
             <tr *ngIf="valid.result.velSincDown">
                 <th>Velocidade Sincronizada (Mbps):</th>

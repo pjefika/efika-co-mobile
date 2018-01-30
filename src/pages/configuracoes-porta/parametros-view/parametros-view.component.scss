@@ -30,7 +30,7 @@ parametros-view-component {
     }
 
     table td {
-        text-align: right;
+        text-align: center;
         padding: .625em;
         font-size: .8em;
         font-size: .8em;
@@ -39,5 +39,14 @@ parametros-view-component {
 
     table tr:last-child {
         border-bottom: 3px solid #ddd;
+    }
+
+
+    .aln-center {
+        text-align: center;
+    }
+
+    .aln-right {
+        text-align: right;
     }
 }

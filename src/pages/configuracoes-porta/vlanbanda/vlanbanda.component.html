@@ -13,8 +13,8 @@
             <tr>
                 <th>Foi Corrigido:</th>
                 <td>
-                    <ion-icon name="checkmark-circle" *ngIf="valid.foiCorrigido" style="color: green;"></ion-icon>
-                    <ion-icon name="ios-alert" *ngIf="!valid.foiCorrigido" style="color: red;"></ion-icon>
+                    <ion-icon name="checkmark-circle" *ngIf="!valid.foiCorrigido" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="valid.foiCorrigido" style="color: red;"></ion-icon>
                 </td>
             </tr>
             <tr *ngIf="valid.result.cvlan">
