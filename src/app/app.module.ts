@@ -35,6 +35,7 @@ import { VlanComponent } from '../pages/configuracoes-porta/vlanbanda/vlan.compo
 import { ModulacaoComponent } from '../pages/configuracoes-porta/modulacao/modulacao.component';
 import { CadastroConfpComponent } from '../pages/configuracoes-porta/cadastro/cadastro.component';
 import { MacComponent } from '../pages/configuracoes-porta/mac/mac.component';
+import { AssociacaoOntComponent } from '../pages/configuracoes-porta/associacaoont/associacao-ont.component';
 
 @NgModule({
 	declarations: [
@@ -63,7 +64,8 @@ import { MacComponent } from '../pages/configuracoes-porta/mac/mac.component';
 		VlanComponent,
 		CadastroConfpComponent,
 		ModulacaoComponent,
-		MacComponent
+		MacComponent,
+		AssociacaoOntComponent
 	],
 	imports: [
 		BrowserModule,
@@ -97,7 +99,8 @@ import { MacComponent } from '../pages/configuracoes-porta/mac/mac.component';
 		VlanComponent,
 		CadastroConfpComponent,
 		ModulacaoComponent,
-		MacComponent
+		MacComponent,
+		AssociacaoOntComponent
 	],
 	providers: [
 		StatusBar,
