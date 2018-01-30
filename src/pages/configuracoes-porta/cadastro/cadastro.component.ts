@@ -12,7 +12,6 @@ export class CadastroConfpComponent extends ConfiguracoesPortaService implements
 
     public modulacao: Valids;
     public mac: Valids;
-
     public assocOnt: Valids;
 
     constructor(public holderService: HolderService) {
@@ -27,5 +26,6 @@ export class CadastroConfpComponent extends ConfiguracoesPortaService implements
         this.modulacao = super.getParameterValid(this.holderService.certification.fulltest.valids, "Modulação");
         this.mac = super.getParameterValid(this.holderService.certification.fulltest.valids, "MAC do Equipamento");
         this.assocOnt = super.getParameterValid(this.holderService.certification.fulltest.valids, "Associação Serial ONT");
+       
     }
 }

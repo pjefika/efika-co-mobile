@@ -10,7 +10,8 @@ import { HolderService } from '../../../providers/holder/holder.service';
 
 export class PerformanceComponent extends ConfiguracoesPortaService implements OnInit {
 
-    public confbRede: Valids;
+    public confbRede: Valids;    
+    
 
     constructor(public holderService: HolderService) {
         super();
@@ -21,6 +22,6 @@ export class PerformanceComponent extends ConfiguracoesPortaService implements O
     }
 
     private getValid() {
-        this.confbRede = super.getParameterValid(this.holderService.certification.fulltest.valids, "Confiabilidade de Rede");
+        this.confbRede = super.getParameterValid(this.holderService.certification.fulltest.valids, "Confiabilidade de Rede");        
     }
 }
