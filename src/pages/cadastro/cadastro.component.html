@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar (keyup.enter)="getCadastroMock()">
+    <ion-toolbar (keyup.enter)="getCadastro()">
         <ion-title (click)="searchInputOptions(true)" *ngIf="!hideandshowsearch"> {{"Instância: " + holderService.instancia}} </ion-title>
         <ion-searchbar [type]="'search'" [(ngModel)]="holderService.instancia" [placeholder]="'Instância/Designador'" *ngIf="hideandshowsearch"
             (focusout)="searchInputOptions(false)" [focuser]>
@@ -19,7 +19,7 @@
                     <div class="titulo-info-cad">Informações do cadastro</div>
                 </ion-col>
                 <ion-col col-2>
-                    <button ion-button small icon-only color="royal" (click)="getCadastroMock();">
+                    <button ion-button small icon-only color="royal" (click)="getCadastro();">
                         <ion-icon name="refresh"></ion-icon>
                     </button>
                 </ion-col>
