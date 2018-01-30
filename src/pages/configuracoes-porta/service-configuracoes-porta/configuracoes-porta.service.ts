@@ -6,10 +6,11 @@ export class ConfiguracoesPortaService {
 
     constructor() { }
 
-    public getParameterValid(valid: Valids[], validName: string): Valids {
+    public getParameterValid(valid: Valids[], validName: string, validNameTwo?: string): Valids {
+        
         let rValid: Valids;
         valid.forEach(valid => {
-            if (valid.nome === validName) {
+            if (valid.nome === validName || valid.nome === validNameTwo) {             
                 rValid = valid;
             }
         });

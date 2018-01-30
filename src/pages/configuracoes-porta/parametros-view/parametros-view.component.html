@@ -10,7 +10,7 @@
                     <ion-icon name="ios-alert" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
                 </td>
             </tr>
-            <tr>
+            <tr *ngIf="!valid.result.potOlt && !valid.result.potOnt">
                 <th>Informações</th>
                 <th class="aln-center">Download</th>
                 <th class="aln-center">Upload</th>

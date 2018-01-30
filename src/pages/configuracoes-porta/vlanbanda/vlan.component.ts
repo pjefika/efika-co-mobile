@@ -12,7 +12,5 @@ export class VlanComponent extends SuperConfPortaService implements OnInit {
         super();
     }
 
-    public ngOnInit() {
-        console.log(this.valids);
-    }
+    public ngOnInit() { }
 }

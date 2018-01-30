@@ -21,6 +21,6 @@ export class ConectividadeComponent extends ConfiguracoesPortaService implements
     }
 
     private getValid() {
-        this.parametros = super.getParameterValid(this.holderService.certification.fulltest.valids, "Parâmetros");
+        this.parametros = super.getParameterValid(this.holderService.certification.fulltest.valids, "Parâmetros", "Parâmetros Ópticos");
     }
 }
