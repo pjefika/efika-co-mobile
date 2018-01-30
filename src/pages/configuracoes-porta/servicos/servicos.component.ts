@@ -10,8 +10,8 @@ import { HolderService } from '../../../providers/holder/holder.service';
 
 export class ServicosComponent extends ConfiguracoesPortaService implements OnInit {
 
-    public vlanBanda: Valids;
     public profile: Valids;
+    public vlans: Valids[];
 
     constructor(public holderService: HolderService) {
         super();
@@ -22,7 +22,10 @@ export class ServicosComponent extends ConfiguracoesPortaService implements OnIn
     }
 
     private getValid() {
-        this.vlanBanda = super.getParameterValid(this.holderService.certification.fulltest.valids, "Vlan Banda Larga");
+        this.vlans = [super.getParameterValid(this.holderService.certification.fulltest.valids, "Vlan Banda Larga")];
+        this.vlans.push(super.getParameterValid(this.holderService.certification.fulltest.valids, "Vlan VoIP"));
+        this.vlans.push(super.getParameterValid(this.holderService.certification.fulltest.valids, "Vlan VoD/IPTV"));
+
         this.profile = super.getParameterValid(this.holderService.certification.fulltest.valids, "Profile");
     }
 

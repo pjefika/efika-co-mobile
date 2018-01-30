@@ -31,7 +31,7 @@ import { ConectividadeComponent } from '../pages/configuracoes-porta/conectivida
 import { PerformanceComponent } from '../pages/configuracoes-porta/performance/performance.component';
 import { ServicosComponent } from '../pages/configuracoes-porta/servicos/servicos.component';
 import { ProfileComponent } from '../pages/configuracoes-porta/profile/profile.component';
-import { VlanbandaComponent } from '../pages/configuracoes-porta/vlanbanda/vlanbanda.component';
+import { VlanComponent } from '../pages/configuracoes-porta/vlanbanda/vlan.component';
 import { ModulacaoComponent } from '../pages/configuracoes-porta/modulacao/modulacao.component';
 import { CadastroConfpComponent } from '../pages/configuracoes-porta/cadastro/cadastro.component';
 import { MacComponent } from '../pages/configuracoes-porta/mac/mac.component';
@@ -60,7 +60,7 @@ import { MacComponent } from '../pages/configuracoes-porta/mac/mac.component';
 		ConfiabilidadeRedeComponent,
 		ServicosComponent,
 		ProfileComponent,
-		VlanbandaComponent,
+		VlanComponent,
 		CadastroConfpComponent,
 		ModulacaoComponent,
 		MacComponent
@@ -94,7 +94,7 @@ import { MacComponent } from '../pages/configuracoes-porta/mac/mac.component';
 		ConfiabilidadeRedeComponent,
 		ServicosComponent,
 		ProfileComponent,
-		VlanbandaComponent,
+		VlanComponent,
 		CadastroConfpComponent,
 		ModulacaoComponent,
 		MacComponent

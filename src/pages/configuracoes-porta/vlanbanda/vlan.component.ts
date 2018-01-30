@@ -2,15 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { SuperConfPortaService } from '../service-configuracoes-porta/super-conf-porta.service';
 
 @Component({
-    selector: 'vlanbanda-component',
-    templateUrl: 'vlanbanda.component.html'
+    selector: 'vlan-component',
+    templateUrl: 'vlan.component.html'
 })
 
-export class VlanbandaComponent extends SuperConfPortaService implements OnInit {
+export class VlanComponent extends SuperConfPortaService implements OnInit {
 
     constructor() {
         super();
     }
 
-    public ngOnInit() { }
+    public ngOnInit() {
+        console.log(this.valids);
+    }
 }

@@ -1,11 +1,11 @@
 <ion-header>
-    <ion-toolbar (keyup.enter)="getCadastro()">
+    <ion-toolbar (keyup.enter)="getCadastroMock()">
         <ion-title (click)="searchInputOptions(true)" *ngIf="!hideandshowsearch"> {{"Instância: " + holderService.instancia}} </ion-title>
         <ion-searchbar [type]="'search'" [(ngModel)]="holderService.instancia" [placeholder]="'Instância/Designador'" *ngIf="hideandshowsearch"
             (focusout)="searchInputOptions(false)" [focuser]>
         </ion-searchbar>
         <ion-buttons end>
-            <button ion-button icon-only color="royal" (click)="getCadastro();" *ngIf="holderService.instancia">
+            <button ion-button icon-only color="royal" (click)="getCadastroMock();" *ngIf="holderService.instancia">
                 <ion-icon name="refresh"></ion-icon>
             </button>
             <button ion-button icon-only color="royal" (click)="openPopover();">

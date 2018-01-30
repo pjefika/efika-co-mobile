@@ -5,6 +5,7 @@ import { Valids } from '../../../view-model/fulltest/validacao';
 export class SuperConfPortaService {
 
     @Input() public valid: Valids;
+    @Input() public valids: Valids[];
 
     constructor() { }
     
