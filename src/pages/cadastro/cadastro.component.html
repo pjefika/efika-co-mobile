@@ -1,13 +1,10 @@
 <ion-header>
-    <ion-toolbar (keyup.enter)="getCadastro()">
+    <ion-toolbar (keyup.enter)="getCadastroMock()">
         <ion-title (click)="searchInputOptions(true)" *ngIf="!hideandshowsearch"> {{"Instância: " + holderService.instancia}} </ion-title>
         <ion-searchbar [type]="'search'" [(ngModel)]="holderService.instancia" [placeholder]="'Instância/Designador'" *ngIf="hideandshowsearch"
             (focusout)="searchInputOptions(false)" [focuser]>
         </ion-searchbar>
         <ion-buttons end>
-            <button ion-button icon-only color="royal" (click)="getCadastro();" *ngIf="holderService.instancia">
-                <ion-icon name="refresh"></ion-icon>
-            </button>
             <button ion-button icon-only color="royal" (click)="openPopover();">
                 <ion-icon name="contact"></ion-icon>
             </button>
@@ -16,10 +13,19 @@
 </ion-header>
 <ion-content padding>
     <div *ngIf="holderService.cadastro">
-        <div class="titulo-info-cad">Informações do cadastro</div>
-
+        <ion-grid>
+            <ion-row>
+                <ion-col col-10>
+                    <div class="titulo-info-cad">Informações do cadastro</div>
+                </ion-col>
+                <ion-col col-2>
+                    <button ion-button small icon-only color="royal" (click)="getCadastroMock();">
+                        <ion-icon name="refresh"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
         <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
-
         <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block small (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
     </div>
     <div *ngIf="!holderService.cadastro && !jaBuscou">
@@ -29,7 +35,5 @@
         </h4>
         <p>Para começar insira a instância no Input de pesquisa e pressione "Enter" e aguarde a busca do cadastro.</p>
     </div>
-
     <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
-
 </ion-content>
