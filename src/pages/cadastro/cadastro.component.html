@@ -13,13 +13,16 @@
 </ion-header>
 <ion-content padding>
     <div *ngIf="holderService.cadastro">
+
+
         <div class="titulo-info-cad">Informações do cadastro</div>
+        <!--  <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component> -->
         <ion-buttons end>
             <button ion-button small icon-only color="royal" (click)="getCadastroMock();">
                 <ion-icon name="refresh"></ion-icon>
             </button>
         </ion-buttons>
-        <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component>
+        <info-cadastro-list-component [cadastro]="holderService.cadastro"></info-cadastro-list-component>
         <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block small (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
     </div>
     <div *ngIf="!holderService.cadastro && !jaBuscou">

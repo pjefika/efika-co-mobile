@@ -1,0 +1,28 @@
+<div *ngIf="cadastro">
+    <ion-list>
+        <ion-item (click)="infoGerais()">
+            <h2>Informações Gerais</h2>
+            <p>Informações gerais do cliente</p>
+        </ion-item>
+        <ion-item (click)="infoRede();">
+            <h2>Rede</h2>
+            <p>Informações de rede</p>
+        </ion-item>
+        <ion-item *ngIf="cadastro.rede.tipo === 'GPON' && cadastro.rede.planta === 'VIVO1'" (click)="infoRedeExterna();">
+            <h2>Rede Externa</h2>
+            <p>Informações de rede externa</p>
+        </ion-item>
+        <ion-item (click)="infoServico()">
+            <h2>Serviços</h2>
+            <p>Informações de serviços</p>
+        </ion-item>
+        <ion-item>
+            <h2>Linha</h2>
+            <p>Informações de linha</p>
+        </ion-item>
+        <ion-item>
+            <h2>Radius</h2>
+            <p>Informações de Radius</p>
+        </ion-item>
+    </ion-list>
+</div>

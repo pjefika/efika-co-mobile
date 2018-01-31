@@ -37,6 +37,11 @@ import { CadastroConfpComponent } from '../pages/configuracoes-porta/cadastro/ca
 import { MacComponent } from '../pages/configuracoes-porta/mac/mac.component';
 import { AssociacaoOntComponent } from '../pages/configuracoes-porta/associacaoont/associacao-ont.component';
 import { EstadoPortaComponent } from '../pages/configuracoes-porta/estado-porta/estado-porta.component';
+import { InfoCadastroListComponent } from '../pages/cadastro/info-cadastro-list/info-cadastro-list.component';
+import { InfoRedeComponent } from '../pages/cadastro/info-cadastro-list/info-rede/info-rede.component';
+import { InfoRedeExternaComponent } from '../pages/cadastro/info-cadastro-list/info-rede-externa/info-rede-externa.component';
+import { InfoGeraisComponent } from '../pages/cadastro/info-cadastro-list/info-gerais/info-gerais.component';
+import { InfoServicosComponent } from '../pages/cadastro/info-cadastro-list/info-servicos/info-servicos.component';
 
 @NgModule({
 	declarations: [
@@ -67,7 +72,12 @@ import { EstadoPortaComponent } from '../pages/configuracoes-porta/estado-porta/
 		ModulacaoComponent,
 		MacComponent,
 		AssociacaoOntComponent,
-		EstadoPortaComponent
+		EstadoPortaComponent,
+		InfoCadastroListComponent,
+		InfoRedeComponent,
+		InfoRedeExternaComponent,
+		InfoGeraisComponent,
+		InfoServicosComponent
 	],
 	imports: [
 		BrowserModule,
@@ -103,7 +113,12 @@ import { EstadoPortaComponent } from '../pages/configuracoes-porta/estado-porta/
 		ModulacaoComponent,
 		MacComponent,
 		AssociacaoOntComponent,
-		EstadoPortaComponent
+		EstadoPortaComponent,
+		InfoCadastroListComponent,
+		InfoRedeComponent,
+		InfoRedeExternaComponent,
+		InfoGeraisComponent,
+		InfoServicosComponent
 	],
 	providers: [
 		StatusBar,

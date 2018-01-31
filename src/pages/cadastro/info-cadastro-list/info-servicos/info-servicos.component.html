@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Informações</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="servicos">
+        <table>
+            <tbody>
+                <tr>
+                    <th colspan="2" class="th-title"> Informações de Serviço</th>
+                </tr>
+                <tr *ngIf="servicos.velDown">
+                    <th> Velocidade Download: </th>
+                    <td> {{servicos.velDown}} </td>
+                </tr>
+                <tr *ngIf="servicos.velUp">
+                    <th> Velocidade Upload: </th>
+                    <td> {{servicos.velUp}} </td>
+                </tr>
+                <tr *ngIf="servicos.tipoTv">
+                    <th> Tipo TV : </th>
+                    <td> {{servicos.tipoTv}} </td>
+                </tr>
+                <tr *ngIf="servicos.tipoLinha">
+                    <th> Tipo Linha: </th>
+                    <td> {{servicos.tipoLinha}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ion-content>
