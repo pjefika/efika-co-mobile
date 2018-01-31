@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Informações</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="linha">
+        <table>
+            <tbody>
+                <tr>
+                    <th colspan="2" class="th-title"> Informações de Linha</th>
+                </tr>
+                <tr *ngIf="linha.dn">
+                    <th> DN: </th>
+                    <td> {{linha.dn}} </td>
+                </tr>
+                <tr *ngIf="linha.tipo">
+                    <th> Tipo Linha: </th>
+                    <td> {{linha.tipo}} </td>
+                </tr>
+                <tr *ngIf="linha.central">
+                    <th> Central: </th>
+                    <td> {{linha.central}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ion-content>

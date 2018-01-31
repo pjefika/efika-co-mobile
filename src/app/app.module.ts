@@ -42,6 +42,7 @@ import { InfoRedeComponent } from '../pages/cadastro/info-cadastro-list/info-red
 import { InfoRedeExternaComponent } from '../pages/cadastro/info-cadastro-list/info-rede-externa/info-rede-externa.component';
 import { InfoGeraisComponent } from '../pages/cadastro/info-cadastro-list/info-gerais/info-gerais.component';
 import { InfoServicosComponent } from '../pages/cadastro/info-cadastro-list/info-servicos/info-servicos.component';
+import { InfoLinhaComponent } from '../pages/cadastro/info-cadastro-list/info-linha/info-linha.component';
 
 @NgModule({
 	declarations: [
@@ -77,7 +78,8 @@ import { InfoServicosComponent } from '../pages/cadastro/info-cadastro-list/info
 		InfoRedeComponent,
 		InfoRedeExternaComponent,
 		InfoGeraisComponent,
-		InfoServicosComponent
+		InfoServicosComponent,
+		InfoLinhaComponent
 	],
 	imports: [
 		BrowserModule,
@@ -118,7 +120,8 @@ import { InfoServicosComponent } from '../pages/cadastro/info-cadastro-list/info
 		InfoRedeComponent,
 		InfoRedeExternaComponent,
 		InfoGeraisComponent,
-		InfoServicosComponent
+		InfoServicosComponent,
+		InfoLinhaComponent
 	],
 	providers: [
 		StatusBar,
