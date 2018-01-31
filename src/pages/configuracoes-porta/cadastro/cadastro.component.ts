@@ -10,7 +10,7 @@ import { Valids } from '../../../view-model/fulltest/validacao';
 
 export class CadastroConfpComponent extends ConfiguracoesPortaService implements OnInit {
 
-    public modulacao: Valids;
+    
     public mac: Valids;
     
 
@@ -23,9 +23,6 @@ export class CadastroConfpComponent extends ConfiguracoesPortaService implements
     }
 
     private getValid() {
-        this.modulacao = super.getParameterValid(this.holderService.certification.fulltest.valids, "Modulação");
         this.mac = super.getParameterValid(this.holderService.certification.fulltest.valids, "MAC do Equipamento");
-        
-       
     }
 }

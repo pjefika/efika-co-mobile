@@ -10,6 +10,6 @@ export class AssociacaoOntComponent extends SuperConfPortaService implements OnI
 
     constructor() { super(); }
 
-    public ngOnInit() { console.log(this.valid) }
+    public ngOnInit() { }
 
 }
