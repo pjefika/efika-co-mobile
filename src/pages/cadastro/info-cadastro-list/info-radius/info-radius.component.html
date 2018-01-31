@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Informações</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="radius">
+        <table>
+            <tbody>
+                <tr>
+                    <th colspan="2" class="th-title"> Informações de Radius</th>
+                </tr>
+                <tr *ngIf="radius.status">
+                    <th> Status: </th>
+                    <td> {{radius.status}} </td>
+                </tr>
+                <tr *ngIf="radius.armario">
+                    <th> Armario: </th>
+                    <td> {{radius.armario}} </td>
+                </tr>
+                <tr *ngIf="radius.rin">
+                    <th> Rin: </th>
+                    <td> {{radius.rin}} </td>
+                </tr>
+                <tr *ngIf="radius.velocidade">
+                    <th> Velocidade: </th>
+                    <td> {{radius.velocidade}} </td>
+                </tr>
+                <tr *ngIf="radius.isIpFixo">
+                    <th> É IP Fixo: </th>
+                    <td> {{radius.isIpFixo? 'Sim' : 'Não'}} </td>
+                </tr>
+                <tr *ngIf="radius.ipFixo && radius.isIpFixo">
+                    <th> Ip Fixo: </th>
+                    <td> {{radius.ipFixo}} </td>
+                </tr>
+                <tr *ngIf="radius.profile">
+                    <th> Profile: </th>
+                    <td> {{radius.profile}} </td>
+                </tr>
+                <tr *ngIf="radius.porta">
+                    <th> Porta: </th>
+                    <td> {{radius.porta}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ion-content>

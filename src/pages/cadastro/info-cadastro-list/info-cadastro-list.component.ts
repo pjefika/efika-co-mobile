@@ -8,6 +8,7 @@ import { InfoRedeExternaComponent } from './info-rede-externa/info-rede-externa.
 import { InfoGeraisComponent } from './info-gerais/info-gerais.component';
 import { InfoServicosComponent } from './info-servicos/info-servicos.component';
 import { InfoLinhaComponent } from './info-linha/info-linha.component';
+import { InfoRadiusComponent } from './info-radius/info-radius.component';
 
 @Component({
     selector: 'info-cadastro-list-component',
@@ -41,6 +42,10 @@ export class InfoCadastroListComponent implements OnInit {
 
     public infoLinha() {
         this.navCtrl.push(InfoLinhaComponent);
+    }
+
+    public infoRadius() {
+        this.navCtrl.push(InfoRadiusComponent);
     }
 
 }
