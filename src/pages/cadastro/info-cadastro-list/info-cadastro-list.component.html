@@ -1,26 +1,56 @@
 <div *ngIf="cadastro">
     <ion-list>
-        <ion-item (click)="infoGerais();">
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoGerais();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
             <h2>Informações Gerais</h2>
             <p>Informações gerais do cliente</p>
         </ion-item>
-        <ion-item (click)="infoRede();">
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoRede();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
             <h2>Rede</h2>
             <p>Informações de rede</p>
         </ion-item>
-        <ion-item *ngIf="cadastro.rede.tipo === 'GPON' && cadastro.rede.planta === 'VIVO1'" (click)="infoRedeExterna();">
+        <ion-item *ngIf="cadastro.rede.tipo === 'GPON' && cadastro.rede.planta === 'VIVO1'">
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoRedeExterna();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
             <h2>Rede Externa</h2>
             <p>Informações de rede externa</p>
         </ion-item>
-        <ion-item (click)="infoServico();">
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoServico();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
             <h2>Serviços</h2>
             <p>Informações de serviços</p>
         </ion-item>
-        <ion-item (click)="infoLinha();">
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoLinha();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
             <h2>Linha</h2>
             <p>Informações de linha</p>
         </ion-item>
-        <ion-item (click)="infoRadius();">
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoRadius();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
             <h2>Radius</h2>
             <p>Informações de Radius</p>
         </ion-item>
