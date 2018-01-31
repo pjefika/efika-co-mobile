@@ -21,6 +21,7 @@ export class HeaderPopoverComponent implements OnInit {
     }
 
     private resetHolder() {
+        this.holderService.instancia = null;
         this.holderService.estalogado = false;
         this.holderService.cadastro = null;
         this.holderService.objectValid = null;
