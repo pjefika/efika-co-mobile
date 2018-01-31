@@ -41,7 +41,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     public entrar() {
         this.showHidePassword = false;
         let carregando = this.loadingCtrl.create({ content: "Consultando Login" });
-        carregando.present();
+        carregando.present();        
         this.loginService
             .entrar(this.usuario)
             .then(response => {
@@ -49,6 +49,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                     let verify: boolean = response.output.match;
                     if (verify) {
                         this.holderService.estalogado = verify;
+                        this.usuario.matricula = this.usuario.matricula.toUpperCase();
                         sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
                     } else {
                         super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
