@@ -11,6 +11,7 @@ import { InfoLinhaComponent } from './info-linha/info-linha.component';
 import { InfoRadiusComponent } from './info-radius/info-radius.component';
 import { CadastroService } from '../cadastro.service';
 import { SuperComponentService } from '../../../providers/component-service/super-compoenent.service';
+import { EventosMassivosComponent } from '../eventos-massivos/eventos-massivos.component';
 
 @Component({
     selector: 'info-cadastro-list-component',
@@ -99,12 +100,16 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
     }
 
     public msgEventoMassivo() {
-        if (this.haveEventoMassivo()) {
+        if (this.temEventoMassivo()) {
             super.showAlert("Evento Massivo", "Este cadastro possui um evento massivo, podendo ocorrer problemas nos testes e correções.");
         }
     }
 
-    public haveEventoMassivo(): boolean {
+    public entrarEventoMassivos() {
+        this.navCtrl.push(EventosMassivosComponent);
+    }
+
+    public temEventoMassivo(): boolean {
         if (this.holderService.cadastro) {
             if (this.holderService.cadastro.eventos.length > 0) {
                 return true;

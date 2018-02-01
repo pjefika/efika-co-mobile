@@ -3,19 +3,13 @@ import { AlertController, LoadingController, PopoverController, NavController } 
 import { HolderService } from '../../providers/holder/holder.service';
 import { SuperComponentService } from '../../providers/component-service/super-compoenent.service';
 import { HeaderPopoverComponent } from '../../util/header-popover/header-popover.component';
-import { EventosMassivosComponent } from './eventos-massivos/eventos-massivos.component';
 
 @Component({
     selector: 'cadastro-component',
-    templateUrl: 'cadastro.component.html',
-    providers: []
+    templateUrl: 'cadastro.component.html'
 })
 
 export class CadastroComponent extends SuperComponentService implements OnInit {
-
-    public hideandshowsearch: boolean = true;
-
-    public jaBuscou: boolean = false;
 
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -40,18 +34,5 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
             }
         };
         popover.present({ ev });
-    }
-
-    public entrarEventoMassivos() {
-        this.navCtrl.push(EventosMassivosComponent);
-    }
-
-    public temEventoMassivo(): boolean {
-        if (this.holderService.cadastro) {
-            if (this.holderService.cadastro.eventos.length > 0) {
-                return true;
-            }
-        }
-        return false;
-    }
+    }    
 }

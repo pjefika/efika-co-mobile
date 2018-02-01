@@ -12,7 +12,6 @@
     <div *ngIf="holderService.cadastro">
         <info-cadastro-list-component [cadastro]="holderService.cadastro"></info-cadastro-list-component>
         <fulltest-component></fulltest-component>
-        <button *ngIf="temEventoMassivo()" ion-button round color="primary" block small (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
     </div>
     <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
 </ion-content>

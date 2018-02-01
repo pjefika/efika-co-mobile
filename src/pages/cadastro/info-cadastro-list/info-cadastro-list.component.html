@@ -1,10 +1,5 @@
 <div *ngIf="cadastro">
     <div class="titulo-info-cad">Informações do cadastro</div>
-    <!-- <ion-buttons end>
-        <button ion-button color="secondary" (click)="refreshCadastro()">
-            <ion-icon name="refresh"></ion-icon>
-        </button>
-    </ion-buttons> -->
     <ion-list>
         <ion-item>
             <ion-avatar item-start>
@@ -14,6 +9,17 @@
             </ion-avatar>
             <h2>Reconsultar Cadastro</h2>
         </ion-item>
+
+        <ion-item *ngIf="temEventoMassivo()">
+            <ion-avatar item-start>
+                <button color="danger" ion-button (click)="entrarEventoMassivos();">
+                    <ion-icon name="alert"></ion-icon>
+                </button>
+            </ion-avatar>
+            <h2>Eventos Massivos</h2>
+            <p>Lista de eventos massivos</p>
+        </ion-item>
+
         <ion-item>
             <ion-avatar item-start>
                 <button color="dark" ion-button (click)="infoGerais();">
