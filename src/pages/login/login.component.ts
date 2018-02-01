@@ -38,10 +38,17 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         // this.usuario.senha = "123"
     }
 
+    public validEntrar() {
+        // --Prod
+        this.entrar();
+        // --Mock        
+        // this.entrarMock();
+    }
+
     public entrar() {
         this.showHidePassword = false;
         let carregando = this.loadingCtrl.create({ content: "Consultando Login" });
-        carregando.present();        
+        carregando.present();
         this.loginService
             .entrar(this.usuario)
             .then(response => {

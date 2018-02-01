@@ -44,8 +44,10 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
     //Busca cadastro.
     public getCadastro() {
         this.resetHolder();
-        // this.buscaCadastro("Consultando Cadastro");
-        this.getCadastroMock("Consultando Cadastro");
+        // --Prod
+        this.buscaCadastro("Consultando Cadastro");
+        // --Mockc
+        // this.getCadastroMock("Consultando Cadastro");
     }
 
     //Reconsulta de cadastro.
