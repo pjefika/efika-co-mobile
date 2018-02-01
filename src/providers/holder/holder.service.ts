@@ -11,8 +11,11 @@ export class HolderService {
     public instancia: string;
     public cadastro: Cadastro;
     public objectValid: ObjectValid;
-
     public certification: Certification;
+
+
+    public tabCadastroAtivo: boolean = false;
+    public tabFulltestAtivo: boolean = false;
 
     constructor() { }
 

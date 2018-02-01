@@ -1,13 +1,7 @@
 <ion-header>
-    <ion-toolbar (keyup.enter)="getCadastro()">
-        <!-- <ion-title (click)="searchInputOptions(true)" *ngIf="!hideandshowsearch"> {{"Instância: " + holderService.instancia}} </ion-title> -->
-        <ion-searchbar [type]="'search'" [(ngModel)]="holderService.instancia" [placeholder]="'Instância/Designador'" *ngIf="hideandshowsearch"
-            [focuser]>
-        </ion-searchbar>
+    <ion-toolbar>
+        <ion-title> Cadastro_ </ion-title>
         <ion-buttons end>
-            <button ion-button icon-only color="royal" (click)="getCadastro();" *ngIf="holderService.instancia">
-                <ion-icon name="send"></ion-icon>
-            </button>
             <button ion-button icon-only color="royal" (click)="openPopover();">
                 <ion-icon name="contact"></ion-icon>
             </button>
@@ -16,22 +10,9 @@
 </ion-header>
 <ion-content padding>
     <div *ngIf="holderService.cadastro">
-        <div class="titulo-info-cad">Informações do cadastro</div>
-        <!--  <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component> -->
-        <ion-buttons end>
-            <button ion-button small icon-only color="secondary" (click)="reconsultar();">
-                <ion-icon name="refresh"></ion-icon>
-            </button>
-        </ion-buttons>
         <info-cadastro-list-component [cadastro]="holderService.cadastro"></info-cadastro-list-component>
-        <button *ngIf="haveEventoMassivo()" ion-button round color="primary" block small (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
-    </div>
-    <div *ngIf="!holderService.cadastro && !jaBuscou">
-        <h4>Seja Bem Vindo ao
-            <br>
-            <b class="mg-left">Efika CO Mobile</b>
-        </h4>
-        <p>Para começar insira a instância no Input de pesquisa e pressione "Enter" e aguarde a busca do cadastro.</p>
+        <fulltest-component></fulltest-component>
+        <button *ngIf="temEventoMassivo()" ion-button round color="primary" block small (click)="entrarEventoMassivos()">Visualizar Eventos Massivos</button>
     </div>
     <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
 </ion-content>

@@ -1,5 +1,19 @@
 <div *ngIf="cadastro">
+    <div class="titulo-info-cad">Informações do cadastro</div>
+    <!-- <ion-buttons end>
+        <button ion-button color="secondary" (click)="refreshCadastro()">
+            <ion-icon name="refresh"></ion-icon>
+        </button>
+    </ion-buttons> -->
     <ion-list>
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="secondary" ion-button (click)="refreshCadastro();">
+                    <ion-icon name="refresh"></ion-icon>
+                </button>
+            </ion-avatar>
+            <h2>Reconsultar Cadastro</h2>
+        </ion-item>
         <ion-item>
             <ion-avatar item-start>
                 <button color="dark" ion-button (click)="infoGerais();">
@@ -55,5 +69,4 @@
             <p>Informações de Radius</p>
         </ion-item>
     </ion-list>
-    <fulltest-component></fulltest-component>
 </div>

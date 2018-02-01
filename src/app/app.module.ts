@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { HttpModule } from '@angular/http';
 import { ObjKeysPipe } from '../util/pipes/objKeysPipe';
 import { Capitalize, KeyBeautifyingPipe } from '../util/pipes/beautifyingPipe';
@@ -44,11 +43,14 @@ import { InfoGeraisComponent } from '../pages/cadastro/info-cadastro-list/info-g
 import { InfoServicosComponent } from '../pages/cadastro/info-cadastro-list/info-servicos/info-servicos.component';
 import { InfoLinhaComponent } from '../pages/cadastro/info-cadastro-list/info-linha/info-linha.component';
 import { InfoRadiusComponent } from '../pages/cadastro/info-cadastro-list/info-radius/info-radius.component';
+import { HomeComponent } from '../pages/home/home.component';
+import { CadastroSearchComponent } from '../pages/cadastro/cadastro-search/cadastro-search.component';
+import { InfoMuralComponent } from '../pages/home/info-mural/info-mural.component';
 
 @NgModule({
 	declarations: [
 		MyApp,
-		HomePage,
+		HomeComponent,
 		ObjKeysPipe,
 		KeyBeautifyingPipe,
 		Capitalize,
@@ -81,7 +83,9 @@ import { InfoRadiusComponent } from '../pages/cadastro/info-cadastro-list/info-r
 		InfoGeraisComponent,
 		InfoServicosComponent,
 		InfoLinhaComponent,
-		InfoRadiusComponent
+		InfoRadiusComponent,
+		CadastroSearchComponent,
+		InfoMuralComponent
 	],
 	imports: [
 		BrowserModule,
@@ -95,7 +99,7 @@ import { InfoRadiusComponent } from '../pages/cadastro/info-cadastro-list/info-r
 	bootstrap: [IonicApp],
 	entryComponents: [
 		MyApp,
-		HomePage,
+		HomeComponent,
 		CadastroComponent,
 		InfoCadastroComponent,
 		FulltestComponent,
@@ -124,7 +128,9 @@ import { InfoRadiusComponent } from '../pages/cadastro/info-cadastro-list/info-r
 		InfoGeraisComponent,
 		InfoServicosComponent,
 		InfoLinhaComponent,
-		InfoRadiusComponent
+		InfoRadiusComponent,
+		CadastroSearchComponent,
+		InfoMuralComponent
 	],
 	providers: [
 		StatusBar,

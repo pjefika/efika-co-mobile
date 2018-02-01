@@ -1,0 +1,8 @@
+<div (keyup.enter)="getCadastro()">
+    <ion-searchbar [type]="'search'" [(ngModel)]="holderService.instancia" [placeholder]="'Instância'" [focuser]>
+    </ion-searchbar>
+    <button ion-button block round color="royal" (click)="getCadastro();">Consultar</button>
+</div>
+<div class="msg-mg-top">
+    <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
+</div>

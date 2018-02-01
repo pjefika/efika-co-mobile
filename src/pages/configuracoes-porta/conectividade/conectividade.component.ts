@@ -14,6 +14,7 @@ export class ConectividadeComponent extends ConfiguracoesPortaService implements
     public estadoPorta: Valids[];
     public assocOnt: Valids;
     public modulacao: Valids;
+    public mac: Valids;
 
     constructor(public holderService: HolderService) {
         super();
@@ -29,5 +30,6 @@ export class ConectividadeComponent extends ConfiguracoesPortaService implements
         this.estadoPorta.push(super.getParameterValid(this.holderService.certification.fulltest.valids, "Estado Administrativo da Porta"));
         this.assocOnt = super.getParameterValid(this.holderService.certification.fulltest.valids, "Associação Serial ONT");
         this.modulacao = super.getParameterValid(this.holderService.certification.fulltest.valids, "Modulação");
+        this.mac = super.getParameterValid(this.holderService.certification.fulltest.valids, "MAC do Equipamento");
     }
 }

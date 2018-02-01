@@ -39,7 +39,9 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             .then(response => {
                 if (super.validState(response.output)) {
                     this.holderService.certification = response.output.certification;
-                    this.navCtrl.parent.select(1);
+                    setTimeout(() => {
+                        this.navCtrl.parent.select(2);
+                    }, 1);
                 }
             }, error => {
                 super.showAlert("Ops, ocorreu algo.", "Fulltest não realizado.");
@@ -55,8 +57,11 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         carregando.present();
         setTimeout(() => {
             this.holderService.certification = this.fulltestService.doFulltestMock();
+            this.holderService.tabFulltestAtivo = true;
             carregando.dismiss();
-            this.navCtrl.parent.select(1);
+            setTimeout(() => {
+                this.navCtrl.parent.select(2);
+            }, 1);
         }, 300);
     }
 

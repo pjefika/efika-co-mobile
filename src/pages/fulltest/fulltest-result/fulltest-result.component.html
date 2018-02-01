@@ -13,6 +13,7 @@
 
     <alert-mensagem-component *ngIf="!holderService.certification && !holderService.cadastro" [ativo]="true" [tipo]="'erro'"
         [titulo]="'Informativo'" [mensagem]="'Consulte antes o cadastro inserindo a Instância/Designador'"></alert-mensagem-component>
+        
     <alert-mensagem-component *ngIf="!holderService.certification && holderService.cadastro" [ativo]="true" [tipo]="'erro'" [titulo]="'Informativo'"
         [mensagem]="'Fulltest ainda não realizado ou comando ainda está em andamento, se você já realizou o comando aguarde...'"></alert-mensagem-component>
 
