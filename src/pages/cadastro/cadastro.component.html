@@ -1,10 +1,13 @@
 <ion-header>
     <ion-toolbar (keyup.enter)="getCadastro()">
-        <ion-title (click)="searchInputOptions(true)" *ngIf="!hideandshowsearch"> {{"Instância: " + holderService.instancia}} </ion-title>
+        <!-- <ion-title (click)="searchInputOptions(true)" *ngIf="!hideandshowsearch"> {{"Instância: " + holderService.instancia}} </ion-title> -->
         <ion-searchbar [type]="'search'" [(ngModel)]="holderService.instancia" [placeholder]="'Instância/Designador'" *ngIf="hideandshowsearch"
-            (focusout)="searchInputOptions(false)" [focuser]>
+            [focuser]>
         </ion-searchbar>
         <ion-buttons end>
+            <button ion-button icon-only color="royal" (click)="getCadastro();" *ngIf="holderService.instancia">
+                <ion-icon name="arrow-forward"></ion-icon>
+            </button>
             <button ion-button icon-only color="royal" (click)="openPopover();">
                 <ion-icon name="contact"></ion-icon>
             </button>
@@ -13,8 +16,6 @@
 </ion-header>
 <ion-content padding>
     <div *ngIf="holderService.cadastro">
-
-
         <div class="titulo-info-cad">Informações do cadastro</div>
         <!--  <info-cadastro-component [cadastro]="holderService.cadastro"></info-cadastro-component> -->
         <ion-buttons end>
