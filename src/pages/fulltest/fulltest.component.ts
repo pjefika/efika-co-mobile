@@ -39,7 +39,8 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             .then(response => {
                 if (super.validState(response.output)) {
                     this.holderService.certification = response.output.certification;
-                    setTimeout(() => {
+                    this.holderService.tabFulltestAtivo = true;
+                    setTimeout(() => {                        
                         this.navCtrl.parent.select(2);
                     }, 1);
                 }
