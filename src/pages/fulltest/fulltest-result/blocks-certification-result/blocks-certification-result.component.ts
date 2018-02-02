@@ -7,6 +7,7 @@ import { ServicosComponent } from '../../../configuracoes-porta/servicos/servico
 import { CadastroConfpComponent } from '../../../configuracoes-porta/cadastro/cadastro.component';
 import { HolderService } from '../../../../providers/holder/holder.service';
 import { FulltestResultActionService } from '../fulltest-services/fulltest-result-action.service';
+import { Valids } from '../../../../view-model/fulltest/validacao';
 
 @Component({
     selector: 'blocks-certification-result-component',
@@ -68,7 +69,11 @@ export class BlocksCertificationResultComponent implements OnInit {
     }
 
     public validaInfoInsideBlocks(info: string): boolean {
-        return this.fulltestResultActionService.validaInfoInsideBlocks(info, this.holderService.certification.fulltest.valids);
+        let valids: Valids[];
+        if (this.holderService.certification.fulltest) {
+            valids = this.holderService.certification.fulltest.valids;
+        }
+        return this.fulltestResultActionService.validaInfoInsideBlocks(info, valids);
     }
 
 }

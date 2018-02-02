@@ -102,6 +102,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
     }
 
     public validInstancia(): boolean {
+        this.holderService.instancia = this.holderService.instancia.trim();
         let valid: boolean = false;
         if (this.holderService.instancia && this.holderService.instancia.length === 10) {
             valid = true;
