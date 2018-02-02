@@ -1,18 +1,14 @@
-<div *ngIf="valid">
-    <table>
+<div>
+    <div class="titulo-pagina">Informações de Rede</div>
+    <table *ngIf="valid">
         <tbody>
             <tr>
-                <th colspan="2" class="align-title-center">Informações de Rede</th>
-            </tr>
-            <tr>
-                <th>
-                    Confiabilidade de Rede
-                </th>
+                <th>Mensagem:</th>
                 <td>
+                    {{valid.mensagem}}
                     <ion-icon name="checkmark-circle" *ngIf="valid.resultado" style="color: green;"></ion-icon>
                     <ion-icon name="ios-alert" *ngIf="!valid.resultado && valid.result.pctSuficiente" style="color: red;"></ion-icon>
                     <ion-icon name="warning" *ngIf="!valid.resultado && !valid.result.pctSuficiente" style="color: orange;"></ion-icon>
-
                 </td>
             </tr>
             <tr>

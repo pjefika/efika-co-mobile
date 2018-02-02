@@ -1,7 +1,7 @@
 <div *ngIf="valids">
     <div *ngFor="let valid of valids">
         <div class="titulo-pagina">{{valid.nome}}</div>
-        <table>
+        <table *ngIf="valid">
             <tbody>
                 <tr>
                     <th>Mensagem:</th>
