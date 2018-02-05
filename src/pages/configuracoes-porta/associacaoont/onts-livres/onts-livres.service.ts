@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { SuperService } from '../../../providers/super-service/super.service';
-import { UrlService } from '../../../providers/url-service/url.service';
-import { TaskProcess } from '../../../view-model/task-process/task-process';
-import { Cadastro } from '../../../view-model/cadastro/cadastro';
+import { SuperService } from '../../../../providers/super-service/super.service';
+import { UrlService } from '../../../../providers/url-service/url.service';
+import { TaskProcess } from '../../../../view-model/task-process/task-process';
+import { Cadastro } from '../../../../view-model/cadastro/cadastro';
 
 @Injectable()
-export class AssociacaoOntService extends SuperService {
+export class OntsLivresService extends SuperService {
 
     constructor(private urlService: UrlService) {
         super();
@@ -29,10 +29,10 @@ export class AssociacaoOntService extends SuperService {
             .catch(super.handleError);
     }
 
-    public setOntsDisp(instancia: string, cadastro: Cadastro, serial: string): Promise<TaskProcess> {
+    public setOntsDisp(serial: string, cadastro: Cadastro): Promise<TaskProcess> {
         let userSession = JSON.parse(sessionStorage.getItem("user"));
-        let _data: { task: string, input: { type: string, serial: string, cadastro: Cadastro }, executor: string };
-        _data = { task: "SET_ONT", input: { type: "certification", serial: serial, cadastro: cadastro }, executor: userSession.user };
+        let _data: { task: string, input: { type: string, serial: string, customer: Cadastro }, executor: string };
+        _data = { task: "SET_ONT", input: { type: "setOntToOlt", serial: serial, customer: cadastro }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
             command: this.urlService.queueAPI + "task/process/",

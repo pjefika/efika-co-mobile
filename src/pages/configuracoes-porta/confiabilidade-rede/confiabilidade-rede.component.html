@@ -16,6 +16,13 @@
                 <td>{{valid.result.pctDown}} / {{valid.result.pctUp}}</td>
             </tr>
             <tr>
+                <th>CRC OK</th>
+                <td>
+                    <ion-icon name="checkmark-circle" *ngIf="valid.result.crcOk" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="!valid.result.crcOk" style="color: red;"></ion-icon>
+                </td>
+            </tr>
+            <tr>
                 <th>CRC (Down/Up)</th>
                 <td>{{valid.result.crcDown}} / {{valid.result.crcUp}}</td>
             </tr>
@@ -32,13 +39,11 @@
                 <td>{{valid.result.tempoMedicao}}</td>
             </tr>
             <tr>
-                <th>CRC OK</th>
-                <td>
-                    <ion-icon name="checkmark-circle" *ngIf="valid.result.crcOk" style="color: green;"></ion-icon>
-                    <ion-icon name="ios-alert" *ngIf="!valid.result.crcOk" style="color: red;"></ion-icon>
+                <td colspan="2">
+                    <button ion-button round block (click)="getConfRede()">Reconsultar Tabela de Rede</button>
                 </td>
             </tr>
         </tbody>
     </table>
-    <button ion-button round block (click)="getConfRede()">Reconsultar Tabela de Rede</button>
+
 </div>

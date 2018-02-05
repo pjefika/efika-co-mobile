@@ -1,6 +1,7 @@
 import { Cadastro } from "../cadastro/cadastro";
 import { Certification } from "../certification/certification";
 import { Valids } from "../fulltest/validacao";
+import { Ont } from "./ont";
 
 export class Output {
     type: string;
@@ -19,6 +20,9 @@ export class Output {
 
     //Tab Rede Case
     tabRede?: Valids;
+
+    //Onts Livres
+    onts?: Ont[];
 
 
 }

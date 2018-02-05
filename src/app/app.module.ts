@@ -46,6 +46,7 @@ import { InfoRadiusComponent } from '../pages/cadastro/info-cadastro-list/info-r
 import { HomeComponent } from '../pages/home/home.component';
 import { CadastroSearchComponent } from '../pages/cadastro/cadastro-search/cadastro-search.component';
 import { InfoMuralComponent } from '../pages/home/info-mural/info-mural.component';
+import { OntsLivrsComponent } from '../pages/configuracoes-porta/associacaoont/onts-livres/onts-livres.component';
 
 @NgModule({
 	declarations: [
@@ -85,7 +86,8 @@ import { InfoMuralComponent } from '../pages/home/info-mural/info-mural.componen
 		InfoLinhaComponent,
 		InfoRadiusComponent,
 		CadastroSearchComponent,
-		InfoMuralComponent
+		InfoMuralComponent,
+		OntsLivrsComponent
 	],
 	imports: [
 		BrowserModule,
@@ -130,7 +132,8 @@ import { InfoMuralComponent } from '../pages/home/info-mural/info-mural.componen
 		InfoLinhaComponent,
 		InfoRadiusComponent,
 		CadastroSearchComponent,
-		InfoMuralComponent
+		InfoMuralComponent,
+		OntsLivrsComponent
 	],
 	providers: [
 		StatusBar,
