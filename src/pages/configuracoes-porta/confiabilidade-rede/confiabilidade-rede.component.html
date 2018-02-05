@@ -27,7 +27,18 @@
                 <th>Ressincronismo</th>
                 <td>{{valid.result.resync}}</td>
             </tr>
+            <tr>
+                <th>Tempo Medição</th>
+                <td>{{valid.result.tempoMedicao}}</td>
+            </tr>
+            <tr>
+                <th>CRC OK</th>
+                <td>
+                    <ion-icon name="checkmark-circle" *ngIf="valid.result.crcOk" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="!valid.result.crcOk" style="color: red;"></ion-icon>
+                </td>
+            </tr>
         </tbody>
     </table>
-    <!-- <button ion-button round block>Reconsultar Tabela de Rede</button> -->
+    <button ion-button round block (click)="getConfRede()">Reconsultar Tabela de Rede</button>
 </div>
