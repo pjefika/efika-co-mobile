@@ -102,9 +102,9 @@ export class CadastroSearchComponent extends SuperComponentService implements On
     }
 
     public validInstancia(): boolean {
-        this.holderService.instancia = this.holderService.instancia.trim();
         let valid: boolean = false;
         if (this.holderService.instancia && this.holderService.instancia.length === 10) {
+            this.holderService.instancia = this.holderService.instancia.trim();
             valid = true;
         } else {
             super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
