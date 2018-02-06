@@ -29,9 +29,9 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         this.resetHolder();
         setTimeout(() => {
             // --Prod
-            this.buscaCadastro("Consultando Cadastro");
+            // this.buscaCadastro("Consultando Cadastro");
             // --Mockc
-            // this.getCadastroMock("Consultando Cadastro");
+            this.getCadastroMock("Consultando Cadastro Mock");
         }, 1);
     }
 
@@ -83,7 +83,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         this.holderService.tabCadastroAtivo = false;
         this.holderService.tabFulltestAtivo = false;
         this.holderService.cadastro = null;
-        this.holderService.objectValid = null;
+        this.holderService.certification = null;
     }
 
     public msgEventoMassivo() {

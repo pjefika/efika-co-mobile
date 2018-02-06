@@ -26,9 +26,9 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
 
     public fulltest() {
         // --Prod
-        this.fazFulltest();
+        // this.fazFulltest();
         // --Mock        
-        // this.fazFulltestMock();
+        this.fazFulltestMock();
     }
 
     public fazFulltest() {

@@ -24,11 +24,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
     }
 
     public ngOnInit() {
-        if (this.holderService.onts) {
-            this.onts = this.holderService.onts;
-        } else {
-            this.getOntsDisp();
-        }
+        this.getOntsDisp();
     }
 
     private getOntsDisp() {
@@ -67,6 +63,10 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
             });
     }
 
+    /**
+     * 
+     * @param ont Retorna verdadeiro ou falso para habilitar botão de associar de acordo com sua respectivo slot e porta.
+     */
     public btnAssocDisable(ont: Ont): boolean {
         let valid: boolean = true;
         if (ont.slot === this.holderService.cadastro.rede.slot && ont.porta === this.holderService.cadastro.rede.porta) {

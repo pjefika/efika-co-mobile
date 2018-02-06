@@ -1,14 +1,15 @@
 <ion-header>
     <ion-toolbar>
         <ion-title> Cadastro_ </ion-title>
-        <ion-buttons end>
+        <!-- <ion-buttons end>
             <button ion-button icon-only color="royal" (click)="openPopover();">
                 <ion-icon name="contact"></ion-icon>
             </button>
-        </ion-buttons>
+        </ion-buttons> -->
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
+    <fab-action-component></fab-action-component>
     <div *ngIf="holderService.cadastro">
         <info-cadastro-list-component [cadastro]="holderService.cadastro"></info-cadastro-list-component>
         <fulltest-component></fulltest-component>

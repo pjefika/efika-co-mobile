@@ -47,6 +47,7 @@ import { HomeComponent } from '../pages/home/home.component';
 import { CadastroSearchComponent } from '../pages/cadastro/cadastro-search/cadastro-search.component';
 import { InfoMuralComponent } from '../pages/home/info-mural/info-mural.component';
 import { OntsLivrsComponent } from '../pages/configuracoes-porta/associacaoont/onts-livres/onts-livres.component';
+import { FabActionComponent } from '../pages/fab-component/fab-actions.component';
 
 @NgModule({
 	declarations: [
@@ -87,7 +88,8 @@ import { OntsLivrsComponent } from '../pages/configuracoes-porta/associacaoont/o
 		InfoRadiusComponent,
 		CadastroSearchComponent,
 		InfoMuralComponent,
-		OntsLivrsComponent
+		OntsLivrsComponent,
+		FabActionComponent
 	],
 	imports: [
 		BrowserModule,

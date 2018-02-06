@@ -27,9 +27,5 @@ export class MyApp {
 		});
 	}
 
-	public goToOtherTab() {
-
-	}
-
 }
 

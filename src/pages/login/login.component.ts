@@ -37,9 +37,9 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     public validEntrar() {
         // --Prod
-        this.entrar();
+        // this.entrar();
         // --Mock        
-        // this.entrarMock();
+        this.entrarMock();
     }
 
     public entrar() {
@@ -75,6 +75,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         let verify: boolean;
         verify = this.loginService.entrarMock(this.usuario);
         if (verify) {
+            this.usuario.matricula = "IONIC - TEST";
             sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
             this.holderService.estalogado = verify;
         } else {

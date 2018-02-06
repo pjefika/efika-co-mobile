@@ -19,7 +19,9 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
         super(alertCtrl);
     }
 
-    public ngOnInit() { }
+    public ngOnInit() {
+        this.holderService.tabHomeAtivo = false;
+    }
 
     public openPopover() {
         let popover = this.popoverController.create(HeaderPopoverComponent);
@@ -28,11 +30,12 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
                 getBoundingClientRect: () => {
                     return {
                         top: '100',
-                        left: '50'
+                        left: '50',
+                        height: '30'
                     };
                 }
             }
         };
         popover.present({ ev });
-    }    
+    }
 }
