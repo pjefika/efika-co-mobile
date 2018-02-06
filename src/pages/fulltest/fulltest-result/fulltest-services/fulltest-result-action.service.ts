@@ -14,29 +14,36 @@ export class FulltestResultActionService {
                 conectividade = ["Parâmetros", "Parâmetros Ópticos",
                     "Estado Operacional da Porta", "Estado Administrativo da Porta",
                     "Associação Serial ONT", "Modulação", "MAC do Equipamento"];
-                if (valids.filter(valid => conectividade.indexOf(valid.nome)).length > 0) {
-                    validado = true;
-                }
+                validado = this.filterValid(conectividade, valids);
                 break;
             case "PERFORMANCE":
                 let performance: string[];
                 performance = ["Confiabilidade de Rede"];
-                if (valids.filter(valid => performance.indexOf(valid.nome)).length > 0) {
-                    validado = true;
-                }
+                validado = this.filterValid(performance, valids);
                 break;
             case "SERVICOS":
                 let servicos: string[];
                 servicos = ["Vlan Banda Larga", "Vlan VoIP", "Vlan VoD/IPTV", "Profile"];
-                if (valids.filter(valid => servicos.indexOf(valid.nome)).length > 0) {
-                    validado = true;
-                }
+                validado = this.filterValid(servicos, valids);
                 break;
             case "CADASTRO":
                 validado = false;
                 break;
         }
         return validado;
+    }
+
+
+    private filterValid(info: string[], valids: Valids[]): boolean {
+        let val = false;
+        let fil: number;
+        valids.filter(valid => {
+            fil = info.indexOf(valid.nome);
+            if (fil > -1) {
+                val = true;
+            }
+        });
+        return val;
     }
 
 }

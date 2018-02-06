@@ -24,7 +24,7 @@ export class BlocksCertificationResultComponent implements OnInit {
         private fulltestResultActionService: FulltestResultActionService) { }
 
     public ngOnInit() {
-        this.reorganizarBlocos();
+        //this.reorganizarBlocos();
     }
 
     /**

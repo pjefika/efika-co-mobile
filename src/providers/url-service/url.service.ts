@@ -8,8 +8,8 @@ import 'rxjs/add/operator/timeout'
 @Injectable()
 export class UrlService extends SuperService implements RequestAction {
 
-    public urlIp = "http://ec2-54-233-253-253.sa-east-1.compute.amazonaws.com:8080/"; // -- Produção
-    // public urlIp = "http://10.40.195.81:8080/"; // --QA
+    // public urlIp = "http://ec2-54-233-253-253.sa-east-1.compute.amazonaws.com:8080/"; // -- Produção
+    public urlIp = "http://10.40.195.81:8080/"; // --QA
 
     public pathStealerAPI = "stealerAPI/"; // stealerAPI_qa
     public pathFulltestAPI = "fulltestAPI/";

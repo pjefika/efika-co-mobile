@@ -29,9 +29,9 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         this.resetHolder();
         setTimeout(() => {
             // --Prod
-            this.buscaCadastro("Consultando Cadastro");
+            // this.buscaCadastro("Consultando Cadastro");
             // --Mockc
-            // this.getCadastroMock("Consultando Cadastro Mock");
+            this.getCadastroMock("Consultando Cadastro Mock");
         }, 1);
     }
 
