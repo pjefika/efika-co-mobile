@@ -4,6 +4,7 @@ import { OntsLivresService } from './onts-livres.service';
 import { HolderService } from '../../../../providers/holder/holder.service';
 import { SuperConfPortaService } from '../../service-configuracoes-porta/super-conf-porta.service';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
+import { Valids } from '../../../../view-model/fulltest/validacao';
 
 @Component({
     selector: 'onts-livres-component',
@@ -55,7 +56,22 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
             .setOntsDisp(ont.serial, this.holderService.cadastro)
             .then(response => {
                 // Verificar Retorno... 1.2.3
-                super.showAlert("ONT", "ONT Associada com sucesso");
+                let idx: number = this.holderService.certification.fulltest.valids.map(function (e) { return e.nome; }).indexOf("Associação Serial ONT");
+                let setValidOnt: Valids;
+                setValidOnt = {
+                    foiCorrigido: true,
+                    mensagem: "Identificado ONT associada: " + response.output.serial.serial,
+                    nome: "Associação Serial ONT",
+                    resultado: true,
+                    result: {
+                        nome: "Associação Serial ONT",
+                        type: "--",
+                        slot: this.holderService.cadastro.rede.slot,
+                        porta: this.holderService.cadastro.rede.porta
+                    }
+                }
+                this.holderService.certification.fulltest.valids[idx] = setValidOnt;
+                super.showAlert("ONT", "ONT Associada com sucesso, realize o Fulltest novamente.");
             }, error => {
                 super.showAlert("Ops, aconteceu algo", error.mError);
             })
@@ -70,9 +86,14 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
      * @param ont Retorna verdadeiro ou falso para habilitar botão de associar de acordo com sua respectivo slot e porta.
      */
     public btnAssocDisable(ont: Ont): boolean {
-        let valid: boolean = true;
+        // console.log("Porta fO: " + ont.porta);
+        // console.log("Slot fO: " + ont.slot);
+
+        // console.log("Porta fH" + this.holderService.cadastro.rede.porta);
+        // console.log("Slot fH" + this.holderService.cadastro.rede.slot);
+        let valid: boolean = false;
         if (ont.slot === this.holderService.cadastro.rede.slot && ont.porta === this.holderService.cadastro.rede.porta) {
-            valid = false;
+            valid = true;
         }
         return valid;
     }

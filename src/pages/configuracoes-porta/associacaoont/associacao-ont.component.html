@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <button ion-button round block (click)="getOntsLivres()">Buscar ONT's Livres</button>
+                    <button ion-button round block (click)="getOntsLivres()" *ngIf="!valid.resultado">Buscar ONT's Livres</button>
                 </td>
             </tr>
         </tbody>
