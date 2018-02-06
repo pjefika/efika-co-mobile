@@ -38,6 +38,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                     super.showAlert("ONT's", "Busca realizada com sucesso.");
                 } else {
                     super.showAlert("ONT's", "Não foram encontradas ONT's disponiveis");
+                    this.navCtrl.pop();
                 }
             }, error => {
                 super.showError(true, "cuidado", "Ops, aconteceu algo", error.mError);
@@ -53,6 +54,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
         this.ontsLivresService
             .setOntsDisp(ont.serial, this.holderService.cadastro)
             .then(response => {
+                // Verificar Retorno... 1.2.3
                 super.showAlert("ONT", "ONT Associada com sucesso");
             }, error => {
                 super.showAlert("Ops, aconteceu algo", error.mError);

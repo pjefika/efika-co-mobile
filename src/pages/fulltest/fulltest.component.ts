@@ -45,7 +45,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                     }, 1);
                 }
             }, error => {
-                super.showAlert("Ops, ocorreu algo.", "Fulltest não realizado.");
+                super.showAlert("Ops, ocorreu algo.", error.mError);
                 console.log("Deu erro!!! AMD p(o.o)q");
             })
             .then(() => {
