@@ -30,7 +30,8 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                 this.valid = response.output.tabRede;
                 super.showAlert("Sucesso", "Tabela de confiabilidade de rede atualizada com sucesso.");
             }, error => {
-                super.showAlert("Erro", error.mError);
+                // error.mError
+                super.showAlert("Erro", "Em desenvolvimento.");
             })
             .then(() => {
                 carregando.dismiss();

@@ -1,6 +1,7 @@
 <div (keyup.enter)="getCadastro()">
     <ion-searchbar [type]="'search'" [(ngModel)]="holderService.instancia" [placeholder]="'Instância'" [focuser]>
     </ion-searchbar>
+    <p>Para pesquisar insira a instância no campo e pressione "Enter" ou "Consultar"</p>
     <button ion-button block round color="royal" (click)="getCadastro();">Consultar</button>
 </div>
 <div class="msg-mg-top">

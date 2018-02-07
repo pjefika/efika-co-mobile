@@ -9,7 +9,7 @@ import { InfoMuralService } from './info-mural.service';
 
 export class InfoMuralComponent implements OnInit {
 
-    public mostraMural: boolean = false;
+    public mostraMural: boolean = true;
 
     constructor(private infoMuralService: InfoMuralService) { }
 

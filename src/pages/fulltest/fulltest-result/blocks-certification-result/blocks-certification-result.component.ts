@@ -68,6 +68,25 @@ export class BlocksCertificationResultComponent implements OnInit {
         }
     }
 
+    public changeNome(nome: string): string {
+        let nomeC: string;
+        switch (nome) {
+            case "CADASTRO":
+                nomeC = "CADASTRO";
+                break;
+            case "PERFORMANCE":
+                nomeC = "CRC e RESYNC - PERFORM.";
+                break;
+            case "SERVICOS":
+                nomeC = "SERVIÇOS E BRIDGES";
+                break;
+            case "CONECTIVIDADE":
+                nomeC = "PARAMETROS E CONECT.";
+                break;
+        }
+        return nomeC;
+    }
+
     public validaInfoInsideBlocks(info: string): boolean {
         let valids: Valids[];
         if (this.holderService.certification.fulltest) {

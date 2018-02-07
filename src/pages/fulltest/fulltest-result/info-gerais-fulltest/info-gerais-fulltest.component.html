@@ -5,7 +5,7 @@
             <tr>
                 <th>Duração do Fulltest</th>
                 <th>Orientação</th>
-                <th>Resultado</th>
+                <th>Conclusão Final</th>
             </tr>
         </thead>
         <tbody>
@@ -14,7 +14,7 @@
                     {{certification.dataFim | amDifference: certification.dataInicio: 'seconds'}} Segundos
                 </td>
                 <td data-label="Orientação">{{certification.orientacao === 'OK' ? 'Encerrar' : certification.orientacao}}</td>
-                <td data-label="Resultado">
+                <td data-label="Conclusão Final">
                     <ion-icon name="checkmark-circle" *ngIf="certification.resultado === 'OK'" style="color: green;"></ion-icon>
                     <ion-icon name="ios-alert" *ngIf="certification.resultado === 'FISICAL' || certification.resultado === 'FORWARDED_CO' || certification.resultado === 'TO_FIX'"
                         style="color: red;"></ion-icon>

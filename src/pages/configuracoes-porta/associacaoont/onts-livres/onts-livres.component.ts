@@ -42,7 +42,8 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                     this.navCtrl.pop();
                 }
             }, error => {
-                super.showError(true, "cuidado", "Ops, aconteceu algo", error.mError);
+                // error.mError
+                super.showError(true, "cuidado", "Ops, aconteceu algo", "Em desenvolvimento.");
             })
             .then(() => {
                 carregando.dismiss();
@@ -73,7 +74,8 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                 this.holderService.certification.fulltest.valids[idx] = setValidOnt;
                 super.showAlert("ONT", "ONT Associada com sucesso, realize o Fulltest novamente.");
             }, error => {
-                super.showAlert("Ops, aconteceu algo", error.mError);
+                // error.mError
+                super.showAlert("Erro", "Em desenvolvimento.");
             })
             .then(() => {
                 carregando.dismiss();
