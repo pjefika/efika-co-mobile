@@ -16,7 +16,7 @@
                 </tr>
                 <tr *ngIf="linha.tipo">
                     <th> Tipo Linha: </th>
-                    <td> {{linha.tipo}} </td>
+                    <td> {{linha.tipo === 'IMS' ? 'SIP' : linha.tipo}} </td>
                 </tr>
                 <tr *ngIf="linha.central">
                     <th> Central: </th>
