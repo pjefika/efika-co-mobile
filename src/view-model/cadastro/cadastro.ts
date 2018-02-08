@@ -4,6 +4,7 @@ import { Rede } from "./rede";
 import { Servicos } from "./servicos";
 import { Radius } from './radius';
 import { EventoMassivo } from '../evento-massivo/evento-massivo';
+import { RedeExterna } from './rede-externa';
 
 export class Cadastro {
     designador: string;
@@ -16,4 +17,5 @@ export class Cadastro {
     asserts: Asserts[];
     linha: Linha;
     eventos?: EventoMassivo[];
+    redeExterna: RedeExterna;
 }

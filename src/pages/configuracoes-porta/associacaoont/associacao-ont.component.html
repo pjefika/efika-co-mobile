@@ -1,0 +1,36 @@
+<div *ngIf="valid">
+    <div class="titulo-pagina">Associação ONT</div>
+    <table>
+        <tbody>
+            <tr>
+                <th>Mensagem:</th>
+                <td>
+                    {{valid.mensagem}}
+                    <ion-icon name="checkmark-circle" *ngIf="valid.resultado" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
+                </td>
+            </tr>
+            <tr *ngIf="valid.result && valid.result.serial">
+                <th>Serial</th>
+                <td>{{valid.result.serial}}</td>
+            </tr>
+            <tr *ngIf="valid.result && valid.result.slot">
+                <th>Slot</th>
+                <td>{{valid.result.slot}}</td>
+            </tr>
+            <tr *ngIf="valid.result && valid.result.porta">
+                <th>Porta</th>
+                <td>{{valid.result.porta}}</td>
+            </tr>
+            <tr *ngIf="valid.result && valid.result.idOnt">
+                <th>ID ONT</th>
+                <td>{{valid.result.idOnt}}</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button ion-button round block (click)="getOntsLivres()" *ngIf="!valid.resultado">Buscar ONT's Livres</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

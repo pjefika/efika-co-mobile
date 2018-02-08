@@ -1,0 +1,26 @@
+<div *ngIf="valid">
+    <div class="titulo-pagina">MAC</div>
+    <table >
+        <tbody>
+            <tr>
+                <th>Mensagem:</th>
+                <td>
+                    {{valid.mensagem}}
+                    <ion-icon name="checkmark-circle" *ngIf="valid.resultado" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
+                </td>
+            </tr>
+            <!-- <tr>
+                <th>Foi Corrigido:</th>
+                <td>
+                    <ion-icon name="checkmark-circle" *ngIf="!valid.foiCorrigido" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="valid.foiCorrigido" style="color: red;"></ion-icon>
+                </td>
+            </tr> -->
+            <tr>
+                <th>Mac</th>
+                <td>{{valid.result.mac}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Informações_ </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="rede">
+        <table>
+            <tbody>
+                <tr>
+                    <th colspan="2" class="th-title"> Informações de Rede</th>
+                </tr>
+                <tr *ngIf="rede.tipo">
+                    <th> Tipo: </th>
+                    <td> {{rede.tipo}} </td>
+                </tr>
+                <tr *ngIf="rede.origem">
+                    <th> Origem: </th>
+                    <td> {{rede.origem}} </td>
+                </tr>
+                <tr *ngIf="rede.planta">
+                    <th> Planta: </th>
+                    <td> {{rede.planta}} </td>
+                </tr>
+                <tr *ngIf="rede.ipDslam">
+                    <th> IpDslam: </th>
+                    <td> {{rede.ipDslam}} </td>
+                </tr>
+                <tr *ngIf="rede.vendorDslam">
+                    <th> VendorDslam: </th>
+                    <td> {{rede.vendorDslam}} </td>
+                </tr>
+                <tr *ngIf="rede.modeloDslam">
+                    <th> ModeloDslam: </th>
+                    <td> {{rede.modeloDslam}} </td>
+                </tr>
+                <tr *ngIf="rede.idOnt">
+                    <th> IdOnt: </th>
+                    <td> {{rede.idOnt}} </td>
+                </tr>
+                <tr *ngIf="rede.terminal">
+                    <th> Terminal: </th>
+                    <td> {{rede.terminal}} </td>
+                </tr>
+                <tr *ngIf="rede.ipMulticast">
+                    <th> IpMulticast: </th>
+                    <td> {{rede.ipMulticast}} </td>
+                </tr>
+                <tr *ngIf="rede.nrc">
+                    <th> NRC: </th>
+                    <td> {{rede.nrc}} </td>
+                </tr>
+                <tr *ngIf="rede.slot">
+                    <th> Slot: </th>
+                    <td> {{rede.slot}} </td>
+                </tr>
+                <tr *ngIf="rede.porta">
+                    <th> Porta: </th>
+                    <td> {{rede.porta}} </td>
+                </tr>
+                <tr *ngIf="rede.sequencial">
+                    <th> Sequencial: </th>
+                    <td> {{rede.sequencial}} </td>
+                </tr>
+                <tr *ngIf="rede.logica">
+                    <th> Logica: </th>
+                    <td> {{rede.logica}} </td>
+                </tr>
+                <tr *ngIf="rede.rin">
+                    <th> Rin: </th>
+                    <td> {{rede.rin}} </td>
+                </tr>
+                <tr *ngIf="rede.vlanVoip">
+                    <th> Vlan Voip: </th>
+                    <td> {{rede.vlanVoip}} </td>
+                </tr>
+                <tr *ngIf="rede.vlanVod">
+                    <th> Vlan Vod: </th>
+                    <td> {{rede.vlanVod}} </td>
+                </tr>
+                <tr *ngIf="rede.vlanMulticast">
+                    <th> Vlan Multicast: </th>
+                    <td> {{rede.vlanMulticast}} </td>
+                </tr>
+                <tr *ngIf="rede.cvlan">
+                    <th> Cvlan: </th>
+                    <td> {{rede.cvlan}} </td>
+                </tr>
+                <tr *ngIf="rede.bhs">
+                    <th> BHS: </th>
+                    <td> {{rede.bhs}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ion-content>

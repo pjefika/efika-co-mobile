@@ -18,7 +18,7 @@ export class LoginService extends SuperService {
             rqst: "post",
             command: this.urlService.queueAPI + "task/process/",
             _data: _data,
-            timeout: 20000
+            timeout: 60000
         };
         return this.urlService
             .request(this.infoResquest)

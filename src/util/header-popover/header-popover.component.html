@@ -1,12 +1,21 @@
-<ion-content>
-    <ion-item-group>
-        <!-- <ion-item>
-            <ion-icon name="leaf" item-start></ion-icon> Configurações
-        </ion-item> -->
+<!-- <ion-content>
+    <ion-item-group>        
         <ion-item>
+            <button ion-item (click)="logout()">
+                <ion-icon name="refresh" item-start></ion-icon> Novo Atendimento
+            </button>
             <button ion-item (click)="logout()">
                 <ion-icon name="log-out" item-start></ion-icon> Sair
             </button>
         </ion-item>
     </ion-item-group>
-</ion-content>
+</ion-content> -->
+
+<ion-list>
+    <button ion-item (click)="novoAtendmento()">
+        <ion-icon name="refresh" item-start></ion-icon> Novo Atendimento
+    </button>
+    <button ion-item (click)="logout()">
+        <ion-icon name="log-out" item-start></ion-icon> Sair
+    </button>
+</ion-list>

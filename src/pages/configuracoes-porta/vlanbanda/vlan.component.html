@@ -1,0 +1,44 @@
+<div *ngIf="valids">
+    <div class="titulo-pagina">VLAN's</div>
+    <div *ngFor="let valid of valids">
+        <table *ngIf="valid">
+            <tbody>
+                <tr>
+                    <th>Mensagem:</th>
+                    <td>
+                        {{valid.mensagem}}
+                        <ion-icon name="checkmark-circle" *ngIf="valid.resultado" style="color: green;"></ion-icon>
+                        <ion-icon name="ios-alert" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Foi Corrigido:</th>
+                    <td>
+                        <ion-icon name="checkmark-circle" *ngIf="!valid.foiCorrigido" style="color: green;"></ion-icon>
+                        <ion-icon name="ios-alert" *ngIf="valid.foiCorrigido" style="color: red;"></ion-icon>
+                    </td>
+                </tr>
+                <tr *ngIf="valid.result && valid.result.cvlan">
+                    <th>CVLAN</th>
+                    <td>{{valid.result.cvlan}}</td>
+                </tr>
+                <tr *ngIf="valid.result && valid.result.svlan">
+                    <th>SVLAN</th>
+                    <td>{{valid.result.svlan}}</td>
+                </tr>
+                <tr *ngIf="valid.result && valid.result.pctDown">
+                    <th>Pacote Down</th>
+                    <td>{{valid.result.pctDown}}</td>
+                </tr>
+                <tr *ngIf="valid.result && valid.result.pctUp">
+                    <th>Pacote Up</th>
+                    <td>{{valid.result.pctUp}}</td>
+                </tr>
+                <tr *ngIf="valid.result && valid.result.state">
+                    <th>State</th>
+                    <td>{{valid.result.state}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

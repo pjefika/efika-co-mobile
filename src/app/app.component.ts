@@ -7,13 +7,15 @@ import { CadastroComponent } from '../pages/cadastro/cadastro.component';
 import { FulltestResultComponent } from '../pages/fulltest/fulltest-result/fulltest-result.component';
 import { LoginComponent } from '../pages/login/login.component';
 import { HolderService } from '../providers/holder/holder.service';
+import { HomeComponent } from '../pages/home/home.component';
 @Component({
 	templateUrl: 'app.html'
 })
 export class MyApp {
 
+	public home: any = HomeComponent;
 	public cadastro: any = CadastroComponent;
-	public fulltestResult: any = FulltestResultComponent
+	public fulltestResult: any = FulltestResultComponent;
 	public login: any = LoginComponent;
 
 	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public holderService: HolderService) {
@@ -23,10 +25,6 @@ export class MyApp {
 			statusBar.styleDefault();
 			splashScreen.hide();
 		});
-	}
-
-	public goToOtherTab() {
-		
 	}
 
 }

@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Informações_ </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="redeExterna">
+        <table>
+            <tbody>
+                <tr>
+                    <th colspan="2" class="th-title"> Informações de Rede Externa</th>
+                </tr>
+                <tr *ngIf="redeExterna.tipo">
+                    <th> Tipo: </th>
+                    <td> {{redeExterna.tipo}} </td>
+                </tr>
+                <tr *ngIf="redeExterna.origem">
+                    <th> Origem: </th>
+                    <td> {{redeExterna.origem}} </td>
+                </tr>
+                <tr *ngIf="redeExterna.planta">
+                    <th> Planta: </th>
+                    <td> {{redeExterna.planta}} </td>
+                </tr>
+                <tr *ngIf="redeExterna.splitter1n">
+                    <th> Splitter1n: </th>
+                    <td> {{redeExterna.splitter1n}} </td>
+                </tr>
+                <tr *ngIf="redeExterna.splitter2n">
+                    <th> Splitter2n: </th>
+                    <td> {{redeExterna.splitter2n}} </td>
+                </tr>
+                <tr *ngIf="redeExterna.caboAlim">
+                    <th> Cabo Alim: </th>
+                    <td> {{redeExterna.caboAlim}} </td>
+                </tr>
+                <tr *ngIf="redeExterna.fibra1n">
+                    <th> Fibra1n: </th>
+                    <td> {{redeExterna.fibra1n}} </td>
+                </tr>
+                <tr *ngIf="redeExterna.fibra2n">
+                    <th> Fibra2n: </th>
+                    <td> {{redeExterna.fibra2n}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ion-content>

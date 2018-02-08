@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Informações_ </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="cadastro">
+        <table>
+            <tbody>
+                <tr>
+                    <th colspan="2" class="th-title"> Informações Gerais</th>
+                </tr>
+                <tr *ngIf="cadastro.instancia">
+                    <th> Instancia: </th>
+                    <td> {{cadastro.instancia}} </td>
+                </tr>
+                <tr *ngIf="cadastro.designador">
+                    <th> Designador: </th>
+                    <td> {{cadastro.designador}} </td>
+                </tr>
+                <tr *ngIf="cadastro.designadorAcesso">
+                    <th> Designador Acesso: </th>
+                    <td> {{cadastro.designadorAcesso}} </td>
+                </tr>
+                <tr *ngIf="cadastro.designadorTv">
+                    <th> Designador TV: </th>
+                    <td> {{cadastro.designadorTv}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ion-content>

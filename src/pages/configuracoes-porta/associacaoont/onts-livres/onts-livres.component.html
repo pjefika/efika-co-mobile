@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>ONT's </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="onts">
+        <table *ngFor="let ont of onts">
+            <tbody>
+                <tr *ngIf="ont.serial">
+                    <th>Serial</th>
+                    <td>{{ont.serial}}</td>
+                </tr>
+                <tr *ngIf="ont.slot">
+                    <th>Slot</th>
+                    <td>{{ont.slot}}</td>
+                </tr>
+                <tr *ngIf="ont.porta">
+                    <th>Porta</th>
+                    <td>{{ont.porta}}</td>
+                </tr>
+                <tr *ngIf="ont.idOnt">
+                    <th>ID ONT</th>
+                    <td>{{ont.idOnt}}</td>
+                </tr>
+                <tr>
+                    <th>Associar</th>
+                    <td>
+                        <button ion-button small [disabled]="btnAssocDisable(ont)" (click)="setOnt(ont);">Associar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
+</ion-content>

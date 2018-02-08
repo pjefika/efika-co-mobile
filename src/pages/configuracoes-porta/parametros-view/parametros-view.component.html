@@ -1,0 +1,63 @@
+<div *ngIf="valid">
+    <div class="titulo-pagina">Tabela de Parametros</div>
+    <table>
+        <tbody>
+            <tr>
+                <th>Mensagem:</th>
+                <td colspan="2" class="aln-right">
+                    {{valid.mensagem}}
+                    <ion-icon name="checkmark-circle" *ngIf="valid.resultado" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="!valid.resultado" style="color: red;"></ion-icon>
+                </td>
+            </tr>
+            <tr *ngIf="!valid.result.potOlt && !valid.result.potOnt">
+                <th>Informações</th>
+                <th class="aln-center">Download</th>
+                <th class="aln-center">Upload</th>
+            </tr>
+            <tr *ngIf="valid.result.velSincDown">
+                <th>Velocidade Sincronizada (Mbps):</th>
+                <td>{{valid.result.velSincDown}}</td>
+                <td>{{valid.result.velSincUp}}</td>
+            </tr>
+            <tr *ngIf="valid.result.snrDown">
+                <th>Sinal Ruído (dB):</th>
+                <td>{{valid.result.snrDown}}</td>
+                <td>{{valid.result.snrUp}}</td>
+            </tr>
+            <tr *ngIf="valid.result.snrDown1">
+                <th>Sinal Ruído (dB):</th>
+                <td>{{valid.result.snrDown1}}</td>
+                <td>{{valid.result.snrUp1}}</td>
+            </tr>
+            <tr *ngIf="valid.result.snrDown2">
+                <th>Sinal Ruído (dB):</th>
+                <td>{{valid.result.snrDown2}}</td>
+                <td>{{valid.result.snrUp2}}</td>
+            </tr>
+            <tr *ngIf="valid.result.atnDown">
+                <th>Atenuação (dB):</th>
+                <td>{{valid.result.atnDown}}</td>
+                <td>{{valid.result.atnUp}}</td>
+            </tr>
+            <tr *ngIf="valid.result.atnDown1">
+                <th>Atenuação (dB):</th>
+                <td>{{valid.result.atnDown1}}</td>
+                <td>{{valid.result.atnUp1}}</td>
+            </tr>
+            <tr *ngIf="valid.result.atnDown2">
+                <th>Atenuação (dB):</th>
+                <td>{{valid.result.atnDown2}}</td>
+                <td>{{valid.result.atnUp2}}</td>
+            </tr>
+            <tr *ngIf="valid.result.potOnt">
+                <th>Potência ONT (dB):</th>
+                <td colspan=2 class="aln-right">{{valid.result.potOnt}}</td>
+            </tr>
+            <tr *ngIf="valid.result.potOlt">
+                <th>Potência OLT (dB):</th>
+                <td colspan=2 class="aln-right">{{valid.result.potOlt}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

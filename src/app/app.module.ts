@@ -5,7 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { HttpModule } from '@angular/http';
 import { ObjKeysPipe } from '../util/pipes/objKeysPipe';
 import { Capitalize, KeyBeautifyingPipe } from '../util/pipes/beautifyingPipe';
@@ -25,11 +24,35 @@ import { HeaderPopoverComponent } from '../util/header-popover/header-popover.co
 import { LoginUtilService } from '../util/login-util/login-util.service';
 import { EventosMassivosComponent } from '../pages/cadastro/eventos-massivos/eventos-massivos.component';
 import { FocuserDirective } from '../providers/directive/focuser.directive';
+import { ParametrosViewComponent } from '../pages/configuracoes-porta/parametros-view/parametros-view.component';
+import { ConfiabilidadeRedeComponent } from '../pages/configuracoes-porta/confiabilidade-rede/confiabilidade-rede.component';
+import { ConectividadeComponent } from '../pages/configuracoes-porta/conectividade/conectividade.component';
+import { PerformanceComponent } from '../pages/configuracoes-porta/performance/performance.component';
+import { ServicosComponent } from '../pages/configuracoes-porta/servicos/servicos.component';
+import { ProfileComponent } from '../pages/configuracoes-porta/profile/profile.component';
+import { VlanComponent } from '../pages/configuracoes-porta/vlanbanda/vlan.component';
+import { ModulacaoComponent } from '../pages/configuracoes-porta/modulacao/modulacao.component';
+import { CadastroConfpComponent } from '../pages/configuracoes-porta/cadastro/cadastro.component';
+import { MacComponent } from '../pages/configuracoes-porta/mac/mac.component';
+import { AssociacaoOntComponent } from '../pages/configuracoes-porta/associacaoont/associacao-ont.component';
+import { EstadoPortaComponent } from '../pages/configuracoes-porta/estado-porta/estado-porta.component';
+import { InfoCadastroListComponent } from '../pages/cadastro/info-cadastro-list/info-cadastro-list.component';
+import { InfoRedeComponent } from '../pages/cadastro/info-cadastro-list/info-rede/info-rede.component';
+import { InfoRedeExternaComponent } from '../pages/cadastro/info-cadastro-list/info-rede-externa/info-rede-externa.component';
+import { InfoGeraisComponent } from '../pages/cadastro/info-cadastro-list/info-gerais/info-gerais.component';
+import { InfoServicosComponent } from '../pages/cadastro/info-cadastro-list/info-servicos/info-servicos.component';
+import { InfoLinhaComponent } from '../pages/cadastro/info-cadastro-list/info-linha/info-linha.component';
+import { InfoRadiusComponent } from '../pages/cadastro/info-cadastro-list/info-radius/info-radius.component';
+import { HomeComponent } from '../pages/home/home.component';
+import { CadastroSearchComponent } from '../pages/cadastro/cadastro-search/cadastro-search.component';
+import { InfoMuralComponent } from '../pages/home/info-mural/info-mural.component';
+import { OntsLivrsComponent } from '../pages/configuracoes-porta/associacaoont/onts-livres/onts-livres.component';
+import { FabActionComponent } from '../pages/fab-component/fab-actions.component';
 
 @NgModule({
 	declarations: [
 		MyApp,
-		HomePage,
+		HomeComponent,
 		ObjKeysPipe,
 		KeyBeautifyingPipe,
 		Capitalize,
@@ -43,7 +66,30 @@ import { FocuserDirective } from '../providers/directive/focuser.directive';
 		InfoGeraisFulltestComponent,
 		HeaderPopoverComponent,
 		EventosMassivosComponent,
-		FocuserDirective
+		FocuserDirective,
+		ConectividadeComponent,
+		PerformanceComponent,
+		ParametrosViewComponent,
+		ConfiabilidadeRedeComponent,
+		ServicosComponent,
+		ProfileComponent,
+		VlanComponent,
+		CadastroConfpComponent,
+		ModulacaoComponent,
+		MacComponent,
+		AssociacaoOntComponent,
+		EstadoPortaComponent,
+		InfoCadastroListComponent,
+		InfoRedeComponent,
+		InfoRedeExternaComponent,
+		InfoGeraisComponent,
+		InfoServicosComponent,
+		InfoLinhaComponent,
+		InfoRadiusComponent,
+		CadastroSearchComponent,
+		InfoMuralComponent,
+		OntsLivrsComponent,
+		FabActionComponent
 	],
 	imports: [
 		BrowserModule,
@@ -57,7 +103,7 @@ import { FocuserDirective } from '../providers/directive/focuser.directive';
 	bootstrap: [IonicApp],
 	entryComponents: [
 		MyApp,
-		HomePage,
+		HomeComponent,
 		CadastroComponent,
 		InfoCadastroComponent,
 		FulltestComponent,
@@ -67,7 +113,29 @@ import { FocuserDirective } from '../providers/directive/focuser.directive';
 		BlocksCertificationResultComponent,
 		InfoGeraisFulltestComponent,
 		HeaderPopoverComponent,
-		EventosMassivosComponent
+		EventosMassivosComponent,
+		ConectividadeComponent,
+		PerformanceComponent,
+		ParametrosViewComponent,
+		ConfiabilidadeRedeComponent,
+		ServicosComponent,
+		ProfileComponent,
+		VlanComponent,
+		CadastroConfpComponent,
+		ModulacaoComponent,
+		MacComponent,
+		AssociacaoOntComponent,
+		EstadoPortaComponent,
+		InfoCadastroListComponent,
+		InfoRedeComponent,
+		InfoRedeExternaComponent,
+		InfoGeraisComponent,
+		InfoServicosComponent,
+		InfoLinhaComponent,
+		InfoRadiusComponent,
+		CadastroSearchComponent,
+		InfoMuralComponent,
+		OntsLivrsComponent
 	],
 	providers: [
 		StatusBar,

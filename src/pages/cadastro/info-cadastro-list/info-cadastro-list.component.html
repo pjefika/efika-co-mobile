@@ -1,0 +1,78 @@
+<div *ngIf="cadastro">
+    <div class="titulo-info-cad">Informações do cadastro</div>
+    <ion-list>
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="secondary" ion-button (click)="refreshCadastro();">
+                    <ion-icon name="refresh"></ion-icon>
+                </button>
+            </ion-avatar>
+            <h2>Reconsultar Cadastro</h2>
+        </ion-item>
+
+        <ion-item *ngIf="temEventoMassivo()">
+            <ion-avatar item-start>
+                <button color="danger" ion-button (click)="entrarEventoMassivos();">
+                    <ion-icon name="alert"></ion-icon>
+                </button>
+            </ion-avatar>
+            <h2>Eventos Massivos</h2>
+            <p>Lista de eventos massivos</p>
+        </ion-item>
+
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoGerais();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
+            <h2>Informações Gerais</h2>
+            <p>Dados: Designador e Instância</p>
+        </ion-item>
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoRede();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
+            <h2>Rede</h2>
+            <p>Rede e Facilidades</p>
+        </ion-item>
+        <ion-item *ngIf="cadastro.rede.tipo === 'GPON' && cadastro.rede.planta === 'VIVO1'">
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoRedeExterna();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
+            <h2>Rede Externa</h2>
+            <p>Informações de rede externa</p>
+        </ion-item>
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoServico();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
+            <h2>Serviços</h2>
+            <p>Produtos Contratados</p>
+        </ion-item>
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoLinha();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
+            <h2>Linha</h2>
+            <p>Informações de linha</p>
+        </ion-item>
+        <ion-item>
+            <ion-avatar item-start>
+                <button color="dark" ion-button (click)="infoRadius();">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                </button>
+            </ion-avatar>
+            <h2>Radius</h2>
+            <p>Informações de Autenticação</p>
+        </ion-item>
+    </ion-list>
+</div>

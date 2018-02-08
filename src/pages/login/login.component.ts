@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from './login.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { Usuario } from '../../view-model/usuario/usuario';
@@ -18,6 +18,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     public showHidePassword: boolean = false;
 
+    @ViewChild('input') private input;
+
     constructor(private loginService: LoginService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -30,29 +32,37 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         if (this.loginUtilService.isLogado()) {
             this.holderService.estalogado = true;
         }
-        // Comentar quando for para produção;
-        // this.usuario.matricula = "G0034481";
-        // this.usuario.senha = "123"
+        setTimeout(() => { this.input.setFocus(); }, 150);
+    }
+
+    public validEntrar() {
+        // --Prod
+        // this.entrar();
+        // --Mock        
+        this.entrarMock();
     }
 
     public entrar() {
+        this.showHidePassword = false;
         let carregando = this.loadingCtrl.create({ content: "Consultando Login" });
         carregando.present();
         this.loginService
             .entrar(this.usuario)
-            .then(response => {                
-                let verify: boolean;
-                verify = response.output.match;
-                if (verify) {
-                    this.holderService.estalogado = verify;
-                    sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));                   
-                } else {
-                    super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
-                    this.usuario.matricula = "";
-                    this.usuario.senha = "";
+            .then(response => {
+                if (super.validState(response.output)) {
+                    let verify: boolean = response.output.match;
+                    if (verify) {
+                        this.holderService.estalogado = verify;
+                        this.usuario.matricula = this.usuario.matricula.toUpperCase();
+                        sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
+                    } else {
+                        super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+                        this.usuario.matricula = "";
+                        this.usuario.senha = "";
+                    }
                 }
             }, error => {
-                super.showError(true, "erro", "Erro ao realizar login", "Ocorreu um erro ao realizar busca de login.");
+                super.showError(true, "erro", "Erro ao realizar login", error.mError);
                 this.usuario.matricula = "";
                 this.usuario.senha = "";
             })
@@ -65,6 +75,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         let verify: boolean;
         verify = this.loginService.entrarMock(this.usuario);
         if (verify) {
+            this.usuario.matricula = "IONIC - TEST";
             sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
             this.holderService.estalogado = verify;
         } else {

@@ -16,7 +16,7 @@ export class InfoGeraisFulltestComponent implements OnInit {
 
     constructor(public holderService: HolderService) { }
 
-    public ngOnInit() { 
+    public ngOnInit() {
         this.numberValid();
     }
 
@@ -36,4 +36,5 @@ export class InfoGeraisFulltestComponent implements OnInit {
         }
 
     }
+
 }
