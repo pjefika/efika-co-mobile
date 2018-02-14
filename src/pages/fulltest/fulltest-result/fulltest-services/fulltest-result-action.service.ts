@@ -37,12 +37,14 @@ export class FulltestResultActionService {
     private filterValid(info: string[], valids: Valids[]): boolean {
         let val = false;
         let fil: number;
-        valids.filter(valid => {
-            fil = info.indexOf(valid.nome);
-            if (fil > -1) {
-                val = true;
-            }
-        });
+        if (valids) {
+            valids.filter(valid => {
+                fil = info.indexOf(valid.nome);
+                if (fil > -1) {
+                    val = true;
+                }
+            });
+        }
         return val;
     }
 

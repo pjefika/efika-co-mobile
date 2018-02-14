@@ -33,11 +33,11 @@ export class BlocksCertificationResultComponent implements OnInit {
      */
     public reorganizarBlocos() {
         this.blocks.sort(function (bloco1, bloco2) {
-            if (bloco1.nome === "PERFORMANCE") {
+            if (bloco1.nome.name === "PERFORMANCE") {
                 return 1;
-            } else if (bloco1.nome < bloco2.nome && bloco1.nome != "PERFORMANCE") {
+            } else if (bloco1.nome.name < bloco2.nome.name && bloco1.nome.name != "PERFORMANCE") {
                 return -1
-            } else if (bloco1.nome > bloco2.nome && bloco1.nome != "PERFORMANCE") {
+            } else if (bloco1.nome.name > bloco2.nome.name && bloco1.nome.name != "PERFORMANCE") {
                 return 1;
             } else {
                 return 0;
@@ -68,30 +68,33 @@ export class BlocksCertificationResultComponent implements OnInit {
         }
     }
 
-    public changeNome(nome: string): string {
-        let nomeC: string;
-        switch (nome) {
-            case "CADASTRO":
-                nomeC = "CADASTRO";
-                break;
-            case "PERFORMANCE":
-                nomeC = "CRC e RESYNC - PERFORM.";
-                break;
-            case "SERVICOS":
-                nomeC = "SERVIÇOS E BRIDGES";
-                break;
-            case "CONECTIVIDADE":
-                nomeC = "PARAMETROS E CONECT.";
-                break;
-        }
-        return nomeC;
-    }
+    // public changeNome(nome: string): string {
+    //     let nomeC: string;
+    //     switch (nome) {
+    //         case "CADASTRO":
+    //             nomeC = "CADASTRO";
+    //             break;
+    //         case "PERFORMANCE":
+    //             nomeC = "CRC e RESYNC - PERFORM.";
+    //             break;
+    //         case "SERVICOS":
+    //             nomeC = "SERVIÇOS E BRIDGES";
+    //             break;
+    //         case "CONECTIVIDADE":
+    //             nomeC = "PARAMETROS E CONECT.";
+    //             break;
+    //     }
+    //     return nomeC;
+    // }
 
     public validaInfoInsideBlocks(info: string): boolean {
+        console.log(info);        
         let valids: Valids[];
         if (this.holderService.certification.fulltest) {
             valids = this.holderService.certification.fulltest.valids;
         }
+        console.log(valids);
+        
         return this.fulltestResultActionService.validaInfoInsideBlocks(info, valids);
     }
 
