@@ -6,6 +6,11 @@ import { Ont } from "../../view-model/task-process/ont";
 @Injectable()
 export class HolderService {
 
+    //Valida se é ambiente de Produção ou de QA
+    // True para Produção/QA - Vide link na UrlService.
+    // False para Mock
+    public isProd: boolean = true;
+
     public estalogado: boolean;
 
     public instancia: string;

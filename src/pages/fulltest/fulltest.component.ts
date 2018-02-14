@@ -25,10 +25,13 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
     public ngOnInit() { }
 
     public fulltest() {
-        // --Prod
-        this.fazFulltest();
-        // --Mock        
-        // this.fazFulltestMock();
+        if (this.holderService.isProd) {
+            // --Prod
+            this.fazFulltest();
+        } else {
+            // --Mock        
+            this.fazFulltestMock();
+        }
     }
 
     public fazFulltest() {
@@ -40,7 +43,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                 if (super.validState(response.output)) {
                     this.holderService.certification = response.output.certification;
                     this.holderService.tabFulltestAtivo = true;
-                    setTimeout(() => {                        
+                    setTimeout(() => {
                         this.navCtrl.parent.select(2);
                     }, 1);
                 }
