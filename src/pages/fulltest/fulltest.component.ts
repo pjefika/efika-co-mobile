@@ -25,12 +25,12 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
     public ngOnInit() { }
 
     public fulltest() {
-        if (this.holderService.isProd) {
-            // --Prod
-            this.fazFulltest();
-        } else {
+        if (this.holderService.isMock) {
             // --Mock        
             this.fazFulltestMock();
+        } else {
+            // --Prod
+            this.fazFulltest();            
         }
     }
 

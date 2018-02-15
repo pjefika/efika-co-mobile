@@ -36,12 +36,12 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     }
 
     public validEntrar() {
-        if (this.holderService.isProd) {
-            // --Prod
-            this.entrar();
-        } else {
+        if (this.holderService.isMock) {
             // --Mock        
             this.entrarMock();
+        } else {
+            // --Prod
+            this.entrar();
         }
     }
 

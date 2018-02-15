@@ -4,12 +4,13 @@ import { RequestAction } from './url-service.interface';
 import { InfoRequest } from '../../view-model/url-service/info-request';
 import { Headers, RequestOptions, Http } from '@angular/http';
 import 'rxjs/add/operator/timeout'
+import { HolderService } from '../holder/holder.service';
 
 @Injectable()
 export class UrlService extends SuperService implements RequestAction {
 
-    public urlIp = "http://ec2-54-233-253-253.sa-east-1.compute.amazonaws.com:8080/"; // -- Produção
-    // public urlIp = "http://10.40.195.81:8080/"; // --QA
+    public urlIpProd = "http://ec2-54-233-253-253.sa-east-1.compute.amazonaws.com:8080/"; // -- Produção
+    public urlIpQA = "http://10.40.195.81:8080/"; // --QA
 
     public pathStealerAPI = "stealerAPI/"; // stealerAPI_qa
     public pathFulltestAPI = "fulltestAPI/";
@@ -19,7 +20,8 @@ export class UrlService extends SuperService implements RequestAction {
     public options = new RequestOptions({ headers: this.headersAppJson });
     private url;
 
-    constructor(private http: Http) {
+    constructor(private http: Http,
+        public holderService: HolderService) {
         super();
     }
 
@@ -65,7 +67,11 @@ export class UrlService extends SuperService implements RequestAction {
         if (l) {
             this.url = l;
         } else {
-            this.url = this.urlIp;
+            if (this.holderService.isLinkProd) {
+                this.url = this.urlIpProd;
+            } else {
+                this.url = this.urlIpQA;
+            }
         }
     }
 
