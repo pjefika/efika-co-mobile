@@ -10,6 +10,12 @@
         </thead>
         <tbody>
             <tr>
+                <td data-label="Instância">
+                    {{certification.customer.instancia}}
+                </td>
+                <td data-label="Certification ID">
+                    {{certification.id}}
+                </td>
                 <td data-label="Duração do Fulltest">
                     {{certification.dataFim | amDifference: certification.dataInicio: 'seconds'}} Segundos
                 </td>

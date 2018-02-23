@@ -88,12 +88,12 @@ export class BlocksCertificationResultComponent implements OnInit {
     // }
 
     public validaInfoInsideBlocks(info: string): boolean {
-        console.log(info);        
+        // console.log(info);        
         let valids: Valids[];
         if (this.holderService.certification.fulltest) {
             valids = this.holderService.certification.fulltest.valids;
         }
-        console.log(valids);
+        // console.log(valids);
         
         return this.fulltestResultActionService.validaInfoInsideBlocks(info, valids);
     }

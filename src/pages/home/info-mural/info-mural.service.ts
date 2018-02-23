@@ -9,7 +9,7 @@ export class InfoMuralService extends SuperService {
     }
 
     public logMural() {
-        console.log("Entrou Service Mural....");
+        // console.log("Entrou Service Mural....");
     }
 
 
