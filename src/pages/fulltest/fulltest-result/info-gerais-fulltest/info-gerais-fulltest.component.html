@@ -20,7 +20,7 @@
                     {{certification.dataFim | amDifference: certification.dataInicio: 'seconds'}} Segundos
                 </td>
                 <td data-label="Data do Comando">
-                    {{ (certification.dataInicio / 1000 | amFromUnix) | amDateFormat: 'DD/MM/YYYY HH:mm:ss' }}
+                    {{ (certification.dataFim / 1000 | amFromUnix) | amDateFormat: 'DD/MM/YYYY HH:mm:ss' }}
                 </td>
                 <td data-label="Orientação">{{certification.orientacao === 'OK' ? 'Encerrar' : certification.orientacao}}</td>
                 <td data-label="Conclusão Final">
