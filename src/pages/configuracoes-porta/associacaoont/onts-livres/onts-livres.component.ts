@@ -32,7 +32,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
         let carregando = this.loadingCtrl.create({ content: "Aguarde, carregando ONT's..." });
         carregando.present();
         this.ontsLivresService
-            .getOntsDisp(this.holderService.instancia)
+            .getOntsDisp(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
                 if (response.output.onts) {
                     this.onts = response.output.onts;

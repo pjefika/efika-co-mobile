@@ -25,7 +25,7 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
         let carregando = this.loadingCtrl.create({ content: "Aguarde..." });
         carregando.present();
         this.confiabilidadeRedeService
-            .getConfRede(this.holderService.instancia)
+            .getConfRede(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
                 if (super.validState(response.output)) {
                     this.valid = response.output.tabRede;

@@ -11,10 +11,10 @@ export class OntsLivresService extends SuperService {
         super();
     }
 
-    public getOntsDisp(instancia: string): Promise<TaskProcess> {
+    public getOntsDisp(instancia: string, cadastro: Cadastro): Promise<TaskProcess> {
         let userSession = JSON.parse(sessionStorage.getItem("user"));
-        let _data: { task: string, input: { type: string, instancia: string }, executor: string };
-        _data = { task: "ONTS_DISP", input: { type: "certification", instancia: instancia }, executor: userSession.user };
+        let _data: { task: string, input: { type: string, instancia: string, cadastro: Cadastro }, executor: string };
+        _data = { task: "ONTS_DISP", input: { type: "certification", instancia: instancia, cadastro: cadastro }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
             command: this.urlService.queueAPI + "task/process/",
