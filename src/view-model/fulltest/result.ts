@@ -1,7 +1,7 @@
 export class Result {
     //Padrão
     nome: string;
-    type: string;
+    type?: string;
 
     //[1]
     adminState?: boolean;

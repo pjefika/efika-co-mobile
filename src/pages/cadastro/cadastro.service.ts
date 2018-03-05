@@ -11,22 +11,6 @@ export class CadastroService extends SuperService {
         super();
     }
 
-    public _getCadastro(instancia: string) {
-        let _data: { instancia: string, executor: string };
-        _data = { instancia: instancia, executor: "ionicTest" };
-        this.infoResquest = {
-            rqst: "post",
-            command: this.urlService.pathStealerAPI + "oss/",
-            _data: _data,
-            timeout: 120000
-        };
-        return this.urlService.request(this.infoResquest)
-            .then(response => {
-                return response as Cadastro
-            })
-            .catch(super.handleError);
-    }
-
     public getCadastro(instancia: string): Promise<TaskProcess> {
         let userSession = JSON.parse(sessionStorage.getItem("user"));
         let _data: { task: string, input: { type: string, instancia: string }, executor: string };
@@ -46,10 +30,11 @@ export class CadastroService extends SuperService {
     }
 
     public getCadastroMock(): Cadastro {
+        let cad: Cadastro;
         //Metalico
-        let cad: Cadastro = JSON.parse('{"designador":"PAE-812GNAJKCY-013","instancia":"5130190034","designadorAcesso":"PAE-11089448-069","designadorTv":null,"rede":{"tipo":"GPON","origem":"ONLINE","planta":"VIVO2","ipDslam":"10.151.206.114","vendorDslam":"ALCATEL","modeloDslam":"GPON_CARD","idOnt":null,"terminal":null,"ipMulticast":null,"nrc":null,"slot":7,"porta":14,"sequencial":1466,"logica":26,"rin":227,"vlanVoip":1227,"vlanVod":3227,"vlanMulticast":4000,"cvlan":1566,"bhs":null},"redeExterna":{"tipo":null,"origem":null,"planta":null,"splitter1n":null,"splitter2n":null,"caboAlim":null,"fibra1n":null,"fibra2n":null},"servicos":{"velDown":51200,"velUp":25600,"tipoTv":null,"tipoLinha":"SIP"},"linha":{"tipo":"IMS","dn":"5130190034","central":"PRCTA_VMS02"},"radius":{"status":"ATIVO","armario":"RSPAE_O1B75","rin":"227","velocidade":"51200 - 25600","ipFixo":"NAO ENCONTROU","profile":"a25600b51200 op:PAE-812GNAJKCY-013","porta":"1466","isIpFixo":false},"asserts":[{"asserts":"DIVERGENCIA_TBS_RADIUS","value":false,"creationDate":1516303391080},{"asserts":"CIRCUITO_ATIVO","value":true,"creationDate":1516303391080},{"asserts":"HAS_BLOQUEIO_RADIUS","value":false,"creationDate":1516303391080}],"eventos":[{"tipoAlarme":"ABC","tipoFalha":"ABC","tipoAfetacao":"ABC","desc":"ABC","dataAbertura":1516442400000,"dataPrevista":1516792747000,"numeroEvento":123456,"tipoEvento":"ABC"},{"tipoAlarme":"ABC","tipoFalha":"ABC","tipoAfetacao":"ABC","desc":"ABC","dataAbertura":1516442400000,"dataPrevista":1516792747000,"numeroEvento":123456,"tipoEvento":"ABC"}]}');
+        cad = JSON.parse('{"designador":"CTA-81E2J3HSS-013","instancia":"4131543457","designadorAcesso":"CTA-04887444-069","designadorTv":"TV-CTA-81E2J3HST-050","rede":{"tipo":"METALICA","origem":"ONLINE","planta":"VIVO2","ipDslam":"10.200.30.177","vendorDslam":"KEYMILE","modeloDslam":"SUVD11","idOnt":null,"terminal":null,"ipMulticast":null,"nrc":null,"slot":3,"porta":37,"sequencial":1085,"logica":1085,"rin":74,"vlanVoip":1074,"vlanVod":3074,"vlanMulticast":4000,"cvlan":1185,"bhs":null},"redeExterna":{"tipo":null,"origem":null,"planta":null,"splitter1n":null,"splitter2n":null,"caboAlim":null,"fibra1n":null,"fibra2n":null},"servicos":{"velDown":51200,"velUp":5120,"tipoTv":"DTH","tipoLinha":"TDM"},"linha":{"tipo":"TDM","dn":"4131543457","central":"PRCTA_PVS01"},"radius":{"status":"ATIVO","armario":"PRCTA_O1C50","rin":"074","velocidade":"51200 - 5120","ipFixo":"-","profile":"r5120b51200","porta":"1085","isIpFixo":false},"asserts":[{"asserts":"DIVERGENCIA_TBS_RADIUS","value":false,"creationDate":1520259652992},{"asserts":"CIRCUITO_ATIVO","value":true,"creationDate":1520259652992},{"asserts":"HAS_BLOQUEIO_RADIUS","value":false,"creationDate":1520259652992}],"eventos":[]}');
         //GPON
-        // let cad: Cadastro = JSON.parse('{"designador":"RCE-30NCGZJQ-013","instancia":"8134650186","designadorAcesso":"RCE-15395420-069","designadorTv":null,"rede":{"tipo":"GPON","origem":"ONLINE","planta":"VIVO2","ipDslam":"10.181.9.21","vendorDslam":"ALCATEL","modeloDslam":"GPON_CARD","idOnt":null,"terminal":null,"ipMulticast":null,"nrc":null,"slot":6,"porta":4,"sequencial":1225,"logica":9,"rin":211,"vlanVoip":1211,"vlanVod":3211,"vlanMulticast":4000,"cvlan":1325,"bhs":null},"redeExterna":{"tipo":null,"origem":null,"planta":null,"splitter1n":null,"splitter2n":null,"caboAlim":null,"fibra1n":null,"fibra2n":null},"servicos":{"velDown":51200,"velUp":25600,"tipoTv":null,"tipoLinha":"SIP"},"linha":{"tipo":"IMS","dn":"8134650186","central":"PERCE_LNS03"},"radius":{"status":"ATIVO","armario":"PERCE_G1I07","rin":"211","velocidade":"51200 - 25600","ipFixo":"NAO ENCONTROU","profile":"r25600b51200 op:RCE-30NCGZJQ-013","porta":"1225","isIpFixo":false},"asserts":[{"asserts":"DIVERGENCIA_TBS_RADIUS","value":false,"creationDate":1517329517494},{"asserts":"CIRCUITO_ATIVO","value":true,"creationDate":1517329517494},{"asserts":"HAS_BLOQUEIO_RADIUS","value":false,"creationDate":1517329517494}],"eventos":[]}');
+        // cad = JSON.parse('{"designador":"CIM-81IDZUA6D-013","instancia":"2830271731","designadorAcesso":"CIM-06120648-069","designadorTv":null,"rede":{"tipo":"GPON","origem":"ONLINE","planta":"VIVO2","ipDslam":"10.227.26.15","vendorDslam":"ALCATEL","modeloDslam":"GPON_CARD","idOnt":null,"terminal":null,"ipMulticast":null,"nrc":null,"slot":6,"porta":15,"sequencial":964,"logica":4,"rin":15,"vlanVoip":1015,"vlanVod":3015,"vlanMulticast":4000,"cvlan":1064,"bhs":null},"redeExterna":{"tipo":null,"origem":null,"planta":null,"splitter1n":null,"splitter2n":null,"caboAlim":null,"fibra1n":null,"fibra2n":null},"servicos":{"velDown":51200,"velUp":5120,"tipoTv":null,"tipoLinha":"SIP"},"linha":{"tipo":"IMS","dn":"2830271731","central":"MGBHE_HMS04"},"radius":{"status":"ATIVO","armario":"ESCIM_G1A05","rin":"015","velocidade":"51200 - 5120","ipFixo":"NAO ENCONTROU","profile":"a5120b51200 op:CIM-81IDZUA6D-013","porta":"964","isIpFixo":false},"asserts":[{"asserts":"DIVERGENCIA_TBS_RADIUS","value":false,"creationDate":1520261088887},{"asserts":"CIRCUITO_ATIVO","value":true,"creationDate":1520261088887},{"asserts":"HAS_BLOQUEIO_RADIUS","value":false,"creationDate":1520261088887}],"eventos":[]}');
         return cad;
     }
 }
