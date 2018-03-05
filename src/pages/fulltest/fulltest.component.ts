@@ -46,6 +46,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                     setTimeout(() => {
                         this.navCtrl.parent.select(2);
                     }, 1);
+                    this.ativo = false;
                 }
             }, error => {
                 super.showAlert("Ops, ocorreu algo.", error.mError);

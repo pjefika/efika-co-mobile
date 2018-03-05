@@ -51,6 +51,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                         this.holderService.cadastro = response.output.customer;
                         this.holderService.tabCadastroAtivo = true;
                         this.msgEventoMassivo();
+                        this.ativo = false;
                     }
                 }, error => {
                     super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);

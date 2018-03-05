@@ -52,6 +52,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                         setTimeout(() => {
                             this.navCtrl.parent.select(1);
                         }, 1);
+                        this.ativo = false;
                     }
                 }, error => {
                     super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
