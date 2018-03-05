@@ -10,10 +10,10 @@ import { HolderService } from '../holder/holder.service';
 export class UrlService extends SuperService implements RequestAction {
 
     public urlIpProd = "http://ec2-54-233-253-253.sa-east-1.compute.amazonaws.com:8080/"; // -- Produção
-    public urlIpQA = "http://10.40.195.81:8080/"; // --QA
+    public urlIpQA = "http://10.40.196.182:7175/"; // --QA
 
-    public pathStealerAPI = "stealerAPI/"; // stealerAPI_qa
-    public pathFulltestAPI = "fulltestAPI/";
+    // public pathStealerAPI = "stealerAPI/"; // stealerAPI_qa
+    // public pathFulltestAPI = "fulltestAPI/";
     public queueAPI = "queueAPI/";
 
     private headersAppJson = new Headers({ 'Content-Type': 'application/json' });
