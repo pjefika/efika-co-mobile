@@ -11,7 +11,7 @@ export class SuperComponentService extends ClipBoardService {
     public mensagem: string;
     public tipo: string;
 
-    constructor(public alertCtrl: AlertController) { 
+    constructor(public alertCtrl: AlertController) {
         super();
     }
 
@@ -45,7 +45,8 @@ export class SuperComponentService extends ClipBoardService {
                 break;
             case "EXCEPTION":
                 v = false;
-                this.showError(true, "erro", "Ops, aconteceu algo.", output.exceptionMessage);
+                // this.showError(true, "erro", "Ops, aconteceu algo.", output.exceptionMessage);
+                this.showAlert("Ops, aconteceu algo", output.exceptionMessage);
                 console.log("Deu erro -- EXCEPTION IN: " + output.type + " -- !!! AMD p(o.o)q");
                 break;
         }
