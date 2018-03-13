@@ -20,7 +20,7 @@ export class FulltestService extends SuperService {
             rqst: "post",
             command: this.urlService.queueAPI + "task/process/",
             _data: _data,
-            timeout: 120000
+            timeout: 180000
         };
         return this.urlService
             .request(this.infoResquest)
