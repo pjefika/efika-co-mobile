@@ -26,6 +26,10 @@
                     <th> IpDslam: </th>
                     <td> {{rede.ipDslam}} </td>
                 </tr>
+                <tr *ngIf="holderService.cadastro.radius">
+                    <th> Armario: </th>
+                    <td> {{holderService.cadastro.radius.armario}} </td>
+                </tr>
                 <tr *ngIf="rede.vendorDslam">
                     <th> VendorDslam: </th>
                     <td> {{rede.vendorDslam}} </td>
