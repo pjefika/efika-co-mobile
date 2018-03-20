@@ -33,7 +33,10 @@
         </tbody>
     </table>
     <div>
-        <button ion-button round small block (click)="goToETA()" *ngIf="certification.resultado === 'OK'" color="secondary">Clique para encerrar</button>
+        <div *ngIf="certification.resultado === 'OK'">
+            <p style="font-size: 0.9em; margin-left: 5%; margin-right: 5%;">Nenhum problema encontrado no Cadastro do cliente, utilize o botão abaixo para encerrar.</p>
+            <button ion-button block (click)="goToETA()" color="secondary">Clique para encerrar</button>
+        </div>
         <a href="tel:+{{numero}}" ion-button round small block *ngIf="certification.resultado === 'FORWARDED_CO'">
             Link Suporte
         </a>
