@@ -6,6 +6,7 @@ export class Certification {
     resultado: string;
     orientacao: string;
     id: string;
+    fkId: string;
     blocks: Blocks[];
     dataInicio: number;
     dataFim: number;

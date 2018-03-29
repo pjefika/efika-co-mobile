@@ -10,15 +10,15 @@ export class InfoClipBoard {
     potOnt?: number
     potOlt?: number
 
-    profile: string;
+    // profile: string;
 
     autenticado?: string;
 
-    modulacao?: string;
+    // modulacao?: string;
 
-    bridgeDados: string;
-    bridgeVoz: string;
-    bridgeVODIPTV: string;
+    // bridgeDados: string;
+    // bridgeVoz: string;
+    // bridgeVODIPTV: string;
 
 
 }

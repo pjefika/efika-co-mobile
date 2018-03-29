@@ -59,7 +59,7 @@ export class FulltestResultComponent extends SuperComponentService implements On
 
         infoClipBoard.dataAcao = dataFim.format('DD/MM/YYYY HH:mm:ss').toString();
         infoClipBoard.tecnico = userSession.user;
-        infoClipBoard.protocolo = this.holderService.certification.id;
+        infoClipBoard.protocolo = this.holderService.certification.fkId;
         this.holderService.certification.fulltest.valids.forEach(valid => {
             if (valid.result) {
                 switch (valid.result.nome) {
@@ -76,21 +76,21 @@ export class FulltestResultComponent extends SuperComponentService implements On
                         infoClipBoard.potOlt = valid.result.potOlt;
                         infoClipBoard.potOnt = valid.result.potOnt;
                         break;
-                    case "Modulação":
-                        infoClipBoard.modulacao = valid.result.modulacao + " * " + valid.mensagem;
-                        break;
-                    case "Profile":
-                        infoClipBoard.profile = valid.result.down + "/" + valid.result.up + " * " + valid.mensagem;
-                        break;
-                    case "Vlan Banda Larga":
-                        infoClipBoard.bridgeDados = valid.mensagem;
-                        break;
-                    case "Vlan VoIP":
-                        infoClipBoard.bridgeVoz = valid.mensagem;
-                        break;
-                    case "Vlan VoD/IPTV":
-                        infoClipBoard.bridgeVODIPTV = valid.mensagem;
-                        break;
+                    // case "Modulação":
+                    //     infoClipBoard.modulacao = valid.result.modulacao + " * " + valid.mensagem;
+                    //     break;
+                    // case "Profile":
+                    //     infoClipBoard.profile = valid.result.down + "/" + valid.result.up + " * " + valid.mensagem;
+                    //     break;
+                    // case "Vlan Banda Larga":
+                    //     infoClipBoard.bridgeDados = valid.mensagem;
+                    //     break;
+                    // case "Vlan VoIP":
+                    //     infoClipBoard.bridgeVoz = valid.mensagem;
+                    //     break;
+                    // case "Vlan VoD/IPTV":
+                    //     infoClipBoard.bridgeVODIPTV = valid.mensagem;
+                    //     break;
                 }
             }
         });
