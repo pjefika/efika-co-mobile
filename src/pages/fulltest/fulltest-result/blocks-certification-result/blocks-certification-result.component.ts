@@ -21,10 +21,9 @@ export class BlocksCertificationResultComponent implements OnInit {
 
     constructor(public navCtrl: NavController,
         public holderService: HolderService,
-        private fulltestResultActionService: FulltestResultActionService) { }
+        private fulltestResultActionService: FulltestResultActionService) {}
 
     public ngOnInit() {
-        //this.reorganizarBlocos();
     }
 
     /**
@@ -46,55 +45,28 @@ export class BlocksCertificationResultComponent implements OnInit {
     }
 
     public openInfos(info: string) {
+        this.holderService.showhidetab = false;
         switch (info) {
             case "CONECTIVIDADE":
-                //Parametros
                 this.navCtrl.push(ConectividadeComponent);
                 break;
             case "PERFORMANCE":
-                //Confiabilidade de Rede
                 this.navCtrl.push(PerformanceComponent);
                 break;
             case "SERVICOS":
-                //Vlan Banda
-                //Profile
                 this.navCtrl.push(ServicosComponent);
                 break;
             case "CADASTRO":
-                //Modulação                
-                //MAC do Equipamento
                 this.navCtrl.push(CadastroConfpComponent);
                 break;
         }
     }
 
-    // public changeNome(nome: string): string {
-    //     let nomeC: string;
-    //     switch (nome) {
-    //         case "CADASTRO":
-    //             nomeC = "CADASTRO";
-    //             break;
-    //         case "PERFORMANCE":
-    //             nomeC = "CRC e RESYNC - PERFORM.";
-    //             break;
-    //         case "SERVICOS":
-    //             nomeC = "SERVIÇOS E BRIDGES";
-    //             break;
-    //         case "CONECTIVIDADE":
-    //             nomeC = "PARAMETROS E CONECT.";
-    //             break;
-    //     }
-    //     return nomeC;
-    // }
-
     public validaInfoInsideBlocks(info: string): boolean {
-        // console.log(info);        
         let valids: Valids[];
         if (this.holderService.certification.fulltest) {
             valids = this.holderService.certification.fulltest.valids;
         }
-        // console.log(valids);
-        
         return this.fulltestResultActionService.validaInfoInsideBlocks(info, valids);
     }
 

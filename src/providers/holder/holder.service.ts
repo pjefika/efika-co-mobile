@@ -22,6 +22,8 @@ export class HolderService {
     // Variavel para segurar informação se usuário está ou não logado.
     public estalogado: boolean;
 
+    public showhidetab: boolean;
+
     // Segura a instância inserida
     public instancia: string;
     // Segura o Cadastro buscado pelo usuário

@@ -31,6 +31,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     public ngOnInit() {
         if (this.loginUtilService.isLogado()) {
             this.holderService.estalogado = true;
+            this.holderService.showhidetab = true;
         }
         setTimeout(() => { this.input.setFocus(); }, 150);
     }
@@ -56,6 +57,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                     let verify: boolean = response.output.match;
                     if (verify) {
                         this.holderService.estalogado = verify;
+                        this.holderService.showhidetab = verify;
                         this.usuario.matricula = this.usuario.matricula.toUpperCase();
                         sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
                     } else {
@@ -81,6 +83,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             this.usuario.matricula = "IONIC - TEST";
             sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
             this.holderService.estalogado = verify;
+            this.holderService.showhidetab = verify;
         } else {
             super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
             this.usuario.matricula = "";

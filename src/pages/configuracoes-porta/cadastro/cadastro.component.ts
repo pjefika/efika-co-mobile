@@ -18,6 +18,10 @@ export class CadastroConfpComponent extends ConfiguracoesPortaService implements
     }
 
     private getValid() {
-        
+
+    }
+
+    ionViewWillLeave() {
+        this.holderService.showhidetab = true;
     }
 }

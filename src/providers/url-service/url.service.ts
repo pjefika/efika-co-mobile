@@ -9,7 +9,8 @@ import { HolderService } from '../holder/holder.service';
 @Injectable()
 export class UrlService extends SuperService implements RequestAction {
 
-    public urlIpProd = "http://ec2-54-233-253-253.sa-east-1.compute.amazonaws.com:8080/"; // -- Produção
+    // public urlIpProd = "http://ec2-54-233-253-253.sa-east-1.compute.amazonaws.com:8080/"; // -- Produção Old
+    public urlIpProd = "http://54.94.208.183:8080/"  // -- Produção
     public urlIpQA = "http://10.40.196.182:8080/"; // --QA // 7175
 
     // public pathStealerAPI = "stealerAPI/"; // stealerAPI_qa
