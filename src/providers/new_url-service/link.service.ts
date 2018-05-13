@@ -11,9 +11,9 @@ export class LinkService extends SuperService {
         super();
     }
 
-    public getLinksEndPoints(): Promise<LinksEndPoits[]> {
+    public getLinksEndPoints(): LinksEndPoits[] {
         let linksEndPoits: LinksEndPoits[] = require("../../assets/json/links-end-points.json");
-        return Promise.resolve(linksEndPoits);
+        return linksEndPoits;
     }
 
     public contacMountUrl(url, port, command): string {

@@ -5,6 +5,8 @@ import { InfoRequest } from '../../view-model/url-service/info-request';
 import { LinkService } from './link.service';
 import { LinksEndPoits } from '../../view-model/url-service/links-end-points';
 
+import 'rxjs/add/operator/timeout';
+
 @Injectable()
 export class UrlService extends LinkService {
 
@@ -19,6 +21,8 @@ export class UrlService extends LinkService {
 
     private count: number = 0;
 
+    private url: string;
+
     constructor(private http: Http,
         public holderService: HolderService) {
         super();
@@ -28,16 +32,17 @@ export class UrlService extends LinkService {
         this.count = 0;
         switch (infoResquest.rqst) {
             case "get":
+                this.mountUrl(infoResquest.otherUrl, "get", infoResquest.command) + this.mountlinkget(infoResquest);
                 return this.get(infoResquest);
             case "post":
+                this.url = this.mountUrl(infoResquest.otherUrl, "set", infoResquest.command);
                 return this.post(infoResquest);
         }
     }
 
     private post(infoResquest: InfoRequest) {
         let idtask: string;
-        const url = this.mountUrl(infoResquest.otherUrl, "set", infoResquest.command);
-        return this.http.post(url, JSON.stringify(infoResquest._data), this.options)
+        return this.http.post(this.url, JSON.stringify(infoResquest._data), this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
@@ -51,6 +56,7 @@ export class UrlService extends LinkService {
 
     private startgettask(infoResquest: InfoRequest) {
         let interval = setInterval(() => {
+            this.mountUrl(infoResquest.otherUrl, "get", infoResquest.command) + this.mountlinkget(infoResquest);
             if (this.count < 5) {
                 this.get(infoResquest)
                     .then(respostaget => {
@@ -77,14 +83,7 @@ export class UrlService extends LinkService {
     }
 
     private get(infoResquest: InfoRequest) {
-        let rstlink;
-        if (infoResquest._data) {
-            rstlink = infoResquest.command + infoResquest._data;
-        } else {
-            rstlink = infoResquest.command;
-        }
-        const url = this.mountUrl(infoResquest.otherUrl, "get", infoResquest.command) + rstlink;
-        return this.http.get(url, this.options)
+        return this.http.get(this.url, this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
@@ -93,41 +92,48 @@ export class UrlService extends LinkService {
             .catch(super.handleErrorKing);
     }
 
-    private mountUrl(l, ftype: string, command: string) {
+    private mountlinkget(infoResquest: InfoRequest): string {
+        if (infoResquest._data) {
+            return infoResquest.command + infoResquest._data;
+        } else {
+            return infoResquest.command;
+        }
+    }
+
+    private mountUrl(l, ftype: string, command: string): string {
         if (l) {
             return l;
         } else {
-            // this.setftypeInUrl(ftype);
-            super.getLinksEndPoints()
-                .then(resposta => {
-                    switch (ftype) {
-                        case "get":
-                            if (this.ftypename) {
-                                if (this.ftypename === resposta[0].nome) {
-                                    this.ajustLink(resposta[1]);
-                                } else {
-                                    this.ajustLink(resposta[0]);
-                                }
-                            } else {
-                                this.ajustLink(resposta[0]);
-                            }
-                            break;
-                        case "set":
-                            if (this.ftypename) {
-                                if (this.ftypename === resposta[2].nome) {
-                                    this.ajustLink(resposta[3]);
-                                } else {
-                                    this.ajustLink(resposta[2]);
-                                }
-                            } else {
-                                this.ajustLink(resposta[2]);
-                            }
-                            break;
+            console.log("entrou no else");
+            let le = super.getLinksEndPoints();
+            switch (ftype) {
+                case "get":
+                    if (this.ftypename) {
+                        if (this.ftypename === le[0].nome) {
+                            this.ajustLink(le[1]);
+                        } else {
+                            this.ajustLink(le[0]);
+                        }
+                    } else {
+                        this.ajustLink(le[0]);
                     }
-                })
-                .then(() => {
-                    this.returnLink(command);
-                });
+                    break;
+                case "set":
+                    console.log("entrou no case set");
+                    if (this.ftypename) {
+                        if (this.ftypename === le[2].nome) {
+                            this.ajustLink(le[3]);
+                        } else {
+                            this.ajustLink(le[2]);
+                        }
+                    } else {
+                        this.ajustLink(le[2]);
+                    }
+                    break;
+            }
+            let u = this.returnLink(command)
+            console.log(u);
+            return u;
         }
     }
 
@@ -135,7 +141,6 @@ export class UrlService extends LinkService {
         if (this.holderService.isLinkProd) {
             return super.contacMountUrl(this.urlIpProd, this.portLink, command);
         } else {
-            console.log(super.contacMountUrl(this.urlIpQA, this.portLink, command));
             return super.contacMountUrl(this.urlIpQA, this.portLink, command);
         }
     }
