@@ -19,6 +19,7 @@ export class UrlService extends SuperService implements RequestAction {
 
     private headersAppJson = new Headers({ 'Content-Type': 'application/json' });
     public options = new RequestOptions({ headers: this.headersAppJson });
+
     private url;
 
     constructor(private http: Http,
@@ -37,12 +38,14 @@ export class UrlService extends SuperService implements RequestAction {
     }
 
     public post(infoResquest: InfoRequest) {
+
         const url = `${this.url}` + infoResquest.command;
+
         return this.http.post(url, JSON.stringify(infoResquest._data), this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
-                return response.json()
+                return response.json();
             })
             .catch(super.handleErrorKing);
     }

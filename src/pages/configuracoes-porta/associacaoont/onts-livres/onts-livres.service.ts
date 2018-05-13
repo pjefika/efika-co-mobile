@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SuperService } from '../../../../providers/super-service/super.service';
-import { UrlService } from '../../../../providers/url-service/url.service';
 import { TaskProcess } from '../../../../view-model/task-process/task-process';
 import { Cadastro } from '../../../../view-model/cadastro/cadastro';
+import { UrlService } from '../../../../providers/new_url-service/url.service';
 
 @Injectable()
 export class OntsLivresService extends SuperService {
@@ -17,7 +17,7 @@ export class OntsLivresService extends SuperService {
         _data = { task: "ONTS_DISP", input: { type: "certification", instancia: instancia, customer: cadastro }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
-            command: this.urlService.queueAPI + "task/process/",
+            command: "task/process/",
             _data: _data,
             timeout: 120000
         };
@@ -35,7 +35,7 @@ export class OntsLivresService extends SuperService {
         _data = { task: "SET_ONT", input: { type: "setOntToOlt", serial: serial, customer: cadastro }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
-            command: this.urlService.queueAPI + "task/process/",
+            command: "task/process/",
             _data: _data,
             timeout: 120000
         };

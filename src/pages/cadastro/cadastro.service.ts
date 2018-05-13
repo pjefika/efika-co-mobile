@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SuperService } from '../../providers/super-service/super.service';
-import { UrlService } from '../../providers/url-service/url.service';
 import { Cadastro } from '../../view-model/cadastro/cadastro';
 import { TaskProcess } from '../../view-model/task-process/task-process';
+import { UrlService } from '../../providers/new_url-service/url.service';
 
 @Injectable()
 export class CadastroService extends SuperService {
@@ -17,7 +17,7 @@ export class CadastroService extends SuperService {
         _data = { task: "CADASTRO", input: { type: "cadastro", instancia: instancia }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
-            command: this.urlService.queueAPI + "task/process/",
+            command: "task/process/",
             _data: _data,
             timeout: 120000
         };

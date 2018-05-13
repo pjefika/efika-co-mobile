@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../view-model/usuario/usuario';
-import { UrlService } from '../../providers/url-service/url.service';
 import { SuperService } from '../../providers/super-service/super.service';
 import { TaskProcess } from '../../view-model/task-process/task-process';
+import { UrlService } from '../../providers/new_url-service/url.service';
 
 @Injectable()
 export class LoginService extends SuperService {
@@ -16,7 +16,7 @@ export class LoginService extends SuperService {
         _data = { task: "AUTH", input: { type: "auth", login: usuario.matricula, senha: usuario.senha }, executor: "IONIC - Mobile" };
         this.infoResquest = {
             rqst: "post",
-            command: this.urlService.queueAPI + "task/process/",
+            command: "task/process/",
             _data: _data,
             timeout: 60000
         };

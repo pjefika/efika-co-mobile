@@ -8,7 +8,6 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { ObjKeysPipe } from '../util/pipes/objKeysPipe';
 import { Capitalize, KeyBeautifyingPipe } from '../util/pipes/beautifyingPipe';
-import { UrlService } from '../providers/url-service/url.service';
 import { FulltestComponent } from '../pages/fulltest/fulltest.component';
 import { CadastroComponent } from '../pages/cadastro/cadastro.component';
 import { InfoCadastroComponent } from '../pages/cadastro/info-cadastro/info-cadastro.component';
@@ -48,6 +47,8 @@ import { CadastroSearchComponent } from '../pages/cadastro/cadastro-search/cadas
 import { InfoMuralComponent } from '../pages/home/info-mural/info-mural.component';
 import { OntsLivrsComponent } from '../pages/configuracoes-porta/associacaoont/onts-livres/onts-livres.component';
 import { FabActionComponent } from '../pages/fab-component/fab-actions.component';
+import { UrlService } from '../providers/new_url-service/url.service';
+import { LinkService } from '../providers/new_url-service/link.service';
 
 @NgModule({
 	declarations: [
@@ -143,6 +144,7 @@ import { FabActionComponent } from '../pages/fab-component/fab-actions.component
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
 		HolderService,
 		UrlService,
+		LinkService,
 		SuperComponentService,
 		LoginUtilService
 	],
