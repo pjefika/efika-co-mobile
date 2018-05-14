@@ -20,6 +20,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     @ViewChild('input') private input;
 
+    public count: number = 0;
+
     constructor(private loginService: LoginService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -47,32 +49,55 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     }
 
     public entrar() {
+        this.count = 0;
         this.showHidePassword = false;
         let carregando = this.loadingCtrl.create({ content: "Consultando Login" });
         carregando.present();
         this.loginService
             .entrar(this.usuario)
             .then(response => {
-                if (super.validState(response.output)) {
-                    let verify: boolean = response.output.match;
-                    if (verify) {
-                        this.holderService.estalogado = verify;
-                        this.holderService.showhidetab = verify;
-                        this.usuario.matricula = this.usuario.matricula.toUpperCase();
-                        sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
-                    } else {
-                        super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
-                        this.usuario.matricula = "";
-                        this.usuario.senha = "";
-                    }
+                if (response) {
+                    let rqSi = setInterval(() => {
+                        if (this.count < 9) {
+                            this.count++;
+                            this.loginService
+                                .gettask(response.id)
+                                .then(resposta => {
+                                    if (resposta.state === "EXECUTED") {
+                                        let verify: boolean = resposta.output.match;
+                                        if (verify) {
+                                            carregando.dismiss();
+                                            clearInterval(rqSi);
+                                            this.holderService.estalogado = verify;
+                                            this.holderService.showhidetab = verify;
+                                            this.usuario.matricula = this.usuario.matricula.toUpperCase();
+                                            sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
+                                        } else {
+                                            carregando.dismiss();
+                                            clearInterval(rqSi);
+                                            super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+                                            this.usuario.matricula = "";
+                                            this.usuario.senha = "";
+                                        }
+                                    }
+                                }, error => {
+                                    carregando.dismiss();
+                                    clearInterval(rqSi);
+                                });
+                        } else {
+                            carregando.dismiss();
+                            clearInterval(rqSi);
+                        }
+                    }, 15000);
+                } else {
+                    super.showError(true, "erro", "Erro ao realizar login", response.exceptionMessage);
+                    carregando.dismiss();
                 }
             }, error => {
+                carregando.dismiss();
                 super.showError(true, "erro", "Erro ao realizar login", error.mError);
                 this.usuario.matricula = "";
                 this.usuario.senha = "";
-            })
-            .then(() => {
-                carregando.dismiss();
             });
     }
 

@@ -10,7 +10,7 @@ declare var require: any
 @Injectable()
 export class FulltestService extends SuperService {
 
-    constructor(private urlService: UrlService) {
+    constructor(public urlService: UrlService) {
         super();
     }
 
@@ -20,7 +20,7 @@ export class FulltestService extends SuperService {
         _data = { task: "CERTIFICATION", input: { type: "certification", customer: cadastro }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
-            command: "task/process/",
+            command: "task/queue",
             _data: _data,
             timeout: 180000
         };
@@ -30,6 +30,20 @@ export class FulltestService extends SuperService {
                 return response as TaskProcess
             })
             .catch(super.handleError);
+    }
+
+    public gettask(id: String): Promise<any> {
+        this.infoResquest = {
+            rqst: "get",
+            command: "task/",
+            _data: id,
+            timeout: 10000
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta as TaskProcess;
+            });
     }
 
     public doFulltestMock(): Certification {

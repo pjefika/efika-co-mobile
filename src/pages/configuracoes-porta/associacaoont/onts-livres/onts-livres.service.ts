@@ -7,7 +7,7 @@ import { UrlService } from '../../../../providers/new_url-service/url.service';
 @Injectable()
 export class OntsLivresService extends SuperService {
 
-    constructor(private urlService: UrlService) {
+    constructor(public urlService: UrlService) {
         super();
     }
 
@@ -17,7 +17,7 @@ export class OntsLivresService extends SuperService {
         _data = { task: "ONTS_DISP", input: { type: "certification", instancia: instancia, customer: cadastro }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
-            command: "task/process/",
+            command: "task/queue",
             _data: _data,
             timeout: 120000
         };
@@ -35,7 +35,7 @@ export class OntsLivresService extends SuperService {
         _data = { task: "SET_ONT", input: { type: "setOntToOlt", serial: serial, customer: cadastro }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
-            command: "task/process/",
+            command: "task/queue",
             _data: _data,
             timeout: 120000
         };
@@ -47,5 +47,18 @@ export class OntsLivresService extends SuperService {
             .catch(super.handleError);
     }
 
+    public gettask(id: String): Promise<any> {
+        this.infoResquest = {
+            rqst: "get",
+            command: "task/",
+            _data: id,
+            timeout: 10000
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta as TaskProcess;
+            });
+    }
 
 }

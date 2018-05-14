@@ -26,7 +26,7 @@
                 <tr>
                     <th>Associar</th>
                     <td>
-                        <button ion-button small [disabled]="btnAssocDisable(ont)" (click)="setOnt(ont);">Associar</button>
+                        <button ion-button small [disabled]="!btnAssocDisable(ont)" (click)="setOnt(ont);">Associar</button>
                     </td>
                 </tr>
             </tbody>

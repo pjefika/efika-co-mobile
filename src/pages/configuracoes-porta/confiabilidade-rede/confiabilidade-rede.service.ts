@@ -7,7 +7,7 @@ import { UrlService } from '../../../providers/new_url-service/url.service';
 @Injectable()
 export class ConfiabilidadeRedeService extends SuperService {
 
-    constructor(private urlService: UrlService) {
+    constructor(public urlService: UrlService) {
         super();
     }
 
@@ -17,7 +17,7 @@ export class ConfiabilidadeRedeService extends SuperService {
         _data = { task: "CONF_REDE", input: { type: "certification", instancia: instancia, customer: cadastro }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
-            command: "task/process/",
+            command: "task/queue",
             _data: _data,
             timeout: 120000
         };
@@ -27,5 +27,19 @@ export class ConfiabilidadeRedeService extends SuperService {
                 return response as TaskProcess
             })
             .catch(super.handleError);
+    }
+
+    public gettask(id: String): Promise<any> {
+        this.infoResquest = {
+            rqst: "get",
+            command: "task/",
+            _data: id,
+            timeout: 10000
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta as TaskProcess;
+            });
     }
 }

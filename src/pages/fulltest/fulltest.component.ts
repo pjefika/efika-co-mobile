@@ -14,6 +14,8 @@ import { SuperComponentService } from '../../providers/component-service/super-c
 
 export class FulltestComponent extends SuperComponentService implements OnInit {
 
+    private count: number = 0;
+
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
         private fulltestService: FulltestService,
@@ -30,30 +32,54 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             this.fazFulltestMock();
         } else {
             // --Prod
-            this.fazFulltest();            
+            this.fazFulltest();
         }
     }
 
     public fazFulltest() {
+        this.count = 0;
         let carregando = this.loadingCtrl.create({ content: "Realizando Fulltest" });
         carregando.present();
         this.fulltestService
             .doFulltest(this.holderService.cadastro)
             .then(response => {
-                if (super.validState(response.output)) {
-                    this.holderService.certification = response.output.certification;
-                    this.holderService.tabFulltestAtivo = true;
-                    setTimeout(() => {
-                        this.navCtrl.parent.select(2);
-                    }, 1);
-                    this.ativo = false;
+                if (response) {
+                    let rqSi = setInterval(() => {
+                        if (this.count < 9) {
+                            this.count++;
+                            this.fulltestService
+                                .gettask(response.id)
+                                .then(resposta => {
+                                    if (resposta.state === "EXECUTED") {
+                                        if (super.validState(resposta.output)) {
+                                            this.holderService.certification = resposta.output.certification;
+                                            this.holderService.tabFulltestAtivo = true;
+                                            setTimeout(() => {
+                                                this.navCtrl.parent.select(2);
+                                            }, 1);
+                                            this.ativo = false;
+                                            carregando.dismiss();
+                                            clearInterval(rqSi);
+                                        } else {
+                                            carregando.dismiss();
+                                            clearInterval(rqSi);
+                                        }
+                                    }
+                                }, error => {
+                                    carregando.dismiss();
+                                    clearInterval(rqSi);
+                                });
+                        } else {
+                            carregando.dismiss();
+                            clearInterval(rqSi);
+                        }
+                    }, 15000);
+                } else {
+                    super.showError(true, "erro", "Erro ao realizar busca de cadastro", response.exceptionMessage);
                 }
             }, error => {
                 super.showAlert("Ops, ocorreu algo.", error.mError);
                 console.log("Deu erro!!! AMD p(o.o)q");
-            })
-            .then(() => {
-                carregando.dismiss();
             });
     }
 

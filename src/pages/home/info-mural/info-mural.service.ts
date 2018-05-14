@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { SuperService } from '../../../providers/super-service/super.service';
 
 @Injectable()
-export class InfoMuralService extends SuperService {
+export class InfoMuralService {
 
     constructor() {
-        super();
+        
     }
 
     public logMural() {

@@ -16,6 +16,8 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
 
     public onts: Ont[];
 
+    private count: number = 0;
+
     constructor(private ontsLivresService: OntsLivresService,
         public holderService: HolderService,
         public alertCtrl: AlertController,
@@ -29,56 +31,106 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
     }
 
     private getOntsDisp() {
+        this.count = 0;
         let carregando = this.loadingCtrl.create({ content: "Aguarde, carregando ONT's..." });
         carregando.present();
         this.ontsLivresService
             .getOntsDisp(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
-                if (response.output.onts) {
-                    this.onts = response.output.onts;
-                    super.showAlert("ONT's", "Busca realizada com sucesso.");
-                } else {
-                    super.showAlert("ONT's", "Não foram encontradas ONT's disponiveis");
-                    this.navCtrl.pop();
+                if (response) {
+                    let rqSi = setInterval(() => {
+                        if (this.count < 9) {
+                            this.count++;
+                            this.ontsLivresService
+                                .gettask(response.id)
+                                .then(resposta => {
+                                    if (resposta.state === "EXECUTED") {
+                                        if (super.validState(resposta.output)) {
+                                            if (resposta.output.onts) {
+                                                this.onts = resposta.output.onts;
+                                                super.showAlert("ONT's", "Busca realizada com sucesso.");
+                                            } else {
+                                                super.showAlert("ONT's", "Não foram encontradas ONT's disponiveis");
+                                                this.navCtrl.pop();
+                                            }
+                                            carregando.dismiss();
+                                            clearInterval(rqSi);
+                                        } else {
+                                            carregando.dismiss();
+                                            clearInterval(rqSi);
+                                        }
+                                    }
+                                }, error => {
+                                    carregando.dismiss();
+                                    clearInterval(rqSi);
+                                });
+                        } else {
+                            carregando.dismiss();
+                            clearInterval(rqSi);
+                        }
+                    }, 15000);
                 }
             }, error => {
                 // error.mError
                 super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
-            })
-            .then(() => {
-                carregando.dismiss();
             });
     }
 
     public setOnt(ont: Ont) {
+        this.count = 0;
         let carregando = this.loadingCtrl.create({ content: "Aguarde, associando ONT..." });
         carregando.present();
         this.ontsLivresService
             .setOntsDisp(ont.serial, this.holderService.cadastro)
             .then(response => {
-                // Verificar Retorno... 1.2.3
-                let idx: number = this.holderService.certification.fulltest.valids.map(function (e) { return e.nome; }).indexOf("Associação Serial ONT");
-                let setValidOnt: Valids;
-                setValidOnt = {
-                    foiCorrigido: true,
-                    mensagem: "Identificado ONT associada: " + response.output.serial.serial,
-                    nome: "Associação Serial ONT",
-                    resultado: true,
-                    result: {
-                        nome: "Associação Serial ONT",
-                        type: "--",
-                        slot: this.holderService.cadastro.rede.slot,
-                        porta: this.holderService.cadastro.rede.porta
-                    }
+                if (response) {
+                    let rqSi = setInterval(() => {
+                        if (this.count < 9) {
+                            this.count++;
+                            this.ontsLivresService
+                                .gettask(response.id)
+                                .then(resposta => {
+                                    if (resposta.state === "EXECUTED") {
+                                        if (super.validState(resposta.output)) {
+                                            let idx: number = this.holderService.certification.fulltest.valids.map(function (e) { return e.nome; }).indexOf("Associação Serial ONT");
+                                            let setValidOnt: Valids;
+                                            setValidOnt = {
+                                                foiCorrigido: true,
+                                                mensagem: "Identificado ONT associada: " + resposta.output.serial.serial,
+                                                nome: "Associação Serial ONT",
+                                                resultado: true,
+                                                result: {
+                                                    nome: "Associação Serial ONT",
+                                                    type: "--",
+                                                    slot: this.holderService.cadastro.rede.slot,
+                                                    porta: this.holderService.cadastro.rede.porta
+                                                }
+                                            }
+                                            this.holderService.certification.fulltest.valids[idx] = setValidOnt;
+                                            super.showAlert("ONT", "ONT Associada com sucesso, realize o Fulltest novamente.");
+                                            carregando.dismiss();
+                                            this.navCtrl.pop();
+                                            clearInterval(rqSi);
+                                        } else {
+                                            carregando.dismiss();
+                                            this.navCtrl.pop();
+                                            clearInterval(rqSi);
+                                        }
+                                    }
+                                }, error => {
+                                    carregando.dismiss();
+                                    this.navCtrl.pop();
+                                    clearInterval(rqSi);
+                                });
+                        } else {
+                            carregando.dismiss();
+                            this.navCtrl.pop();
+                            clearInterval(rqSi);
+                        }
+                    }, 15000);
                 }
-                this.holderService.certification.fulltest.valids[idx] = setValidOnt;
-                super.showAlert("ONT", "ONT Associada com sucesso, realize o Fulltest novamente.");
             }, error => {
                 super.showAlert("Erro", error.mError);
-            })
-            .then(() => {
-                carregando.dismiss();
-                this.navCtrl.pop();
             });
     }
 

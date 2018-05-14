@@ -53,4 +53,12 @@ export class SuperComponentService extends ClipBoardService {
         return v;
     }
 
+    public validCustomer(output: Output): boolean {
+        let v: boolean = false;
+        if (output.customer.designador) {
+            v = true;
+        }
+        return v;
+    }
+
 }

@@ -14,6 +14,8 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     public jaBuscou: boolean = false;
 
+    private count: number = 0;
+
     constructor(public holderService: HolderService,
         private cadastroService: CadastroService,
         public alertCtrl: AlertController,
@@ -39,6 +41,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
     }
 
     public buscaCadastro(mensagem: string) {
+        this.count = 0;
         super.showError(false);
         if (this.validInstancia()) {
             let carregando = this.loadingCtrl.create({ content: mensagem });
@@ -46,22 +49,54 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             this.cadastroService
                 .getCadastro(this.holderService.instancia)
                 .then(response => {
-                    if (super.validState(response.output)) {
-                        this.holderService.cadastro = response.output.customer;
-                        this.holderService.tabCadastroAtivo = true;
-                        setTimeout(() => {
-                            this.navCtrl.parent.select(1);
-                        }, 1);
-                        this.ativo = false;
+                    if (response) {
+                        let rqSi = setInterval(() => {
+                            if (this.count < 9) {
+                                this.count++;
+                                this.cadastroService
+                                    .gettask(response.id)
+                                    .then(resposta => {
+                                        if (resposta.state === "EXECUTED") {
+                                            if (super.validState(resposta.output)) {
+                                                if (super.validCustomer(resposta.output)) {
+                                                    this.holderService.cadastro = resposta.output.customer;
+                                                    this.holderService.tabCadastroAtivo = true;
+                                                    setTimeout(() => {
+                                                        this.navCtrl.parent.select(1);
+                                                    }, 1);
+                                                    this.ativo = false;
+                                                    carregando.dismiss();
+                                                    this.msgEventoMassivo();
+                                                    this.jaBuscou = true;
+                                                    clearInterval(rqSi);
+                                                } else {
+                                                    carregando.dismiss();
+                                                    clearInterval(rqSi);
+                                                    super.showError(true, "erro", "Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases.");
+                                                }
+                                            } else {
+                                                carregando.dismiss();
+                                                this.msgEventoMassivo();
+                                                this.jaBuscou = true;
+                                                clearInterval(rqSi);
+                                            }
+                                        }
+                                    }, error => {
+                                        carregando.dismiss();
+                                        clearInterval(rqSi);
+                                    });
+                            } else {
+                                carregando.dismiss();
+                                clearInterval(rqSi);
+                                this.jaBuscou = true;
+                            }
+                        }, 15000);
+                    } else {
+                        super.showError(true, "erro", "Erro ao realizar busca de cadastro", response.exceptionMessage);
                     }
                 }, error => {
                     super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
-                })
-                .then(() => {
-                    carregando.dismiss();
-                    this.msgEventoMassivo();
-                    this.jaBuscou = true;
                 });
         }
     }

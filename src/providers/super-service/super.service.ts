@@ -6,8 +6,8 @@ export class SuperService {
 
     public infoResquest: InfoRequest;
 
-    constructor() { }
-
+    constructor() {
+    }
     public handleError(error: any): Promise<any> {
         return Promise.reject(error);
     }
@@ -29,6 +29,5 @@ export class SuperService {
         }
         return Promise.reject(er);
     }
-
 
 }
