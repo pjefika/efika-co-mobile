@@ -51,7 +51,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                 .then(response => {
                     if (response) {
                         let rqSi = setInterval(() => {
-                            if (this.count < 9) {
+                            if (this.count < this.holderService.rcount) {
                                 this.count++;
                                 this.cadastroService
                                     .gettask(response.id)
@@ -82,15 +82,17 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                             }
                                         }
                                     }, error => {
+                                        super.showError(true, "erro", "Erro ao realizar busca de cadastro", error.mError);
                                         carregando.dismiss();
                                         clearInterval(rqSi);
                                     });
                             } else {
+                                super.showError(true, "erro", "Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
                                 carregando.dismiss();
                                 clearInterval(rqSi);
                                 this.jaBuscou = true;
                             }
-                        }, 15000);
+                        }, this.holderService.rtimeout);
                     } else {
                         super.showError(true, "erro", "Erro ao realizar busca de cadastro", response.exceptionMessage);
                     }

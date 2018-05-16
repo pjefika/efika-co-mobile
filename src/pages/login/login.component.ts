@@ -51,14 +51,14 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     public entrar() {
         this.count = 0;
         this.showHidePassword = false;
-        let carregando = this.loadingCtrl.create({ content: "Consultando Login" });
+        let carregando = this.loadingCtrl.create({ content: "Consultando Login " });
         carregando.present();
         this.loginService
             .entrar(this.usuario)
             .then(response => {
                 if (response) {
                     let rqSi = setInterval(() => {
-                        if (this.count < 9) {
+                        if (this.count < this.holderService.rcount) {
                             this.count++;
                             this.loginService
                                 .gettask(response.id)
@@ -83,12 +83,14 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                 }, error => {
                                     carregando.dismiss();
                                     clearInterval(rqSi);
+                                    super.showError(true, "erro", "Erro ao realizar login", error.mError);
                                 });
                         } else {
                             carregando.dismiss();
                             clearInterval(rqSi);
+                            super.showError(true, "erro", "Erro ao realizar login", "Tempo de busca excedido por favor tente novamente.");
                         }
-                    }, 15000);
+                    }, this.holderService.rtimeout);
                 } else {
                     super.showError(true, "erro", "Erro ao realizar login", response.exceptionMessage);
                     carregando.dismiss();

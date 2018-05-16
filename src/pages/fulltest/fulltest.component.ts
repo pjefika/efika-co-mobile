@@ -45,7 +45,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             .then(response => {
                 if (response) {
                     let rqSi = setInterval(() => {
-                        if (this.count < 9) {
+                        if (this.count < this.holderService.rcount) {
                             this.count++;
                             this.fulltestService
                                 .gettask(response.id)
@@ -66,14 +66,16 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                         }
                                     }
                                 }, error => {
+                                    super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
                                     carregando.dismiss();
                                     clearInterval(rqSi);
                                 });
                         } else {
+                            super.showError(true, "erro", "Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
                             carregando.dismiss();
                             clearInterval(rqSi);
                         }
-                    }, 15000);
+                    }, this.holderService.rtimeout);
                 } else {
                     super.showError(true, "erro", "Erro ao realizar busca de cadastro", response.exceptionMessage);
                 }

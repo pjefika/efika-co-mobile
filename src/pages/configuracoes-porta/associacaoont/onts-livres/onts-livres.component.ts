@@ -39,7 +39,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
             .then(response => {
                 if (response) {
                     let rqSi = setInterval(() => {
-                        if (this.count < 9) {
+                        if (this.count < this.holderService.rcount) {
                             this.count++;
                             this.ontsLivresService
                                 .gettask(response.id)
@@ -61,14 +61,16 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                         }
                                     }
                                 }, error => {
+                                    super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
                                     carregando.dismiss();
                                     clearInterval(rqSi);
                                 });
                         } else {
+                            super.showError(true, "erro", "Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
                             carregando.dismiss();
                             clearInterval(rqSi);
                         }
-                    }, 15000);
+                    }, this.holderService.rtimeout);
                 }
             }, error => {
                 // error.mError
@@ -118,11 +120,13 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                         }
                                     }
                                 }, error => {
+                                    super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
                                     carregando.dismiss();
                                     this.navCtrl.pop();
                                     clearInterval(rqSi);
                                 });
                         } else {
+                            super.showError(true, "erro", "Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
                             carregando.dismiss();
                             this.navCtrl.pop();
                             clearInterval(rqSi);

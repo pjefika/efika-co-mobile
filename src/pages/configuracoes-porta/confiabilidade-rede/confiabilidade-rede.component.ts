@@ -31,7 +31,7 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
             .then(response => {
                 if (response) {
                     let rqSi = setInterval(() => {
-                        if (this.count < 9) {
+                        if (this.count < this.holderService.rcount) {
                             this.count++;
                             this.confiabilidadeRedeService
                                 .gettask(response.id)
@@ -49,14 +49,16 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                                         }
                                     }
                                 }, error => {
+                                    super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
                                     carregando.dismiss();
                                     clearInterval(rqSi);
                                 });
                         } else {
+                            super.showError(true, "erro", "Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
                             carregando.dismiss();
                             clearInterval(rqSi);
                         }
-                    }, 15000);
+                    }, this.holderService.rtimeout);
                 }
             }, error => {
                 super.showAlert("Erro", error.mError);
