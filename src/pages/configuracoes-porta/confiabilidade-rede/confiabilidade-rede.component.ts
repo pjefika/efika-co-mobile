@@ -49,12 +49,12 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                                         }
                                     }
                                 }, error => {
-                                    super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
+                                    super.showAlert("Ops, aconteceu algo.", error.mError);
                                     carregando.dismiss();
                                     clearInterval(rqSi);
                                 });
                         } else {
-                            super.showError(true, "erro", "Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
+                            super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
                             carregando.dismiss();
                             clearInterval(rqSi);
                         }

@@ -75,7 +75,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                         } else {
                                             carregando.dismiss();
                                             clearInterval(rqSi);
-                                            super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+                                            super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
                                             this.usuario.matricula = "";
                                             this.usuario.senha = "";
                                         }
@@ -83,16 +83,16 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                 }, error => {
                                     carregando.dismiss();
                                     clearInterval(rqSi);
-                                    super.showError(true, "erro", "Erro ao realizar login", error.mError);
+                                    super.showAlert("Erro ao realizar login", error.mError);
                                 });
                         } else {
                             carregando.dismiss();
                             clearInterval(rqSi);
-                            super.showError(true, "erro", "Erro ao realizar login", "Tempo de busca excedido por favor tente novamente.");
+                            super.showAlert("Erro ao realizar login", "Tempo de busca excedido por favor tente novamente.");
                         }
                     }, this.holderService.rtimeout);
                 } else {
-                    super.showError(true, "erro", "Erro ao realizar login", response.exceptionMessage);
+                    super.showAlert("Erro ao realizar login", response.exceptionMessage);
                     carregando.dismiss();
                 }
             }, error => {

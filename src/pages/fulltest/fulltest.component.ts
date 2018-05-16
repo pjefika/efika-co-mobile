@@ -66,18 +66,18 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                         }
                                     }
                                 }, error => {
-                                    super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
+                                    super.showAlert("Ops, aconteceu algo.", error.mError);
                                     carregando.dismiss();
                                     clearInterval(rqSi);
                                 });
                         } else {
-                            super.showError(true, "erro", "Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
+                            super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
                             carregando.dismiss();
                             clearInterval(rqSi);
                         }
                     }, this.holderService.rtimeout);
                 } else {
-                    super.showError(true, "erro", "Erro ao realizar busca de cadastro", response.exceptionMessage);
+                    super.showAlert("Erro ao realizar busca de cadastro.", response.exceptionMessage);
                 }
             }, error => {
                 super.showAlert("Ops, ocorreu algo.", error.mError);

@@ -72,7 +72,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                 } else {
                                                     carregando.dismiss();
                                                     clearInterval(rqSi);
-                                                    super.showError(true, "erro", "Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases.");
+                                                    super.showAlert("Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases.");
                                                 }
                                             } else {
                                                 carregando.dismiss();
@@ -82,19 +82,19 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                             }
                                         }
                                     }, error => {
-                                        super.showError(true, "erro", "Erro ao realizar busca de cadastro", error.mError);
+                                        super.showAlert("Erro ao realizar busca de cadastro", error.mError);
                                         carregando.dismiss();
                                         clearInterval(rqSi);
                                     });
                             } else {
-                                super.showError(true, "erro", "Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
+                                super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
                                 carregando.dismiss();
                                 clearInterval(rqSi);
                                 this.jaBuscou = true;
                             }
                         }, this.holderService.rtimeout);
                     } else {
-                        super.showError(true, "erro", "Erro ao realizar busca de cadastro", response.exceptionMessage);
+                        super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage);
                     }
                 }, error => {
                     super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
