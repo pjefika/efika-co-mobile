@@ -61,13 +61,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                 if (super.validCustomer(resposta.output)) {
                                                     this.holderService.cadastro = resposta.output.customer;
                                                     this.holderService.tabCadastroAtivo = true;
-                                                    if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
-                                                        || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
-                                                        || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
-                                                        || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
-                                                        || this.holderService.cadastro.rede.modeloDslam === "CCPE") {
-                                                        super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest.");
-                                                    }
+                                                    this.validDSLAM();
                                                     setTimeout(() => {
                                                         this.navCtrl.parent.select(1);
                                                     }, 1);
@@ -158,6 +152,19 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
         }
         return valid;
+    }
+
+    private validDSLAM() {
+        if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
+            || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
+            || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
+            || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
+            || this.holderService.cadastro.rede.modeloDslam === "CCPE"
+            || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
+            || this.holderService.cadastro.rede.modeloDslam === "NVLT"
+            || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
+            super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest.");
+        }
     }
 
 }

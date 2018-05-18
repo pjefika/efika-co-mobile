@@ -98,4 +98,17 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         }, 300);
     }
 
+    public validDSLAM() {
+        if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
+            || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
+            || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
+            || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
+            || this.holderService.cadastro.rede.modeloDslam === "CCPE"
+            || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
+            || this.holderService.cadastro.rede.modeloDslam === "NVLT"
+            || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
+            super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest.");
+        }
+    }
+
 }
