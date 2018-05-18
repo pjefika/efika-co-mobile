@@ -49,6 +49,7 @@ import { OntsLivrsComponent } from '../pages/configuracoes-porta/associacaoont/o
 import { FabActionComponent } from '../pages/fab-component/fab-actions.component';
 import { UrlService } from '../providers/new_url-service/url.service';
 import { LinkService } from '../providers/new_url-service/link.service';
+import { VersionComponent } from '../util/version/version.component';
 
 @NgModule({
 	declarations: [
@@ -90,7 +91,8 @@ import { LinkService } from '../providers/new_url-service/link.service';
 		CadastroSearchComponent,
 		InfoMuralComponent,
 		OntsLivrsComponent,
-		FabActionComponent
+		FabActionComponent,
+		VersionComponent
 	],
 	imports: [
 		BrowserModule,
@@ -136,7 +138,8 @@ import { LinkService } from '../providers/new_url-service/link.service';
 		InfoRadiusComponent,
 		CadastroSearchComponent,
 		InfoMuralComponent,
-		OntsLivrsComponent
+		OntsLivrsComponent,
+		VersionComponent
 	],
 	providers: [
 		StatusBar,

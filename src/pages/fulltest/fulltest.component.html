@@ -2,7 +2,11 @@
     <ion-list>
         <ion-item>
             <ion-avatar item-start>
-                <button ion-button (click)="fulltest();" color="secondary">
+                <button ion-button (click)="fulltest();" color="secondary" [disabled]="holderService.cadastro.rede.modeloDslam === 'LIADSLPT48'
+                                                                                        || holderService.cadastro.rede.modeloDslam === 'VDSL24'
+                                                                                        || holderService.cadastro.rede.modeloDslam === 'VDPE_SIP'
+                                                                                        || holderService.cadastro.rede.modeloDslam === 'CCPE_SIP'
+                                                                                        || holderService.cadastro.rede.modeloDslam === 'CCPE'">
                     <ion-icon name="settings"></ion-icon>
                 </button>
             </ion-avatar>

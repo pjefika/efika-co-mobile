@@ -61,6 +61,13 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                 if (super.validCustomer(resposta.output)) {
                                                     this.holderService.cadastro = resposta.output.customer;
                                                     this.holderService.tabCadastroAtivo = true;
+                                                    if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
+                                                        || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
+                                                        || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
+                                                        || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
+                                                        || this.holderService.cadastro.rede.modeloDslam === "CCPE") {
+                                                        super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest.");
+                                                    }
                                                     setTimeout(() => {
                                                         this.navCtrl.parent.select(1);
                                                     }, 1);
