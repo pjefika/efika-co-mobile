@@ -48,11 +48,9 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
     public getCadastro(mensagem: string) {
         if (this.validInstancia()) {
             this.loading(true, mensagem);
-
             this.cadastroService
                 .getCadastro(this.holderService.instancia)
                 .then(response => {
-
                     if (response) {
                         let rqSi = setInterval(() => {
                             if (this.count < this.holderService.rcount) {
@@ -68,8 +66,8 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                                     this.validDSLAM();
                                                     this.ativo = false;
                                                     this.msgEventoMassivo();
-                                                    // this.jaBuscou = true;
                                                     this.loading(false);
+                                                    super.showAlert("Sucesso.", "Reconsulta realizada com sucesso.");
                                                     clearInterval(rqSi);
                                                 } else {
                                                     this.loading(false);
@@ -79,7 +77,6 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                             } else {
                                                 this.loading(false);
                                                 this.msgEventoMassivo();
-                                                // this.jaBuscou = true;
                                                 clearInterval(rqSi);
                                             }
                                         }
@@ -92,16 +89,13 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                 this.loading(false);
                                 super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
                                 clearInterval(rqSi);
-                                // this.jaBuscou = true;
                             }
                         }, this.holderService.rtimeout);
                     } else {
-                        // carregando.dismiss();
                         this.loading(false);
                         super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage);
                     }                   
                 }, error => {
-                    // carregando.dismiss();
                     this.loading(false);
                     super.showAlert("Ops, aconteceu algo.", error.mError);
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");

@@ -95,12 +95,10 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                             }
                         }, this.holderService.rtimeout);
                     } else {
-                        // carregando.dismiss();
                         this.loading(false);
                         super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage);
                     }
                 }, error => {
-                    // carregando.dismiss();
                     this.loading(false);
                     super.showAlert("Ops, aconteceu algo.", error.mError);
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
