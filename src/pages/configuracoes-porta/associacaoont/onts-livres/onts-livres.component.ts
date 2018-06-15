@@ -18,6 +18,8 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
 
     private count: number = 0;
 
+    private carregando;
+
     constructor(private ontsLivresService: OntsLivresService,
         public holderService: HolderService,
         public alertCtrl: AlertController,
@@ -32,8 +34,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
 
     private getOntsDisp() {
         this.count = 0;
-        let carregando = this.loadingCtrl.create({ content: "Aguarde, carregando ONT's..." });
-        carregando.present();
+        this.loading(true, "Aguarde, carregando ONT's...");
         this.ontsLivresService
             .getOntsDisp(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
@@ -53,35 +54,36 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                                 super.showAlert("ONT's", "Não foram encontradas ONT's disponiveis");
                                                 this.navCtrl.pop();
                                             }
-                                            carregando.dismiss();
+                                            this.loading(false);
                                             clearInterval(rqSi);
                                         } else {
-                                            carregando.dismiss();
+                                            this.loading(false);
                                             clearInterval(rqSi);
+                                            super.showAlert("ONT's", "Sem resposta no Output.");
                                         }
                                     }
                                 }, error => {
                                     super.showAlert("Ops, aconteceu algo.", error.mError);
-                                    carregando.dismiss();
+                                    this.loading(false);
                                     clearInterval(rqSi);
                                 });
                         } else {
                             super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
-                            carregando.dismiss();
+                            this.loading(false);
                             clearInterval(rqSi);
                         }
                     }, this.holderService.rtimeout);
                 }
             }, error => {
                 // error.mError
+                this.loading(false);
                 super.showAlert("Ops, aconteceu algo.", error.mError);
             });
     }
 
     public setOnt(ont: Ont) {
         this.count = 0;
-        let carregando = this.loadingCtrl.create({ content: "Aguarde, associando ONT..." });
-        carregando.present();
+        this.loading(true, "Aguarde, associando ONT...");
         this.ontsLivresService
             .setOntsDisp(ont.serial, this.holderService.cadastro)
             .then(response => {
@@ -110,34 +112,32 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                             }
                                             this.holderService.certification.fulltest.valids[idx] = setValidOnt;
                                             super.showAlert("ONT", "ONT Associada com sucesso, realize o Fulltest novamente.");
-                                            // carregando.dismiss();
                                             this.navCtrl.pop();
+                                            this.loading(false);
                                             clearInterval(rqSi);
                                         } else {
-                                            // carregando.dismiss();
+                                            this.loading(false);
                                             this.navCtrl.pop();
                                             clearInterval(rqSi);
                                         }
                                     }
                                 }, error => {
                                     super.showAlert("Ops, aconteceu algo.", error.mError);
-                                    // carregando.dismiss();
+                                    this.loading(false);
                                     this.navCtrl.pop();
                                     clearInterval(rqSi);
                                 });
                         } else {
+                            this.loading(false);
                             super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
-                            // carregando.dismiss();
                             this.navCtrl.pop();
                             clearInterval(rqSi);
                         }
                     }, 15000);
                 }
             }, error => {
+                this.loading(false);
                 super.showAlert("Erro", error.mError);
-            })
-            .then(() => {
-                carregando.dismiss();
             });
     }
 
@@ -158,5 +158,14 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
         return valid;
     }
 
+
+    private loading(active: boolean, msg?: string, ) {
+        if (active) {
+            this.carregando = this.loadingCtrl.create({ content: msg });
+            this.carregando.present();
+        } else {
+            this.carregando.dismiss();
+        }
+    }
 
 }

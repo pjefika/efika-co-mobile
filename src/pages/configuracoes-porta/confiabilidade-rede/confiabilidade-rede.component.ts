@@ -14,6 +14,8 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
 
     private count: number = 0;
 
+    private carregando;
+
     constructor(private confiabilidadeRedeService: ConfiabilidadeRedeService,
         public holderService: HolderService,
         public alertCtrl: AlertController,
@@ -24,8 +26,7 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
     public ngOnInit() { }
 
     public getConfRede() {
-        let carregando = this.loadingCtrl.create({ content: "Aguarde..." });
-        carregando.present();
+        this.loading(true, "Aguarde, carregando informações...");
         this.confiabilidadeRedeService
             .getConfRede(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
@@ -41,30 +42,37 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                                             this.valid = resposta.output.tabRede;
                                             super.showAlert("Sucesso", "Tabela de confiabilidade de rede atualizada com sucesso.");
                                             this.ativo = false;
-                                            // carregando.dismiss();
+                                            this.loading(false);
                                             clearInterval(rqSi);
                                         } else {
-                                            // carregando.dismiss();
+                                            this.loading(false);
                                             clearInterval(rqSi);
                                         }
                                     }
                                 }, error => {
                                     super.showAlert("Ops, aconteceu algo.", error.mError);
-                                    // carregando.dismiss();
+                                    this.loading(false);
                                     clearInterval(rqSi);
                                 });
                         } else {
+                            this.loading(false);
                             super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
-                            // carregando.dismiss();
                             clearInterval(rqSi);
                         }
                     }, this.holderService.rtimeout);
                 }
             }, error => {
+                this.loading(false);
                 super.showAlert("Erro", error.mError);
             })
-            .then(() => {
-                carregando.dismiss();
-            });
+    }
+
+    private loading(active: boolean, msg?: string, ) {
+        if (active) {
+            this.carregando = this.loadingCtrl.create({ content: msg });
+            this.carregando.present();
+        } else {
+            this.carregando.dismiss();
+        }
     }
 }

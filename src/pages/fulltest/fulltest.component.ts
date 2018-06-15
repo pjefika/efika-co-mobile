@@ -16,6 +16,8 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
 
     private count: number = 0;
 
+    private carregando;
+
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
         private fulltestService: FulltestService,
@@ -38,8 +40,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
 
     public fazFulltest() {
         this.count = 0;
-        let carregando = this.loadingCtrl.create({ content: "Realizando Fulltest" });
-        carregando.present();
+        this.loading(true, "Realizando Fulltest");
         this.fulltestService
             .doFulltest(this.holderService.cadastro)
             .then(response => {
@@ -58,33 +59,32 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                                 this.navCtrl.parent.select(2);
                                             }, 1);
                                             this.ativo = false;
-                                            // carregando.dismiss();
+                                            this.loading(false);
                                             clearInterval(rqSi);
                                         } else {
-                                            // carregando.dismiss();
+                                            this.loading(false);
                                             clearInterval(rqSi);
                                         }
                                     }
                                 }, error => {
                                     super.showAlert("Ops, aconteceu algo.", error.mError);
-                                    // carregando.dismiss();
+                                    this.loading(false);
                                     clearInterval(rqSi);
-                                });
+                                })
                         } else {
+                            this.loading(false);
                             super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
-                            // carregando.dismiss();
                             clearInterval(rqSi);
                         }
                     }, this.holderService.rtimeout);
                 } else {
+                    this.loading(false);
                     super.showAlert("Erro ao realizar fulltest.", response.exceptionMessage);
                 }
             }, error => {
+                this.loading(false);
                 super.showAlert("Ops, ocorreu algo.", error.mError);
                 console.log("Deu erro!!! AMD p(o.o)q");
-            })
-            .then(() => {
-                carregando.dismiss();
             });
     }
 
@@ -111,6 +111,15 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             || this.holderService.cadastro.rede.modeloDslam === "NVLT"
             || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
             super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
+        }
+    }
+
+    private loading(active: boolean, msg?: string, ) {
+        if (active) {
+            this.carregando = this.loadingCtrl.create({ content: msg });
+            this.carregando.present();
+        } else {
+            this.carregando.dismiss();
         }
     }
 

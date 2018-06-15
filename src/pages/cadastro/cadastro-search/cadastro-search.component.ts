@@ -16,6 +16,8 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     private count: number = 0;
 
+    private carregando;
+
     constructor(public holderService: HolderService,
         private cadastroService: CadastroService,
         public alertCtrl: AlertController,
@@ -44,8 +46,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         this.count = 0;
         super.showError(false);
         if (this.validInstancia()) {
-            let carregando = this.loadingCtrl.create({ content: mensagem });
-            carregando.present();
+            this.loading(true, mensagem);
             this.cadastroService
                 .getCadastro(this.holderService.instancia)
                 .then(response => {
@@ -66,43 +67,44 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                         this.navCtrl.parent.select(1);
                                                     }, 1);
                                                     this.ativo = false;
-                                                    // carregando.dismiss();
                                                     this.msgEventoMassivo();
                                                     this.jaBuscou = true;
+                                                    this.loading(false);
                                                     clearInterval(rqSi);
                                                 } else {
-                                                    // carregando.dismiss();
+                                                    this.loading(false);
                                                     clearInterval(rqSi);
                                                     super.showAlert("Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases.");
                                                 }
                                             } else {
-                                                // carregando.dismiss();
+                                                this.loading(false);
                                                 this.msgEventoMassivo();
                                                 this.jaBuscou = true;
                                                 clearInterval(rqSi);
                                             }
                                         }
                                     }, error => {
+                                        this.loading(false);
                                         super.showAlert("Erro ao realizar busca de cadastro", error.mError);
-                                        // carregando.dismiss();
                                         clearInterval(rqSi);
                                     });
                             } else {
+                                this.loading(false);
                                 super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
-                                // carregando.dismiss();
                                 clearInterval(rqSi);
                                 this.jaBuscou = true;
                             }
                         }, this.holderService.rtimeout);
                     } else {
+                        // carregando.dismiss();
+                        this.loading(false);
                         super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage);
                     }
                 }, error => {
+                    // carregando.dismiss();
+                    this.loading(false);
                     super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
-                })
-                .then(() => {
-                    carregando.dismiss();
                 });
         }
     }
@@ -167,6 +169,15 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             || this.holderService.cadastro.rede.modeloDslam === "NVLT"
             || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
             super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
+        }
+    }
+
+    private loading(active: boolean, msg?: string, ) {
+        if (active) {
+            this.carregando = this.loadingCtrl.create({ content: msg });
+            this.carregando.present();
+        } else {
+            this.carregando.dismiss();
         }
     }
 

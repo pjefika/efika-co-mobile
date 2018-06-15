@@ -22,6 +22,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     public count: number = 0;
 
+    private carregando;
+
     constructor(private loginService: LoginService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -51,8 +53,11 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     public entrar() {
         this.count = 0;
         this.showHidePassword = false;
-        let carregando = this.loadingCtrl.create({ content: "Consultando Login " });
-        carregando.present();
+        // let carregando = this.loadingCtrl.create({ content: "Consultando Login " });
+        // carregando.present();
+
+        this.loading(true, "Consultando Login ");
+
         this.loginService
             .entrar(this.usuario)
             .then(response => {
@@ -66,14 +71,14 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                     if (resposta.state === "EXECUTED") {
                                         let verify: boolean = resposta.output.match;
                                         if (verify) {
-                                            // carregando.dismiss();
+                                            this.loading(false);
                                             clearInterval(rqSi);
                                             this.holderService.estalogado = verify;
                                             this.holderService.showhidetab = verify;
                                             this.usuario.matricula = this.usuario.matricula.toUpperCase();
                                             sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
                                         } else {
-                                            // carregando.dismiss();
+                                            this.loading(false);
                                             clearInterval(rqSi);
                                             super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
                                             this.usuario.matricula = "";
@@ -81,29 +86,26 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                         }
                                     }
                                 }, error => {
-                                    // carregando.dismiss();
+                                    this.loading(false);
                                     clearInterval(rqSi);
                                     super.showAlert("Erro ao realizar login", error.mError);
                                 });
                         } else {
-                            // carregando.dismiss();
+                            this.loading(false);
                             clearInterval(rqSi);
                             super.showAlert("Erro ao realizar login", "Tempo de busca excedido por favor tente novamente.");
                         }
                     }, this.holderService.rtimeout);
                 } else {
+                    this.loading(false);
                     super.showAlert("Erro ao realizar login", response.exceptionMessage);
-                    // carregando.dismiss();
                 }
             }, error => {
-                // carregando.dismiss();
+                this.loading(false);
                 super.showError(true, "erro", "Erro ao realizar login", error.mError);
                 this.usuario.matricula = "";
                 this.usuario.senha = "";
-            })
-            .then(() => {
-                carregando.dismiss();
-            })
+            });
     }
 
     public entrarMock() {
@@ -118,6 +120,15 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
             this.usuario.matricula = "";
             this.usuario.senha = "";
+        }
+    }
+
+    private loading(active: boolean, msg?: string, ) {
+        if (active) {
+            this.carregando = this.loadingCtrl.create({ content: msg });
+            this.carregando.present();
+        } else {
+            this.carregando.dismiss();
         }
     }
 
