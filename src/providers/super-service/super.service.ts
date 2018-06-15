@@ -19,11 +19,16 @@ export class SuperService {
                 tError: "Timeout",
                 mError: "Tempo de busca excedido, por favor realize a busca novamente, caso o problema persista informe ao administrador do sistema."
             }
+        } else if (!error.ok) {
+            er = {
+                tError: "isOffException",
+                mError: "Sem conexão com a internet, por favor verifique sua rede e tente novamente."
+            }
         } else {
             let erJson: any;
             erJson = error.json();
             er = {
-                tError: "",
+                tError: "SystemException",
                 mError: erJson.message
             }
         }

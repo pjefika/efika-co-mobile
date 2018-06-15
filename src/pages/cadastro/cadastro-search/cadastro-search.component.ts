@@ -44,7 +44,6 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     public buscaCadastro(mensagem: string) {
         this.count = 0;
-        super.showError(false);
         if (this.validInstancia()) {
             this.loading(true, mensagem);
             this.cadastroService
@@ -103,14 +102,14 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                 }, error => {
                     // carregando.dismiss();
                     this.loading(false);
-                    super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
+                    super.showAlert("Ops, aconteceu algo.", error.mError);
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
                 });
         }
     }
 
     public getCadastroMock(mensagem: string) {
-        super.showError(false);
+        // super.showError(false);
         // if (this.validInstancia()) {
         let carregando = this.loadingCtrl.create({ content: mensagem });
         carregando.present();

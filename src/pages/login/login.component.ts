@@ -102,7 +102,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                 }
             }, error => {
                 this.loading(false);
-                super.showError(true, "erro", "Erro ao realizar login", error.mError);
+                super.showAlert("Erro ao realizar login", error.mError);
                 this.usuario.matricula = "";
                 this.usuario.senha = "";
             });
@@ -117,7 +117,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             this.holderService.estalogado = verify;
             this.holderService.showhidetab = verify;
         } else {
-            super.showError(true, "erro", "Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+            super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
             this.usuario.matricula = "";
             this.usuario.senha = "";
         }

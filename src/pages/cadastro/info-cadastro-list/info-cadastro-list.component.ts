@@ -23,6 +23,10 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
 
     @Input() public cadastro: Cadastro;
 
+    private count: number = 0;
+
+    private carregando;
+
     constructor(public holderService: HolderService,
         public navCtrl: NavController,
         private cadastroService: CadastroService,
@@ -34,32 +38,73 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
     public ngOnInit() { }
 
     public refreshCadastro() {
-        // --Mock
-        // this.getCadastroMock();
-        // --Prod
-        this.getCadastro();
+        if (this.holderService.isMock) {
+            this.getCadastroMock();
+        } else {
+            this.getCadastro("Reconsultando Cadastro");
+        }
     }
 
-    public getCadastro() {
-        if (this.holderService.instancia) {
-            let carregando = this.loadingCtrl.create({ content: "Reconsultando Cadastro" });
-            carregando.present();
+    public getCadastro(mensagem: string) {
+        if (this.validInstancia()) {
+            this.loading(true, mensagem);
+
             this.cadastroService
                 .getCadastro(this.holderService.instancia)
                 .then(response => {
-                    if (super.validState(response.output)) {
-                        this.holderService.cadastro = response.output.customer;
-                        this.holderService.tabCadastroAtivo = true;
-                        this.msgEventoMassivo();
-                        this.ativo = false;
-                    }
+
+                    if (response) {
+                        let rqSi = setInterval(() => {
+                            if (this.count < this.holderService.rcount) {
+                                this.count++;
+                                this.cadastroService
+                                    .gettask(response.id)
+                                    .then(resposta => {
+                                        if (resposta.state === "EXECUTED") {
+                                            if (super.validState(resposta.output)) {
+                                                if (super.validCustomer(resposta.output)) {
+                                                    this.holderService.cadastro = resposta.output.customer;
+                                                    this.holderService.tabCadastroAtivo = true;
+                                                    this.validDSLAM();
+                                                    this.ativo = false;
+                                                    this.msgEventoMassivo();
+                                                    // this.jaBuscou = true;
+                                                    this.loading(false);
+                                                    clearInterval(rqSi);
+                                                } else {
+                                                    this.loading(false);
+                                                    clearInterval(rqSi);
+                                                    super.showAlert("Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases.");
+                                                }
+                                            } else {
+                                                this.loading(false);
+                                                this.msgEventoMassivo();
+                                                // this.jaBuscou = true;
+                                                clearInterval(rqSi);
+                                            }
+                                        }
+                                    }, error => {
+                                        this.loading(false);
+                                        super.showAlert("Erro ao realizar busca de cadastro", error.mError);
+                                        clearInterval(rqSi);
+                                    });
+                            } else {
+                                this.loading(false);
+                                super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
+                                clearInterval(rqSi);
+                                // this.jaBuscou = true;
+                            }
+                        }, this.holderService.rtimeout);
+                    } else {
+                        // carregando.dismiss();
+                        this.loading(false);
+                        super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage);
+                    }                   
                 }, error => {
-                    super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
+                    // carregando.dismiss();
+                    this.loading(false);
+                    super.showAlert("Ops, aconteceu algo.", error.mError);
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
-                    this.holderService.tabCadastroAtivo = false;
-                })
-                .then(() => {
-                    carregando.dismiss();
                 });
         }
     }
@@ -74,6 +119,17 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
             this.msgEventoMassivo();
             carregando.dismiss();
         }, 300);
+    }
+
+    public validInstancia(): boolean {
+        let valid: boolean = false;
+        if (this.holderService.instancia && this.holderService.instancia.length === 10) {
+            this.holderService.instancia = this.holderService.instancia.trim();
+            valid = true;
+        } else {
+            super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
+        }
+        return valid;
     }
 
     public infoGerais() {
@@ -117,6 +173,28 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
             }
         }
         return false;
+    }
+
+    private validDSLAM() {
+        if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
+            || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
+            || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
+            || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
+            || this.holderService.cadastro.rede.modeloDslam === "CCPE"
+            || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
+            || this.holderService.cadastro.rede.modeloDslam === "NVLT"
+            || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
+            super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
+        }
+    }
+
+    private loading(active: boolean, msg?: string, ) {
+        if (active) {
+            this.carregando = this.loadingCtrl.create({ content: msg });
+            this.carregando.present();
+        } else {
+            this.carregando.dismiss();
+        }
     }
 
 }
