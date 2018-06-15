@@ -163,7 +163,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
             || this.holderService.cadastro.rede.modeloDslam === "NVLT"
             || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
-            super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest.");
+            super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
         }
     }
 
