@@ -41,27 +41,30 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                                             this.valid = resposta.output.tabRede;
                                             super.showAlert("Sucesso", "Tabela de confiabilidade de rede atualizada com sucesso.");
                                             this.ativo = false;
-                                            carregando.dismiss();
+                                            // carregando.dismiss();
                                             clearInterval(rqSi);
                                         } else {
-                                            carregando.dismiss();
+                                            // carregando.dismiss();
                                             clearInterval(rqSi);
                                         }
                                     }
                                 }, error => {
                                     super.showAlert("Ops, aconteceu algo.", error.mError);
-                                    carregando.dismiss();
+                                    // carregando.dismiss();
                                     clearInterval(rqSi);
                                 });
                         } else {
                             super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
-                            carregando.dismiss();
+                            // carregando.dismiss();
                             clearInterval(rqSi);
                         }
                     }, this.holderService.rtimeout);
                 }
             }, error => {
                 super.showAlert("Erro", error.mError);
+            })
+            .then(() => {
+                carregando.dismiss();
             });
     }
 }

@@ -66,17 +66,17 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                         this.navCtrl.parent.select(1);
                                                     }, 1);
                                                     this.ativo = false;
-                                                    carregando.dismiss();
+                                                    // carregando.dismiss();
                                                     this.msgEventoMassivo();
                                                     this.jaBuscou = true;
                                                     clearInterval(rqSi);
                                                 } else {
-                                                    carregando.dismiss();
+                                                    // carregando.dismiss();
                                                     clearInterval(rqSi);
                                                     super.showAlert("Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases.");
                                                 }
                                             } else {
-                                                carregando.dismiss();
+                                                // carregando.dismiss();
                                                 this.msgEventoMassivo();
                                                 this.jaBuscou = true;
                                                 clearInterval(rqSi);
@@ -84,12 +84,12 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                         }
                                     }, error => {
                                         super.showAlert("Erro ao realizar busca de cadastro", error.mError);
-                                        carregando.dismiss();
+                                        // carregando.dismiss();
                                         clearInterval(rqSi);
                                     });
                             } else {
                                 super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
-                                carregando.dismiss();
+                                // carregando.dismiss();
                                 clearInterval(rqSi);
                                 this.jaBuscou = true;
                             }
@@ -100,6 +100,9 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                 }, error => {
                     super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
+                })
+                .then(() => {
+                    carregando.dismiss();
                 });
         }
     }

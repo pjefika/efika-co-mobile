@@ -58,30 +58,33 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                                 this.navCtrl.parent.select(2);
                                             }, 1);
                                             this.ativo = false;
-                                            carregando.dismiss();
+                                            // carregando.dismiss();
                                             clearInterval(rqSi);
                                         } else {
-                                            carregando.dismiss();
+                                            // carregando.dismiss();
                                             clearInterval(rqSi);
                                         }
                                     }
                                 }, error => {
                                     super.showAlert("Ops, aconteceu algo.", error.mError);
-                                    carregando.dismiss();
+                                    // carregando.dismiss();
                                     clearInterval(rqSi);
                                 });
                         } else {
                             super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
-                            carregando.dismiss();
+                            // carregando.dismiss();
                             clearInterval(rqSi);
                         }
                     }, this.holderService.rtimeout);
                 } else {
-                    super.showAlert("Erro ao realizar busca de cadastro.", response.exceptionMessage);
+                    super.showAlert("Erro ao realizar fulltest.", response.exceptionMessage);
                 }
             }, error => {
                 super.showAlert("Ops, ocorreu algo.", error.mError);
                 console.log("Deu erro!!! AMD p(o.o)q");
+            })
+            .then(() => {
+                carregando.dismiss();
             });
     }
 

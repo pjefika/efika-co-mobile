@@ -110,24 +110,24 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                             }
                                             this.holderService.certification.fulltest.valids[idx] = setValidOnt;
                                             super.showAlert("ONT", "ONT Associada com sucesso, realize o Fulltest novamente.");
-                                            carregando.dismiss();
+                                            // carregando.dismiss();
                                             this.navCtrl.pop();
                                             clearInterval(rqSi);
                                         } else {
-                                            carregando.dismiss();
+                                            // carregando.dismiss();
                                             this.navCtrl.pop();
                                             clearInterval(rqSi);
                                         }
                                     }
                                 }, error => {
                                     super.showAlert("Ops, aconteceu algo.", error.mError);
-                                    carregando.dismiss();
+                                    // carregando.dismiss();
                                     this.navCtrl.pop();
                                     clearInterval(rqSi);
                                 });
                         } else {
                             super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
-                            carregando.dismiss();
+                            // carregando.dismiss();
                             this.navCtrl.pop();
                             clearInterval(rqSi);
                         }
@@ -135,6 +135,9 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                 }
             }, error => {
                 super.showAlert("Erro", error.mError);
+            })
+            .then(() => {
+                carregando.dismiss();
             });
     }
 

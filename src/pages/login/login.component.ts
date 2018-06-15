@@ -66,14 +66,14 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                     if (resposta.state === "EXECUTED") {
                                         let verify: boolean = resposta.output.match;
                                         if (verify) {
-                                            carregando.dismiss();
+                                            // carregando.dismiss();
                                             clearInterval(rqSi);
                                             this.holderService.estalogado = verify;
                                             this.holderService.showhidetab = verify;
                                             this.usuario.matricula = this.usuario.matricula.toUpperCase();
                                             sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
                                         } else {
-                                            carregando.dismiss();
+                                            // carregando.dismiss();
                                             clearInterval(rqSi);
                                             super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
                                             this.usuario.matricula = "";
@@ -81,26 +81,29 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                         }
                                     }
                                 }, error => {
-                                    carregando.dismiss();
+                                    // carregando.dismiss();
                                     clearInterval(rqSi);
                                     super.showAlert("Erro ao realizar login", error.mError);
                                 });
                         } else {
-                            carregando.dismiss();
+                            // carregando.dismiss();
                             clearInterval(rqSi);
                             super.showAlert("Erro ao realizar login", "Tempo de busca excedido por favor tente novamente.");
                         }
                     }, this.holderService.rtimeout);
                 } else {
                     super.showAlert("Erro ao realizar login", response.exceptionMessage);
-                    carregando.dismiss();
+                    // carregando.dismiss();
                 }
             }, error => {
-                carregando.dismiss();
+                // carregando.dismiss();
                 super.showError(true, "erro", "Erro ao realizar login", error.mError);
                 this.usuario.matricula = "";
                 this.usuario.senha = "";
-            });
+            })
+            .then(() => {
+                carregando.dismiss();
+            })
     }
 
     public entrarMock() {
