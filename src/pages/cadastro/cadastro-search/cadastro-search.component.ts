@@ -61,14 +61,15 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                 if (super.validCustomer(resposta.output)) {
                                                     this.holderService.cadastro = resposta.output.customer;
                                                     this.holderService.tabCadastroAtivo = true;
-                                                    this.validDSLAM();
+                                                    
                                                     setTimeout(() => {
                                                         this.navCtrl.parent.select(1);
                                                     }, 1);
-                                                    this.ativo = false;
+                                                    this.validDSLAM();
                                                     this.msgEventoMassivo();
-                                                    this.jaBuscou = true;
                                                     this.loading(false);
+                                                    this.ativo = false;
+                                                    this.jaBuscou = true;
                                                     clearInterval(rqSi);
                                                 } else {
                                                     this.loading(false);
