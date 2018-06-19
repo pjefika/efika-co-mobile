@@ -88,7 +88,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                 }, error => {
                                     this.loading(false);
                                     clearInterval(rqSi);
-                                    super.showAlert("Erro ao realizar login", error.mError);
+                                    super.showAlert(error.tError, error.mError);
                                 });
                         } else {
                             this.loading(false);
@@ -102,7 +102,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                 }
             }, error => {
                 this.loading(false);
-                super.showAlert("Erro ao realizar login", error.mError);
+                super.showAlert(error.tError, error.mError);
                 this.usuario.matricula = "";
                 this.usuario.senha = "";
             });

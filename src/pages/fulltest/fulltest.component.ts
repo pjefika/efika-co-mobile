@@ -67,7 +67,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                         }
                                     }
                                 }, error => {
-                                    super.showAlert("Ops, aconteceu algo.", error.mError);
+                                    super.showAlert(error.tError, error.mError);
                                     this.loading(false);
                                     clearInterval(rqSi);
                                 })
@@ -83,7 +83,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                 }
             }, error => {
                 this.loading(false);
-                super.showAlert("Ops, ocorreu algo.", error.mError);
+                super.showAlert(error.tError, error.mError);
                 console.log("Deu erro!!! AMD p(o.o)q");
             });
     }

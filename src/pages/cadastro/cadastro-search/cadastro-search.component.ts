@@ -61,7 +61,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                 if (super.validCustomer(resposta.output)) {
                                                     this.holderService.cadastro = resposta.output.customer;
                                                     this.holderService.tabCadastroAtivo = true;
-                                                    
+
                                                     setTimeout(() => {
                                                         this.navCtrl.parent.select(1);
                                                     }, 1);
@@ -85,7 +85,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                         }
                                     }, error => {
                                         this.loading(false);
-                                        super.showAlert("Erro ao realizar busca de cadastro", error.mError);
+                                        super.showAlert(error.tError, error.mError);
                                         clearInterval(rqSi);
                                     });
                             } else {
@@ -101,7 +101,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                     }
                 }, error => {
                     this.loading(false);
-                    super.showAlert("Ops, aconteceu algo.", error.mError);
+                    super.showAlert(error.tError, error.mError);
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
                 });
         }

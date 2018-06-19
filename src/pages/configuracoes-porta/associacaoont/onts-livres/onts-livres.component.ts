@@ -63,7 +63,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                         }
                                     }
                                 }, error => {
-                                    super.showAlert("Ops, aconteceu algo.", error.mError);
+                                    super.showAlert(error.tError, error.mError);
                                     this.loading(false);
                                     clearInterval(rqSi);
                                 });
@@ -77,7 +77,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
             }, error => {
                 // error.mError
                 this.loading(false);
-                super.showAlert("Ops, aconteceu algo.", error.mError);
+                super.showAlert(error.tError, error.mError);
             });
     }
 
@@ -122,7 +122,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                         }
                                     }
                                 }, error => {
-                                    super.showAlert("Ops, aconteceu algo.", error.mError);
+                                    super.showAlert(error.tError, error.mError);
                                     this.loading(false);
                                     this.navCtrl.pop();
                                     clearInterval(rqSi);
@@ -137,7 +137,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                 }
             }, error => {
                 this.loading(false);
-                super.showAlert("Erro", error.mError);
+                super.showAlert(error.tError, error.mError);
             });
     }
 

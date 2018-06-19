@@ -50,7 +50,7 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                                         }
                                     }
                                 }, error => {
-                                    super.showAlert("Ops, aconteceu algo.", error.mError);
+                                    super.showAlert(error.tError, error.mError);
                                     this.loading(false);
                                     clearInterval(rqSi);
                                 });
@@ -63,7 +63,7 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                 }
             }, error => {
                 this.loading(false);
-                super.showAlert("Erro", error.mError);
+                super.showAlert(error.tError, error.mError);
             })
     }
 
