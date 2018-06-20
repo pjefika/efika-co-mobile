@@ -18,7 +18,7 @@ export class SuperService {
         if (error.message === "Timeout has occurred") {
             er = {
                 tError: "Tempo Excedido.",
-                mError: "Tempo de busca excedido, por favor realize a busca novamente, caso o problema persista informe ao administrador do sistema. " + this.mountmsgexception()
+                mError: "Tempo de busca excedido, por favor realize a busca novamente. " + this.mountmsgexception()
             }
         } else if (!error.ok) {
             er = {
