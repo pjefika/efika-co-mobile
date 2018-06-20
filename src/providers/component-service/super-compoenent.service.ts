@@ -3,6 +3,8 @@ import { AlertController } from 'ionic-angular';
 import { Output } from '../../view-model/task-process/output-task';
 import { ClipBoardService } from '../clipboard/clipboard.service';
 
+declare var require: any
+
 @Injectable()
 export class SuperComponentService extends ClipBoardService {
 
@@ -45,8 +47,7 @@ export class SuperComponentService extends ClipBoardService {
                 break;
             case "EXCEPTION":
                 v = false;
-                // this.showError(true, "erro", "Ops, aconteceu algo.", output.exceptionMessage);
-                this.showAlert("Ops, aconteceu algo", output.exceptionMessage);
+                this.showAlert("Ops, aconteceu algo", output.exceptionMessage + this.mountmsgexception());
                 console.log("Deu erro -- EXCEPTION IN: " + output.type + " -- !!! AMD p(o.o)q");
                 break;
         }
@@ -65,12 +66,17 @@ export class SuperComponentService extends ClipBoardService {
         let datenow: Date = new Date();
         let msgconcat: string;
         if (instancia) {
-            msgconcat = datenow.toLocaleDateString() + " Instância: " + instancia;
+            msgconcat = " " + datenow.toLocaleDateString() + " Instância: " + instancia + " versão: " + this.getVersion();
         } else {
-            msgconcat = datenow.toLocaleDateString();
+            msgconcat = " " + datenow.toLocaleDateString() + " versão: " + this.getVersion();
         }
         console.log(msgconcat);
         return msgconcat;
+    }
+
+    public getVersion() {
+        const { version: appVersion } = require("../../../package.json"); // Versão da aplicação na package.json
+        return appVersion;
     }
 
 }

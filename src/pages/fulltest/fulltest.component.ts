@@ -79,7 +79,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                     }, this.holderService.rtimeout);
                 } else {
                     this.loading(false);
-                    super.showAlert("Erro ao realizar fulltest.", response.exceptionMessage);
+                    super.showAlert("Erro ao realizar fulltest.", response.exceptionMessage + super.mountmsgexception(this.holderService.instancia));
                 }
             }, error => {
                 this.loading(false);

@@ -59,7 +59,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                         } else {
                                             this.loading(false);
                                             clearInterval(rqSi);
-                                            super.showAlert("ONT's", "Sem resposta no Output.");
+                                            super.showAlert("ONT's", "Sem resposta no Output." + super.mountmsgexception(this.holderService.instancia));
                                         }
                                     }
                                 }, error => {

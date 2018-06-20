@@ -99,7 +99,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                         } else {
                                             this.loading(false);
                                             clearInterval(rqSi);
-                                            super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+                                            super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente." + " versão: " + super.getVersion());
                                             this.usuario.matricula = "";
                                             this.usuario.senha = "";
                                         }
@@ -117,7 +117,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                     }, this.holderService.rtimeout);
                 } else {
                     this.loading(false);
-                    super.showAlert("Erro ao realizar login", response.exceptionMessage);
+                    super.showAlert("Erro ao realizar login", response.exceptionMessage + " versão: " + super.getVersion());
                 }
             }, error => {
                 this.loading(false);

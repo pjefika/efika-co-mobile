@@ -73,7 +73,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                 } else {
                                                     this.loading(false);
                                                     clearInterval(rqSi);
-                                                    super.showAlert("Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases.");
+                                                    super.showAlert("Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases. " + super.mountmsgexception(this.holderService.instancia));
                                                 }
                                             } else {
                                                 this.loading(false);
@@ -89,14 +89,14 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                     });
                             } else {
                                 this.loading(false);
-                                super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception());
+                                super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
                                 clearInterval(rqSi);
                                 this.jaBuscou = true;
                             }
                         }, this.holderService.rtimeout);
                     } else {
                         this.loading(false);
-                        super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage);
+                        super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage + super.mountmsgexception(this.holderService.instancia));
                     }
                 }, error => {
                     this.loading(false);
