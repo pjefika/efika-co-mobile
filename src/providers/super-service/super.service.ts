@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { InfoRequest } from '../../view-model/url-service/info-request';
+import { HolderService } from '../holder/holder.service';
 
 @Injectable()
 export class SuperService {
 
     public infoResquest: InfoRequest;
 
-    constructor() {
-    }
+    constructor(public holderService: HolderService) { }
+
     public handleError(error: any): Promise<any> {
         return Promise.reject(error);
     }
@@ -17,7 +18,7 @@ export class SuperService {
         if (error.message === "Timeout has occurred") {
             er = {
                 tError: "Tempo Excedido.",
-                mError: "Tempo de busca excedido, por favor realize a busca novamente, caso o problema persista informe ao administrador do sistema."
+                mError: "Tempo de busca excedido, por favor realize a busca novamente, caso o problema persista informe ao administrador do sistema. " + this.mountmsgexception()
             }
         } else if (!error.ok) {
             er = {
@@ -33,6 +34,18 @@ export class SuperService {
             }
         }
         return Promise.reject(er);
+    }
+
+    private mountmsgexception(): string {
+        let datenow: Date = new Date();
+        let msgconcat: string;
+        if (this.holderService.instancia) {
+            msgconcat = datenow.toLocaleDateString() + " Instância: " + this.holderService.instancia;
+        } else {
+            msgconcat = datenow.toLocaleDateString();
+        }
+        console.log(msgconcat);
+        return msgconcat;
     }
 
 }

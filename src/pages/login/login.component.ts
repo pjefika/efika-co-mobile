@@ -6,6 +6,8 @@ import { LoadingController, AlertController } from 'ionic-angular';
 import { SuperComponentService } from '../../providers/component-service/super-compoenent.service';
 import { LoginUtilService } from '../../util/login-util/login-util.service';
 
+import * as moment from 'moment';
+
 @Component({
     selector: 'login-component',
     templateUrl: 'login.component.html',
@@ -46,6 +48,26 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             this.entrarMock();
         } else {
             // --Prod
+            // this.entrar();
+            this.validSession();
+        }
+    }
+
+    public validSession() {
+        let userSession = JSON.parse(localStorage.getItem("user"));
+        let miliday: number = 86400000; // 24h - 86400000
+        if (localStorage === null || localStorage === undefined) {
+            if (Math.abs(moment().diff(userSession.lastlogin)) < miliday) {
+                // Valido
+                this.holderService.estalogado = true;
+                this.holderService.showhidetab = true;
+                this.usuario.matricula = userSession.user;
+            } else {
+                // Expirado
+                localStorage.clear();
+                this.entrar();
+            }
+        } else {
             this.entrar();
         }
     }
@@ -53,11 +75,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     public entrar() {
         this.count = 0;
         this.showHidePassword = false;
-        // let carregando = this.loadingCtrl.create({ content: "Consultando Login " });
-        // carregando.present();
-
         this.loading(true, "Consultando Login ");
-
         this.loginService
             .entrar(this.usuario)
             .then(response => {
@@ -76,7 +94,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                             this.holderService.estalogado = verify;
                                             this.holderService.showhidetab = verify;
                                             this.usuario.matricula = this.usuario.matricula.toUpperCase();
-                                            sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
+                                            let dateLastLogin: Date = new Date();
+                                            localStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula, lastlogin: dateLastLogin }));
                                         } else {
                                             this.loading(false);
                                             clearInterval(rqSi);
@@ -93,7 +112,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                         } else {
                             this.loading(false);
                             clearInterval(rqSi);
-                            super.showAlert("Erro ao realizar login", "Tempo de busca excedido por favor tente novamente.");
+                            super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception());
                         }
                     }, this.holderService.rtimeout);
                 } else {
@@ -113,7 +132,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         verify = this.loginService.entrarMock(this.usuario);
         if (verify) {
             this.usuario.matricula = "IONIC - TEST";
-            sessionStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
+            localStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
             this.holderService.estalogado = verify;
             this.holderService.showhidetab = verify;
         } else {

@@ -3,16 +3,18 @@ import { SuperService } from '../../providers/super-service/super.service';
 import { Cadastro } from '../../view-model/cadastro/cadastro';
 import { TaskProcess } from '../../view-model/task-process/task-process';
 import { UrlService } from '../../providers/new_url-service/url.service';
+import { HolderService } from '../../providers/holder/holder.service';
 
 @Injectable()
 export class CadastroService extends SuperService {
 
-    constructor(public urlService: UrlService) {
-        super();
+    constructor(public urlService: UrlService,
+        public holderService: HolderService) {
+        super(holderService);
     }
 
     public getCadastro(instancia: string): Promise<TaskProcess> {
-        let userSession = JSON.parse(sessionStorage.getItem("user"));
+        let userSession = JSON.parse(localStorage.getItem("user"));
         let _data: { task: string, input: { type: string, instancia: string }, executor: string };
         _data = { task: "CADASTRO", input: { type: "cadastro", instancia: instancia }, executor: userSession.user };
         this.infoResquest = {

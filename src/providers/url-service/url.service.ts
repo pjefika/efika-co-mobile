@@ -24,7 +24,7 @@ export class UrlService extends SuperService implements RequestAction {
 
     constructor(private http: Http,
         public holderService: HolderService) {
-        super();
+        super(holderService);
     }
 
     public request(infoResquest: InfoRequest) {

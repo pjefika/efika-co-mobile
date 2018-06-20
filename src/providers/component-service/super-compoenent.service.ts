@@ -61,4 +61,16 @@ export class SuperComponentService extends ClipBoardService {
         return v;
     }
 
+    public mountmsgexception(instancia?: string): string {
+        let datenow: Date = new Date();
+        let msgconcat: string;
+        if (instancia) {
+            msgconcat = datenow.toLocaleDateString() + " Instância: " + instancia;
+        } else {
+            msgconcat = datenow.toLocaleDateString();
+        }
+        console.log(msgconcat);
+        return msgconcat;
+    }
+
 }

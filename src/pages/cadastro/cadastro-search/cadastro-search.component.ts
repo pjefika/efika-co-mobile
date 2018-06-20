@@ -61,7 +61,6 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                 if (super.validCustomer(resposta.output)) {
                                                     this.holderService.cadastro = resposta.output.customer;
                                                     this.holderService.tabCadastroAtivo = true;
-
                                                     setTimeout(() => {
                                                         this.navCtrl.parent.select(1);
                                                     }, 1);
@@ -90,7 +89,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                     });
                             } else {
                                 this.loading(false);
-                                super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
+                                super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception());
                                 clearInterval(rqSi);
                                 this.jaBuscou = true;
                             }

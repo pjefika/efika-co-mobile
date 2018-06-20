@@ -68,7 +68,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                     clearInterval(rqSi);
                                 });
                         } else {
-                            super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
+                            super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
                             this.loading(false);
                             clearInterval(rqSi);
                         }
@@ -129,7 +129,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                 });
                         } else {
                             this.loading(false);
-                            super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
+                            super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
                             this.navCtrl.pop();
                             clearInterval(rqSi);
                         }
@@ -146,11 +146,6 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
      * @param ont Retorna verdadeiro ou falso para habilitar botão de associar de acordo com sua respectivo slot e porta.
      */
     public btnAssocDisable(ont: Ont): boolean {
-        // console.log("Porta fO: " + ont.porta);
-        // console.log("Slot fO: " + ont.slot);
-
-        // console.log("Porta fH" + this.holderService.cadastro.rede.porta);
-        // console.log("Slot fH" + this.holderService.cadastro.rede.slot);
         let valid: boolean = false;
         if (ont.slot === this.holderService.cadastro.rede.slot && ont.porta === this.holderService.cadastro.rede.porta) {
             valid = true;

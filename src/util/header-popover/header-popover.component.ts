@@ -15,7 +15,7 @@ export class HeaderPopoverComponent implements OnInit {
     public ngOnInit() { }
 
     public logout() {
-        sessionStorage.clear();
+        localStorage.clear();
         this.resetHolder();
         this.viewCtrl.dismiss();
     }

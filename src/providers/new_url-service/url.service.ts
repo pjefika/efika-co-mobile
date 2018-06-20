@@ -21,7 +21,7 @@ export class UrlService extends LinkService {
 
     constructor(private http: Http,
         public holderService: HolderService) {
-        super();
+        super(holderService);
     }
 
     public request(infoResquest: InfoRequest) {

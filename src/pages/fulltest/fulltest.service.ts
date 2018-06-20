@@ -4,18 +4,20 @@ import { Cadastro } from '../../view-model/cadastro/cadastro';
 import { TaskProcess } from '../../view-model/task-process/task-process';
 import { Certification } from '../../view-model/certification/certification';
 import { UrlService } from '../../providers/new_url-service/url.service';
+import { HolderService } from '../../providers/holder/holder.service';
 
 declare var require: any
 
 @Injectable()
 export class FulltestService extends SuperService {
 
-    constructor(public urlService: UrlService) {
-        super();
+    constructor(public urlService: UrlService,
+        public holderService: HolderService) {
+        super(holderService);
     }
 
     public doFulltest(cadastro: Cadastro): Promise<TaskProcess> {
-        let userSession = JSON.parse(sessionStorage.getItem("user"));
+        let userSession = JSON.parse(localStorage.getItem("user"));
         let _data: { task: string, input: { type: string, customer: Cadastro }, executor: string };
         _data = { task: "CERTIFICATION", input: { type: "certification", customer: cadastro }, executor: userSession.user };
         this.infoResquest = {

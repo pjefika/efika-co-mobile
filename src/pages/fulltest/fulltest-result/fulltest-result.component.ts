@@ -55,7 +55,7 @@ export class FulltestResultComponent extends SuperComponentService implements On
     public mountInfo() {
         let infoClipBoard: InfoClipBoard = new InfoClipBoard();
         let dataFim: moment.Moment = moment(this.holderService.certification.dataFim);
-        let userSession = JSON.parse(sessionStorage.getItem("user"));
+        let userSession = JSON.parse(localStorage.getItem("user"));
 
         infoClipBoard.dataAcao = dataFim.format('DD/MM/YYYY HH:mm:ss').toString();
         infoClipBoard.tecnico = userSession.user;

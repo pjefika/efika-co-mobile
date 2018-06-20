@@ -73,7 +73,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                 })
                         } else {
                             this.loading(false);
-                            super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
+                            super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
                             clearInterval(rqSi);
                         }
                     }, this.holderService.rtimeout);
