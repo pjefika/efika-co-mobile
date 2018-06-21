@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { Output } from '../../view-model/task-process/output-task';
 import { ClipBoardService } from '../clipboard/clipboard.service';
-
-declare var require: any
+import { CheckVersion } from '../../view-model/version/checkversion';
 
 @Injectable()
 export class SuperComponentService extends ClipBoardService {
@@ -63,20 +62,22 @@ export class SuperComponentService extends ClipBoardService {
     }
 
     public mountmsgexception(instancia?: string): string {
+        let version: string = CheckVersion.VERSION;
         let datenow: Date = new Date();
         let msgconcat: string;
         if (instancia) {
-            msgconcat = " " + datenow.toLocaleDateString() + " Instância: " + instancia + " versão: " + this.getVersion();
+            msgconcat = " " + datenow.toLocaleDateString() + " " + datenow.toLocaleTimeString() + " Instância: " + instancia + " versão: " + version;
         } else {
-            msgconcat = " " + datenow.toLocaleDateString() + " versão: " + this.getVersion();
+            msgconcat = " " + datenow.toLocaleDateString() + " " + datenow.toLocaleTimeString() + " versão: " + version;
         }
         console.log(msgconcat);
         return msgconcat;
     }
 
     public getVersion() {
-        const { version: appVersion } = require("../../../package.json"); // Versão da aplicação na package.json
-        return appVersion;
+        let version: string = CheckVersion.VERSION;
+        return version;
     }
+
 
 }

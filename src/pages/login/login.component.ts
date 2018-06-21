@@ -65,11 +65,26 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             } else {
                 // Expirado
                 localStorage.clear();
-                this.entrar();
+                if (this.userisvalid()) {
+                    this.entrar();
+                }
             }
         } else {
-            this.entrar();
+            if (this.userisvalid()) {
+                this.entrar();
+            }
         }
+    }
+
+    private userisvalid() {
+        let valid: boolean = false;
+        if (this.usuario.matricula === null || this.usuario.matricula === undefined || this.usuario.senha === null || this.usuario.senha === undefined) {
+            valid = false;
+            super.showAlert("Ops, Aconteceu algo", "Campos de Matricula e Senha não pode ser vazio." + " versão: " + super.getVersion());
+        } else {
+            valid = true;
+        }
+        return valid;
     }
 
     public entrar() {
@@ -105,6 +120,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                         }
                                     }
                                 }, error => {
+                                    console.log(error);
+
                                     this.loading(false);
                                     clearInterval(rqSi);
                                     super.showAlert(error.tError, error.mError);
@@ -120,6 +137,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                     super.showAlert("Erro ao realizar login", response.exceptionMessage + " versão: " + super.getVersion());
                 }
             }, error => {
+                console.log(error);
                 this.loading(false);
                 super.showAlert(error.tError, error.mError);
                 this.usuario.matricula = "";

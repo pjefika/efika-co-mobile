@@ -72,7 +72,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                                 } else {
                                                     this.loading(false);
                                                     clearInterval(rqSi);
-                                                    super.showAlert("Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases.");
+                                                    super.showAlert("Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases." + super.mountmsgexception(this.holderService.instancia));
                                                 }
                                             } else {
                                                 this.loading(false);
@@ -82,22 +82,22 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                         }
                                     }, error => {
                                         this.loading(false);
-                                        super.showAlert("Erro ao realizar busca de cadastro", error.mError);
+                                        super.showAlert(error.tError, error.mError);
                                         clearInterval(rqSi);
                                     });
                             } else {
                                 this.loading(false);
-                                super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente.");
+                                super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente." + super.mountmsgexception(this.holderService.instancia));
                                 clearInterval(rqSi);
                             }
                         }, this.holderService.rtimeout);
                     } else {
                         this.loading(false);
-                        super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage);
-                    }                   
+                        super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage + super.mountmsgexception(this.holderService.instancia));
+                    }
                 }, error => {
                     this.loading(false);
-                    super.showAlert("Ops, aconteceu algo.", error.mError);
+                    super.showAlert(error.tError, error.mError);
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
                 });
         }
