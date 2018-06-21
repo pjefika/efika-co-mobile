@@ -58,7 +58,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                     .then(resposta => {
                                         if (resposta.state === "EXECUTED") {
                                             if (super.validState(resposta.output)) {
-                                                if (super.validCustomer(resposta.output)) {
+                                                if (super.validCustomer(resposta.output, this.holderService.instancia)) {
                                                     this.holderService.cadastro = resposta.output.customer;
                                                     this.holderService.tabCadastroAtivo = true;
                                                     setTimeout(() => {
@@ -69,11 +69,12 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                     this.loading(false);
                                                     this.ativo = false;
                                                     this.jaBuscou = true;
+                                                    this.holderService.btnFazFulltestAtivo = true;
                                                     clearInterval(rqSi);
                                                 } else {
                                                     this.loading(false);
                                                     clearInterval(rqSi);
-                                                    super.showAlert("Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases. " + super.mountmsgexception(this.holderService.instancia));
+                                                    this.holderService.btnFazFulltestAtivo = false;
                                                 }
                                             } else {
                                                 this.loading(false);
@@ -87,11 +88,16 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                         super.showAlert(error.tError, error.mError);
                                         clearInterval(rqSi);
                                     });
+                                if (this.count === this.holderService.rcount) {
+                                    this.tempobuscaexcedido();
+                                    clearInterval(rqSi);
+                                }
                             } else {
-                                this.loading(false);
-                                super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
+                                // this.loading(false);
+                                // super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
+                                // this.jaBuscou = true;
+                                this.tempobuscaexcedido();
                                 clearInterval(rqSi);
-                                this.jaBuscou = true;
                             }
                         }, this.holderService.rtimeout);
                     } else {
@@ -104,6 +110,12 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
                 });
         }
+    }
+
+    private tempobuscaexcedido() {
+        this.loading(false);
+        super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
+        this.jaBuscou = true;
     }
 
     public getCadastroMock(mensagem: string) {
@@ -147,12 +159,20 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     public validInstancia(): boolean {
         let valid: boolean = false;
-        if (this.holderService.instancia && this.holderService.instancia.length === 10) {
+        if (this.holderService.instancia) {
             this.holderService.instancia = this.holderService.instancia.trim();
-            valid = true;
-        } else {
-            super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
+            if (this.holderService.instancia.length === 10) {
+                valid = true;
+            } else {
+                super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
+            }
         }
+        // if (this.holderService.instancia && this.holderService.instancia.length === 10) {
+        //     this.holderService.instancia = this.holderService.instancia.trim();
+        //     valid = true;
+        // } else {
+        //     super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
+        // }
         return valid;
     }
 

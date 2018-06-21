@@ -2,7 +2,7 @@
     <ion-list>
         <ion-item>
             <ion-avatar item-start>
-                <button ion-button (click)="fulltest();" color="secondary" [disabled]="validDSLAM()">
+                <button ion-button (click)="fulltest();" color="secondary" [disabled]="!holderService.btnFazFulltestAtivo">
                     <ion-icon name="settings"></ion-icon>
                 </button>
             </ion-avatar>

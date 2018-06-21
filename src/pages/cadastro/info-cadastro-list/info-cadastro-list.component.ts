@@ -60,7 +60,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                     .then(resposta => {
                                         if (resposta.state === "EXECUTED") {
                                             if (super.validState(resposta.output)) {
-                                                if (super.validCustomer(resposta.output)) {
+                                                if (super.validCustomer(resposta.output, this.holderService.instancia)) {
                                                     this.holderService.cadastro = resposta.output.customer;
                                                     this.holderService.tabCadastroAtivo = true;
                                                     this.validDSLAM();
@@ -72,7 +72,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                                 } else {
                                                     this.loading(false);
                                                     clearInterval(rqSi);
-                                                    super.showAlert("Ops, aconteceu algo.", "Instância incorreta, a mesma não foi encontrada em nossas bases." + super.mountmsgexception(this.holderService.instancia));
+                                                    this.holderService.btnFazFulltestAtivo = true;
                                                 }
                                             } else {
                                                 this.loading(false);

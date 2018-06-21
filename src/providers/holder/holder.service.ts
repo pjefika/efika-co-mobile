@@ -39,14 +39,16 @@ export class HolderService {
     public tabFulltestAtivo: boolean = false;
     public tabHomeAtivo: boolean = true;
 
+    public btnFazFulltestAtivo: boolean = false;
+
     // Lista de ONT's
     //public onts: Ont[];
 
     /**
     * Para os request de GET task 
     */
-    public rtimeout: number = 10000;
-    public rcount: number = 30;
+    public rtimeout: number = 15000;
+    public rcount: number = 14;
 
     constructor() { }
 

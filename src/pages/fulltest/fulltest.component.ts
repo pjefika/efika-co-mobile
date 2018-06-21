@@ -26,7 +26,9 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         super(alertCtrl);
     }
 
-    public ngOnInit() { }
+    public ngOnInit() {
+        this.validDSLAM();
+    }
 
     public fulltest() {
         if (this.holderService.isMock) {
@@ -37,6 +39,8 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             this.fazFulltest();
         }
     }
+
+
 
     public fazFulltest() {
         this.count = 0;
@@ -102,6 +106,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
     }
 
     public validDSLAM() {
+        // valid dslam type
         if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
             || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
             || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
@@ -111,6 +116,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             || this.holderService.cadastro.rede.modeloDslam === "NVLT"
             || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
             super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
+            this.holderService.btnFazFulltestAtivo = false;
         }
     }
 

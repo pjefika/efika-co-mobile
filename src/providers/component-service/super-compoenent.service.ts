@@ -53,8 +53,11 @@ export class SuperComponentService extends ClipBoardService {
         return v;
     }
 
-    public validCustomer(output: Output): boolean {
+    public validCustomer(output: Output, instancia: string): boolean {
         let v: boolean = false;
+        if (!output.customer.rede.ipDslam) {
+            this.showAlert("Ops, aconteceu algo.", "Não foram identificados informações de rede do cliente, não sendo possivel realizar testes." + this.mountmsgexception(instancia));
+        }
         if (output.customer.designador) {
             v = true;
         }
@@ -70,7 +73,6 @@ export class SuperComponentService extends ClipBoardService {
         } else {
             msgconcat = " " + datenow.toLocaleDateString() + " " + datenow.toLocaleTimeString() + " versão: " + version;
         }
-        console.log(msgconcat);
         return msgconcat;
     }
 
