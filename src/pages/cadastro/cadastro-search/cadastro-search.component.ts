@@ -93,9 +93,6 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                     clearInterval(rqSi);
                                 }
                             } else {
-                                // this.loading(false);
-                                // super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
-                                // this.jaBuscou = true;
                                 this.tempobuscaexcedido();
                                 clearInterval(rqSi);
                             }

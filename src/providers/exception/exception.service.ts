@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
-import { InfoRequest } from '../../view-model/url-service/info-request';
-import { HolderService } from '../holder/holder.service';
 import { CheckVersion } from '../../view-model/version/checkversion';
 
 @Injectable()
-export class SuperService {
+export class ExceptionService {
 
-    public infoResquest: InfoRequest;
-
-    constructor(public holderService: HolderService) { }
+    constructor() { }
 
     public handleError(error: any): Promise<any> {
         return Promise.reject(error);
@@ -43,14 +39,16 @@ export class SuperService {
         let datenow: Date = new Date();
         let msgconcat: string;
         if (instancia) {
-            msgconcat = " " + datenow.toLocaleDateString() + datenow.toLocaleTimeString() + " Instância: " + instancia + " versão: " + version;
+            msgconcat = " " + datenow.toLocaleDateString() + " " + datenow.toLocaleTimeString() + " Instância: " + instancia + " versão: " + version;
         } else {
-            msgconcat = " " + datenow.toLocaleDateString() + datenow.toLocaleTimeString() + " versão: " + version;
+            msgconcat = " " + datenow.toLocaleDateString() + " " + datenow.toLocaleTimeString() + " versão: " + version;
         }
-        console.log(msgconcat);
-
-
         return msgconcat;
+    }
+
+    public getVersion() {
+        let version: string = CheckVersion.VERSION;
+        return version;
     }
 
 }

@@ -35,6 +35,9 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     }
 
     public ngOnInit() {
+
+        this.validwheninit();
+
         if (this.loginUtilService.isLogado()) {
             this.holderService.estalogado = true;
             this.holderService.showhidetab = true;
@@ -48,15 +51,17 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             this.entrarMock();
         } else {
             // --Prod
-            // this.entrar();
-            this.validSession();
+            if (this.userisvalid()) {
+                this.entrar();
+            }
+            // this.validSession();
         }
     }
 
-    public validSession() {
+    public validwheninit() {
         let userSession = JSON.parse(localStorage.getItem("user"));
-        let miliday: number = 86400000; // 24h - 86400000
-        if (localStorage === null || localStorage === undefined) {
+        let miliday: number = 43200000; // 24h - 86400000 // 12h - 43200000
+        if (userSession != null || userSession != undefined) {
             if (Math.abs(moment().diff(userSession.lastlogin)) < miliday) {
                 // Valido
                 this.holderService.estalogado = true;
@@ -65,13 +70,6 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             } else {
                 // Expirado
                 localStorage.clear();
-                if (this.userisvalid()) {
-                    this.entrar();
-                }
-            }
-        } else {
-            if (this.userisvalid()) {
-                this.entrar();
             }
         }
     }
