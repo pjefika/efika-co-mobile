@@ -10,7 +10,7 @@ import { InfoServicosComponent } from './info-servicos/info-servicos.component';
 import { InfoLinhaComponent } from './info-linha/info-linha.component';
 import { InfoRadiusComponent } from './info-radius/info-radius.component';
 import { CadastroService } from '../cadastro.service';
-import { SuperComponentService } from '../../../providers/component-service/super-compoenent.service';
+import { SuperComponentService } from '../../../providers/component-service/super-component.service';
 import { EventosMassivosComponent } from '../eventos-massivos/eventos-massivos.component';
 
 @Component({
@@ -59,7 +59,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                     .gettask(response.id)
                                     .then(resposta => {
                                         if (resposta.state === "EXECUTED") {
-                                            if (super.validState(resposta.output)) {
+                                            if (super.validState(resposta.output, this.holderService.instancia)) {
                                                 if (super.validCustomer(resposta.output, this.holderService.instancia)) {
                                                     this.holderService.cadastro = resposta.output.customer;
                                                     this.holderService.tabCadastroAtivo = true;
@@ -82,25 +82,33 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                         }
                                     }, error => {
                                         this.loading(false);
-                                        super.showAlert(error.tError, error.mError);
+                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
                                         clearInterval(rqSi);
                                     });
+                                if (this.count === this.holderService.rcount) {
+                                    this.tempobuscaexcedido();
+                                    clearInterval(rqSi);
+                                }
                             } else {
-                                this.loading(false);
-                                super.showAlert("Ops, aconteceu algo.", "Tempo de busca excedido por favor tente novamente." + super.mountmsgexception(this.holderService.instancia));
+                                this.tempobuscaexcedido();
                                 clearInterval(rqSi);
                             }
                         }, this.holderService.rtimeout);
                     } else {
                         this.loading(false);
-                        super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage + super.mountmsgexception(this.holderService.instancia));
+                        super.showAlert("Erro ao realizar busca de cadastro", super.makeexceptionmessage(response.exceptionMessage, this.holderService.instancia));
                     }
                 }, error => {
                     this.loading(false);
-                    super.showAlert(error.tError, error.mError);
+                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
                 });
         }
+    }
+
+    private tempobuscaexcedido() {
+        this.loading(false);
+        super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     public getCadastroMock() {

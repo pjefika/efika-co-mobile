@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HolderService } from '../../../providers/holder/holder.service';
-import { SuperComponentService } from '../../../providers/component-service/super-compoenent.service';
+import { SuperComponentService } from '../../../providers/component-service/super-component.service';
 import { AlertController } from 'ionic-angular';
 import * as moment from 'moment';
 import { InfoClipBoard } from '../../../view-model/clipboard/info-clipboard';
+import { ClipBoardService } from '../../../providers/clipboard/clipboard.service';
 
 @Component({
     selector: 'fulltest-result-component',
@@ -13,7 +14,8 @@ import { InfoClipBoard } from '../../../view-model/clipboard/info-clipboard';
 export class FulltestResultComponent extends SuperComponentService implements OnInit {
 
     constructor(public holderService: HolderService,
-        public alertCtrl: AlertController) {
+        public alertCtrl: AlertController,
+        public clipBoardService: ClipBoardService) {
         super(alertCtrl);
     }
 
@@ -29,7 +31,7 @@ export class FulltestResultComponent extends SuperComponentService implements On
                 hClip = hClip + "\n\n||** Fulltest **||\n" + this.trataCopy(certification);
             }
         }
-        if (super.clipboard(hClip)) {
+        if (this.clipBoardService.clipboard(hClip)) {
             super.showAlert("Clipboard", "Conteúdo copiado com sucesso.");
         }
     }
@@ -50,7 +52,6 @@ export class FulltestResultComponent extends SuperComponentService implements On
         }
         return trat;
     }
-
 
     public mountInfo() {
         let infoClipBoard: InfoClipBoard = new InfoClipBoard();
@@ -76,26 +77,11 @@ export class FulltestResultComponent extends SuperComponentService implements On
                         infoClipBoard.potOlt = valid.result.potOlt;
                         infoClipBoard.potOnt = valid.result.potOnt;
                         break;
-                    // case "Modulação":
-                    //     infoClipBoard.modulacao = valid.result.modulacao + " * " + valid.mensagem;
-                    //     break;
-                    // case "Profile":
-                    //     infoClipBoard.profile = valid.result.down + "/" + valid.result.up + " * " + valid.mensagem;
-                    //     break;
-                    // case "Vlan Banda Larga":
-                    //     infoClipBoard.bridgeDados = valid.mensagem;
-                    //     break;
-                    // case "Vlan VoIP":
-                    //     infoClipBoard.bridgeVoz = valid.mensagem;
-                    //     break;
-                    // case "Vlan VoD/IPTV":
-                    //     infoClipBoard.bridgeVODIPTV = valid.mensagem;
-                    //     break;
                 }
             }
         });
 
-        if (super.clipboard(this.trataCopy(infoClipBoard))) {
+        if (this.clipBoardService.clipboard(this.trataCopy(infoClipBoard))) {
             super.showAlert("Clipboard", "Conteúdo copiado com sucesso.");
         }
 

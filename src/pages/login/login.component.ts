@@ -3,7 +3,7 @@ import { LoginService } from './login.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { Usuario } from '../../view-model/usuario/usuario';
 import { LoadingController, AlertController } from 'ionic-angular';
-import { SuperComponentService } from '../../providers/component-service/super-compoenent.service';
+import { SuperComponentService } from '../../providers/component-service/super-component.service';
 import { LoginUtilService } from '../../util/login-util/login-util.service';
 
 import * as moment from 'moment';
@@ -112,35 +112,40 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                         } else {
                                             this.loading(false);
                                             clearInterval(rqSi);
-                                            super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente." + " versão: " + super.getVersion());
+                                            super.showAlert("Erro ao realizar login", super.makeexceptionmessage("Login ou senha incorretos, por favor tente novamente."));
                                             this.usuario.matricula = "";
                                             this.usuario.senha = "";
                                         }
                                     }
                                 }, error => {
-                                    console.log(error);
-
                                     this.loading(false);
                                     clearInterval(rqSi);
-                                    super.showAlert(error.tError, error.mError);
+                                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
                                 });
+                            if (this.count === this.holderService.rcount) {
+                                this.tempobuscaexcedido();
+                                clearInterval(rqSi);
+                            }
                         } else {
-                            this.loading(false);
                             clearInterval(rqSi);
-                            super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception());
+                            this.tempobuscaexcedido();
                         }
                     }, this.holderService.rtimeout);
                 } else {
                     this.loading(false);
-                    super.showAlert("Erro ao realizar login", response.exceptionMessage + " versão: " + super.getVersion());
+                    super.showAlert("Erro ao realizar login", super.makeexceptionmessage(response.exceptionMessage));
                 }
             }, error => {
-                console.log(error);
                 this.loading(false);
-                super.showAlert(error.tError, error.mError);
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
                 this.usuario.matricula = "";
                 this.usuario.senha = "";
             });
+    }
+
+    private tempobuscaexcedido() {
+        this.loading(false);
+        super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. "));
     }
 
     public entrarMock() {

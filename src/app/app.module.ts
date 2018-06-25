@@ -16,7 +16,7 @@ import { MomentModule } from 'angular2-moment';
 import { LoginComponent } from '../pages/login/login.component';
 import { HolderService } from '../providers/holder/holder.service';
 import { AlertMensagemComponent } from '../util/alert-mensagem/alert-mensagem.component';
-import { SuperComponentService } from '../providers/component-service/super-compoenent.service';
+import { SuperComponentService } from '../providers/component-service/super-component.service';
 import { BlocksCertificationResultComponent } from '../pages/fulltest/fulltest-result/blocks-certification-result/blocks-certification-result.component';
 import { InfoGeraisFulltestComponent } from '../pages/fulltest/fulltest-result/info-gerais-fulltest/info-gerais-fulltest.component';
 import { HeaderPopoverComponent } from '../util/header-popover/header-popover.component';
@@ -50,6 +50,7 @@ import { FabActionComponent } from '../pages/fab-component/fab-actions.component
 import { UrlService } from '../providers/new_url-service/url.service';
 import { LinkService } from '../providers/new_url-service/link.service';
 import { VersionComponent } from '../util/version/version.component';
+import { ClipBoardService } from '../providers/clipboard/clipboard.service';
 
 @NgModule({
 	declarations: [
@@ -149,7 +150,8 @@ import { VersionComponent } from '../util/version/version.component';
 		UrlService,
 		LinkService,
 		SuperComponentService,
-		LoginUtilService
+		LoginUtilService,
+		ClipBoardService
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

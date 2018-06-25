@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, PopoverController, NavController } from 'ionic-angular';
 import { HolderService } from '../../providers/holder/holder.service';
-import { SuperComponentService } from '../../providers/component-service/super-compoenent.service';
+import { SuperComponentService } from '../../providers/component-service/super-component.service';
 import { HeaderPopoverComponent } from '../../util/header-popover/header-popover.component';
 
 @Component({

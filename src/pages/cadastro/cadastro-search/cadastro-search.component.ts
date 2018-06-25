@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HolderService } from '../../../providers/holder/holder.service';
 import { CadastroService } from '../cadastro.service';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
-import { SuperComponentService } from '../../../providers/component-service/super-compoenent.service';
+import { SuperComponentService } from '../../../providers/component-service/super-component.service';
 
 @Component({
     selector: 'cadastro-search-component',
@@ -57,7 +57,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                     .gettask(response.id)
                                     .then(resposta => {
                                         if (resposta.state === "EXECUTED") {
-                                            if (super.validState(resposta.output)) {
+                                            if (super.validState(resposta.output, this.holderService.instancia)) {
                                                 if (super.validCustomer(resposta.output, this.holderService.instancia)) {
                                                     this.holderService.cadastro = resposta.output.customer;
                                                     this.holderService.tabCadastroAtivo = true;
@@ -85,7 +85,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                         }
                                     }, error => {
                                         this.loading(false);
-                                        super.showAlert(error.tError, error.mError);
+                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
                                         clearInterval(rqSi);
                                     });
                                 if (this.count === this.holderService.rcount) {
@@ -99,11 +99,11 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                         }, this.holderService.rtimeout);
                     } else {
                         this.loading(false);
-                        super.showAlert("Erro ao realizar busca de cadastro", response.exceptionMessage + super.mountmsgexception(this.holderService.instancia));
+                        super.showAlert("Erro ao realizar busca de cadastro", super.makeexceptionmessage(response.exceptionMessage, this.holderService.instancia));
                     }
                 }, error => {
                     this.loading(false);
-                    super.showAlert(error.tError, error.mError);
+                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
                 });
         }
@@ -111,7 +111,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
+        super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
         this.jaBuscou = true;
     }
 

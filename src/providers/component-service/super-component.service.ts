@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { Output } from '../../view-model/task-process/output-task';
-import { ClipBoardService } from '../clipboard/clipboard.service';
-import { CheckVersion } from '../../view-model/version/checkversion';
+import { ExceptionService } from '../exception/exception.service';
 
 @Injectable()
-export class SuperComponentService extends ClipBoardService {
+export class SuperComponentService extends ExceptionService {
 
     public ativo: boolean = false;
     public titulo: string;
@@ -38,7 +37,7 @@ export class SuperComponentService extends ClipBoardService {
      * Tratativa do state do Output
      * Se EXCEPTION faz chamada automatica do showError mostrando informação.
      */
-    public validState(output: Output): boolean {
+    public validState(output: Output, instancia: string): boolean {
         let v: boolean;
         switch (output.state) {
             case "OK":
@@ -46,7 +45,7 @@ export class SuperComponentService extends ClipBoardService {
                 break;
             case "EXCEPTION":
                 v = false;
-                this.showAlert("Ops, aconteceu algo", output.exceptionMessage + this.mountmsgexception());
+                this.showAlert("Ops, aconteceu algo", super.makeexceptionmessage(output.exceptionMessage, instancia));
                 console.log("Deu erro -- EXCEPTION IN: " + output.type + " -- !!! AMD p(o.o)q");
                 break;
         }
@@ -56,30 +55,12 @@ export class SuperComponentService extends ClipBoardService {
     public validCustomer(output: Output, instancia: string): boolean {
         let v: boolean = false;
         if (!output.customer.rede.ipDslam) {
-            this.showAlert("Ops, aconteceu algo.", "Não foram identificados informações de rede do cliente, não sendo possivel realizar testes." + this.mountmsgexception(instancia));
+            this.showAlert("Ops, aconteceu algo", super.makeexceptionmessage("Não foram identificados informações de rede do cliente, não sendo possivel realizar testes.", instancia));
         }
         if (output.customer.designador) {
             v = true;
         }
         return v;
     }
-
-    public mountmsgexception(instancia?: string): string {
-        let version: string = CheckVersion.VERSION;
-        let datenow: Date = new Date();
-        let msgconcat: string;
-        if (instancia) {
-            msgconcat = " " + datenow.toLocaleDateString() + " " + datenow.toLocaleTimeString() + " Instância: " + instancia + " versão: " + version;
-        } else {
-            msgconcat = " " + datenow.toLocaleDateString() + " " + datenow.toLocaleTimeString() + " versão: " + version;
-        }
-        return msgconcat;
-    }
-
-    public getVersion() {
-        let version: string = CheckVersion.VERSION;
-        return version;
-    }
-
 
 }

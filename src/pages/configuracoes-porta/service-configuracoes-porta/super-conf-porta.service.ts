@@ -1,6 +1,6 @@
 import { Injectable, Input } from '@angular/core';
 import { Valids } from '../../../view-model/fulltest/validacao';
-import { SuperComponentService } from '../../../providers/component-service/super-compoenent.service';
+import { SuperComponentService } from '../../../providers/component-service/super-component.service';
 import { AlertController } from 'ionic-angular';
 
 @Injectable()

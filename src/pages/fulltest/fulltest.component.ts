@@ -4,7 +4,7 @@ import { FulltestService } from './fulltest.service';
 import { NavController } from 'ionic-angular';
 import { HolderService } from '../../providers/holder/holder.service';
 import { AlertController } from 'ionic-angular';
-import { SuperComponentService } from '../../providers/component-service/super-compoenent.service';
+import { SuperComponentService } from '../../providers/component-service/super-component.service';
 
 @Component({
     selector: 'fulltest-component',
@@ -56,7 +56,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                 .gettask(response.id)
                                 .then(resposta => {
                                     if (resposta.state === "EXECUTED") {
-                                        if (super.validState(resposta.output)) {
+                                        if (super.validState(resposta.output, this.holderService.instancia)) {
                                             this.holderService.certification = resposta.output.certification;
                                             this.holderService.tabFulltestAtivo = true;
                                             setTimeout(() => {
@@ -71,25 +71,34 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                         }
                                     }
                                 }, error => {
-                                    super.showAlert(error.tError, error.mError);
+                                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
                                     this.loading(false);
                                     clearInterval(rqSi);
-                                })
+                                });
+                            if (this.count === this.holderService.rcount) {
+                                this.tempobuscaexcedido();
+                                clearInterval(rqSi);
+                            }
                         } else {
                             this.loading(false);
-                            super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
+                            this.tempobuscaexcedido();
                             clearInterval(rqSi);
                         }
                     }, this.holderService.rtimeout);
                 } else {
                     this.loading(false);
-                    super.showAlert("Erro ao realizar fulltest.", response.exceptionMessage + super.mountmsgexception(this.holderService.instancia));
+                    super.showAlert("Erro ao realizar fulltest.", super.makeexceptionmessage(response.exceptionMessage, this.holderService.instancia));
                 }
             }, error => {
                 this.loading(false);
-                super.showAlert(error.tError, error.mError);
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
                 console.log("Deu erro!!! AMD p(o.o)q");
             });
+    }
+
+    private tempobuscaexcedido() {
+        this.loading(false);
+        super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     public fazFulltestMock() {

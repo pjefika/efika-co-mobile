@@ -1,6 +1,6 @@
 {
 	"name": "efika-co-mobile",
-	"version": "2.0.4",
+	"version": "2.1.4",
 	"author": "Efika Team",
 	"homepage": "http://ionicframework.com/",
 	"private": true,
@@ -22,11 +22,11 @@
 		"@angular/platform-browser": "5.0.3",
 		"@angular/platform-browser-dynamic": "5.0.3",
 		"@angular/tsc-wrapped": "^4.4.7",
-		"@ionic-native/core": "^4.7.0",
+		"@ionic-native/core": "^4.8.0",
 		"@ionic-native/splash-screen": "4.4.0",
 		"@ionic-native/status-bar": "4.4.0",
 		"@ionic/storage": "2.1.3",
-		"angular2-moment": "^1.8.0",
+		"angular2-moment": "^1.9.0",
 		"cordova-browser": "5.0.3",
 		"cordova-plugin-device": "^2.0.2",
 		"cordova-plugin-splashscreen": "^5.0.2",
@@ -39,7 +39,7 @@
 		"zone.js": "0.8.18"
 	},
 	"devDependencies": {
-		"@ionic/app-scripts": "^3.1.9",
+		"@ionic/app-scripts": "^3.1.10",
 		"typescript": "2.6.2"
 	},
 	"description": "An Ionic project",

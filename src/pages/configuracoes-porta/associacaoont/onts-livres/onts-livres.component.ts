@@ -46,7 +46,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                 .gettask(response.id)
                                 .then(resposta => {
                                     if (resposta.state === "EXECUTED") {
-                                        if (super.validState(resposta.output)) {
+                                        if (super.validState(resposta.output, this.holderService.instancia)) {
                                             if (resposta.output.onts) {
                                                 this.onts = resposta.output.onts;
                                                 super.showAlert("ONT's", "Busca realizada com sucesso.");
@@ -67,15 +67,17 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                     this.loading(false);
                                     clearInterval(rqSi);
                                 });
+                            if (this.count === this.holderService.rcount) {
+                                this.tempobuscaexcedido();
+                                clearInterval(rqSi);
+                            }
                         } else {
-                            super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
-                            this.loading(false);
+                            this.tempobuscaexcedido();
                             clearInterval(rqSi);
                         }
                     }, this.holderService.rtimeout);
                 }
             }, error => {
-                // error.mError
                 this.loading(false);
                 super.showAlert(error.tError, error.mError);
             });
@@ -89,13 +91,13 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
             .then(response => {
                 if (response) {
                     let rqSi = setInterval(() => {
-                        if (this.count < 9) {
+                        if (this.count < this.holderService.rcount) {
                             this.count++;
                             this.ontsLivresService
                                 .gettask(response.id)
                                 .then(resposta => {
                                     if (resposta.state === "EXECUTED") {
-                                        if (super.validState(resposta.output)) {
+                                        if (super.validState(resposta.output, this.holderService.instancia)) {
                                             let idx: number = this.holderService.certification.fulltest.valids.map(function (e) { return e.nome; }).indexOf("Associação Serial ONT");
                                             let setValidOnt: Valids;
                                             setValidOnt = {
@@ -122,14 +124,17 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                         }
                                     }
                                 }, error => {
-                                    super.showAlert(error.tError, error.mError);
+                                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
                                     this.loading(false);
                                     this.navCtrl.pop();
                                     clearInterval(rqSi);
                                 });
+                            if (this.count === this.holderService.rcount) {
+                                this.tempobuscaexcedido();
+                                clearInterval(rqSi);
+                            }
                         } else {
-                            this.loading(false);
-                            super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
+                            this.tempobuscaexcedido();
                             this.navCtrl.pop();
                             clearInterval(rqSi);
                         }
@@ -137,8 +142,13 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                 }
             }, error => {
                 this.loading(false);
-                super.showAlert(error.tError, error.mError);
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
             });
+    }
+
+    private tempobuscaexcedido() {
+        this.loading(false);
+        super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     /**

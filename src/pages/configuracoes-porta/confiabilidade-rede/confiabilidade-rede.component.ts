@@ -38,7 +38,7 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                                 .gettask(response.id)
                                 .then(resposta => {
                                     if (resposta.state === "EXECUTED") {
-                                        if (super.validState(resposta.output)) {
+                                        if (super.validState(resposta.output, this.holderService.instancia)) {
                                             this.valid = resposta.output.tabRede;
                                             super.showAlert("Sucesso", "Tabela de confiabilidade de rede atualizada com sucesso.");
                                             this.ativo = false;
@@ -54,9 +54,12 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                                     this.loading(false);
                                     clearInterval(rqSi);
                                 });
+                            if (this.count === this.holderService.rcount) {
+                                this.tempobuscaexcedido();
+                                clearInterval(rqSi);
+                            }
                         } else {
-                            this.loading(false);
-                            super.showAlert("Tempo Excedido.", "Tempo de busca excedido por favor tente novamente. " + super.mountmsgexception(this.holderService.instancia));
+                            this.tempobuscaexcedido();
                             clearInterval(rqSi);
                         }
                     }, this.holderService.rtimeout);
@@ -65,6 +68,11 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                 this.loading(false);
                 super.showAlert(error.tError, error.mError);
             })
+    }
+
+    private tempobuscaexcedido() {
+        this.loading(false);
+        super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     private loading(active: boolean, msg?: string, ) {
