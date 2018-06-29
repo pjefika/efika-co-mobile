@@ -16,14 +16,12 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     private count: number = 0;
 
-    private carregando;
-
     constructor(public holderService: HolderService,
         private cadastroService: CadastroService,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
         public navCtrl: NavController) {
-        super(alertCtrl);
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() { }
@@ -46,6 +44,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         this.count = 0;
         if (this.validInstancia()) {
             this.loading(true, mensagem);
+            this.startTimer();
             this.cadastroService
                 .getCadastro(this.holderService.instancia)
                 .then(response => {
@@ -115,20 +114,26 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         this.jaBuscou = true;
     }
 
+    private startTimer() {
+        this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
+    }
+
     public getCadastroMock(mensagem: string) {
-        // super.showError(false);
-        // if (this.validInstancia()) {
-        let carregando = this.loadingCtrl.create({ content: mensagem });
-        carregando.present();
+        this.loading(true, mensagem);
+        this.startTimer();
         setTimeout(() => {
-            carregando.dismiss();
-            this.holderService.cadastro = this.cadastroService.getCadastroMock();
+            this.holderService.cadastro = this.cadastroService.getCadastroMock().output.customer;
             this.holderService.tabCadastroAtivo = true;
-            this.msgEventoMassivo();
             setTimeout(() => {
                 this.navCtrl.parent.select(1);
             }, 1);
-        }, 300);
+            this.validDSLAM();
+            this.msgEventoMassivo();
+            this.loading(false);
+            this.ativo = false;
+            this.jaBuscou = true;
+            this.holderService.btnFazFulltestAtivo = true;
+        }, 5000);
         // }
     }
 
@@ -156,20 +161,16 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     public validInstancia(): boolean {
         let valid: boolean = false;
-        if (this.holderService.instancia) {
+        if (this.holderService.instancia != null && this.holderService.instancia != undefined) {
             this.holderService.instancia = this.holderService.instancia.trim();
             if (this.holderService.instancia.length === 10) {
                 valid = true;
             } else {
                 super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
             }
+        } else {
+            super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
         }
-        // if (this.holderService.instancia && this.holderService.instancia.length === 10) {
-        //     this.holderService.instancia = this.holderService.instancia.trim();
-        //     valid = true;
-        // } else {
-        //     super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
-        // }
         return valid;
     }
 
@@ -183,15 +184,6 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             || this.holderService.cadastro.rede.modeloDslam === "NVLT"
             || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
             super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
-        }
-    }
-
-    private loading(active: boolean, msg?: string, ) {
-        if (active) {
-            this.carregando = this.loadingCtrl.create({ content: msg });
-            this.carregando.present();
-        } else {
-            this.carregando.dismiss();
         }
     }
 

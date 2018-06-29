@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, PopoverController } from 'ionic-angular';
+import { NavController, PopoverController, LoadingController, AlertController } from 'ionic-angular';
 import { HolderService } from '../../providers/holder/holder.service';
 import { HeaderPopoverComponent } from '../../util/header-popover/header-popover.component';
+import { SuperComponentService } from '../../providers/component-service/super-component.service';
 
 @Component({
 	selector: 'home-component',
 	templateUrl: 'home.component.html'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends SuperComponentService implements OnInit {
 
 	constructor(public navCtrl: NavController,
 		public holderService: HolderService,
-		public popoverController: PopoverController) { }
+		public popoverController: PopoverController,
+		public loadingCtrl: LoadingController,
+		public alertCtrl: AlertController) {
+		super(alertCtrl, loadingCtrl);
+	}
 
 	public ngOnInit() { }
 

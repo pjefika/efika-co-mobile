@@ -25,21 +25,19 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
 
     private count: number = 0;
 
-    private carregando;
-
     constructor(public holderService: HolderService,
         public navCtrl: NavController,
         private cadastroService: CadastroService,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController) {
-        super(alertCtrl);
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() { }
 
     public refreshCadastro() {
         if (this.holderService.isMock) {
-            this.getCadastroMock();
+            this.getCadastroMock("Reconsultando Cadastro Mock");
         } else {
             this.getCadastro("Reconsultando Cadastro");
         }
@@ -48,6 +46,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
     public getCadastro(mensagem: string) {
         if (this.validInstancia()) {
             this.loading(true, mensagem);
+            this.startTimer();
             this.cadastroService
                 .getCadastro(this.holderService.instancia)
                 .then(response => {
@@ -111,16 +110,24 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
         super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
-    public getCadastroMock() {
-        super.showError(false);
-        let carregando = this.loadingCtrl.create({ content: "Reconsultando Cadastro" });
-        carregando.present();
+    private startTimer() {
+        this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
+    }
+
+    public getCadastroMock(mensagem: string) {
+        this.loading(true, mensagem);
+        this.startTimer();
         setTimeout(() => {
-            this.holderService.cadastro = this.cadastroService.getCadastroMock();
+            this.holderService.cadastro = this.cadastroService.getCadastroMock().output.customer;
             this.holderService.tabCadastroAtivo = true;
+            this.validDSLAM();
+            this.ativo = false;
             this.msgEventoMassivo();
-            carregando.dismiss();
-        }, 300);
+            this.loading(false);
+            super.showAlert("Sucesso.", "Reconsulta realizada com sucesso.");
+
+
+        }, 5000);
     }
 
     public validInstancia(): boolean {
@@ -187,15 +194,6 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
             || this.holderService.cadastro.rede.modeloDslam === "NVLT"
             || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
             super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
-        }
-    }
-
-    private loading(active: boolean, msg?: string, ) {
-        if (active) {
-            this.carregando = this.loadingCtrl.create({ content: msg });
-            this.carregando.present();
-        } else {
-            this.carregando.dismiss();
         }
     }
 

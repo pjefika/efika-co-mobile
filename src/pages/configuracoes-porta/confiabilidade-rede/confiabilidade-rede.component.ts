@@ -14,19 +14,18 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
 
     private count: number = 0;
 
-    private carregando;
-
     constructor(private confiabilidadeRedeService: ConfiabilidadeRedeService,
         public holderService: HolderService,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController) {
-        super(alertCtrl);
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() { }
 
     public getConfRede() {
         this.loading(true, "Aguarde, carregando informações...");
+        this.startTimer();
         this.confiabilidadeRedeService
             .getConfRede(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
@@ -75,12 +74,7 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
         super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
-    private loading(active: boolean, msg?: string, ) {
-        if (active) {
-            this.carregando = this.loadingCtrl.create({ content: msg });
-            this.carregando.present();
-        } else {
-            this.carregando.dismiss();
-        }
+    private startTimer() {
+        this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
     }
 }

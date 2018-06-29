@@ -51,6 +51,7 @@ import { UrlService } from '../providers/new_url-service/url.service';
 import { LinkService } from '../providers/new_url-service/link.service';
 import { VersionComponent } from '../util/version/version.component';
 import { ClipBoardService } from '../providers/clipboard/clipboard.service';
+import { CounterComponent } from '../util/counter/counter.component';
 
 @NgModule({
 	declarations: [
@@ -93,7 +94,8 @@ import { ClipBoardService } from '../providers/clipboard/clipboard.service';
 		InfoMuralComponent,
 		OntsLivrsComponent,
 		FabActionComponent,
-		VersionComponent
+		VersionComponent,
+		CounterComponent
 	],
 	imports: [
 		BrowserModule,

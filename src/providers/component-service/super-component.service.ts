@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController } from 'ionic-angular';
 import { Output } from '../../view-model/task-process/output-task';
 import { ExceptionService } from '../exception/exception.service';
 
 @Injectable()
 export class SuperComponentService extends ExceptionService {
 
+    public carregando;
+
+    public timercount: any;
+
+    public timer: number;
+
     public ativo: boolean = false;
     public titulo: string;
     public mensagem: string;
     public tipo: string;
 
-    constructor(public alertCtrl: AlertController) {
+    constructor(public alertCtrl: AlertController,
+        public loadingCtrl: LoadingController) {
         super();
     }
 
@@ -61,6 +68,32 @@ export class SuperComponentService extends ExceptionService {
             v = true;
         }
         return v;
+    }
+
+    public doTimer(maxtime: number) {
+        this.timer = maxtime; // Passa valor maximo para o timer
+        this.timercount = setInterval(() => {
+            this.timer--; // Diminui contador
+            if (this.timer === 0) { // Se timer zerar finaliza o mesmo.
+                clearInterval(this.timercount);
+            }
+            // console.log(this.timer);
+        }, 1000); // intervalo de 1 segundo.
+    }
+
+    public killtimer() { // Para o contador.
+        clearInterval(this.timercount);
+        this.timer = null;
+    }
+
+    public loading(active: boolean, msg?: string) {
+        if (active) {
+            this.carregando = this.loadingCtrl.create({ content: msg });
+            this.carregando.present();
+        } else {
+            this.carregando.dismiss();
+            this.killtimer();
+        }
     }
 
 }

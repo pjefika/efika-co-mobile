@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HolderService } from '../../../providers/holder/holder.service';
 import { SuperComponentService } from '../../../providers/component-service/super-component.service';
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController } from 'ionic-angular';
 import * as moment from 'moment';
 import { InfoClipBoard } from '../../../view-model/clipboard/info-clipboard';
 import { ClipBoardService } from '../../../providers/clipboard/clipboard.service';
@@ -15,8 +15,9 @@ export class FulltestResultComponent extends SuperComponentService implements On
 
     constructor(public holderService: HolderService,
         public alertCtrl: AlertController,
-        public clipBoardService: ClipBoardService) {
-        super(alertCtrl);
+        public clipBoardService: ClipBoardService,
+        public loadingCtrl: LoadingController) {
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() { }

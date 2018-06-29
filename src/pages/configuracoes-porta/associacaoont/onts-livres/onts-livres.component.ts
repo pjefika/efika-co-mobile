@@ -18,14 +18,12 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
 
     private count: number = 0;
 
-    private carregando;
-
     constructor(private ontsLivresService: OntsLivresService,
         public holderService: HolderService,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
         public navCtrl: NavController) {
-        super(alertCtrl);
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() {
@@ -35,6 +33,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
     private getOntsDisp() {
         this.count = 0;
         this.loading(true, "Aguarde, carregando ONT's...");
+        this.startTimer();
         this.ontsLivresService
             .getOntsDisp(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
@@ -86,6 +85,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
     public setOnt(ont: Ont) {
         this.count = 0;
         this.loading(true, "Aguarde, associando ONT...");
+        this.startTimer();
         this.ontsLivresService
             .setOntsDisp(ont.serial, this.holderService.cadastro)
             .then(response => {
@@ -151,6 +151,10 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
         super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
+    private startTimer() {
+        this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
+    }
+
     /**
      * 
      * @param ont Retorna verdadeiro ou falso para habilitar botão de associar de acordo com sua respectivo slot e porta.
@@ -161,16 +165,6 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
             valid = true;
         }
         return valid;
-    }
-
-
-    private loading(active: boolean, msg?: string, ) {
-        if (active) {
-            this.carregando = this.loadingCtrl.create({ content: msg });
-            this.carregando.present();
-        } else {
-            this.carregando.dismiss();
-        }
     }
 
 }

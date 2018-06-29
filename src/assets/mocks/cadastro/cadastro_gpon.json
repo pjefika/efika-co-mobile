@@ -1,0 +1,98 @@
+{
+    "id": "5b368cbf80f4312cce075152",
+    "dateQueueIn": 1530301631000,
+    "dateConsumed": 1530301633441,
+    "dateQueueOut": 1530301668092,
+    "state": "EXECUTED",
+    "task": "CADASTRO",
+    "executor": "G0034481",
+    "consumer": "worker: aplicationserver/10.40.198.168",
+    "input": {
+        "type": "cadastro",
+        "instancia": "5137223195"
+    },
+    "output": {
+        "type": "cadastro",
+        "state": "OK",
+        "exceptionMessage": null,
+        "instancia": "5137223195",
+        "customer": {
+            "designador": "CCR-812XS6WZFK-013",
+            "instancia": "5137223195",
+            "designadorAcesso": "CCR-12469965-069",
+            "designadorTv": null,
+            "rede": {
+                "tipo": "GPON",
+                "origem": "ONLINE",
+                "planta": "VIVO2",
+                "ipDslam": "10.218.9.3",
+                "vendorDslam": "ALCATEL",
+                "modeloDslam": "GPON_CARD",
+                "idOnt": null,
+                "terminal": null,
+                "ipMulticast": null,
+                "nrc": null,
+                "slot": 6,
+                "porta": 13,
+                "sequencial": 1834,
+                "logica": 42,
+                "rin": 187,
+                "vlanVoip": 1187,
+                "vlanVod": 3187,
+                "vlanMulticast": 4000,
+                "cvlan": 1934,
+                "bhs": null
+            },
+            "redeExterna": {
+                "tipo": null,
+                "origem": null,
+                "planta": null,
+                "splitter1n": null,
+                "splitter2n": null,
+                "caboAlim": null,
+                "fibra1n": null,
+                "fibra2n": null
+            },
+            "servicos": {
+                "origem": null,
+                "velDown": 51200,
+                "velUp": 25600,
+                "tipoTv": null,
+                "tipoLinha": "SIP"
+            },
+            "linha": {
+                "tipo": "IMS",
+                "dn": "5137223195",
+                "central": "PRCTA_VMS02"
+            },
+            "radius": {
+                "status": "ATIVO",
+                "armario": "RSCCR_G1I01",
+                "rin": "187",
+                "velocidade": "51200 - 25600",
+                "ipFixo": "NAO ENCONTROU",
+                "profile": "r25600b51200 op:CCR-812XS6WZFK-013",
+                "porta": "1834",
+                "isIpFixo": false
+            },
+            "asserts": [
+                {
+                    "asserts": "DIVERGENCIA_TBS_RADIUS",
+                    "value": false,
+                    "creationDate": 1530301859050
+                },
+                {
+                    "asserts": "CIRCUITO_ATIVO",
+                    "value": true,
+                    "creationDate": 1530301859050
+                },
+                {
+                    "asserts": "HAS_BLOQUEIO_RADIUS",
+                    "value": false,
+                    "creationDate": 1530301859050
+                }
+            ],
+            "eventos": []
+        }
+    }
+}

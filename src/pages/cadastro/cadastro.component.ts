@@ -16,7 +16,7 @@ export class CadastroComponent extends SuperComponentService implements OnInit {
         public alertCtrl: AlertController,
         public popoverController: PopoverController,
         public navCtrl: NavController) {
-        super(alertCtrl);
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() {

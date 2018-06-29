@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CheckVersion } from '../../view-model/version/checkversion';
 
 @Injectable()
-export class ExceptionService {
+export class ExceptionService {    
 
     constructor() { }
 
@@ -59,5 +59,5 @@ export class ExceptionService {
         let version: string = CheckVersion.VERSION;
         return version;
     }
-
+    
 }

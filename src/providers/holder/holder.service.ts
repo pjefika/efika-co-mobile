@@ -48,7 +48,7 @@ export class HolderService {
     * Para os request de GET task 
     */
     public rtimeout: number = 15000;
-    public rcount: number = 14;
+    public rcount: number = 20;
 
     constructor() { }
 

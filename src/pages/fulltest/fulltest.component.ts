@@ -16,14 +16,12 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
 
     private count: number = 0;
 
-    private carregando;
-
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
         private fulltestService: FulltestService,
         public navCtrl: NavController,
         public alertCtrl: AlertController) {
-        super(alertCtrl);
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() {
@@ -45,6 +43,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
     public fazFulltest() {
         this.count = 0;
         this.loading(true, "Realizando Fulltest");
+        this.startTimer();
         this.fulltestService
             .doFulltest(this.holderService.cadastro)
             .then(response => {
@@ -101,17 +100,22 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
+    private startTimer() {
+        this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
+    }
+
     public fazFulltestMock() {
-        let carregando = this.loadingCtrl.create({ content: "Realizando Fulltest" });
-        carregando.present();
+        this.loading(true, "Realizando Fulltest Mock");
+        this.startTimer();
         setTimeout(() => {
-            this.holderService.certification = this.fulltestService.doFulltestMock();
+            this.holderService.certification = this.fulltestService.doFulltestMock().output.certification;
             this.holderService.tabFulltestAtivo = true;
-            carregando.dismiss();
             setTimeout(() => {
                 this.navCtrl.parent.select(2);
             }, 1);
-        }, 300);
+            this.ativo = false;
+            this.loading(false);
+        }, 5000);
     }
 
     public validDSLAM() {
@@ -126,15 +130,6 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
             super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
             this.holderService.btnFazFulltestAtivo = false;
-        }
-    }
-
-    private loading(active: boolean, msg?: string, ) {
-        if (active) {
-            this.carregando = this.loadingCtrl.create({ content: msg });
-            this.carregando.present();
-        } else {
-            this.carregando.dismiss();
         }
     }
 

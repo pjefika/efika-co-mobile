@@ -24,14 +24,12 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     public count: number = 0;
 
-    private carregando;
-
     constructor(private loginService: LoginService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
         public loginUtilService: LoginUtilService) {
-        super(alertCtrl);
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() {
@@ -88,7 +86,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     public entrar() {
         this.count = 0;
         this.showHidePassword = false;
-        this.loading(true, "Consultando Login ");
+        this.loading(true, "Consultando Login");
+        this.startTimer();
         this.loginService
             .entrar(this.usuario)
             .then(response => {
@@ -148,6 +147,10 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. "));
     }
 
+    private startTimer() {
+        this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
+    }
+
     public entrarMock() {
         let verify: boolean;
         verify = this.loginService.entrarMock(this.usuario);
@@ -160,15 +163,6 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
             this.usuario.matricula = "";
             this.usuario.senha = "";
-        }
-    }
-
-    private loading(active: boolean, msg?: string, ) {
-        if (active) {
-            this.carregando = this.loadingCtrl.create({ content: msg });
-            this.carregando.present();
-        } else {
-            this.carregando.dismiss();
         }
     }
 
