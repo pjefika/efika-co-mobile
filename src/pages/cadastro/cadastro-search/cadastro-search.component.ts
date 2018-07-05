@@ -98,7 +98,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                         }, this.holderService.rtimeout);
                     } else {
                         this.loading(false);
-                        super.showAlert("Erro ao realizar busca de cadastro", super.makeexceptionmessage(response.exceptionMessage, this.holderService.instancia));
+                        super.showAlert(super.makeexceptionmessageTitle("Erro ao realizar busca de cadastro.", true), super.makeexceptionmessage(response.exceptionMessage, this.holderService.instancia));
                     }
                 }, error => {
                     this.loading(false);
@@ -110,7 +110,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
         this.jaBuscou = true;
     }
 
@@ -183,7 +183,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
             || this.holderService.cadastro.rede.modeloDslam === "NVLT"
             || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
-            super.showAlert("Atenção", "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
+            super.showAlert(super.makeexceptionmessageTitle("Atenção.", true), "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
         }
     }
 

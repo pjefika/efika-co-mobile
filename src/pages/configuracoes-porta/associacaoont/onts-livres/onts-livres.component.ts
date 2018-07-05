@@ -58,7 +58,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                                         } else {
                                             this.loading(false);
                                             clearInterval(rqSi);
-                                            super.showAlert("ONT's", "Sem resposta no Output." + super.mountmsgexception(this.holderService.instancia));
+                                            super.showAlert(super.makeexceptionmessageTitle("ONT's.", true), "Sem resposta no Output." + super.mountmsgexception(this.holderService.instancia));
                                         }
                                     }
                                 }, error => {
@@ -148,7 +148,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     private startTimer() {

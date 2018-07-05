@@ -76,7 +76,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         let valid: boolean = false;
         if (this.usuario.matricula === null || this.usuario.matricula === undefined || this.usuario.senha === null || this.usuario.senha === undefined) {
             valid = false;
-            super.showAlert("Ops, Aconteceu algo", "Campos de Matricula e Senha não pode ser vazio." + " versão: " + super.getVersion());
+            super.showAlert("Login ou senha Invalidos", "Campos de Matricula e Senha não pode ser vazio." + " versão: " + super.getVersion());
         } else {
             valid = true;
         }
@@ -132,7 +132,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                     }, this.holderService.rtimeout);
                 } else {
                     this.loading(false);
-                    super.showAlert("Erro ao realizar login", super.makeexceptionmessage(response.exceptionMessage));
+                    super.showAlert(super.makeexceptionmessageTitle("Erro ao realizar login.", true), super.makeexceptionmessage(response.exceptionMessage));
                 }
             }, error => {
                 this.loading(false);
@@ -144,7 +144,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert("Tempo Excedido.", super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. "));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     private startTimer() {

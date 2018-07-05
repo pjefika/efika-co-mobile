@@ -26,15 +26,15 @@ export class UrlService extends LinkService {
 
     public request(infoResquest: InfoRequest) {
         switch (infoResquest.rqst) {
-            case "get":
-                return this.get(infoResquest);
             case "post":
                 return this.post(infoResquest);
+            case "get":
+                return this.get(infoResquest);
         }
     }
 
-    private post(infoResquest: InfoRequest) {
-        return this.http.post(this.mountUrl(infoResquest.otherUrl, "set", infoResquest.command), JSON.stringify(infoResquest._data), this.options)
+    private post(infoResquest: InfoRequest): Promise<any> {
+        return this.http.post(this.mountUrl(infoResquest), JSON.stringify(infoResquest._data), this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
@@ -43,8 +43,8 @@ export class UrlService extends LinkService {
             .catch(super.handleErrorKing);
     }
 
-    private get(infoResquest: InfoRequest) {
-        return this.http.get(this.mountUrl(infoResquest.otherUrl, "get", infoResquest.command + infoResquest._data), this.options)
+    private get(infoResquest: InfoRequest): Promise<any> {
+        return this.http.get(this.mountUrl(infoResquest), this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
@@ -53,12 +53,12 @@ export class UrlService extends LinkService {
             .catch(super.handleErrorKing);
     }
 
-    private mountUrl(l, ftype: string, command: string): string {
-        if (l) {
-            return l;
+    private mountUrl(infoResquest: InfoRequest): string {
+        if (infoResquest.otherUrl) {
+            return infoResquest.otherUrl;
         } else {
             let le = super.getLinksEndPoints();
-            switch (ftype) {
+            switch (infoResquest.rqst) {
                 case "get":
                     if (this.ftypename) {
                         if (this.ftypename === le[0].nome) {
@@ -70,7 +70,7 @@ export class UrlService extends LinkService {
                         this.ajustLink(le[0]);
                     }
                     break;
-                case "set":
+                case "post":
                     if (this.ftypename) {
                         if (this.ftypename === le[2].nome) {
                             this.ajustLink(le[3]);
@@ -82,16 +82,20 @@ export class UrlService extends LinkService {
                     }
                     break;
             }
-            let u = this.returnLink(command);
+            let u = this.returnLink(infoResquest);
             return u;
         }
     }
 
-    private returnLink(command: string) {
+    private returnLink(infoResquest: InfoRequest) {
         if (this.holderService.isLinkProd) {
-            return super.contacMountUrl(this.urlIpProd, this.portLink, command);
+            if (infoResquest.rqst === "get" && infoResquest._data) {
+                return super.contacMountUrl(this.urlIpProd, this.portLink, infoResquest.command + infoResquest._data);
+            } else {
+                return super.contacMountUrl(this.urlIpProd, this.portLink, infoResquest.command);
+            }
         } else {
-            return super.contacMountUrl(this.urlIpQA, this.portLink, command);
+            return super.contacMountUrl(this.urlIpQA, this.portLink, infoResquest.command);
         }
     }
 

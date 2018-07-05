@@ -29,12 +29,21 @@ export class SuperComponentService extends ExceptionService {
         this.mensagem = mensagem;
     }
 
-    public showAlert(titulo: string, subTitle: string) {
-        let alert = this.alertCtrl.create({
-            title: titulo,
-            subTitle: subTitle,
-            buttons: ["Ok"]
-        });
+    public showAlert(titulo: string, subTitle: string, hidebutton?: boolean) {
+        let alert;
+        if (hidebutton === true) {
+            alert = this.alertCtrl.create({
+                title: titulo,
+                subTitle: subTitle,
+                enableBackdropDismiss: false
+            });
+        } else {
+            alert = this.alertCtrl.create({
+                title: titulo,
+                subTitle: subTitle,
+                buttons: ["Ok"]
+            });
+        }
         alert.present();
     }
 
@@ -52,7 +61,7 @@ export class SuperComponentService extends ExceptionService {
                 break;
             case "EXCEPTION":
                 v = false;
-                this.showAlert("Ops, aconteceu algo", super.makeexceptionmessage(output.exceptionMessage, instancia));
+                this.showAlert(super.makeexceptionmessageTitle("Ops, aconteceu algo.", true), super.makeexceptionmessage(output.exceptionMessage, instancia));
                 console.log("Deu erro -- EXCEPTION IN: " + output.type + " -- !!! AMD p(o.o)q");
                 break;
         }
@@ -62,7 +71,7 @@ export class SuperComponentService extends ExceptionService {
     public validCustomer(output: Output, instancia: string): boolean {
         let v: boolean = false;
         if (!output.customer.rede.ipDslam) {
-            this.showAlert("Ops, aconteceu algo", super.makeexceptionmessage("Não foram identificados informações de rede do cliente, não sendo possivel realizar testes.", instancia));
+            this.showAlert(super.makeexceptionmessageTitle("Ops, aconteceu algo.", true), super.makeexceptionmessage("Não foram identificados informações de rede do cliente, não sendo possivel realizar testes.", instancia));
         }
         if (output.customer.designador) {
             v = true;
