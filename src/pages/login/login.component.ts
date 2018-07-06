@@ -33,9 +33,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     }
 
     public ngOnInit() {
-
         this.validwheninit();
-
         if (this.loginUtilService.isLogado()) {
             this.holderService.estalogado = true;
             this.holderService.showhidetab = true;
@@ -52,7 +50,6 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             if (this.userisvalid()) {
                 this.entrar();
             }
-            // this.validSession();
         }
     }
 

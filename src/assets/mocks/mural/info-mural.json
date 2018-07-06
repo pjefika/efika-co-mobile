@@ -1,0 +1,8 @@
+[
+    {
+        "titulo": "Lorem ipsum",
+        "mensagem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu mauris quis lectus vehicula congue. Morbi dictum lorem id mattis gravida. Cras in nisi quis ante venenatis accumsan.",
+        "data_inicio": 123456789,
+        "data_fim": 123456789
+    }
+]
