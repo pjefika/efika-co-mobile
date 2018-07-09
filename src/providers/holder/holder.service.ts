@@ -50,6 +50,8 @@ export class HolderService {
     public rtimeout: number = 15000;
     public rcount: number = 20;
 
+    public emManutencao: boolean = false;
+
     constructor() { }
 
 }

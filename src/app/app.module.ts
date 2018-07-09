@@ -52,6 +52,8 @@ import { LinkService } from '../providers/new_url-service/link.service';
 import { VersionComponent } from '../util/version/version.component';
 import { ClipBoardService } from '../providers/clipboard/clipboard.service';
 import { CounterComponent } from '../util/counter/counter.component';
+import { MensagemMuralComponent } from '../pages/home/info-mural/mensagem-mural/mensagem-mural.component';
+import { EmManutencaoComponent } from '../pages/atualizacao/em-manutencao.component';
 
 @NgModule({
 	declarations: [
@@ -95,7 +97,9 @@ import { CounterComponent } from '../util/counter/counter.component';
 		OntsLivrsComponent,
 		FabActionComponent,
 		VersionComponent,
-		CounterComponent
+		CounterComponent,
+		MensagemMuralComponent,
+		EmManutencaoComponent
 	],
 	imports: [
 		BrowserModule,
@@ -142,7 +146,8 @@ import { CounterComponent } from '../util/counter/counter.component';
 		CadastroSearchComponent,
 		InfoMuralComponent,
 		OntsLivrsComponent,
-		VersionComponent
+		VersionComponent,
+		MensagemMuralComponent
 	],
 	providers: [
 		StatusBar,

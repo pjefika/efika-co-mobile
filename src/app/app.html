@@ -1,4 +1,5 @@
 <ion-nav [root]="login" *ngIf="!holderService.estalogado"></ion-nav>
+<em-manutencao-component></em-manutencao-component>
 <version-component></version-component>
 <ion-tabs *ngIf="holderService.estalogado">
     <ion-tab tabIcon="home" [root]="home" [enabled]="holderService.tabHomeAtivo && holderService.showhidetab"></ion-tab>

@@ -1,8 +1,14 @@
-[
+[    
     {
-        "titulo": "Lorem ipsum",
-        "mensagem": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu mauris quis lectus vehicula congue. Morbi dictum lorem id mattis gravida. Cras in nisi quis ante venenatis accumsan.",
+        "titulo": "Tutorial Efika CO Mobile",
+        "mensagem": "Neste Link você encontra o tutorial completo do Efika CO Mobile.",
         "data_inicio": 123456789,
-        "data_fim": 123456789
+        "data_fim": 123456789,
+        "action": {
+            "action": true,
+            "namebutton": "Tutorial Efika CO Mobile",
+            "colorbutton": "Dark",
+            "linkref": "http://54.94.208.183/tutorial/tutorial.html"
+        }
     }
 ]

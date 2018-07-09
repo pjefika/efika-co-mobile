@@ -1,28 +1,11 @@
-<div class="mural-mg-top" *ngIf="mostraMural">
+<div class="mural-mg-top">
     <h5>
         <ion-icon name="information-circle" item-start style="color: #25b0f7;"></ion-icon>
         Mural de avisos.</h5>
     <ion-list>
-        <ion-item>
-            <h2>&bull; Novas funcionalidades disponiveis</h2>
-        </ion-item>
-        <ion-item>
-            <ion-avatar item-start>
-                <a round ion-button color="dark" href="/tutorial/tutorial.html">
-                    <ion-icon name="albums" item-end></ion-icon>
-                    Tutorial Efika CO Mobile
-                </a>
-            </ion-avatar>
+        <ion-item *ngFor="let im of infosMural" (click)="openInfoMural(im)">
+            <h2>{{im.titulo}}</h2>
+            <p>{{im.mensagem}}</p>
         </ion-item>
     </ion-list>
 </div>
-
-<!-- 
-    Colocar um thumbnail list para mostrar pré infos do mural.
-    Com botão para abrir uma tela com informação.
-
-    || 
-
-    Navigation
-
- -->

@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Aviso</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <h4>{{infoMural.titulo}}</h4>
+
+    <p>{{infoMural.mensagem}}</p>
+
+    <div *ngIf="infoMural.action">
+        <button ion-button [color]="infoMural.action.colorbutton === 'Green' ? 'secondary' : infoMural.action.colorbutton === 'Red' ? 'danger' : infoMural.action.colorbutton === 'Dark' ? 'dark': '' "
+            full="true" round="true" (click)="openLink()">{{infoMural.action.namebutton}}</button>
+    </div>
+
+</ion-content>

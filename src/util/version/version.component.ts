@@ -13,8 +13,7 @@ export class VersionComponent extends SuperComponentService implements OnInit {
 
     public version: string;
 
-    constructor(private versionService: VersionService,
-        public loadingCtrl: LoadingController,
+    constructor(public loadingCtrl: LoadingController,
         public alertCtrl: AlertController) {
         super(alertCtrl, loadingCtrl);
     }
@@ -25,16 +24,16 @@ export class VersionComponent extends SuperComponentService implements OnInit {
 
     public compareVersion() {
         this.version = super.getVersion();
-        this.versionService
-            .getSpectedSystemVersion()
-            .then(resposta => {
-                console.log(resposta);
-                if (this.version !== resposta.version) {
-                    super.showAlert("Versão divirgente", super.makeexceptionmessage("A versão do seu sistema é diferente da versão atual, por favor atualize sua página para baixar a nova versão, a versão mais atual é : " + resposta.version + "."), true);
-                }
-            }, error => {
-                super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
-            });
+        // this.versionService
+        //     .getSpectedSystemVersion()
+        //     .then(resposta => {
+        //         console.log(resposta);
+        //         if (this.version !== resposta.version) {
+        //             super.showAlert("Versão divirgente", super.makeexceptionmessage("A versão do seu sistema é diferente da versão atual, por favor atualize sua página para baixar a nova versão, a versão mais atual é : " + resposta.version + "."), true);
+        //         }
+        //     }, error => {
+        //         super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+        //     });
     }
 
 }
