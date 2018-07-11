@@ -26,7 +26,7 @@ export class ExceptionService {
             }
             return Promise.reject(er);
         }
-        if (error.status === 0) {
+        if (error.status === 0) {            
             er = {
                 tError: "Servidor Cod.30",
                 mError: "Houve um problema de conexão com nossos servidores por favor aguarde um momento e tente novamente."

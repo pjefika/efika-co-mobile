@@ -49,11 +49,10 @@ import { OntsLivrsComponent } from '../pages/configuracoes-porta/associacaoont/o
 import { FabActionComponent } from '../pages/fab-component/fab-actions.component';
 import { UrlService } from '../providers/new_url-service/url.service';
 import { LinkService } from '../providers/new_url-service/link.service';
-import { VersionComponent } from '../util/version/version.component';
 import { ClipBoardService } from '../providers/clipboard/clipboard.service';
 import { CounterComponent } from '../util/counter/counter.component';
 import { MensagemMuralComponent } from '../pages/home/info-mural/mensagem-mural/mensagem-mural.component';
-import { EmManutencaoComponent } from '../pages/atualizacao/em-manutencao.component';
+import { IndexValidationsComponent } from '../util/index-validations/index-validations.component';
 
 @NgModule({
 	declarations: [
@@ -96,10 +95,9 @@ import { EmManutencaoComponent } from '../pages/atualizacao/em-manutencao.compon
 		InfoMuralComponent,
 		OntsLivrsComponent,
 		FabActionComponent,
-		VersionComponent,
 		CounterComponent,
 		MensagemMuralComponent,
-		EmManutencaoComponent
+		IndexValidationsComponent
 	],
 	imports: [
 		BrowserModule,
@@ -146,8 +144,8 @@ import { EmManutencaoComponent } from '../pages/atualizacao/em-manutencao.compon
 		CadastroSearchComponent,
 		InfoMuralComponent,
 		OntsLivrsComponent,
-		VersionComponent,
-		MensagemMuralComponent
+		MensagemMuralComponent,
+		IndexValidationsComponent
 	],
 	providers: [
 		StatusBar,
