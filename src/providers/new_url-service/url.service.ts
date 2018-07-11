@@ -103,6 +103,4 @@ export class UrlService extends LinkService {
         this.ftypename = linksEndPoits.nome;
         this.portLink = linksEndPoits.port;
     }
-
-
 }

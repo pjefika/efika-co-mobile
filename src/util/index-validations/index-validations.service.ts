@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
+
 import { SuperService } from '../../providers/super-service/super.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { UrlService } from '../../providers/new_url-service/url.service';
 
 @Injectable()
-export class VersionService extends SuperService {
+export class IndexValidationsService extends SuperService {
 
     constructor(public urlService: UrlService,
         public holderService: HolderService) {
         super(holderService);
     }
 
-    public getSpectedSystemVersion(): Promise<any> {
+    public getInfosSystem(): Promise<any> {
         this.infoResquest = {
             rqst: "get",
             otherUrl: "http://54.94.208.183/efika-mobile-infos.json",
@@ -25,5 +26,4 @@ export class VersionService extends SuperService {
                 return resposta
             });
     }
-
 }

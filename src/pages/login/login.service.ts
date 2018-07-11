@@ -51,5 +51,4 @@ export class LoginService extends SuperService {
             return false;
         }
     }
-
 }
