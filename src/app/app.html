@@ -1,6 +1,11 @@
 <ion-nav [root]="login" *ngIf="!holderService.estalogado"></ion-nav>
+<!-- <em-manutencao-component></em-manutencao-component>
+<version-component></version-component> -->
+
+<index-validations-component></index-validations-component>
+
 <ion-tabs *ngIf="holderService.estalogado">
-    <ion-tab tabIcon="home" [root]="home" [enabled]="holderService.tabHomeAtivo"></ion-tab>
-    <ion-tab tabIcon="list-box" [root]="cadastro" [enabled]="holderService.tabCadastroAtivo"></ion-tab>
-    <ion-tab tabIcon="hammer" [root]="fulltestResult" [enabled]="holderService.tabFulltestAtivo"></ion-tab>
+    <ion-tab tabIcon="home" [root]="home" [enabled]="holderService.tabHomeAtivo && holderService.showhidetab"></ion-tab>
+    <ion-tab tabIcon="list-box" [root]="cadastro" [enabled]="holderService.tabCadastroAtivo && holderService.showhidetab"></ion-tab>
+    <ion-tab tabIcon="hammer" [root]="fulltestResult" [enabled]="holderService.tabFulltestAtivo && holderService.showhidetab"></ion-tab>
 </ion-tabs>

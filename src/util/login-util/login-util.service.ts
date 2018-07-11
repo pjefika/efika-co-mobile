@@ -7,7 +7,7 @@ export class LoginUtilService {
     constructor(public holderService: HolderService) { }
 
     public isLogado(): boolean {        
-        if (sessionStorage.getItem('user')) {
+        if (localStorage.getItem('user')) {
             return true
         }
         return false;        

@@ -1,16 +1,11 @@
-<div class="mural-mg-top" *ngIf="mostraMural">
+<div class="mural-mg-top">
     <h5>
         <ion-icon name="information-circle" item-start style="color: #25b0f7;"></ion-icon>
         Mural de avisos.</h5>
     <ion-list>
-        <ion-item>
-            <!-- <ion-avatar item-start>
-                <button ion-button>
-                    <ion-icon name="arrow-forward"></ion-icon>
-                </button>
-            </ion-avatar> -->
-            <h2>&bull; Novas Funcionaidades disponiveis</h2>
-            <!-- <p>Armario AAA123 foi detectado um problema de autenticação.</p> -->
+        <ion-item *ngFor="let im of infosMural" (click)="openInfoMural(im)">
+            <h2>{{im.titulo}}</h2>
+            <p>{{im.mensagem}}</p>
         </ion-item>
     </ion-list>
 </div>

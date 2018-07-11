@@ -42,7 +42,6 @@ export class ClipBoardService {
             if (!status) {
                 console.log("Conteúdo não foi copiado.");
                 valid = false;
-
             } else {
                 valid = true;
                 console.log("Conteúdo copiado com sucesso.");

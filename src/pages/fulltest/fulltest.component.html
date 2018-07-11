@@ -2,12 +2,13 @@
     <ion-list>
         <ion-item>
             <ion-avatar item-start>
-                <button ion-button (click)="fulltest();" color="secondary" >
+                <button ion-button (click)="fulltest();" color="secondary" [disabled]="!holderService.btnFazFulltestAtivo">
                     <ion-icon name="settings"></ion-icon>
                 </button>
             </ion-avatar>
             <h2>Realizar Fulltest</h2>
-            <p>Realiza testes no cliente.</p>
+            <p>Clique aqui e teste o cadastro.</p>
+            <counter-component [timer]="timer"></counter-component>
         </ion-item>
-    </ion-list>
+    </ion-list>    
 </div>

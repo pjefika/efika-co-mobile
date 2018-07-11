@@ -21,6 +21,10 @@ export class ServicosComponent extends ConfiguracoesPortaService implements OnIn
         this.getValid();
     }
 
+    ionViewWillLeave() {
+        this.holderService.showhidetab = true;
+    }
+
     private getValid() {
         this.vlans = [super.getParameterValid(this.holderService.certification.fulltest.valids, "Vlan Banda Larga")];
         this.vlans.push(super.getParameterValid(this.holderService.certification.fulltest.valids, "Vlan VoIP"));

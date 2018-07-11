@@ -24,6 +24,10 @@ export class ConectividadeComponent extends ConfiguracoesPortaService implements
         this.getValid();
     }
 
+    ionViewWillLeave() {
+        this.holderService.showhidetab = true;
+    }
+
     private getValid() {
         this.parametros = super.getParameterValid(this.holderService.certification.fulltest.valids, "Parâmetros", "Parâmetros Ópticos");
         this.estadoPorta = [super.getParameterValid(this.holderService.certification.fulltest.valids, "Estado Operacional da Porta")];

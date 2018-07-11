@@ -8,7 +8,6 @@ import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
 import { ObjKeysPipe } from '../util/pipes/objKeysPipe';
 import { Capitalize, KeyBeautifyingPipe } from '../util/pipes/beautifyingPipe';
-import { UrlService } from '../providers/url-service/url.service';
 import { FulltestComponent } from '../pages/fulltest/fulltest.component';
 import { CadastroComponent } from '../pages/cadastro/cadastro.component';
 import { InfoCadastroComponent } from '../pages/cadastro/info-cadastro/info-cadastro.component';
@@ -17,7 +16,7 @@ import { MomentModule } from 'angular2-moment';
 import { LoginComponent } from '../pages/login/login.component';
 import { HolderService } from '../providers/holder/holder.service';
 import { AlertMensagemComponent } from '../util/alert-mensagem/alert-mensagem.component';
-import { SuperComponentService } from '../providers/component-service/super-compoenent.service';
+import { SuperComponentService } from '../providers/component-service/super-component.service';
 import { BlocksCertificationResultComponent } from '../pages/fulltest/fulltest-result/blocks-certification-result/blocks-certification-result.component';
 import { InfoGeraisFulltestComponent } from '../pages/fulltest/fulltest-result/info-gerais-fulltest/info-gerais-fulltest.component';
 import { HeaderPopoverComponent } from '../util/header-popover/header-popover.component';
@@ -48,6 +47,12 @@ import { CadastroSearchComponent } from '../pages/cadastro/cadastro-search/cadas
 import { InfoMuralComponent } from '../pages/home/info-mural/info-mural.component';
 import { OntsLivrsComponent } from '../pages/configuracoes-porta/associacaoont/onts-livres/onts-livres.component';
 import { FabActionComponent } from '../pages/fab-component/fab-actions.component';
+import { UrlService } from '../providers/new_url-service/url.service';
+import { LinkService } from '../providers/new_url-service/link.service';
+import { ClipBoardService } from '../providers/clipboard/clipboard.service';
+import { CounterComponent } from '../util/counter/counter.component';
+import { MensagemMuralComponent } from '../pages/home/info-mural/mensagem-mural/mensagem-mural.component';
+import { IndexValidationsComponent } from '../util/index-validations/index-validations.component';
 
 @NgModule({
 	declarations: [
@@ -89,7 +94,10 @@ import { FabActionComponent } from '../pages/fab-component/fab-actions.component
 		CadastroSearchComponent,
 		InfoMuralComponent,
 		OntsLivrsComponent,
-		FabActionComponent
+		FabActionComponent,
+		CounterComponent,
+		MensagemMuralComponent,
+		IndexValidationsComponent
 	],
 	imports: [
 		BrowserModule,
@@ -135,7 +143,9 @@ import { FabActionComponent } from '../pages/fab-component/fab-actions.component
 		InfoRadiusComponent,
 		CadastroSearchComponent,
 		InfoMuralComponent,
-		OntsLivrsComponent
+		OntsLivrsComponent,
+		MensagemMuralComponent,
+		IndexValidationsComponent
 	],
 	providers: [
 		StatusBar,
@@ -143,8 +153,10 @@ import { FabActionComponent } from '../pages/fab-component/fab-actions.component
 		{ provide: ErrorHandler, useClass: IonicErrorHandler },
 		HolderService,
 		UrlService,
+		LinkService,
 		SuperComponentService,
-		LoginUtilService
+		LoginUtilService,
+		ClipBoardService
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

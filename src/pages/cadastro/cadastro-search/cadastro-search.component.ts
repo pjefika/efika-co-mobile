@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HolderService } from '../../../providers/holder/holder.service';
 import { CadastroService } from '../cadastro.service';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
-import { SuperComponentService } from '../../../providers/component-service/super-compoenent.service';
+import { SuperComponentService } from '../../../providers/component-service/super-component.service';
 
 @Component({
     selector: 'cadastro-search-component',
@@ -14,12 +14,14 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     public jaBuscou: boolean = false;
 
+    private count: number = 0;
+
     constructor(public holderService: HolderService,
         private cadastroService: CadastroService,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
         public navCtrl: NavController) {
-        super(alertCtrl);
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() { }
@@ -28,54 +30,110 @@ export class CadastroSearchComponent extends SuperComponentService implements On
     public getCadastro() {
         this.resetHolder();
         setTimeout(() => {
-            // --Prod
-            this.buscaCadastro("Consultando Cadastro");
-            // --Mockc
-            // this.getCadastroMock("Consultando Cadastro Mock");
+            if (this.holderService.isMock) {
+                // --Mock
+                this.getCadastroMock("Consultando Cadastro Mock");
+            } else {
+                // --Prod
+                this.buscaCadastro("Consultando Cadastro");
+            }
         }, 1);
     }
 
     public buscaCadastro(mensagem: string) {
-        super.showError(false);
+        this.count = 0;
         if (this.validInstancia()) {
-            let carregando = this.loadingCtrl.create({ content: mensagem });
-            carregando.present();
+            this.loading(true, mensagem);
+            this.startTimer();
             this.cadastroService
                 .getCadastro(this.holderService.instancia)
                 .then(response => {
-                    if (super.validState(response.output)) {
-                        this.holderService.cadastro = response.output.customer;
-                        this.holderService.tabCadastroAtivo = true;
-                        setTimeout(() => {
-                            this.navCtrl.parent.select(1);
-                        }, 1);
+                    if (response) {
+                        let rqSi = setInterval(() => {
+                            if (this.count < this.holderService.rcount) {
+                                this.count++;
+                                this.cadastroService
+                                    .gettask(response.id)
+                                    .then(resposta => {
+                                        if (resposta.state === "EXECUTED") {
+                                            if (super.validState(resposta.output, this.holderService.instancia)) {
+                                                if (super.validCustomer(resposta.output, this.holderService.instancia)) {
+                                                    this.holderService.cadastro = resposta.output.customer;
+                                                    this.holderService.tabCadastroAtivo = true;
+                                                    setTimeout(() => {
+                                                        this.navCtrl.parent.select(1);
+                                                    }, 1);
+                                                    this.validDSLAM();
+                                                    this.msgEventoMassivo();
+                                                    this.loading(false);
+                                                    this.ativo = false;
+                                                    this.jaBuscou = true;
+                                                    this.holderService.btnFazFulltestAtivo = true;
+                                                    clearInterval(rqSi);
+                                                } else {
+                                                    this.loading(false);
+                                                    clearInterval(rqSi);
+                                                    this.holderService.btnFazFulltestAtivo = false;
+                                                }
+                                            } else {
+                                                this.loading(false);
+                                                this.msgEventoMassivo();
+                                                this.jaBuscou = true;
+                                                clearInterval(rqSi);
+                                            }
+                                        }
+                                    }, error => {
+                                        this.loading(false);
+                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                        clearInterval(rqSi);
+                                    });
+                                if (this.count === this.holderService.rcount) {
+                                    this.tempobuscaexcedido();
+                                    clearInterval(rqSi);
+                                }
+                            } else {
+                                this.tempobuscaexcedido();
+                                clearInterval(rqSi);
+                            }
+                        }, this.holderService.rtimeout);
+                    } else {
+                        this.loading(false);
+                        super.showAlert(super.makeexceptionmessageTitle("Erro ao realizar busca de cadastro.", true), super.makeexceptionmessage(response.exceptionMessage, this.holderService.instancia));
                     }
                 }, error => {
-                    super.showError(true, "erro", "Ops, aconteceu algo.", error.mError);
+                    this.loading(false);
+                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
                     console.log("Deu erro -- error --!!! AMD p(o.o)q");
-                })
-                .then(() => {
-                    carregando.dismiss();
-                    this.msgEventoMassivo();
-                    this.jaBuscou = true;
                 });
         }
     }
 
+    private tempobuscaexcedido() {
+        this.loading(false);
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        this.jaBuscou = true;
+    }
+
+    private startTimer() {
+        this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
+    }
+
     public getCadastroMock(mensagem: string) {
-        super.showError(false);
-        // if (this.validInstancia()) {
-        let carregando = this.loadingCtrl.create({ content: mensagem });
-        carregando.present();
+        this.loading(true, mensagem);
+        this.startTimer();
         setTimeout(() => {
-            carregando.dismiss();
-            this.holderService.cadastro = this.cadastroService.getCadastroMock();
+            this.holderService.cadastro = this.cadastroService.getCadastroMock().output.customer;
             this.holderService.tabCadastroAtivo = true;
-            this.msgEventoMassivo();
             setTimeout(() => {
                 this.navCtrl.parent.select(1);
             }, 1);
-        }, 300);
+            this.validDSLAM();
+            this.msgEventoMassivo();
+            this.loading(false);
+            this.ativo = false;
+            this.jaBuscou = true;
+            this.holderService.btnFazFulltestAtivo = true;
+        }, 5000);
         // }
     }
 
@@ -103,13 +161,30 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     public validInstancia(): boolean {
         let valid: boolean = false;
-        if (this.holderService.instancia && this.holderService.instancia.length === 10) {
+        if (this.holderService.instancia != null && this.holderService.instancia != undefined) {
             this.holderService.instancia = this.holderService.instancia.trim();
-            valid = true;
+            if (this.holderService.instancia.length === 10) {
+                valid = true;
+            } else {
+                super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
+            }
         } else {
             super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
         }
         return valid;
+    }
+
+    private validDSLAM() {
+        if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
+            || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
+            || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
+            || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
+            || this.holderService.cadastro.rede.modeloDslam === "CCPE"
+            || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
+            || this.holderService.cadastro.rede.modeloDslam === "NVLT"
+            || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
+            super.showAlert(super.makeexceptionmessageTitle("Atenção.", true), "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
+        }
     }
 
 }

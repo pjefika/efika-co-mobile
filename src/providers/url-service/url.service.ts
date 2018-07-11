@@ -4,23 +4,27 @@ import { RequestAction } from './url-service.interface';
 import { InfoRequest } from '../../view-model/url-service/info-request';
 import { Headers, RequestOptions, Http } from '@angular/http';
 import 'rxjs/add/operator/timeout'
+import { HolderService } from '../holder/holder.service';
 
 @Injectable()
 export class UrlService extends SuperService implements RequestAction {
 
-    public urlIp = "http://ec2-54-233-253-253.sa-east-1.compute.amazonaws.com:8080/"; // -- Produção
-    // public urlIp = "http://10.40.195.81:8080/"; // --QA
+    // public urlIpProd = "http://ec2-54-233-253-253.sa-east-1.compute.amazonaws.com:8080/"; // -- Produção Old
+    public urlIpProd = "http://54.94.208.183:8080/"  // -- Produção
+    public urlIpQA = "http://10.40.196.182:8080/"; // --QA // 7175
 
-    public pathStealerAPI = "stealerAPI/"; // stealerAPI_qa
-    public pathFulltestAPI = "fulltestAPI/";
+    // public pathStealerAPI = "stealerAPI/"; // stealerAPI_qa
+    // public pathFulltestAPI = "fulltestAPI/";
     public queueAPI = "queueAPI/";
 
     private headersAppJson = new Headers({ 'Content-Type': 'application/json' });
     public options = new RequestOptions({ headers: this.headersAppJson });
+
     private url;
 
-    constructor(private http: Http) {
-        super();
+    constructor(private http: Http,
+        public holderService: HolderService) {
+        super(holderService);
     }
 
     public request(infoResquest: InfoRequest) {
@@ -34,12 +38,14 @@ export class UrlService extends SuperService implements RequestAction {
     }
 
     public post(infoResquest: InfoRequest) {
+
         const url = `${this.url}` + infoResquest.command;
+
         return this.http.post(url, JSON.stringify(infoResquest._data), this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
-                return response.json()
+                return response.json();
             })
             .catch(super.handleErrorKing);
     }
@@ -65,7 +71,11 @@ export class UrlService extends SuperService implements RequestAction {
         if (l) {
             this.url = l;
         } else {
-            this.url = this.urlIp;
+            if (this.holderService.isLinkProd) {
+                this.url = this.urlIpProd;
+            } else {
+                this.url = this.urlIpQA;
+            }
         }
     }
 

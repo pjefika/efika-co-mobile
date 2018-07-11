@@ -21,6 +21,10 @@ export class PerformanceComponent extends ConfiguracoesPortaService implements O
         this.getValid();
     }
 
+    ionViewWillLeave() {
+        this.holderService.showhidetab = true;
+    }
+
     private getValid() {
         this.confbRede = super.getParameterValid(this.holderService.certification.fulltest.valids, "Confiabilidade de Rede");        
     }

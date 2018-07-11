@@ -41,9 +41,10 @@
             <tr>
                 <td colspan="2">
                     <button ion-button round block (click)="getConfRede()">Reconsultar Tabela de Rede</button>
+                    <counter-component [timer]="timer"></counter-component>
                 </td>
             </tr>
         </tbody>
     </table>
-
+    <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
 </div>

@@ -10,8 +10,18 @@
         </thead>
         <tbody>
             <tr>
+                <td data-label="Instância">
+                    {{certification.customer.instancia}}
+                </td>
+                <td data-label="FKID">
+                    {{certification.fkId}}
+                    <!-- Ira mudar....... para FKID -->
+                </td>
                 <td data-label="Duração do Fulltest">
                     {{certification.dataFim | amDifference: certification.dataInicio: 'seconds'}} Segundos
+                </td>
+                <td data-label="Data do Comando">
+                    {{ (certification.dataFim / 1000 | amFromUnix) | amDateFormat: 'DD/MM/YYYY HH:mm:ss' }}
                 </td>
                 <td data-label="Orientação">{{certification.orientacao === 'OK' ? 'Encerrar' : certification.orientacao}}</td>
                 <td data-label="Conclusão Final">
@@ -24,7 +34,10 @@
         </tbody>
     </table>
     <div>
-        <button ion-button round small block (click)="goToETA()" *ngIf="certification.resultado === 'OK'" color="secondary">Clique para encerrar</button>
+        <div *ngIf="certification.resultado === 'OK'">
+            <p style="font-size: 0.9em; margin-left: 5%; margin-right: 5%;">Nenhum problema encontrado no Cadastro do cliente, utilize o botão abaixo para encerrar.</p>
+            <button ion-button block (click)="goToETA()" color="secondary">Clique para encerrar</button>
+        </div>
         <a href="tel:+{{numero}}" ion-button round small block *ngIf="certification.resultado === 'FORWARDED_CO'">
             Link Suporte
         </a>

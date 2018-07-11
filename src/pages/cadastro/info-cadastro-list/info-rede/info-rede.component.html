@@ -22,75 +22,83 @@
                     <th> Planta: </th>
                     <td> {{rede.planta}} </td>
                 </tr>
-                <tr *ngIf="rede.ipDslam">
-                    <th> IpDslam: </th>
-                    <td> {{rede.ipDslam}} </td>
+                <tr *ngIf="holderService.cadastro.radius">
+                    <th> Armario: </th>
+                    <td> {{holderService.cadastro.radius.armario}} </td>
                 </tr>
                 <tr *ngIf="rede.vendorDslam">
-                    <th> VendorDslam: </th>
+                    <th> Vendor Dslam: </th>
                     <td> {{rede.vendorDslam}} </td>
                 </tr>
                 <tr *ngIf="rede.modeloDslam">
-                    <th> ModeloDslam: </th>
+                    <th> Modelo Dslam: </th>
                     <td> {{rede.modeloDslam}} </td>
                 </tr>
-                <tr *ngIf="rede.idOnt">
-                    <th> IdOnt: </th>
-                    <td> {{rede.idOnt}} </td>
-                </tr>
-                <tr *ngIf="rede.terminal">
-                    <th> Terminal: </th>
-                    <td> {{rede.terminal}} </td>
-                </tr>
-                <tr *ngIf="rede.ipMulticast">
-                    <th> IpMulticast: </th>
-                    <td> {{rede.ipMulticast}} </td>
-                </tr>
-                <tr *ngIf="rede.nrc">
-                    <th> NRC: </th>
-                    <td> {{rede.nrc}} </td>
-                </tr>
                 <tr *ngIf="rede.slot">
-                    <th> Slot: </th>
+                    <th> Slot Equipamento: </th>
                     <td> {{rede.slot}} </td>
                 </tr>
                 <tr *ngIf="rede.porta">
-                    <th> Porta: </th>
+                    <th> Porta Equipamento: </th>
                     <td> {{rede.porta}} </td>
                 </tr>
                 <tr *ngIf="rede.sequencial">
-                    <th> Sequencial: </th>
+                    <th> Porta Sequencial: </th>
                     <td> {{rede.sequencial}} </td>
-                </tr>
-                <tr *ngIf="rede.logica">
-                    <th> Logica: </th>
-                    <td> {{rede.logica}} </td>
                 </tr>
                 <tr *ngIf="rede.rin">
                     <th> Rin: </th>
                     <td> {{rede.rin}} </td>
                 </tr>
-                <tr *ngIf="rede.vlanVoip">
+                <!-- Abaixo ira esconder e mostrar de acordo com o usuário -->
+                <tr *ngIf="rede.ipDslam && btnMostrarMaisMenos">
+                    <th> Ip Dslam: </th>
+                    <td> {{rede.ipDslam}} </td>
+                </tr>
+                <tr *ngIf="rede.idOnt && btnMostrarMaisMenos">
+                    <th> Id Ont: </th>
+                    <td> {{rede.idOnt}} </td>
+                </tr>
+                <tr *ngIf="rede.terminal && btnMostrarMaisMenos">
+                    <th> Terminal: </th>
+                    <td> {{rede.terminal}} </td>
+                </tr>
+                <tr *ngIf="rede.ipMulticast && btnMostrarMaisMenos">
+                    <th> Ip Multicast: </th>
+                    <td> {{rede.ipMulticast}} </td>
+                </tr>
+                <tr *ngIf="rede.nrc && btnMostrarMaisMenos">
+                    <th> NRC: </th>
+                    <td> {{rede.nrc}} </td>
+                </tr>
+                <tr *ngIf="rede.logica && btnMostrarMaisMenos">
+                    <th> Logica: </th>
+                    <td> {{rede.logica}} </td>
+                </tr>
+                <tr *ngIf="rede.vlanVoip && btnMostrarMaisMenos">
                     <th> Vlan Voip: </th>
                     <td> {{rede.vlanVoip}} </td>
                 </tr>
-                <tr *ngIf="rede.vlanVod">
+                <tr *ngIf="rede.vlanVod && btnMostrarMaisMenos">
                     <th> Vlan Vod: </th>
                     <td> {{rede.vlanVod}} </td>
                 </tr>
-                <tr *ngIf="rede.vlanMulticast">
+                <tr *ngIf="rede.vlanMulticast && btnMostrarMaisMenos">
                     <th> Vlan Multicast: </th>
                     <td> {{rede.vlanMulticast}} </td>
                 </tr>
-                <tr *ngIf="rede.cvlan">
+                <tr *ngIf="rede.cvlan && btnMostrarMaisMenos">
                     <th> Cvlan: </th>
                     <td> {{rede.cvlan}} </td>
                 </tr>
-                <tr *ngIf="rede.bhs">
+                <tr *ngIf="rede.bhs && btnMostrarMaisMenos">
                     <th> BHS: </th>
-                    <td> {{rede.bhs}} </td>
+                    <td> {{rede.bhs ? 'Sim' : 'Não'}} </td>
                 </tr>
             </tbody>
         </table>
+        <button ion-button color="dark" (click)="actMostrarMaisMenos()" block>
+            {{btnMostrarMaisMenosName}}
+        </button>
     </div>
 </ion-content>

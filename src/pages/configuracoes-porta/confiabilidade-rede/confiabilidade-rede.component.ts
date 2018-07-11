@@ -12,30 +12,69 @@ import { AlertController, LoadingController } from 'ionic-angular';
 
 export class ConfiabilidadeRedeComponent extends SuperConfPortaService implements OnInit {
 
+    private count: number = 0;
+
     constructor(private confiabilidadeRedeService: ConfiabilidadeRedeService,
         public holderService: HolderService,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController) {
-        super(alertCtrl);
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() { }
 
     public getConfRede() {
-        let carregando = this.loadingCtrl.create({ content: "Aguarde..." });
-        carregando.present();
+        this.loading(true, "Aguarde, carregando informações...");
+        this.startTimer();
         this.confiabilidadeRedeService
-            .getConfRede(this.holderService.instancia)
+            .getConfRede(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
-                this.valid = response.output.tabRede;
-                super.showAlert("Sucesso", "Tabela de confiabilidade de rede atualizada com sucesso.");
+                if (response) {
+                    let rqSi = setInterval(() => {
+                        if (this.count < this.holderService.rcount) {
+                            this.count++;
+                            this.confiabilidadeRedeService
+                                .gettask(response.id)
+                                .then(resposta => {
+                                    if (resposta.state === "EXECUTED") {
+                                        if (super.validState(resposta.output, this.holderService.instancia)) {
+                                            this.valid = resposta.output.tabRede;
+                                            super.showAlert("Sucesso", "Tabela de confiabilidade de rede atualizada com sucesso.");
+                                            this.ativo = false;
+                                            this.loading(false);
+                                            clearInterval(rqSi);
+                                        } else {
+                                            this.loading(false);
+                                            clearInterval(rqSi);
+                                        }
+                                    }
+                                }, error => {
+                                    super.showAlert(error.tError, error.mError);
+                                    this.loading(false);
+                                    clearInterval(rqSi);
+                                });
+                            if (this.count === this.holderService.rcount) {
+                                this.tempobuscaexcedido();
+                                clearInterval(rqSi);
+                            }
+                        } else {
+                            this.tempobuscaexcedido();
+                            clearInterval(rqSi);
+                        }
+                    }, this.holderService.rtimeout);
+                }
             }, error => {
-                // error.mError
-                super.showAlert("Erro", "Em desenvolvimento.");
+                this.loading(false);
+                super.showAlert(error.tError, error.mError);
             })
-            .then(() => {
-                carregando.dismiss();
-            });
     }
 
+    private tempobuscaexcedido() {
+        this.loading(false);
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+    }
+
+    private startTimer() {
+        this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
+    }
 }

@@ -13,7 +13,7 @@ export class FabActionComponent implements OnInit {
     public ngOnInit() { }
 
     public logout() {
-        sessionStorage.clear();
+        localStorage.clear();
         window.location.reload();
     }
 

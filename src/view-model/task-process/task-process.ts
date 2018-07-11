@@ -12,4 +12,5 @@ export class TaskProcess {
     consumer: string;
     input: Input;
     output: Output;
+    exceptionMessage: string;
 }

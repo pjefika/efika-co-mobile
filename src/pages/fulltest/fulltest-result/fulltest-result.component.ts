@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HolderService } from '../../../providers/holder/holder.service';
-import { SuperComponentService } from '../../../providers/component-service/super-compoenent.service';
-import { AlertController } from 'ionic-angular';
+import { SuperComponentService } from '../../../providers/component-service/super-component.service';
+import { AlertController, LoadingController } from 'ionic-angular';
+import * as moment from 'moment';
+import { InfoClipBoard } from '../../../view-model/clipboard/info-clipboard';
+import { ClipBoardService } from '../../../providers/clipboard/clipboard.service';
 
 @Component({
     selector: 'fulltest-result-component',
@@ -11,8 +14,10 @@ import { AlertController } from 'ionic-angular';
 export class FulltestResultComponent extends SuperComponentService implements OnInit {
 
     constructor(public holderService: HolderService,
-        public alertCtrl: AlertController) {
-        super(alertCtrl);
+        public alertCtrl: AlertController,
+        public clipBoardService: ClipBoardService,
+        public loadingCtrl: LoadingController) {
+        super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() { }
@@ -27,7 +32,7 @@ export class FulltestResultComponent extends SuperComponentService implements On
                 hClip = hClip + "\n\n||** Fulltest **||\n" + this.trataCopy(certification);
             }
         }
-        if (super.clipboard(hClip)) {
+        if (this.clipBoardService.clipboard(hClip)) {
             super.showAlert("Clipboard", "Conteúdo copiado com sucesso.");
         }
     }
@@ -47,6 +52,40 @@ export class FulltestResultComponent extends SuperComponentService implements On
                 .replace("\"", "");
         }
         return trat;
+    }
+
+    public mountInfo() {
+        let infoClipBoard: InfoClipBoard = new InfoClipBoard();
+        let dataFim: moment.Moment = moment(this.holderService.certification.dataFim);
+        let userSession = JSON.parse(localStorage.getItem("user"));
+
+        infoClipBoard.dataAcao = dataFim.format('DD/MM/YYYY HH:mm:ss').toString();
+        infoClipBoard.tecnico = userSession.user;
+        infoClipBoard.protocolo = this.holderService.certification.fkId;
+        this.holderService.certification.fulltest.valids.forEach(valid => {
+            if (valid.result) {
+                switch (valid.result.nome) {
+                    case "MAC do Equipamento":
+                        infoClipBoard.autenticado = valid.result ? "Sim - " + valid.mensagem : "Não - " + valid.mensagem;
+                        break;
+                    case "Parâmetros":
+                        infoClipBoard.parametro = valid.mensagem;
+                        infoClipBoard.velSincDown = valid.result.velSincDown;
+                        infoClipBoard.velSincUp = valid.result.velSincUp;
+                        break;
+                    case "Parâmetros Ópticos":
+                        infoClipBoard.parametro = valid.mensagem;
+                        infoClipBoard.potOlt = valid.result.potOlt;
+                        infoClipBoard.potOnt = valid.result.potOnt;
+                        break;
+                }
+            }
+        });
+
+        if (this.clipBoardService.clipboard(this.trataCopy(infoClipBoard))) {
+            super.showAlert("Clipboard", "Conteúdo copiado com sucesso.");
+        }
+
     }
 
 }

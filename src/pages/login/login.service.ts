@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../view-model/usuario/usuario';
-import { UrlService } from '../../providers/url-service/url.service';
 import { SuperService } from '../../providers/super-service/super.service';
 import { TaskProcess } from '../../view-model/task-process/task-process';
+import { UrlService } from '../../providers/new_url-service/url.service';
+import { HolderService } from '../../providers/holder/holder.service';
 
 @Injectable()
 export class LoginService extends SuperService {
 
-    constructor(private urlService: UrlService) {
-        super();
+    constructor(public urlService: UrlService,
+        public holderService: HolderService) {
+        super(holderService);
     }
 
     public entrar(usuario: Usuario): Promise<TaskProcess> {
@@ -16,7 +18,7 @@ export class LoginService extends SuperService {
         _data = { task: "AUTH", input: { type: "auth", login: usuario.matricula, senha: usuario.senha }, executor: "IONIC - Mobile" };
         this.infoResquest = {
             rqst: "post",
-            command: this.urlService.queueAPI + "task/process/",
+            command: "task/queue",
             _data: _data,
             timeout: 60000
         };
@@ -28,6 +30,20 @@ export class LoginService extends SuperService {
             .catch(super.handleError);
     }
 
+    public gettask(id: String): Promise<any> {
+        this.infoResquest = {
+            rqst: "get",
+            command: "task/",
+            _data: id,
+            timeout: 10000
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta as TaskProcess;
+            });
+    }
+
     public entrarMock(usuario: Usuario): boolean {
         if (usuario.matricula === "1" && usuario.senha === "1") {
             return true;
@@ -35,5 +51,4 @@ export class LoginService extends SuperService {
             return false;
         }
     }
-
 }

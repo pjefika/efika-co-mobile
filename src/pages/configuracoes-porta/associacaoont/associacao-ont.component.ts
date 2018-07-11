@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SuperConfPortaService } from '../service-configuracoes-porta/super-conf-porta.service';
-import { AlertController, NavController } from 'ionic-angular';
+import { AlertController, NavController, LoadingController } from 'ionic-angular';
 import { OntsLivrsComponent } from './onts-livres/onts-livres.component';
 
 @Component({
@@ -10,7 +10,11 @@ import { OntsLivrsComponent } from './onts-livres/onts-livres.component';
 
 export class AssociacaoOntComponent extends SuperConfPortaService implements OnInit {
 
-    constructor(public alertCtrl: AlertController, public navCtrl: NavController) { super(alertCtrl); }
+    constructor(public alertCtrl: AlertController, 
+        public navCtrl: NavController, 
+        public loadingCtrl: LoadingController) {
+        super(alertCtrl, loadingCtrl);
+    }
 
     public ngOnInit() { }
 

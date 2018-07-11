@@ -9,12 +9,25 @@ import { HolderService } from '../../../../providers/holder/holder.service';
 
 export class InfoRedeComponent implements OnInit {
 
+    public btnMostrarMaisMenos: boolean = false;
+    public btnMostrarMaisMenosName: string = "Mostrar Mais";
+
     public rede: Rede;
 
     constructor(public holderService: HolderService) { }
 
     public ngOnInit() {
         this.rede = this.holderService.cadastro.rede;
+    }
+
+    public actMostrarMaisMenos() {
+        if (this.btnMostrarMaisMenos) {
+            this.btnMostrarMaisMenos = false;
+            this.btnMostrarMaisMenosName = "Mostrar Mais";
+        } else {
+            this.btnMostrarMaisMenos = true;
+            this.btnMostrarMaisMenosName = "Mostrar Menos";
+        }
     }
 
 }

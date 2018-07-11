@@ -21,10 +21,9 @@ export class BlocksCertificationResultComponent implements OnInit {
 
     constructor(public navCtrl: NavController,
         public holderService: HolderService,
-        private fulltestResultActionService: FulltestResultActionService) { }
+        private fulltestResultActionService: FulltestResultActionService) {}
 
     public ngOnInit() {
-        //this.reorganizarBlocos();
     }
 
     /**
@@ -33,11 +32,11 @@ export class BlocksCertificationResultComponent implements OnInit {
      */
     public reorganizarBlocos() {
         this.blocks.sort(function (bloco1, bloco2) {
-            if (bloco1.nome === "PERFORMANCE") {
+            if (bloco1.nome.name === "PERFORMANCE") {
                 return 1;
-            } else if (bloco1.nome < bloco2.nome && bloco1.nome != "PERFORMANCE") {
+            } else if (bloco1.nome.name < bloco2.nome.name && bloco1.nome.name != "PERFORMANCE") {
                 return -1
-            } else if (bloco1.nome > bloco2.nome && bloco1.nome != "PERFORMANCE") {
+            } else if (bloco1.nome.name > bloco2.nome.name && bloco1.nome.name != "PERFORMANCE") {
                 return 1;
             } else {
                 return 0;
@@ -46,45 +45,21 @@ export class BlocksCertificationResultComponent implements OnInit {
     }
 
     public openInfos(info: string) {
+        this.holderService.showhidetab = false;
         switch (info) {
             case "CONECTIVIDADE":
-                //Parametros
                 this.navCtrl.push(ConectividadeComponent);
                 break;
             case "PERFORMANCE":
-                //Confiabilidade de Rede
                 this.navCtrl.push(PerformanceComponent);
                 break;
             case "SERVICOS":
-                //Vlan Banda
-                //Profile
                 this.navCtrl.push(ServicosComponent);
                 break;
             case "CADASTRO":
-                //Modulação                
-                //MAC do Equipamento
                 this.navCtrl.push(CadastroConfpComponent);
                 break;
         }
-    }
-
-    public changeNome(nome: string): string {
-        let nomeC: string;
-        switch (nome) {
-            case "CADASTRO":
-                nomeC = "CADASTRO";
-                break;
-            case "PERFORMANCE":
-                nomeC = "CRC e RESYNC - PERFORM.";
-                break;
-            case "SERVICOS":
-                nomeC = "SERVIÇOS E BRIDGES";
-                break;
-            case "CONECTIVIDADE":
-                nomeC = "PARAMETROS E CONECT.";
-                break;
-        }
-        return nomeC;
     }
 
     public validaInfoInsideBlocks(info: string): boolean {

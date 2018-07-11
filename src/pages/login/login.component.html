@@ -29,6 +29,7 @@
 
     <div padding>
         <button ion-button round color="primary" block (click)="validEntrar()">Entrar</button>
+        <counter-component [timer]="timer"></counter-component>
     </div>
     <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>
 </ion-content>
