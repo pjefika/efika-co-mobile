@@ -23,7 +23,16 @@ export class IndexValidationsService extends SuperService {
             .request(this.infoResquest)
             .then(resposta => {
                 console.log(resposta);
-                return resposta
+                return resposta;
             });
     }
+
+    public getIpEthernet() {
+        return this.urlService
+            .getIpEthernet()
+            .then(resposta => {
+                return resposta;
+            })
+    }
+
 }

@@ -103,4 +103,13 @@ export class UrlService extends LinkService {
         this.ftypename = linksEndPoits.nome;
         this.portLink = linksEndPoits.port;
     }
+
+    public getIpEthernet() {
+        return this.http.get("https://jsonip.com")
+            .toPromise()
+            .then(response => {
+                return response.json();
+            })
+            .catch(super.handleErrorKing);
+    }
 }

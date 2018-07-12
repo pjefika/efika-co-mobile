@@ -29,7 +29,8 @@ export class IndexValidationsComponent extends SuperComponentService implements 
 
     public ngOnInit() {
         this.version = super.getVersion();
-        this.getInfosSystem();
+        this.getIpEthernet();
+        // this.getInfosSystem();
     }
 
     public getInfosSystem() {
@@ -55,6 +56,14 @@ export class IndexValidationsComponent extends SuperComponentService implements 
         if (this.holderService.emManutencao) {
             super.showAlert("Mantenção.", "Estamos em manutenção por favor aguarde...", true);
         }
+    }
+
+    public getIpEthernet() {
+        this.indexValidationsService
+            .getIpEthernet()
+            .then(resposta => {
+                this.holderService.myip = resposta.ip;
+            });
     }
 
 }

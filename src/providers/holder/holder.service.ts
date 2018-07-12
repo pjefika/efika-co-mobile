@@ -30,6 +30,8 @@ export class HolderService {
     public cadastro: Cadastro;
     // Segura o Fulltest realizado pelo usuário
     public certification: Certification;
+    // Segura o ip local da rede conectada
+    public myip: string;
 
     /**
     * Variavel de controle de menu do rodapé 
