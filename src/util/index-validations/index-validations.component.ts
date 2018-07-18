@@ -4,6 +4,10 @@ import { IndexValidationsService } from './index-validations.service';
 import { LoadingController, AlertController } from 'ionic-angular';
 import { SuperComponentService } from '../../providers/component-service/super-component.service';
 import { HolderService } from '../../providers/holder/holder.service';
+import { NotificationService } from '../../providers/notification/notification.service';
+import { IndexValidations } from '../../view-model/index-validations/index-validations';
+
+declare let ClientIP: any;
 
 @Component({
     selector: 'index-validations-component',
@@ -15,22 +19,22 @@ export class IndexValidationsComponent extends SuperComponentService implements 
 
     public version: string;
 
-    public infoSys: {
-        version: string;
-        estaEmManutencao: boolean;
-    }
+    public infoSys: IndexValidations;
 
     constructor(private indexValidationsService: IndexValidationsService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
-        public holderService: HolderService) {
+        public holderService: HolderService,
+        public notificationService: NotificationService) {
         super(alertCtrl, loadingCtrl);
     }
 
     public ngOnInit() {
         this.version = super.getVersion();
-        this.getIpEthernet();
-        // this.getInfosSystem();
+        // this.getIpEthernet();
+        this.ipsprivateandpublicisequeal();
+        this.getInfosSystem();
+        this.notificationService.allowNotify();
     }
 
     public getInfosSystem() {
@@ -38,16 +42,19 @@ export class IndexValidationsComponent extends SuperComponentService implements 
             .getInfosSystem()
             .then(resposta => {
                 this.infoSys = resposta;
-                this.validversion();
-                this.validEmManutencao();
+                if (resposta.useValidations) {
+                    this.validversion();
+                    this.validEmManutencao();
+                }
             }, error => {
-                console.log("Não foi possivel carregar informações do sistema.");
+                console.log("Não foi possivel carregar informações de sistema.");
             });
     }
 
     public validversion() {
         if (this.version !== this.infoSys.version) {
             super.showAlert("Versão divirgente", super.makeexceptionmessage("A versão do seu sistema é diferente da versão atual, por favor atualize sua página para baixar a nova versão, a versão mais atual é : " + this.infoSys.version + "."), true);
+            // this.notificationService.notify("Versão divirgente", "A versão do seu sistema é diferente da versão atual, por favor atualize sua página para baixar a nova versão, a versão mais atual é : " + this.infoSys.version + ".");
         }
     }
 
@@ -59,11 +66,18 @@ export class IndexValidationsComponent extends SuperComponentService implements 
     }
 
     public getIpEthernet() {
-        this.indexValidationsService
-            .getIpEthernet()
-            .then(resposta => {
-                this.holderService.myip = resposta.ip;
-            });
+        setTimeout(() => {
+            let pvip = ClientIP;
+            console.log(pvip);
+        }, 1000);
+    }
+
+    public ipsprivateandpublicisequeal() {
+        let publicIP = window.location.origin;
+        let privateIP = ClientIP;
+        if (privateIP != publicIP) {
+            this.holderService.validipspublicandprivate = false;
+        }
     }
 
 }

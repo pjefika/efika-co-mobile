@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HolderService } from '../../providers/holder/holder.service';
 
+import { NavController } from 'ionic-angular';
+import { UserModifyComponent } from '../login/user-modify/user-modify.component';
+import { TestesRedeComponent } from '../../util/testes-rede/testes-rede.component';
+
 @Component({
     selector: 'fab-action-component',
     templateUrl: 'fab-actions.component.html'
@@ -8,7 +12,8 @@ import { HolderService } from '../../providers/holder/holder.service';
 
 export class FabActionComponent implements OnInit {
 
-    constructor(public holderService: HolderService) { }
+    constructor(public holderService: HolderService,
+        public navCtrl: NavController) { }
 
     public ngOnInit() { }
 
@@ -20,4 +25,13 @@ export class FabActionComponent implements OnInit {
     public novoAtendmento() {
         window.location.reload();
     }
+
+    public userconfig() {
+        this.navCtrl.push(UserModifyComponent);
+    }
+
+    public testcase() {
+        this.navCtrl.push(TestesRedeComponent);
+    }
+
 }

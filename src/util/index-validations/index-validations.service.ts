@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { SuperService } from '../../providers/super-service/super.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { UrlService } from '../../providers/new_url-service/url.service';
+import { IndexValidations } from '../../view-model/index-validations/index-validations';
 
 @Injectable()
 export class IndexValidationsService extends SuperService {
@@ -12,7 +13,7 @@ export class IndexValidationsService extends SuperService {
         super(holderService);
     }
 
-    public getInfosSystem(): Promise<any> {
+    public getInfosSystem(): Promise<IndexValidations> {
         this.infoResquest = {
             rqst: "get",
             otherUrl: "http://54.94.208.183/efika-mobile-infos.json",
@@ -22,8 +23,8 @@ export class IndexValidationsService extends SuperService {
         return this.urlService
             .request(this.infoResquest)
             .then(resposta => {
-                console.log(resposta);
-                return resposta;
+                // console.log(resposta);
+                return resposta as IndexValidations;
             });
     }
 

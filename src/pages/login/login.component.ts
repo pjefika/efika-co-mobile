@@ -2,11 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LoginService } from './login.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { Usuario } from '../../view-model/usuario/usuario';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController, AlertController, NavController } from 'ionic-angular';
 import { SuperComponentService } from '../../providers/component-service/super-component.service';
 import { LoginUtilService } from '../../util/login-util/login-util.service';
 
 import * as moment from 'moment';
+import { Usuario_N } from '../../view-model/usuario/usuario_n';
+import { UserModifyComponent } from './user-modify/user-modify.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @Component({
     selector: 'login-component',
@@ -18,6 +21,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     public usuario = new Usuario();
 
+    public usuario_n: Usuario_N;
+
     public showHidePassword: boolean = false;
 
     @ViewChild('input') private input;
@@ -28,7 +33,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
-        public loginUtilService: LoginUtilService) {
+        private loginUtilService: LoginUtilService,
+        public navCtrl: NavController) {
         super(alertCtrl, loadingCtrl);
     }
 
@@ -45,6 +51,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         if (this.holderService.isMock) {
             // --Mock        
             this.entrarMock();
+            // this.entrarnewauth(); // Nova conf de autenticação
         } else {
             // --Prod
             if (this.userisvalid()) {
@@ -84,11 +91,11 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         this.count = 0;
         this.showHidePassword = false;
         this.loading(true, "Consultando Login");
-        this.startTimer();
         this.loginService
             .entrar(this.usuario)
             .then(response => {
                 if (response) {
+                    this.startTimer();
                     let rqSi = setInterval(() => {
                         if (this.count < this.holderService.rcount) {
                             this.count++;
@@ -141,7 +148,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     private startTimer() {
@@ -163,6 +170,45 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         }
     }
 
-   
+    public entrarnewauth() {
+
+        this.loginService
+            .entrarnewauth(this.usuario)
+            .then(rsp => {
+                if (rsp) {
+                    this.loginService
+                        .getnewuserauth()
+                        .then(resposta => {
+
+                            this.usuario_n = resposta;
+                            this.holderService.usuario_n = this.usuario_n;
+
+                        })
+                        .then(() => {
+                            if (!this.loginUtilService.userIsValid(this.usuario_n)) {
+                                // open modal with values
+                                setTimeout(() => {
+                                    this.navCtrl.push(UserModifyComponent);
+                                }, 500);
+                            } else {
+                                localStorage.setItem("user", JSON.stringify({ user: this.holderService.usuario_n.matricula }));
+                                this.holderService.estalogado = true;
+                                this.holderService.showhidetab = true;
+                            }
+                        });
+                }
+            }, error => {
+                super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+                this.usuario.matricula = "";
+                this.usuario.senha = "";
+            });
+
+    }
+
+    public solicitarAcesso() {
+        setTimeout(() => {
+            this.navCtrl.push(CreateUserComponent);
+        }, 500);
+    }
 
 }

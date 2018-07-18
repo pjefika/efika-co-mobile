@@ -53,6 +53,10 @@ import { ClipBoardService } from '../providers/clipboard/clipboard.service';
 import { CounterComponent } from '../util/counter/counter.component';
 import { MensagemMuralComponent } from '../pages/home/info-mural/mensagem-mural/mensagem-mural.component';
 import { IndexValidationsComponent } from '../util/index-validations/index-validations.component';
+import { NotificationService } from '../providers/notification/notification.service';
+import { UserModifyComponent } from '../pages/login/user-modify/user-modify.component';
+import { CreateUserComponent } from '../pages/login/create-user/create-user.component';
+import { TestesRedeComponent } from '../util/testes-rede/testes-rede.component';
 
 @NgModule({
 	declarations: [
@@ -97,7 +101,10 @@ import { IndexValidationsComponent } from '../util/index-validations/index-valid
 		FabActionComponent,
 		CounterComponent,
 		MensagemMuralComponent,
-		IndexValidationsComponent
+		IndexValidationsComponent,
+		UserModifyComponent,
+		CreateUserComponent,
+		TestesRedeComponent
 	],
 	imports: [
 		BrowserModule,
@@ -145,7 +152,10 @@ import { IndexValidationsComponent } from '../util/index-validations/index-valid
 		InfoMuralComponent,
 		OntsLivrsComponent,
 		MensagemMuralComponent,
-		IndexValidationsComponent
+		IndexValidationsComponent,
+		UserModifyComponent,
+		CreateUserComponent,
+		TestesRedeComponent
 	],
 	providers: [
 		StatusBar,
@@ -156,7 +166,8 @@ import { IndexValidationsComponent } from '../util/index-validations/index-valid
 		LinkService,
 		SuperComponentService,
 		LoginUtilService,
-		ClipBoardService
+		ClipBoardService,
+		NotificationService
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

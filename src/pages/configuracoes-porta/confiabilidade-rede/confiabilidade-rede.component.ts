@@ -25,12 +25,13 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
 
     public getConfRede() {
         this.loading(true, "Aguarde, carregando informações...");
-        this.startTimer();
+
         this.confiabilidadeRedeService
             .getConfRede(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
                 if (response) {
                     let rqSi = setInterval(() => {
+                        this.startTimer();
                         if (this.count < this.holderService.rcount) {
                             this.count++;
                             this.confiabilidadeRedeService
@@ -71,7 +72,7 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     private startTimer() {

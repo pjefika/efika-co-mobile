@@ -1,6 +1,7 @@
 import { Cadastro } from "../../view-model/cadastro/cadastro";
 import { Injectable } from "@angular/core";
 import { Certification } from "../../view-model/certification/certification";
+import { Usuario_N } from "../../view-model/usuario/usuario_n";
 
 @Injectable()
 export class HolderService {
@@ -23,6 +24,9 @@ export class HolderService {
     public estalogado: boolean;
 
     public showhidetab: boolean;
+
+    // Segura o usuario buscado
+    public usuario_n: Usuario_N;
 
     // Segura a instância inserida
     public instancia: string;
@@ -53,6 +57,10 @@ export class HolderService {
     public rcount: number = 20;
 
     public emManutencao: boolean = false;
+
+    public validipspublicandprivate: boolean = false;
+
+    public validchangeBHS: boolean;
 
     constructor() { }
 

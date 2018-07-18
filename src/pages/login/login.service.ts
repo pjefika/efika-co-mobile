@@ -4,6 +4,7 @@ import { SuperService } from '../../providers/super-service/super.service';
 import { TaskProcess } from '../../view-model/task-process/task-process';
 import { UrlService } from '../../providers/new_url-service/url.service';
 import { HolderService } from '../../providers/holder/holder.service';
+import { Usuario_N } from '../../view-model/usuario/usuario_n';
 
 @Injectable()
 export class LoginService extends SuperService {
@@ -51,4 +52,40 @@ export class LoginService extends SuperService {
             return false;
         }
     }
+
+    public entrarnewauth(usuario: Usuario): Promise<boolean> {
+        console.log(usuario);
+        return Promise.resolve(true);
+    }
+
+    public getnewuserauth(): Promise<Usuario_N> {
+        let usuario_N: Usuario_N;
+        // usuario_N = {
+        //     id: "1234",
+        //     matricula: "G0034481",
+        //     nome: "Fabio Henrique Clem da Silva",
+        //     email: null,
+        //     cpf: null,
+        //     dt_nascimento: null,
+        //     senha: null,
+        //     area: null,
+        //     perfis: null
+        // }
+
+        usuario_N = {
+            id: "1234",
+            matricula: "G0034481",
+            nome: "Fabio Henrique Clem da Silva",
+            email: "fabioh.silva@telefonica.com",
+            cpf: "08110367909",
+            dt_nascimento: "10/10/2010",
+            senha: null,
+            area: "CO",
+            perfis: "DEV"
+        }
+
+        return Promise.resolve(usuario_N);
+    }
+
+
 }

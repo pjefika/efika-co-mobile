@@ -28,7 +28,7 @@ export class ExceptionService {
         }
         if (error.status === 0) {            
             er = {
-                tError: "Servidor Cod.30",
+                tError: "Servidor Cod.20",
                 mError: "Houve um problema de conexão com nossos servidores por favor aguarde um momento e tente novamente."
             }
             console.log(er);

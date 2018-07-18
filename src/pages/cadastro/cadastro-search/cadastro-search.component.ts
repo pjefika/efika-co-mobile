@@ -44,11 +44,11 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         this.count = 0;
         if (this.validInstancia()) {
             this.loading(true, mensagem);
-            this.startTimer();
             this.cadastroService
                 .getCadastro(this.holderService.instancia)
                 .then(response => {
                     if (response) {
+                        this.startTimer();
                         let rqSi = setInterval(() => {
                             if (this.count < this.holderService.rcount) {
                                 this.count++;
@@ -65,6 +65,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                     }, 1);
                                                     this.validDSLAM();
                                                     this.msgEventoMassivo();
+                                                    this.validbhs();
                                                     this.loading(false);
                                                     this.ativo = false;
                                                     this.jaBuscou = true;
@@ -110,7 +111,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
         this.jaBuscou = true;
     }
 
@@ -184,6 +185,31 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             || this.holderService.cadastro.rede.modeloDslam === "NVLT"
             || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
             super.showAlert(super.makeexceptionmessageTitle("Atenção.", true), "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
+        }
+    }
+
+    private validbhs() {
+        if (this.holderService.cadastro.rede.planta === "VIVO1" &&
+            this.holderService.cadastro.rede.tipo === "GPON" &&
+            !this.holderService.cadastro.rede.bhs) {
+            let alert;
+            alert = this.alertCtrl.create({
+                title: "Configuração HGU",
+                subTitle: "Será utilizado HGU para configurar o cliente.",
+                buttons: [{
+                    text: "Não",
+                    role: "cancel",
+                    handler: () => {
+                        this.holderService.cadastro.rede.bhs = false;
+                    }
+                }, {
+                    text: "Sim",
+                    handler: () => {
+                        this.holderService.cadastro.rede.bhs = true;
+                    }
+                }]
+            });
+            alert.present();
         }
     }
 

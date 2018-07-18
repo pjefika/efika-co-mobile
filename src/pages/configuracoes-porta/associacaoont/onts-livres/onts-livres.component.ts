@@ -33,7 +33,6 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
     private getOntsDisp() {
         this.count = 0;
         this.loading(true, "Aguarde, carregando ONT's...");
-        this.startTimer();
         this.ontsLivresService
             .getOntsDisp(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
@@ -44,6 +43,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
                             this.ontsLivresService
                                 .gettask(response.id)
                                 .then(resposta => {
+                                    this.startTimer();
                                     if (resposta.state === "EXECUTED") {
                                         if (super.validState(resposta.output, this.holderService.instancia)) {
                                             if (resposta.output.onts) {
@@ -85,11 +85,11 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
     public setOnt(ont: Ont) {
         this.count = 0;
         this.loading(true, "Aguarde, associando ONT...");
-        this.startTimer();
         this.ontsLivresService
             .setOntsDisp(ont.serial, this.holderService.cadastro)
             .then(response => {
                 if (response) {
+                    this.startTimer();
                     let rqSi = setInterval(() => {
                         if (this.count < this.holderService.rcount) {
                             this.count++;
@@ -148,7 +148,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     private startTimer() {

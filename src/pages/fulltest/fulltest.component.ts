@@ -43,12 +43,12 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
     public fazFulltest() {
         this.count = 0;
         this.loading(true, "Realizando Fulltest");
-        this.startTimer();
         this.fulltestService
             .doFulltest(this.holderService.cadastro)
             .then(response => {
                 if (response) {
                     let rqSi = setInterval(() => {
+                        this.startTimer();
                         if (this.count < this.holderService.rcount) {
                             this.count++;
                             this.fulltestService
@@ -97,7 +97,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     private startTimer() {

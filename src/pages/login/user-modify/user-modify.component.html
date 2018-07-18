@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Configurações de usuário</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item>
+        <ion-label color="primary" stacked>Matricula</ion-label>
+        <ion-input type="text" placeholder="Matricula" [(ngModel)]="holderService.usuario_n.matricula"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Nome</ion-label>
+        <ion-input type="text" placeholder="Nome" [(ngModel)]="holderService.usuario_n.nome"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Email</ion-label>
+        <ion-input type="email" placeholder="Email" [(ngModel)]="holderService.usuario_n.email"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>CPF</ion-label>
+        <ion-input type="text" placeholder="CPF - Somente números" [(ngModel)]="holderService.usuario_n.cpf"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Data de Nascimento</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="holderService.usuario_n.dt_nascimento"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Area</ion-label>
+        <ion-input type="text" placeholder="Area" [(ngModel)]="holderService.usuario_n.area"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Perfil</ion-label>
+        <ion-input type="text" placeholder="Perfil" [(ngModel)]="holderService.usuario_n.perfis"></ion-input>
+    </ion-item>
+
+    <button ion-button color="secondary" full round (click)="updateUser();">Atualizar</button>
+
+</ion-content>

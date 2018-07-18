@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Solicitar Acesso</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item>
+        <ion-label color="primary" stacked>Matricula</ion-label>
+        <ion-input type="text" placeholder="Matricula" [(ngModel)]="usuario_n.matricula" name="matricula"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Email</ion-label>
+        <ion-input type="email" placeholder="Email" [(ngModel)]="usuario_n.email" name="email"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Contato</ion-label>
+        <ion-input type="tel" placeholder="Contato" [(ngModel)]="usuario_n.contato" name="contato"></ion-input>
+    </ion-item>
+
+
+    <button ion-button color="secondary" full round (click)="pedirAcesso();">Solicitar acesso</button>
+
+</ion-content>
