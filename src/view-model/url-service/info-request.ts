@@ -4,4 +4,6 @@ export class InfoRequest {
     _data?: any;
     otherUrl?: string;
     timeout: number;
+    gettoken?: boolean;
+    havetoken?: boolean;
 }

@@ -13,8 +13,10 @@ export class UrlService extends LinkService {
     public urlIpProd = "http://54.94.208.183"  // -- Produção
     public urlIpQA = "http://10.40.196.172"; // --QA 
 
-    private headersAppJson = new Headers({ 'Content-Type': 'application/json' });
-    public options = new RequestOptions({ headers: this.headersAppJson });
+
+    // public options = new RequestOptions({ headers: this.headersAppJson });
+
+    public options;
 
     private ftypename: string;
     private portLink: number;
@@ -25,6 +27,12 @@ export class UrlService extends LinkService {
     }
 
     public request(infoResquest: InfoRequest) {
+        let headers = new Headers({});
+        headers.set("Content-Type", "application/json");
+        if (infoResquest.havetoken) {
+            headers.set("Authorization", this.holderService.headerToken);
+        }
+        this.options = new RequestOptions({ headers });
         switch (infoResquest.rqst) {
             case "post":
                 return this.post(infoResquest);
@@ -38,6 +46,9 @@ export class UrlService extends LinkService {
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
+                if (infoResquest.gettoken) {
+                    this.settoken(response.headers);
+                }
                 return response.json();
             })
             .catch(super.handleErrorKing);
@@ -55,7 +66,11 @@ export class UrlService extends LinkService {
 
     private mountUrl(infoResquest: InfoRequest): string {
         if (infoResquest.otherUrl) {
-            return infoResquest.otherUrl;
+            let ol: string = infoResquest.otherUrl;
+            if (infoResquest._data && infoResquest.rqst === "get") {                
+                ol  = ol + infoResquest._data;
+            }
+            return ol;
         } else {
             let le = super.getLinksEndPoints();
             switch (infoResquest.rqst) {
@@ -111,5 +126,10 @@ export class UrlService extends LinkService {
                 return response.json();
             })
             .catch(super.handleErrorKing);
+    }
+
+    private settoken(header: Headers) {
+        // console.log(header.get("authorization"));
+        this.holderService.headerToken = header.get("authorization");
     }
 }

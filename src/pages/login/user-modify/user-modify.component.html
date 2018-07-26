@@ -28,13 +28,13 @@
     </ion-item>
     <ion-item>
         <ion-label color="primary" stacked>Area</ion-label>
-        <ion-input type="text" placeholder="Area" [(ngModel)]="holderService.usuario_n.area"></ion-input>
+        <ion-input type="text" placeholder="Area" [(ngModel)]="holderService.usuario_n.setor"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-label color="primary" stacked>Perfil</ion-label>
-        <ion-input type="text" placeholder="Perfil" [(ngModel)]="holderService.usuario_n.perfis"></ion-input>
+        <ion-label color="primary" stacked>Contato</ion-label>
+        <ion-input type="text" placeholder="Contato" [(ngModel)]="holderService.usuario_n.telefone"></ion-input>
     </ion-item>
 
-    <button ion-button color="secondary" full round (click)="updateUser();">Atualizar</button>
+    <button ion-button color="secondary" full round (click)="updateuser();">Atualizar</button>
 
 </ion-content>

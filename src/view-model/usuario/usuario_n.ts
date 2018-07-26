@@ -1,12 +1,14 @@
 export class Usuario_N {
-    id: string;
+    id: number;
     matricula: string;
     nome: string;
     email: string;
     cpf: string;
-    dt_nascimento: string;
+    dt_nascimento: Date;
     senha: string;
-    area: string;
-    perfis: string
-    contato?: string;
+    setor: string;
+    telefone: string;
+    dt_expira: Date;
+    dt_criacao: Date;
+    criadoPor: string;
 }

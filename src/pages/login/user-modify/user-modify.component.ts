@@ -14,7 +14,7 @@ import { UserModifyService } from './user-modify.service';
 
 export class UserModifyComponent extends SuperComponentService implements OnInit {
 
-    constructor(//private userModifyService: UserModifyService,
+    constructor(private userModifyService: UserModifyService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
         private loginUtilService: LoginUtilService,
@@ -25,12 +25,20 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
     public ngOnInit() {
         this.uservalid();
     }
-    
-    public updateUser() {
+
+    public updateuser() {
         if (this.uservalid()) {
-            localStorage.setItem("user", JSON.stringify({ user: this.holderService.usuario_n.matricula }));
-            this.holderService.estalogado = true;
-            this.holderService.showhidetab = true;
+            this.userModifyService
+                .updateuserinfo(this.holderService.usuario_n)
+                .then(resposta => {
+                    console.log(resposta);     
+                    this.holderService.usuario_n = resposta;               
+                    localStorage.setItem("user", JSON.stringify({ user: this.holderService.usuario_n.matricula }));
+                    this.holderService.estalogado = true;
+                    this.holderService.showhidetab = true;
+                }, error => {
+                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                });
         }
     }
 

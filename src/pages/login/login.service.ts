@@ -4,7 +4,6 @@ import { SuperService } from '../../providers/super-service/super.service';
 import { TaskProcess } from '../../view-model/task-process/task-process';
 import { UrlService } from '../../providers/new_url-service/url.service';
 import { HolderService } from '../../providers/holder/holder.service';
-import { Usuario_N } from '../../view-model/usuario/usuario_n';
 
 @Injectable()
 export class LoginService extends SuperService {
@@ -54,38 +53,39 @@ export class LoginService extends SuperService {
     }
 
     public entrarnewauth(usuario: Usuario): Promise<boolean> {
-        console.log(usuario);
-        return Promise.resolve(true);
-    }
-
-    public getnewuserauth(): Promise<Usuario_N> {
-        let usuario_N: Usuario_N;
-        // usuario_N = {
-        //     id: "1234",
-        //     matricula: "G0034481",
-        //     nome: "Fabio Henrique Clem da Silva",
-        //     email: null,
-        //     cpf: null,
-        //     dt_nascimento: null,
-        //     senha: null,
-        //     area: null,
-        //     perfis: null
-        // }
-
-        usuario_N = {
-            id: "1234",
-            matricula: "G0034481",
-            nome: "Fabio Henrique Clem da Silva",
-            email: "fabioh.silva@telefonica.com",
-            cpf: "08110367909",
-            dt_nascimento: "10/10/2010",
-            senha: null,
-            area: "CO",
-            perfis: "DEV"
+        let _d: { username: string, password: string };
+        _d = { username: usuario.matricula, password: usuario.senha };
+        this.infoResquest = {
+            rqst: "post",
+            otherUrl: "http://10.40.196.171:8080/auth/logar",
+            command: "entrar",
+            _data: _d,
+            gettoken: true,
+            timeout: 10000
         }
-
-        return Promise.resolve(usuario_N);
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta;
+            })
+            .catch(super.handleError);
     }
 
+    public getuserifos(matricula: string) {
+        this.infoResquest = {
+            rqst: "get",
+            command: "getuserinfo",
+            timeout: 10000,
+            havetoken: true,
+            otherUrl: "http://10.40.196.171:8080/auth/usuario/getinfo?matricula=",
+            _data: matricula
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta;
+            })
+            .catch(this.handleErrorKing);
+    }
 
 }

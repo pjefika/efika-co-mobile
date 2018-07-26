@@ -62,6 +62,8 @@ export class HolderService {
 
     public validchangeBHS: boolean;
 
+    public headerToken: string;
+
     constructor() { }
 
 }

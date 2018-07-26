@@ -65,7 +65,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                     }, 1);
                                                     this.validDSLAM();
                                                     this.msgEventoMassivo();
-                                                    this.validbhs();
+                                                    // this.validbhs();  BHS This
                                                     this.loading(false);
                                                     this.ativo = false;
                                                     this.jaBuscou = true;

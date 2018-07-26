@@ -17,13 +17,13 @@ export class LoginUtilService {
     public userIsValid(usuario_N: Usuario_N): boolean {
         let valid: boolean = true;
         if (usuario_N) {
-            if (usuario_N.id === null ||
-                usuario_N.matricula === null ||
+            if (usuario_N.matricula === null ||
                 usuario_N.nome === null ||
                 usuario_N.email === null ||
                 usuario_N.cpf === null ||
-                usuario_N.area === null ||
-                usuario_N.perfis === null) {
+                usuario_N.dt_nascimento === null ||
+                // usuario_N.setor === null ||
+                usuario_N.telefone === null) {
                 valid = false;
             }
         }

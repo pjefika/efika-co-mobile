@@ -50,11 +50,11 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     public validEntrar() {
         if (this.holderService.isMock) {
             // --Mock        
-            this.entrarMock();
-            // this.entrarnewauth(); // Nova conf de autenticação
+            // this.entrarMock();
         } else {
             // --Prod
             if (this.userisvalid()) {
+                // this.entrarnewauth(); // Nova conf de autenticação
                 this.entrar();
             }
         }
@@ -81,10 +81,65 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         if (this.usuario.matricula === null || this.usuario.matricula === undefined || this.usuario.senha === null || this.usuario.senha === undefined) {
             valid = false;
             super.showAlert("Login ou senha Invalidos", "Campos de Matricula e Senha não pode ser vazio." + " versão: " + super.getVersion());
+            super.showAlert("Login ou senha Invalidos", super.makeexceptionmessage("Campos de Matricula e Senha não pode ser vazio."))
         } else {
             valid = true;
         }
         return valid;
+    }
+
+    // public entrarMock() {
+    //     let verify: boolean;
+    //     verify = this.loginService.entrarMock(this.usuario);
+    //     if (verify) {
+    //         this.usuario.matricula = "IONIC - TEST";
+    //         localStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
+    //         this.holderService.estalogado = verify;
+    //         this.holderService.showhidetab = verify;
+    //     } else {
+    //         super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+    //         this.usuario.matricula = "";
+    //         this.usuario.senha = "";
+    //     }
+    // }
+
+    public entrarnewauth() {
+        this.loginService
+            .entrarnewauth(this.usuario)
+            .then(rsp => {
+                console.log("entrou then");
+                console.log(rsp);
+                this.loginService
+                    .getuserifos(this.usuario.matricula)
+                    .then(resposta => {
+                        this.usuario_n = resposta;
+                        this.holderService.usuario_n = this.usuario_n;
+                    })
+                    .then(() => {
+                        if (!this.loginUtilService.userIsValid(this.usuario_n)) {
+                            // open modal with values
+                            setTimeout(() => {
+                                this.navCtrl.push(UserModifyComponent);
+                            }, 500);
+                        } else {
+                            localStorage.setItem("user", JSON.stringify({ user: this.holderService.usuario_n.matricula }));
+                            this.holderService.estalogado = true;
+                            this.holderService.showhidetab = true;
+                        }
+                    });
+            }, error => {
+                super.showAlert(error.tError, "Login ou senha incorretos, por favor tente novamente.");
+                // super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                this.usuario.matricula = "";
+                this.usuario.senha = "";
+            });
+
+    }
+
+    public solicitarAcesso() {
+        setTimeout(() => {
+            this.navCtrl.push(CreateUserComponent);
+        }, 500);
     }
 
     public entrar() {
@@ -153,62 +208,6 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     private startTimer() {
         this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
-    }
-
-    public entrarMock() {
-        let verify: boolean;
-        verify = this.loginService.entrarMock(this.usuario);
-        if (verify) {
-            this.usuario.matricula = "IONIC - TEST";
-            localStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
-            this.holderService.estalogado = verify;
-            this.holderService.showhidetab = verify;
-        } else {
-            super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
-            this.usuario.matricula = "";
-            this.usuario.senha = "";
-        }
-    }
-
-    public entrarnewauth() {
-
-        this.loginService
-            .entrarnewauth(this.usuario)
-            .then(rsp => {
-                if (rsp) {
-                    this.loginService
-                        .getnewuserauth()
-                        .then(resposta => {
-
-                            this.usuario_n = resposta;
-                            this.holderService.usuario_n = this.usuario_n;
-
-                        })
-                        .then(() => {
-                            if (!this.loginUtilService.userIsValid(this.usuario_n)) {
-                                // open modal with values
-                                setTimeout(() => {
-                                    this.navCtrl.push(UserModifyComponent);
-                                }, 500);
-                            } else {
-                                localStorage.setItem("user", JSON.stringify({ user: this.holderService.usuario_n.matricula }));
-                                this.holderService.estalogado = true;
-                                this.holderService.showhidetab = true;
-                            }
-                        });
-                }
-            }, error => {
-                super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
-                this.usuario.matricula = "";
-                this.usuario.senha = "";
-            });
-
-    }
-
-    public solicitarAcesso() {
-        setTimeout(() => {
-            this.navCtrl.push(CreateUserComponent);
-        }, 500);
     }
 
 }

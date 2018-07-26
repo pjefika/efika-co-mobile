@@ -1,14 +1,20 @@
-[    
+[
     {
         "titulo": "Tutorial Efika CO Mobile",
         "mensagem": "Neste Link você encontra o tutorial completo do Efika CO Mobile.",
-        "data_inicio": 123456789,
-        "data_fim": 123456789,
+        "data_inicio": 0,
+        "data_fim": 0,
         "action": {
             "action": true,
             "namebutton": "Tutorial Efika CO Mobile",
             "colorbutton": "Dark",
             "linkref": "http://54.94.208.183/tutorial/tutorial.html"
         }
+    },
+    {
+        "titulo": "Atualização de cadastro",
+        "mensagem": "Atenção, estamos realizando uma atulização de cadastro e precisamos que seja preenchido o forumulario de acesso até o dia 31/07.",
+        "data_inicio": 0,
+        "data_fim": 0        
     }
 ]
