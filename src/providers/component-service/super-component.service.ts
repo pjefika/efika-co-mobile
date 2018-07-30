@@ -83,7 +83,7 @@ export class SuperComponentService extends ExceptionService {
         this.timer = maxtime; // Passa valor maximo para o timer
         this.timercount = setInterval(() => {
             this.timer--; // Diminui contador
-            if (this.timer === 0) { // Se timer zerar finaliza o mesmo.
+            if (this.timer < 1) { // Se timer zerar finaliza o mesmo.
                 clearInterval(this.timercount);
             }
             // console.log(this.timer);

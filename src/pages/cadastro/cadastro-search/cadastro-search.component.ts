@@ -188,7 +188,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         }
     }
 
-    private validbhs() {
+    public validbhs() {
         if (this.holderService.cadastro.rede.planta === "VIVO1" &&
             this.holderService.cadastro.rede.tipo === "GPON" &&
             !this.holderService.cadastro.rede.bhs) {

@@ -47,8 +47,8 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             .doFulltest(this.holderService.cadastro)
             .then(response => {
                 if (response) {
-                    let rqSi = setInterval(() => {
-                        this.startTimer();
+                    this.startTimer();
+                    let rqSi = setInterval(() => {                        
                         if (this.count < this.holderService.rcount) {
                             this.count++;
                             this.fulltestService
@@ -58,12 +58,12 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                         if (super.validState(resposta.output, this.holderService.instancia)) {
                                             this.holderService.certification = resposta.output.certification;
                                             this.holderService.tabFulltestAtivo = true;
-                                            setTimeout(() => {
-                                                this.navCtrl.parent.select(2);
-                                            }, 1);
                                             this.ativo = false;
                                             this.loading(false);
                                             clearInterval(rqSi);
+                                            setTimeout(() => {
+                                                this.navCtrl.parent.select(2);
+                                            }, 1);
                                         } else {
                                             this.loading(false);
                                             clearInterval(rqSi);
