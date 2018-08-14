@@ -1,5 +1,7 @@
+import { VersionValid } from "./version";
+import { Manutencao } from "./manutencao";
+
 export class IndexValidations {
-    useValidations: boolean;
-    version: string;
-    estaEmManutencao: boolean;
+    version: VersionValid;
+    manutencao: Manutencao;
 }

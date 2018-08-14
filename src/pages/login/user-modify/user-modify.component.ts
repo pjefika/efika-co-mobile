@@ -19,7 +19,7 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
         public alertCtrl: AlertController,
         private loginUtilService: LoginUtilService,
         public holderService: HolderService) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() {

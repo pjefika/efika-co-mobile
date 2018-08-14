@@ -5,6 +5,7 @@ import { SuperComponentService } from '../../../providers/component-service/supe
 import { LoadingController, AlertController, NavController } from 'ionic-angular';
 import { InfoMural } from '../../../view-model/mural/mural';
 import { MensagemMuralComponent } from './mensagem-mural/mensagem-mural.component';
+import { HolderService } from '../../../providers/holder/holder.service';
 
 @Component({
     selector: 'info-mural-component',
@@ -19,12 +20,18 @@ export class InfoMuralComponent extends SuperComponentService implements OnInit 
     constructor(private infoMuralService: InfoMuralService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
-        public navCtrl: NavController) {
-        super(alertCtrl, loadingCtrl);
+        public navCtrl: NavController,
+        public holderService: HolderService) {
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() {
-        this.getInfoMuralMock();
+        if (this.holderService.isMock) {
+            this.getInfoMuralMock();
+        } else {
+            this.getInfoMuralMock();
+            // this.getInfoMural();
+        }
     }
 
     public getInfoMuralMock() {
@@ -32,6 +39,16 @@ export class InfoMuralComponent extends SuperComponentService implements OnInit 
             .getInfoMuralMock()
             .then(resposta => {
                 this.infosMural = resposta;
+            });
+    }
+
+    public getInfoMural() {
+        this.infoMuralService
+            .getInfoMural()
+            .then(resposta => {
+                this.infosMural = resposta;
+            }, error => {
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
             });
     }
 

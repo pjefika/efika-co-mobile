@@ -21,7 +21,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
         public navCtrl: NavController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() { }
@@ -63,18 +63,17 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                     setTimeout(() => {
                                                         this.navCtrl.parent.select(1);
                                                     }, 1);
-                                                    this.validDSLAM();
+                                                    this.holderService.btnFazFulltestAtivo = true;
+                                                    super.validDSLAM(this.holderService.cadastro.rede, this.holderService.instancia);
                                                     this.msgEventoMassivo();
                                                     // this.validbhs();  BHS This
                                                     this.loading(false);
                                                     this.ativo = false;
                                                     this.jaBuscou = true;
-                                                    this.holderService.btnFazFulltestAtivo = true;
                                                     clearInterval(rqSi);
                                                 } else {
                                                     this.loading(false);
                                                     clearInterval(rqSi);
-                                                    this.holderService.btnFazFulltestAtivo = false;
                                                 }
                                             } else {
                                                 this.loading(false);
@@ -88,7 +87,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                         super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
                                         clearInterval(rqSi);
                                     });
-                                if (this.count === this.holderService.rcount) {
+                                if (this.count === this.holderService.rcount && !this.holderService.cadastro) {
                                     this.tempobuscaexcedido();
                                     clearInterval(rqSi);
                                 }
@@ -128,7 +127,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             setTimeout(() => {
                 this.navCtrl.parent.select(1);
             }, 1);
-            this.validDSLAM();
+            super.validDSLAM(this.holderService.cadastro.rede, this.holderService.instancia);
             this.msgEventoMassivo();
             this.loading(false);
             this.ativo = false;
@@ -173,19 +172,6 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             super.showError(true, "cuidado", "Alerta", "Por favor preencha a instância ou verifique se a mesma está correta, o campo não pode estar vazio ou estar faltando digitos a instância consiste em 10 digitos contando o DDD + o número. Ex:4112345678.");
         }
         return valid;
-    }
-
-    private validDSLAM() {
-        if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
-            || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
-            || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
-            || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
-            || this.holderService.cadastro.rede.modeloDslam === "CCPE"
-            || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
-            || this.holderService.cadastro.rede.modeloDslam === "NVLT"
-            || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
-            super.showAlert(super.makeexceptionmessageTitle("Atenção.", true), "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
-        }
     }
 
     public validbhs() {

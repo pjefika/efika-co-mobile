@@ -18,7 +18,7 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
         public holderService: HolderService,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() { }

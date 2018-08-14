@@ -64,6 +64,8 @@ export class HolderService {
 
     public headerToken: string;
 
+    public errorneedfkid: boolean = false;
+
     constructor() { }
 
 }

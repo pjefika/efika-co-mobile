@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AlertController, LoadingController } from 'ionic-angular';
 import { Output } from '../../view-model/task-process/output-task';
 import { ExceptionService } from '../exception/exception.service';
+import { Rede } from '../../view-model/cadastro/rede';
+import { HolderService } from '../holder/holder.service';
 
 @Injectable()
 export class SuperComponentService extends ExceptionService {
@@ -18,7 +20,8 @@ export class SuperComponentService extends ExceptionService {
     public tipo: string;
 
     constructor(public alertCtrl: AlertController,
-        public loadingCtrl: LoadingController) {
+        public loadingCtrl: LoadingController,
+        public holderService: HolderService) {
         super();
     }
 
@@ -70,11 +73,15 @@ export class SuperComponentService extends ExceptionService {
 
     public validCustomer(output: Output, instancia: string): boolean {
         let v: boolean = false;
-        if (!output.customer.rede.ipDslam) {
-            this.showAlert(super.makeexceptionmessageTitle("Ops, aconteceu algo.", true), super.makeexceptionmessage("Não foram identificados informações de rede do cliente, não sendo possivel realizar testes.", instancia));
-        }
         if (output.customer.designador) {
             v = true;
+        }
+        if (!output.customer.rede.ipDslam) {
+            this.showAlert(super.makeexceptionmessageTitle("Ops, aconteceu algo. Cod.40", false), super.makeexceptionmessage("Não foram identificados informações de rede do cliente, não sendo possivel realizar testes, gerado FKID.", instancia));
+        }
+        if (output.customer.designador && !output.customer.rede.ipDslam) {
+            this.holderService.errorneedfkid = true;
+            this.holderService.btnFazFulltestAtivo = false;
         }
         return v;
     }
@@ -102,6 +109,21 @@ export class SuperComponentService extends ExceptionService {
         } else {
             this.carregando.dismiss();
             this.killtimer();
+        }
+    }
+
+    public validDSLAM(rede: Rede, instancia: string) {
+        if (rede.modeloDslam === "LIADSLPT48"
+            || rede.modeloDslam === "VDSL24"
+            || rede.modeloDslam === "VDPE_SIP"
+            || rede.modeloDslam === "CCPE_SIP"
+            || rede.modeloDslam === "CCPE"
+            || rede.modeloDslam === "LI-VDSL24"
+            || rede.modeloDslam === "NVLT"
+            || rede.modeloDslam === "NVLT-C_SIP") {
+            this.showAlert(super.makeexceptionmessageTitle("Atenção.", true), super.makeexceptionmessage("Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações, gerado FKID.", instancia));
+            this.holderService.errorneedfkid = true;
+            this.holderService.btnFazFulltestAtivo = false;
         }
     }
 

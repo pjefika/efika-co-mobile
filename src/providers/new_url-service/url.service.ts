@@ -67,8 +67,8 @@ export class UrlService extends LinkService {
     private mountUrl(infoResquest: InfoRequest): string {
         if (infoResquest.otherUrl) {
             let ol: string = infoResquest.otherUrl;
-            if (infoResquest._data && infoResquest.rqst === "get") {                
-                ol  = ol + infoResquest._data;
+            if (infoResquest._data && infoResquest.rqst === "get") {
+                ol = ol + infoResquest._data;
             }
             return ol;
         } else {
@@ -86,15 +86,7 @@ export class UrlService extends LinkService {
                     }
                     break;
                 case "post":
-                    if (this.ftypename) {
-                        if (this.ftypename === le[2].nome) {
-                            this.ajustLink(le[3]);
-                        } else {
-                            this.ajustLink(le[2]);
-                        }
-                    } else {
-                        this.ajustLink(le[2]);
-                    }
+                    this.ajustLink(le[2]);
                     break;
             }
             let u = this.returnLink(infoResquest);

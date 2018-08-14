@@ -25,7 +25,7 @@ export class CreateUserComponent extends SuperComponentService implements OnInit
         public alertCtrl: AlertController,
         public navCtrl: NavController,
         public viewCtrl: ViewController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() {

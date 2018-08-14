@@ -28,13 +28,19 @@ export class ExceptionService {
             console.log(er);
             return Promise.reject(er);
         }
-        if (error.status >= 500) {
+        if (error.status >= 500 || error.status === 0) {
             console.log(error);
             switch (error.status) {
                 case 503:
                     er = {
                         tError: "Ops, Aconteceu algo. Cod.30.1",
                         mError: "Serviço Indisponível, caso problema persista por favor entrar em contato com o administrador do sistema."
+                    }
+                    break;
+                case 0:
+                    er = {
+                        tError: "Erro (\"Requisição invalida\"). Cod.30.1",
+                        mError: "Não foi possivel realizar requisição podendo ser um possivel problema de conexão, por favor verifique."
                     }
                     break;
                 default:
@@ -48,7 +54,7 @@ export class ExceptionService {
             console.log(er);
             return Promise.reject(er);
         }
-        if (error.status >= 400 && error.status < 500 || error.status === 0) {
+        if (error.status >= 400 && error.status < 500) {
             switch (error.status) {
                 case 400:
                     er = {
@@ -78,12 +84,6 @@ export class ExceptionService {
                     er = {
                         tError: "Erro (\"Proxy\"). Cod.20.5",
                         mError: "Houve um problema ao realizar Request, por causa das configurações de seu proxy por favor verifique seu Proxy, e tente novamente."
-                    }
-                    break;
-                case 0:
-                    er = {
-                        tError: "Erro (\"Requisição invalida\"). Cod.20.6",
-                        mError: "Não foi possivel realizar requisição."
                     }
                     break;
                 default:

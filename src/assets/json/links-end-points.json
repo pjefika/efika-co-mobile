@@ -13,10 +13,5 @@
         "ftype": "set",
         "nome": "set_1",
         "port": 8083
-    },
-    {
-        "ftype": "set",
-        "nome": "set_2",
-        "port": 8084
     }
 ]

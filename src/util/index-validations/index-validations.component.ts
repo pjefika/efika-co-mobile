@@ -29,7 +29,7 @@ export class IndexValidationsComponent extends SuperComponentService implements 
         public notificationService: NotificationService,
         //public navCtrl: NavController
     ) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() {
@@ -42,32 +42,36 @@ export class IndexValidationsComponent extends SuperComponentService implements 
     }
 
     public getInfosSystem() {
-        this.indexValidationsService
-            .getInfosSystem()
-            .then(resposta => {
-                if (resposta) {
-                    this.infoSys = resposta;
-                    if (this.infoSys.useValidations) {
+                   
+            this.indexValidationsService
+                .getInfosSystem()
+                .then(resposta => {
+                    if (resposta) {
+                        this.infoSys = resposta;
                         this.validversion();
                         this.validEmManutencao();
                     }
-                }
-            }, error => {
-                console.log("Não foi possivel carregar informações de sistema.");
-            });
+                }, error => {
+                    console.log("Não foi possivel carregar informações de sistema.");
+                });
+                
     }
 
     public validversion() {
-        if (this.version !== this.infoSys.version) {
-            super.showAlert("Versão divirgente", super.makeexceptionmessage("A versão do seu sistema é diferente da versão atual, por favor atualize sua página para baixar a nova versão, a versão mais atual é : " + this.infoSys.version + "."), true);
-            // this.notificationService.notify("Versão divirgente", "A versão do seu sistema é diferente da versão atual, por favor atualize sua página para baixar a nova versão, a versão mais atual é : " + this.infoSys.version + ".");
+        if (this.infoSys.version.usevalid) {
+            if (this.version !== this.infoSys.version.nome) {
+                super.showAlert("Versão divirgente", super.makeexceptionmessage("A versão do seu sistema é diferente da versão atual, por favor atualize sua página para baixar a nova versão, a versão mais atual é : " + this.infoSys.version + "."), true);
+                // this.notificationService.notify("Versão divirgente", "A versão do seu sistema é diferente da versão atual, por favor atualize sua página para baixar a nova versão, a versão mais atual é : " + this.infoSys.version + ".");
+            }
         }
     }
 
     public validEmManutencao() {
-        this.holderService.emManutencao = this.infoSys.estaEmManutencao;
-        if (this.holderService.emManutencao) {
-            super.showAlert("Mantenção.", "Estamos em manutenção por favor aguarde...", true);
+        if (this.infoSys.manutencao.usevalid) {
+            this.holderService.emManutencao = this.infoSys.manutencao.estaEmManutencao;
+            if (this.holderService.emManutencao) {
+                super.showAlert("Mantenção.", "Estamos em manutenção por favor aguarde...", true);
+            }
         }
     }
 

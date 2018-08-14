@@ -23,7 +23,7 @@ export class OntsLivrsComponent extends SuperConfPortaService implements OnInit 
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
         public navCtrl: NavController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() {

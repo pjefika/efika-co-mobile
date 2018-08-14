@@ -35,7 +35,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         public alertCtrl: AlertController,
         private loginUtilService: LoginUtilService,
         public navCtrl: NavController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() {
@@ -50,7 +50,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     public validEntrar() {
         if (this.holderService.isMock) {
             // --Mock        
-            // this.entrarMock();
+            this.entrarMock();
         } else {
             // --Prod
             if (this.userisvalid()) {
@@ -80,35 +80,33 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         let valid: boolean = false;
         if (this.usuario.matricula === null || this.usuario.matricula === undefined || this.usuario.senha === null || this.usuario.senha === undefined) {
             valid = false;
-            super.showAlert("Login ou senha Invalidos", "Campos de Matricula e Senha não pode ser vazio." + " versão: " + super.getVersion());
             super.showAlert("Login ou senha Invalidos", super.makeexceptionmessage("Campos de Matricula e Senha não pode ser vazio."))
         } else {
             valid = true;
-        }
+        }        
         return valid;
     }
 
-    // public entrarMock() {
-    //     let verify: boolean;
-    //     verify = this.loginService.entrarMock(this.usuario);
-    //     if (verify) {
-    //         this.usuario.matricula = "IONIC - TEST";
-    //         localStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
-    //         this.holderService.estalogado = verify;
-    //         this.holderService.showhidetab = verify;
-    //     } else {
-    //         super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
-    //         this.usuario.matricula = "";
-    //         this.usuario.senha = "";
-    //     }
-    // }
+    public entrarMock() {
+        let verify: boolean;
+        verify = this.loginService.entrarMock(this.usuario);
+        if (verify) {
+            this.usuario.matricula = "IONIC - TEST";
+            localStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
+            this.holderService.estalogado = verify;
+            this.holderService.showhidetab = verify;
+        } else {
+            super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+            this.usuario.matricula = "";
+            this.usuario.senha = "";
+        }
+    }
 
     public entrarnewauth() {
         this.loginService
             .entrarnewauth(this.usuario)
             .then(rsp => {
-                console.log("entrou then");
-                console.log(rsp);
+
                 this.loginService
                     .getuserifos(this.usuario.matricula)
                     .then(resposta => {
@@ -127,6 +125,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                             this.holderService.showhidetab = true;
                         }
                     });
+
             }, error => {
                 super.showAlert(error.tError, "Login ou senha incorretos, por favor tente novamente.");
                 // super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
@@ -180,7 +179,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                                     clearInterval(rqSi);
                                     super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
                                 });
-                            if (this.count === this.holderService.rcount) {
+                            if (this.count === this.holderService.rcount && !this.holderService.estalogado) {
                                 this.tempobuscaexcedido();
                                 clearInterval(rqSi);
                             }
@@ -203,7 +202,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido, falha de login. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     private startTimer() {

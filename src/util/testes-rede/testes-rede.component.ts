@@ -18,7 +18,7 @@ export class TestesRedeComponent extends SuperComponentService implements OnInit
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() { }

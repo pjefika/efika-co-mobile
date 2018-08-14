@@ -1,6 +1,6 @@
 {
 	"name": "efika-co-mobile",
-	"version": "2.5.7",
+	"version": "2.5.9",
 	"author": "Efika Team",
 	"homepage": "http://ionicframework.com/",
 	"private": true,
@@ -40,8 +40,9 @@
 		"zone.js": "^0.8.26"
 	},
 	"devDependencies": {
-		"@ionic/app-scripts": "^3.1.10",
-		"typescript": "2.6.2"
+		"@ionic/app-scripts": "^3.1.11",
+		"typescript": "2.6.2",
+		"ws": "3.3.2"
 	},
 	"description": "Ferramenta de suporte que auxilia o técnico em campo, visando melhorar a qualidade dos serviços do cliente.",
 	"cordova": {

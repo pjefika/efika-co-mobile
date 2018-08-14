@@ -21,11 +21,14 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         private fulltestService: FulltestService,
         public navCtrl: NavController,
         public alertCtrl: AlertController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() {
-        this.validDSLAM();
+        if (this.holderService.errorneedfkid) {
+            this.fazfulltesttogetfkid();
+        }
+
     }
 
     public fulltest() {
@@ -38,8 +41,6 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         }
     }
 
-
-
     public fazFulltest() {
         this.count = 0;
         this.loading(true, "Realizando Fulltest");
@@ -48,7 +49,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             .then(response => {
                 if (response) {
                     this.startTimer();
-                    let rqSi = setInterval(() => {                        
+                    let rqSi = setInterval(() => {
                         if (this.count < this.holderService.rcount) {
                             this.count++;
                             this.fulltestService
@@ -74,7 +75,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                     this.loading(false);
                                     clearInterval(rqSi);
                                 });
-                            if (this.count === this.holderService.rcount) {
+                            if (this.count === this.holderService.rcount && this.holderService.certification) {
                                 this.tempobuscaexcedido();
                                 clearInterval(rqSi);
                             }
@@ -118,19 +119,15 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         }, 5000);
     }
 
-    public validDSLAM() {
-        // valid dslam type
-        if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
-            || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
-            || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
-            || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
-            || this.holderService.cadastro.rede.modeloDslam === "CCPE"
-            || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
-            || this.holderService.cadastro.rede.modeloDslam === "NVLT"
-            || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
-            super.showAlert(super.makeexceptionmessageTitle("Atenção.", true), "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
-            this.holderService.btnFazFulltestAtivo = false;
-        }
+    public fazfulltesttogetfkid() {
+        this.fulltestService
+            .doFulltest(this.holderService.cadastro)
+            .then(response => {
+
+            }, error => {
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                console.log("Deu erro!!! AMD p(o.o)q");
+            });
     }
 
 }

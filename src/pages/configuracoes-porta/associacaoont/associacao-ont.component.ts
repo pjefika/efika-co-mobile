@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SuperConfPortaService } from '../service-configuracoes-porta/super-conf-porta.service';
 import { AlertController, NavController, LoadingController } from 'ionic-angular';
 import { OntsLivrsComponent } from './onts-livres/onts-livres.component';
+import { HolderService } from '../../../providers/holder/holder.service';
 
 @Component({
     selector: 'associacao-ont-component',
@@ -12,8 +13,9 @@ export class AssociacaoOntComponent extends SuperConfPortaService implements OnI
 
     constructor(public alertCtrl: AlertController, 
         public navCtrl: NavController, 
-        public loadingCtrl: LoadingController) {
-        super(alertCtrl, loadingCtrl);
+        public loadingCtrl: LoadingController,
+        public holderService: HolderService) {
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() { }

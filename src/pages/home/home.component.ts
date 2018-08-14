@@ -15,7 +15,7 @@ export class HomeComponent extends SuperComponentService implements OnInit {
 		public popoverController: PopoverController,
 		public loadingCtrl: LoadingController,
 		public alertCtrl: AlertController) {
-		super(alertCtrl, loadingCtrl);
+		super(alertCtrl, loadingCtrl, holderService);
 	}
 
 	public ngOnInit() { }
