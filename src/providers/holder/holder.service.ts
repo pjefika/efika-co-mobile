@@ -11,7 +11,7 @@ export class HolderService {
     * True para Mock.
     * False para Produção/QA - Vide link na UrlService.
     */
-    public isMock: boolean = false;
+    public isMock: boolean = true;
 
     /**
     * Valida o Link se é Produção / QA

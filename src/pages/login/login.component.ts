@@ -50,7 +50,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     public validEntrar() {
         if (this.holderService.isMock) {
             // --Mock        
-            this.entrarMock();
+            // this.entrarMock();
+            this.entrarnewauthMock();
         } else {
             // --Prod
             if (this.userisvalid()) {
@@ -83,22 +84,33 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             super.showAlert("Login ou senha Invalidos", super.makeexceptionmessage("Campos de Matricula e Senha não pode ser vazio."))
         } else {
             valid = true;
-        }        
+        }
         return valid;
     }
 
-    public entrarMock() {
+    // public entrarMock() {
+    //     let verify: boolean;
+    //     verify = this.loginService.entrarMock(this.usuario);
+    //     if (verify) {
+    //         this.usuario.matricula = "IONIC - TEST";
+    //         localStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
+    //         this.holderService.estalogado = verify;
+    //         this.holderService.showhidetab = verify;
+    //     } else {
+    //         super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
+    //         this.usuario.matricula = "";
+    //         this.usuario.senha = "";
+    //     }
+    // }
+
+    public entrarnewauthMock() {
         let verify: boolean;
-        verify = this.loginService.entrarMock(this.usuario);
+        verify = this.loginService.entrarnewauthMock(this.usuario);
+        localStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
         if (verify) {
             this.usuario.matricula = "IONIC - TEST";
-            localStorage.setItem("user", JSON.stringify({ user: this.usuario.matricula }));
             this.holderService.estalogado = verify;
             this.holderService.showhidetab = verify;
-        } else {
-            super.showAlert("Erro ao realizar login", "Login ou senha incorretos, por favor tente novamente.");
-            this.usuario.matricula = "";
-            this.usuario.senha = "";
         }
     }
 
@@ -106,7 +118,6 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         this.loginService
             .entrarnewauth(this.usuario)
             .then(rsp => {
-
                 this.loginService
                     .getuserifos(this.usuario.matricula)
                     .then(resposta => {

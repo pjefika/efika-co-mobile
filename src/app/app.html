@@ -3,6 +3,7 @@
 <version-component></version-component> -->
 
 <index-validations-component></index-validations-component>
+<global-notification-component *ngIf="holderService.estalogado"></global-notification-component>
 
 <ion-tabs *ngIf="holderService.estalogado">
     <ion-tab tabIcon="home" [root]="home" [enabled]="holderService.tabHomeAtivo && holderService.showhidetab"></ion-tab>

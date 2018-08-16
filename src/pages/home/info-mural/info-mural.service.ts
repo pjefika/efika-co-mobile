@@ -9,6 +9,7 @@ declare var require: any
 @Injectable()
 export class InfoMuralService extends SuperService {
 
+
     constructor(public urlService: UrlService,
         public holderService: HolderService) {
         super(holderService);

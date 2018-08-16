@@ -57,6 +57,8 @@ import { NotificationService } from '../providers/notification/notification.serv
 import { UserModifyComponent } from '../pages/login/user-modify/user-modify.component';
 import { CreateUserComponent } from '../pages/login/create-user/create-user.component';
 import { TestesRedeComponent } from '../util/testes-rede/testes-rede.component';
+import { WebsocketService } from '../providers/websocket-notification/websocket.service';
+import { GlobalNotificationComponent } from '../util/notification/global-notification.component';
 
 @NgModule({
 	declarations: [
@@ -104,7 +106,8 @@ import { TestesRedeComponent } from '../util/testes-rede/testes-rede.component';
 		IndexValidationsComponent,
 		UserModifyComponent,
 		CreateUserComponent,
-		TestesRedeComponent
+		TestesRedeComponent,
+		GlobalNotificationComponent
 	],
 	imports: [
 		BrowserModule,
@@ -167,7 +170,8 @@ import { TestesRedeComponent } from '../util/testes-rede/testes-rede.component';
 		SuperComponentService,
 		LoginUtilService,
 		ClipBoardService,
-		NotificationService
+		NotificationService,
+		WebsocketService
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

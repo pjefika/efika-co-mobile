@@ -6,7 +6,6 @@ import { SuperComponentService } from '../../providers/component-service/super-c
 import { HolderService } from '../../providers/holder/holder.service';
 import { NotificationService } from '../../providers/notification/notification.service';
 import { IndexValidations } from '../../view-model/index-validations/index-validations';
-// import { CreateUserComponent } from '../../pages/login/create-user/create-user.component';
 
 declare let ClientIP: any;
 
@@ -26,9 +25,7 @@ export class IndexValidationsComponent extends SuperComponentService implements 
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
         public holderService: HolderService,
-        public notificationService: NotificationService,
-        //public navCtrl: NavController
-    ) {
+        public notificationService: NotificationService) {
         super(alertCtrl, loadingCtrl, holderService);
     }
 
@@ -38,23 +35,22 @@ export class IndexValidationsComponent extends SuperComponentService implements 
         this.ipsprivateandpublicisequeal();
         this.getInfosSystem();
         this.notificationService.allowNotify();
-        // this.alertParaSolicitarAcesso();
     }
 
     public getInfosSystem() {
-                   
-            this.indexValidationsService
-                .getInfosSystem()
-                .then(resposta => {
-                    if (resposta) {
-                        this.infoSys = resposta;
-                        this.validversion();
-                        this.validEmManutencao();
-                    }
-                }, error => {
-                    console.log("Não foi possivel carregar informações de sistema.");
-                });
-                
+
+        this.indexValidationsService
+            .getInfosSystem()
+            .then(resposta => {
+                if (resposta) {
+                    this.infoSys = resposta;
+                    this.validversion();
+                    this.validEmManutencao();
+                }
+            }, error => {
+                console.log("Não foi possivel carregar informações de sistema.");
+            });
+
     }
 
     public validversion() {
@@ -89,28 +85,5 @@ export class IndexValidationsComponent extends SuperComponentService implements 
             this.holderService.validipspublicandprivate = false;
         }
     }
-
-    public alertParaSolicitarAcesso() {
-        // let alert = this.alertCtrl.create({
-        //     title: "Atualização de cadastro",
-        //     subTitle: "Atenção, estamos realizando uma atulização de cadastro e precisamos que seja preenchido o forumulario de acesso até o dia 31/07.",
-        //     buttons: [
-        //         {
-        //             text: "Solicitar Acesso",
-        //             handler: () => {
-        //                 setTimeout(() => {
-        //                     this.navCtrl.push(CreateUserComponent);
-        //                 }, 500);
-        //             }
-        //         },
-        //         {
-        //             text: 'Cancel',
-        //             role: 'cancel'
-        //         }
-        //     ]
-        // });
-        // alert.present();
-    }
-
 
 }

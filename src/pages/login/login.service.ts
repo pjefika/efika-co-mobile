@@ -44,12 +44,18 @@ export class LoginService extends SuperService {
             });
     }
 
-    public entrarMock(usuario: Usuario): boolean {
+    public entrarnewauthMock(usuario: Usuario): boolean {
         if (usuario.matricula === "1" && usuario.senha === "1") {
             return true;
         } else {
             return false;
         }
+    }
+
+    public getuserifosMock() {
+
+
+
     }
 
     public entrarnewauth(usuario: Usuario): Promise<boolean> {
@@ -66,7 +72,7 @@ export class LoginService extends SuperService {
         return this.urlService
             .request(this.infoResquest)
             .then(resposta => {
-                return resposta;
+                return resposta as boolean;
             })
             .catch(super.handleError);
     }
