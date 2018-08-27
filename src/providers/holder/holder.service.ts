@@ -1,7 +1,7 @@
 import { Cadastro } from "../../view-model/cadastro/cadastro";
 import { Injectable } from "@angular/core";
 import { Certification } from "../../view-model/certification/certification";
-import { Usuario_N } from "../../view-model/usuario/usuario_n";
+import { UserFull } from "../../view-model/usuario/userfull";
 
 @Injectable()
 export class HolderService {
@@ -11,7 +11,7 @@ export class HolderService {
     * True para Mock.
     * False para Produção/QA - Vide link na UrlService.
     */
-    public isMock: boolean = true;
+    public isMock: boolean = false;
 
     /**
     * Valida o Link se é Produção / QA
@@ -26,7 +26,7 @@ export class HolderService {
     public showhidetab: boolean;
 
     // Segura o usuario buscado
-    public usuario_n: Usuario_N;
+    public user: UserFull;
 
     // Segura a instância inserida
     public instancia: string;

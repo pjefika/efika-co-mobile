@@ -24,7 +24,13 @@ export class SuperComponentService extends ExceptionService {
         public holderService: HolderService) {
         super();
     }
-
+    /**
+     * 
+     * @param ativo 
+     * @param tipo 
+     * @param titulo 
+     * @param mensagem 
+     */
     public showError(ativo: boolean, tipo?: string, titulo?: string, mensagem?: string) {
         this.ativo = ativo;
         this.tipo = tipo;
@@ -32,6 +38,12 @@ export class SuperComponentService extends ExceptionService {
         this.mensagem = mensagem;
     }
 
+    /**
+     * Mostra alerta na tela do usuário
+     * @param titulo Titulo do alerta
+     * @param subTitle Mensgem que será mostrada
+     * @param hidebutton Esconde e mostra botão para fechar / se mensagem ira bloquear tela
+     */
     public showAlert(titulo: string, subTitle: string, hidebutton?: boolean) {
         let alert;
         if (hidebutton === true) {
@@ -51,10 +63,9 @@ export class SuperComponentService extends ExceptionService {
     }
 
     /**
-     * 
-     * @param output 
-     * Tratativa do state do Output
+     * Tratativa do state do request de cadastro do cliente
      * Se EXCEPTION faz chamada automatica do showError mostrando informação.
+     * @param output Objeto contendo informações de cadastro do cliente.     
      */
     public validState(output: Output, instancia: string): boolean {
         let v: boolean;
@@ -71,6 +82,11 @@ export class SuperComponentService extends ExceptionService {
         return v;
     }
 
+    /**
+     * Faz validação do cadastro do cliente validando se o mesmo possui Designador & IP DSLAM
+     * @param output Objeto contendo informações de cadastro do cliente.
+     * @param instancia Número do cliente
+     */
     public validCustomer(output: Output, instancia: string): boolean {
         let v: boolean = false;
         if (output.customer.designador) {
@@ -86,6 +102,10 @@ export class SuperComponentService extends ExceptionService {
         return v;
     }
 
+    /**
+     * Habilita timer para ser mostrado na tela fazendo o contador pular de 1 em 1 segundo.
+     * @param maxtime Tempo maximo
+     */
     public doTimer(maxtime: number) {
         this.timer = maxtime; // Passa valor maximo para o timer
         this.timercount = setInterval(() => {
@@ -97,11 +117,19 @@ export class SuperComponentService extends ExceptionService {
         }, 1000); // intervalo de 1 segundo.
     }
 
+    /**
+     * Timer referente ao request aonde o mesmo desabilita e seta como null o contador.
+     */
     public killtimer() { // Para o contador.
         clearInterval(this.timercount);
         this.timer = null;
     }
 
+    /**
+     * Inicia ou Inativa o loading na tela, o mesmo tambem desliga o timer caso o mesmo for false.
+     * @param active Booleano que Ativa/Inativa loading 
+     * @param msg Mensagem que será mostrada se active for true 
+     */
     public loading(active: boolean, msg?: string) {
         if (active) {
             this.carregando = this.loadingCtrl.create({ content: msg });
@@ -112,6 +140,11 @@ export class SuperComponentService extends ExceptionService {
         }
     }
 
+    /**
+     * Valida se o DSLAM buscado é implementado de acordo com a lista de DSLAMs não implementados.
+     * @param rede Objeto rede
+     * @param instancia Número do cliente 
+     */
     public validDSLAM(rede: Rede, instancia: string) {
         if (rede.modeloDslam === "LIADSLPT48"
             || rede.modeloDslam === "VDSL24"

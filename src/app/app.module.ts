@@ -55,7 +55,6 @@ import { MensagemMuralComponent } from '../pages/home/info-mural/mensagem-mural/
 import { IndexValidationsComponent } from '../util/index-validations/index-validations.component';
 import { NotificationService } from '../providers/notification/notification.service';
 import { UserModifyComponent } from '../pages/login/user-modify/user-modify.component';
-import { CreateUserComponent } from '../pages/login/create-user/create-user.component';
 import { TestesRedeComponent } from '../util/testes-rede/testes-rede.component';
 import { WebsocketService } from '../providers/websocket-notification/websocket.service';
 import { GlobalNotificationComponent } from '../util/notification/global-notification.component';
@@ -105,7 +104,6 @@ import { GlobalNotificationComponent } from '../util/notification/global-notific
 		MensagemMuralComponent,
 		IndexValidationsComponent,
 		UserModifyComponent,
-		CreateUserComponent,
 		TestesRedeComponent,
 		GlobalNotificationComponent
 	],
@@ -114,7 +112,11 @@ import { GlobalNotificationComponent } from '../util/notification/global-notific
 		HttpModule,
 		IonicModule.forRoot(MyApp, {
 			scrollAssist: true,
-			autoFocusAssist: true
+			autoFocusAssist: true,
+			monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+			monthShortNames: ['jan', 'frv', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+			dayNames: ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'],
+			dayShortNames: ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab']
 		}),
 		MomentModule
 	],
@@ -157,7 +159,6 @@ import { GlobalNotificationComponent } from '../util/notification/global-notific
 		MensagemMuralComponent,
 		IndexValidationsComponent,
 		UserModifyComponent,
-		CreateUserComponent,
 		TestesRedeComponent
 	],
 	providers: [

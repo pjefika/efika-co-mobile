@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CheckVersion } from '../../view-model/version/checkversion';
-
+/**
+ * Serviço contendo as validações e traduções das exceções do backend/navegador.
+ */
 @Injectable()
 export class ExceptionService {
 
@@ -10,6 +12,11 @@ export class ExceptionService {
         return Promise.reject(error);
     }
 
+    /**
+     * Monta a mensagem de erro de acordo com retorno do backend/navegador
+     * Validando se o mesmo está com internet, se foi timeout e validando de acordo com os códigos dos status 400>/500>
+     * @param error Objeto de retorno do backend/navegador
+     */
     public handleErrorKing(error: any): Promise<any> {
         let er: any;
         if (!navigator.onLine) {
@@ -69,9 +76,17 @@ export class ExceptionService {
                     }
                     break;
                 case 404:
-                    er = {
-                        tError: "Erro (\"Página não encontrada\"). Cod.20.3",
-                        mError: "Houve um problema ao realizar Request a página não foi encontrada, por favor contate o administrador do sistema."
+                    let error404 = error.json();
+                    if (error404.msg) {
+                        er = {
+                            tError: "Credenciais Inválidas",
+                            mError: "Login ou senha incorretos, por favor tente novamente."
+                        }
+                    } else {
+                        er = {
+                            tError: "Erro (\"Página não encontrada\"). Cod.20.3",
+                            mError: "Houve um problema ao realizar Request a página não foi encontrada, por favor contate o administrador do sistema."
+                        }
                     }
                     break;
                 case 405:
@@ -87,9 +102,10 @@ export class ExceptionService {
                     }
                     break;
                 default:
+                    let casterror = error.json();
                     er = {
                         tError: "Erro Cod.20.7",
-                        mError: "Erro: " + error.message
+                        mError: "Erro: " + casterror.message
                     }
                     break;
             }
@@ -98,6 +114,10 @@ export class ExceptionService {
         }
     }
 
+    /**
+     * Monta informações de data/instância/versão do horario da exceção.
+     * @param instancia Número do cliente (se possuir)
+     */
     public mountmsgexception(instancia?: string): string {
         let version: string = CheckVersion.VERSION;
         let datenow: Date = new Date();
@@ -110,6 +130,11 @@ export class ExceptionService {
         return msgconcat;
     }
 
+    /**
+     * Monta corpo completo da mensagem concatenando as informações da função mountmsgexception()
+     * @param message Mensagem da exceção
+     * @param instancia Número do cliente (se possuir)
+     */
     public makeexceptionmessage(message: string, instancia?: string): string {
         let returnmsg: string;
         if (instancia) {
@@ -120,6 +145,11 @@ export class ExceptionService {
         return returnmsg;
     }
 
+    /**
+     * Monta titulo da mensagem
+     * @param title Titulo da mensagem
+     * @param iserror booleano informando se o mesmo é um erro
+     */
     public makeexceptionmessageTitle(title: string, iserror: boolean) {
         let mounttile: string;
         if (iserror) {
@@ -130,6 +160,9 @@ export class ExceptionService {
         return mounttile;
     }
 
+    /**
+     * Pega informações de versão do sistema.
+     */
     public getVersion() {
         let version: string = CheckVersion.VERSION;
         return version;

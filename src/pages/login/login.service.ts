@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../view-model/usuario/usuario';
 import { SuperService } from '../../providers/super-service/super.service';
-import { TaskProcess } from '../../view-model/task-process/task-process';
 import { UrlService } from '../../providers/new_url-service/url.service';
 import { HolderService } from '../../providers/holder/holder.service';
+import { UserFull } from '../../view-model/usuario/userfull';
+
+declare var require: any
 
 @Injectable()
 export class LoginService extends SuperService {
@@ -13,57 +15,26 @@ export class LoginService extends SuperService {
         super(holderService);
     }
 
-    public entrar(usuario: Usuario): Promise<TaskProcess> {
-        let _data: { task: string, input: { type: string, login: string, senha: string }, executor: string };
-        _data = { task: "AUTH", input: { type: "auth", login: usuario.matricula, senha: usuario.senha }, executor: "IONIC - Mobile" };
-        this.infoResquest = {
-            rqst: "post",
-            command: "task/queue",
-            _data: _data,
-            timeout: 60000
-        };
-        return this.urlService
-            .request(this.infoResquest)
-            .then(response => {
-                return response as TaskProcess
-            })
-            .catch(super.handleError);
-    }
-
-    public gettask(id: String): Promise<any> {
-        this.infoResquest = {
-            rqst: "get",
-            command: "task/",
-            _data: id,
-            timeout: 10000
-        }
-        return this.urlService
-            .request(this.infoResquest)
-            .then(resposta => {
-                return resposta as TaskProcess;
-            });
-    }
-
-    public entrarnewauthMock(usuario: Usuario): boolean {
+    public entrarnewauthMock(usuario: Usuario): Promise<boolean> {
         if (usuario.matricula === "1" && usuario.senha === "1") {
-            return true;
+            return Promise.resolve(true);
         } else {
-            return false;
+            return Promise.resolve(false);
         }
     }
 
-    public getuserifosMock() {
-
-
-
+    public getuserifosMock(): Promise<UserFull> {
+        let userf: UserFull = require("../../assets/mocks/login/login.json");
+        // let user: User = require("../../assets/mocks/login/loginfull.json");
+        return Promise.resolve(userf);
     }
 
-    public entrarnewauth(usuario: Usuario): Promise<boolean> {
+    public logarusuario(usuario: Usuario): Promise<boolean> {
         let _d: { username: string, password: string };
         _d = { username: usuario.matricula, password: usuario.senha };
         this.infoResquest = {
             rqst: "post",
-            otherUrl: "http://10.40.196.171:8080/auth/logar",
+            otherUrl: "http://10.40.196.172:9001/efika/logar",
             command: "entrar",
             _data: _d,
             gettoken: true,
@@ -77,21 +48,23 @@ export class LoginService extends SuperService {
             .catch(super.handleError);
     }
 
-    public getuserifos(matricula: string) {
+    public getuserifos(usuario: Usuario) {
+        let _d: { matricula: string, password: string };
+        _d = { matricula: usuario.matricula, password: usuario.senha };
         this.infoResquest = {
-            rqst: "get",
+            rqst: "post",
             command: "getuserinfo",
             timeout: 10000,
-            havetoken: true,
-            otherUrl: "http://10.40.196.171:8080/auth/usuario/getinfo?matricula=",
-            _data: matricula
+            otherUrl: "http://10.40.196.172:9001/efika/verify",
+            _data: _d,
+            gettoken: true
         }
         return this.urlService
             .request(this.infoResquest)
             .then(resposta => {
                 return resposta;
             })
-            .catch(this.handleErrorKing);
+            .catch(this.handleError);
     }
 
 }

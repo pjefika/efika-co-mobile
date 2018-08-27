@@ -13,9 +13,6 @@ export class UrlService extends LinkService {
     public urlIpProd = "http://54.94.208.183"  // -- Produção
     public urlIpQA = "http://10.40.196.172"; // --QA 
 
-
-    // public options = new RequestOptions({ headers: this.headersAppJson });
-
     public options;
 
     private ftypename: string;

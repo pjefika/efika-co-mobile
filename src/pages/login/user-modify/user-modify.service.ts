@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { SuperService } from '../../../providers/super-service/super.service';
 import { UrlService } from '../../../providers/new_url-service/url.service';
 import { HolderService } from '../../../providers/holder/holder.service';
-import { Usuario_N } from '../../../view-model/usuario/usuario_n';
+import { UserFull } from '../../../view-model/usuario/userfull';
+
+declare var require: any
 
 @Injectable()
 export class UserModifyService extends SuperService {
@@ -12,20 +14,59 @@ export class UserModifyService extends SuperService {
         super(holderService);
     }
 
-    public updateuserinfo(usuario_n: Usuario_N): Promise<Usuario_N> {
+    public updateuserinfo(user: UserFull): Promise<UserFull> {
         this.infoResquest = {
             rqst: "post",
             command: "updateuser",
             timeout: 10000,
             havetoken: true,
-            otherUrl: "http://10.40.196.171:8080/auth/usuario/update",
-            _data: usuario_n
+            otherUrl: "http://10.40.196.172:9001/efika/user",
+            _data: user
         }
         return this.urlService
             .request(this.infoResquest)
             .then(resposta => {
-                return resposta as Usuario_N;
+                return resposta as UserFull;
             });
+    }
+
+    public updateuserinfomock(user: UserFull): Promise<UserFull> {
+        console.log("user mock to update: " + user.matricula);
+        let userf: UserFull = require("../../assets/mocks/login/login.json");
+        // let user: User = require("../../assets/mocks/login/loginfull.json");
+        return Promise.resolve(userf);
+    }
+
+    public getcluster() {
+        this.infoResquest = {
+            rqst: "get",
+            command: "getcluster",
+            otherUrl: "http://10.40.196.172:9001/efika/cluster",
+            timeout: 10000
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta;
+            })
+            .catch(this.handleError);
+    }
+
+    public getcidadeespcluster(cluster: string) {
+        this.infoResquest = {
+            rqst: "get",
+            command: "getcidadeespecificocluster",
+            otherUrl: "http://10.40.196.172:9001/efika/cidades/",
+            timeout: 10000,
+            havetoken: true,
+            _data: cluster
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta;
+            })
+            .catch(this.handleError);
     }
 
 }

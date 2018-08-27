@@ -1,0 +1,30 @@
+{
+    "user": {
+        "id": 1,
+        "matricula": "A0079821",
+        "name": "Tiago Iwamoto",
+        "email": "tiago.iwamoto@telefonica.com",
+        "cpf": "04562799978",
+        "dateBorn": "1984-12-30T00:00:00.000+0000",
+        "password": "iwamoto",
+        "sector": null,
+        "phone": null,
+        "dateExpire": null,
+        "dateCreated": null,
+        "creator": null,
+        "groups": null,
+        "updated": true,
+        "cidade": "Curitiba",
+        "cluster": "Paraná"
+    },
+    "group": [
+        {
+            "id": 1,
+            "module": "admin"
+        },
+        {
+            "id": 2,
+            "module": "operador"
+        }
+    ]
+}

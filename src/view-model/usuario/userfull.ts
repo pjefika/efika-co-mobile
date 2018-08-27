@@ -1,4 +1,6 @@
-export class Usuario {
+import { Group } from "./group";
+
+export class UserFull {
     id: number;
     matricula: string;
     name: string;
@@ -11,7 +13,7 @@ export class Usuario {
     dateExpire: string;
     dateCreated: string;
     creator: string;
-    groups: string;
+    groups: Group[];
     cidade: string;
     cluster: string;
     updated: boolean;
