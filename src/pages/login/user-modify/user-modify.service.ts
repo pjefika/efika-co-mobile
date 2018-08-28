@@ -4,7 +4,7 @@ import { UrlService } from '../../../providers/new_url-service/url.service';
 import { HolderService } from '../../../providers/holder/holder.service';
 import { UserFull } from '../../../view-model/usuario/userfull';
 
-declare var require: any
+// declare var require: any
 
 @Injectable()
 export class UserModifyService extends SuperService {
@@ -20,7 +20,7 @@ export class UserModifyService extends SuperService {
             command: "updateuser",
             timeout: 10000,
             havetoken: true,
-            otherUrl: "http://10.40.196.172:9001/efika/user",
+            otherUrl: this.abcsd + "efika/user",
             _data: user
         }
         return this.urlService
@@ -32,7 +32,7 @@ export class UserModifyService extends SuperService {
 
     public updateuserinfomock(user: UserFull): Promise<UserFull> {
         console.log("user mock to update: " + user.matricula);
-        let userf: UserFull = require("../../assets/mocks/login/login.json");
+        let userf: UserFull //= require("../../assets/mocks/login/login.json");
         // let user: User = require("../../assets/mocks/login/loginfull.json");
         return Promise.resolve(userf);
     }
@@ -41,7 +41,7 @@ export class UserModifyService extends SuperService {
         this.infoResquest = {
             rqst: "get",
             command: "getcluster",
-            otherUrl: "http://10.40.196.172:9001/efika/cluster",
+            otherUrl: this.abcsd + "efika/cluster",
             timeout: 10000
         }
         return this.urlService
@@ -56,7 +56,7 @@ export class UserModifyService extends SuperService {
         this.infoResquest = {
             rqst: "get",
             command: "getcidadeespecificocluster",
-            otherUrl: "http://10.40.196.172:9001/efika/cidades/",
+            otherUrl: this.abcsd + "efika/cidades/",
             timeout: 10000,
             havetoken: true,
             _data: cluster

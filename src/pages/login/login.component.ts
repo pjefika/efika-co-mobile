@@ -75,6 +75,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                     // this.getinfonewauthmock();
                 } else {
                     // Colocar infos prod
+                    this.usuario.matricula = userSession.user;
+                    this.usuario.senha = userSession.password;
                     this.getinfonewauth();
                 }
             } else {
@@ -96,56 +98,6 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         return valid;
     }
 
-    // // Mock para validação do usuário
-    // public entrarnewauthMock() {
-    //     this.loading(true, "Validando Credenciais");
-    //     setTimeout(() => {
-    //         this.loginService
-    //             .entrarnewauthMock(this.usuario)
-    //             .then(resposta => {
-    //                 this.loading(false);
-    //                 if (resposta) {
-    //                     this.getinfonewauthmock();
-    //                 } else {
-    //                     super.showAlert("Credenciais Inválidas", "Login ou senha incorretos, por favor tente novamente.");
-    //                     this.usuario.senha = "";
-    //                 }
-    //             }, error => {
-    //                 this.loading(false);
-    //                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
-    //                 this.usuario.senha = "";
-    //             });
-    //     }, 3000);
-    // }
-
-    // // Mock para pegar as informações do usuário
-    // private getinfonewauthmock() {
-    //     this.loading(true, "Buscando informações do usuário");
-    //     setTimeout(() => {
-    //         this.loginService
-    //             .getuserifosMock()
-    //             .then(resposta => {
-    //                 this.loading(false);
-    //                 this.holderService.user = resposta;
-    //                 if (this.loginUtilService.userIsValid(resposta)) {
-    //                     this.loginUtilService.setloginstatus(true, resposta.matricula);
-    //                 } else {
-    //                     // open modal with values
-    //                     if (!this.comefromfastinit) {
-    //                         setTimeout(() => {
-    //                             this.navCtrl.push(UserModifyComponent);
-    //                         }, 500);
-    //                     } else {
-    //                         this.loginUtilService.setloginstatus(true, resposta.matricula);
-    //                     }
-    //                 }
-    //             }, error => {
-    //                 this.loading(false);
-    //                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
-    //             });
-    //     }, 3000);
-    // }
-
     private getinfonewauth() {
         this.loading(true, "Buscando informações do usuário");
         this.loginService
@@ -154,16 +106,14 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                 this.loading(false);
                 this.holderService.user = resposta;
                 if (this.loginUtilService.userIsValid(resposta)) {
-                    // this.loginUtilService.setloginstatus(true, resposta.matricula);
                     this.logaruser();
                 } else {
                     // open modal with values
                     if (!this.comefromfastinit) {
                         setTimeout(() => {
-                            this.navCtrl.push(UserModifyComponent);
+                            this.navCtrl.push(UserModifyComponent, { usuario: this.usuario.matricula, senha: this.usuario.senha });
                         }, 500);
                     } else {
-                        // this.loginUtilService.setloginstatus(true, resposta.matricula);
                         this.logaruser();
                     }
                 }
@@ -178,12 +128,12 @@ export class LoginComponent extends SuperComponentService implements OnInit {
         this.loginService
             .logarusuario(this.usuario)
             .then(resposta => {
-                console.log(resposta);
                 this.loading(false);
-                this.loginUtilService.setloginstatus(true, this.holderService.user.matricula);
+                this.loginUtilService.setloginstatus(true, this.holderService.user.matricula, this.holderService.user.password);
             }, error => {
                 this.loading(false);
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                this.loginUtilService.setloginstatus(false);
             });
     }
 

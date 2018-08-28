@@ -64,9 +64,17 @@ export class ExceptionService {
         if (error.status >= 400 && error.status < 500) {
             switch (error.status) {
                 case 400:
-                    er = {
-                        tError: "Erro (\"Solicitação Inválida\"). Cod.20.1",
-                        mError: "Houve um problema ao realizar Request, sua solicitação é invalida."
+                    let error400 = error.json();
+                    if (error400.msg) {
+                        er = {
+                            tError: "Credenciais Inválidas",
+                            mError: "Login ou senha incorretos, por favor tente novamente."
+                        }
+                    } else {
+                        er = {
+                            tError: "Erro (\"Solicitação Inválida\"). Cod.20.1",
+                            mError: "Houve um problema ao realizar Request, sua solicitação é invalida."
+                        }
                     }
                     break;
                 case 401:
@@ -76,17 +84,9 @@ export class ExceptionService {
                     }
                     break;
                 case 404:
-                    let error404 = error.json();
-                    if (error404.msg) {
-                        er = {
-                            tError: "Credenciais Inválidas",
-                            mError: "Login ou senha incorretos, por favor tente novamente."
-                        }
-                    } else {
-                        er = {
-                            tError: "Erro (\"Página não encontrada\"). Cod.20.3",
-                            mError: "Houve um problema ao realizar Request a página não foi encontrada, por favor contate o administrador do sistema."
-                        }
+                    er = {
+                        tError: "Erro (\"Página não encontrada\"). Cod.20.3",
+                        mError: "Houve um problema ao realizar Request a página não foi encontrada, por favor contate o administrador do sistema."
                     }
                     break;
                 case 405:

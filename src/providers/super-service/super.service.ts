@@ -9,6 +9,10 @@ import { ExceptionService } from '../exception/exception.service';
 @Injectable()
 export class SuperService extends ExceptionService {
 
+    public abcsd: string = "http://10.40.196.172:9001/";
+    // public url: string = "http://54.94.208.183:9001/";
+
+
     public infoResquest: InfoRequest;
 
     constructor(public holderService: HolderService) {

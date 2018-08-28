@@ -34,7 +34,7 @@ export class LoginService extends SuperService {
         _d = { username: usuario.matricula, password: usuario.senha };
         this.infoResquest = {
             rqst: "post",
-            otherUrl: "http://10.40.196.172:9001/efika/logar",
+            otherUrl: this.abcsd + "efika/logar",
             command: "entrar",
             _data: _d,
             gettoken: true,
@@ -55,7 +55,7 @@ export class LoginService extends SuperService {
             rqst: "post",
             command: "getuserinfo",
             timeout: 10000,
-            otherUrl: "http://10.40.196.172:9001/efika/verify",
+            otherUrl: this.abcsd + "efika/verify",
             _data: _d,
             gettoken: true
         }

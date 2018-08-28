@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { SuperComponentService } from '../../../providers/component-service/super-component.service';
 
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController, AlertController, NavParams } from 'ionic-angular';
 import { LoginUtilService } from '../../../util/login-util/login-util.service';
 import { HolderService } from '../../../providers/holder/holder.service';
 import { UserModifyService } from './user-modify.service';
 import { LoginService } from '../login.service';
 import { Usuario } from '../../../view-model/usuario/usuario';
+
+import * as _ from "lodash";
 
 @Component({
     selector: 'user-modify-component',
@@ -34,8 +36,14 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
         private loginUtilService: LoginUtilService,
-        public holderService: HolderService) {
+        public holderService: HolderService,
+        private navParams: NavParams) {
         super(alertCtrl, loadingCtrl, holderService);
+        let usuario: Usuario = {
+            matricula: this.navParams.get("usuario"),
+            senha: this.navParams.get("senha")
+        }
+        this.setinfosuser(usuario);
     }
 
     public ngOnInit() {
@@ -89,7 +97,7 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
                     .updateuserinfomock(this.holderService.user)
                     .then(resposta => {
                         this.holderService.user = resposta;
-                        this.loginUtilService.setloginstatus(true, this.holderService.user.matricula);
+                        this.loginUtilService.setloginstatus(true, this.holderService.user.matricula, this.holderService.user.password);
                     }, error => {
                         super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
                     });
@@ -117,7 +125,7 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
         this.userModifyService
             .getcluster()
             .then(resposta => {
-                this.lclusters = resposta;
+                this.lclusters = _.orderBy(resposta, ['desc']);
             }, error => {
                 super.showAlert(error.tError, error.mError);
             });
@@ -129,7 +137,7 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
         this.userModifyService
             .getcidadeespcluster(this.holderService.user.cluster)
             .then(resposta => {
-                this.lcidades = resposta;
+                this.lcidades = _.orderBy(resposta, ['desc']);
             }, error => {
                 super.showAlert(error.tError, error.mError);
             })
@@ -161,7 +169,7 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
             .then(resposta => {
                 console.log(resposta);
                 this.loading(false);
-                this.loginUtilService.setloginstatus(true, this.holderService.user.matricula);
+                this.loginUtilService.setloginstatus(true, this.holderService.user.matricula, this.holderService.user.password);
             }, error => {
                 this.loading(false);
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
@@ -184,6 +192,15 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
             valid = true;
         }
         return valid;
+    }
+
+    private setinfosuser(usuario: Usuario) {
+        if (usuario.matricula) {
+            this.holderService.user.matricula = usuario.matricula;
+        }
+        if (usuario.senha) {
+            this.holderService.user.password = usuario.senha
+        }
     }
 
 }

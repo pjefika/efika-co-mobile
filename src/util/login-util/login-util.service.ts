@@ -46,10 +46,15 @@ export class LoginUtilService {
     * @param user (matricula) passar usuário para ser colocado na sessão
     * Função que adiciona sessão para o usuário e envia para component principal.
     */
-    public setloginstatus(value: boolean, user: string) {
-        localStorage.setItem("user", JSON.stringify({ user: user }));
+    public setloginstatus(value: boolean, matricula?: string, passowrd?: string) {
         this.holderService.estalogado = value;
         this.holderService.showhidetab = value;
+        if (value) {
+            let dateLastLogin: Date = new Date();
+            localStorage.setItem("user", JSON.stringify({ user: matricula, password: passowrd, lastlogin: dateLastLogin }));
+        } else {
+            localStorage.clear();
+        }
     }
 
 }
