@@ -84,9 +84,17 @@ export class ExceptionService {
                     }
                     break;
                 case 404:
-                    er = {
-                        tError: "Erro (\"Página não encontrada\"). Cod.20.3",
-                        mError: "Houve um problema ao realizar Request a página não foi encontrada, por favor contate o administrador do sistema."
+                    let error404 = error.json();
+                    if (error404.msg) {
+                        er = {
+                            tError: "Matricula e CPF Inválidos",
+                            mError: "A matricula e CPF digitados não conferem."
+                        }
+                    } else {
+                        er = {
+                            tError: "Erro (\"Página não encontrada\"). Cod.20.3",
+                            mError: "Houve um problema ao realizar Request a página não foi encontrada, por favor contate o administrador do sistema."
+                        }
                     }
                     break;
                 case 405:

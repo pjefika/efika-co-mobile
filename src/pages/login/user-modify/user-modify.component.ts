@@ -31,6 +31,8 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
     // Mostra e esconde senha no input
     public showHidePassword: boolean = false;
 
+    public comefromfast: boolean = false;
+
     constructor(private userModifyService: UserModifyService,
         private loginService: LoginService,
         public loadingCtrl: LoadingController,
@@ -39,6 +41,9 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
         public holderService: HolderService,
         private navParams: NavParams) {
         super(alertCtrl, loadingCtrl, holderService);
+        if (this.navParams.get("comefromfast")) {
+            this.comefromfast = this.navParams.get("comefromfast");
+        }
         let usuario: Usuario = {
             matricula: this.navParams.get("usuario"),
             senha: this.navParams.get("senha")
@@ -47,7 +52,7 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
     }
 
     public ngOnInit() {
-        // Faz validação para amostragem de mensagem e indicação se cadastro está ok.
+        // Faz validação para amostragem de mensagem e indicação se cadastro está ok.        
         this.getcluster();
         this.uservalid();
     }
@@ -59,12 +64,36 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
         if (this.holderService.isMock) {
             this.updateusermock();
         } else {
-            this.updateuser();
+            if (this.comefromfast) {
+                this.updateuser();
+            } else {
+                this.createuser();
+            }
         }
     }
 
     // chamada do serviço para atualização do usuário
     private updateuser() {
+        if (this.validpasswordupdate()) {
+            this.holderService.user.dateBorn = this.datanasc;
+            if (this.uservalid()) {
+                this.userModifyService
+                    .updateuserinfo(this.holderService.user)
+                    .then(resposta => {
+                        this.holderService.user = resposta;
+                        super.showAlert("Sucesso", "Cadastro atualizado com sucesso.");
+                        this.repeatpassword = null;
+                    }, error => {
+                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                    });
+            }
+        } else {
+            super.showAlert("Validação de senha", "Por favor preencha sua senha atual.");
+        }
+    }
+
+    // chamada do serviço para criação do usuário
+    private createuser() {
         if (this.validpassword()) {
             this.holderService.user.dateBorn = this.datanasc;
             if (this.uservalid()) {
@@ -76,7 +105,7 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
                     ]
                 }
                 this.userModifyService
-                    .updateuserinfo(this.holderService.user)
+                    .createuserinfo(this.holderService.user)
                     .then(resposta => {
                         this.holderService.user = resposta;
                         this.logaruser();
@@ -89,33 +118,19 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
         }
     }
 
-    // chamada do serviço para atualização do usuário Mock
-    private updateusermock() {
-        if (this.uservalid()) {
-            setTimeout(() => {
-                this.userModifyService
-                    .updateuserinfomock(this.holderService.user)
-                    .then(resposta => {
-                        this.holderService.user = resposta;
-                        this.loginUtilService.setloginstatus(true, this.holderService.user.matricula, this.holderService.user.password);
-                    }, error => {
-                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
-                    });
-            }, 3000);
-        }
-    }
-
     /**
      * Valida se usuário está completo, caso não o mesmo informa mensagem na tela 
      */
     public uservalid(): boolean {
-        console.log(this.holderService.user);
         let valid = this.loginUtilService.userIsValid(this.holderService.user);
         if (!valid) {
             super.showAlert("Cadastro incompleto", "Por favor preencha todos os campos do seu cadastro e matenha o mesmo sempre atualizado.");
         }
         if (this.holderService.user.dateBorn) {
             this.datanasc = new Date(this.holderService.user.dateBorn).toISOString();
+        }
+        if (this.comefromfast) {
+            this.getcidadeesp(this.holderService.user.cluster);
         }
         return valid;
     }
@@ -125,25 +140,31 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
         this.userModifyService
             .getcluster()
             .then(resposta => {
-                this.lclusters = _.orderBy(resposta, ['desc']);
+                this.lclusters = _.sortBy(resposta);
             }, error => {
                 super.showAlert(error.tError, error.mError);
             });
     }
 
     // Chamada para busca da lista de cidades.
-    public getcidadeesp() {
+    public getcidadeesp(cluster?: string) {
         super.loading(true, "Consultando cidades");
+        let c: string;
+        if (cluster) {
+            c = cluster;
+        } else {
+            c = this.holderService.user.cluster;
+        }
         this.userModifyService
-            .getcidadeespcluster(this.holderService.user.cluster)
+            .getcidadeespcluster(c)
             .then(resposta => {
-                this.lcidades = _.orderBy(resposta, ['desc']);
+                this.lcidades = _.sortBy(resposta);
             }, error => {
                 super.showAlert(error.tError, error.mError);
             })
             .then(() => {
                 super.loading(false);
-            })
+            });
     }
 
     /**
@@ -178,17 +199,18 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
 
     private validpassword(): boolean {
         let valid: boolean = false;
-        if (this.holderService.user.password !== null
-            && this.repeatpassword !== null
+        if (this.holderService.user.password !== null && this.holderService.user.password !== ""
+            && this.repeatpassword !== null && this.repeatpassword !== ""
             && this.holderService.user.password === this.repeatpassword) {
             valid = true;
         }
         return valid;
     }
 
-    public sizeoflistcluster(): boolean {
+    private validpasswordupdate(): boolean {
         let valid: boolean = false;
-        if (this.lclusters) {
+        let userSession = JSON.parse(localStorage.getItem("user"));
+        if (this.holderService.user.password === userSession.password) {
             valid = true;
         }
         return valid;
@@ -200,6 +222,27 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
         }
         if (usuario.senha) {
             this.holderService.user.password = usuario.senha
+        }
+    }
+
+
+
+
+
+
+    // chamada do serviço para atualização do usuário Mock
+    private updateusermock() {
+        if (this.uservalid()) {
+            setTimeout(() => {
+                this.userModifyService
+                    .updateuserinfomock(this.holderService.user)
+                    .then(resposta => {
+                        this.holderService.user = resposta;
+                        this.loginUtilService.setloginstatus(true, this.holderService.user.matricula, this.holderService.user.password);
+                    }, error => {
+                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                    });
+            }, 3000);
         }
     }
 

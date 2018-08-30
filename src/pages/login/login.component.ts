@@ -8,6 +8,7 @@ import { LoginUtilService } from '../../util/login-util/login-util.service';
 
 import * as moment from 'moment';
 import { UserModifyComponent } from './user-modify/user-modify.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @Component({
     selector: 'login-component',
@@ -120,6 +121,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             }, error => {
                 this.loading(false);
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                this.loginUtilService.setloginstatus(false);
             });
     }
 
@@ -135,6 +137,12 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
                 this.loginUtilService.setloginstatus(false);
             });
+    }
+
+    public resetdesenha() {
+
+        this.navCtrl.push(ResetPasswordComponent);
+
     }
 
 }

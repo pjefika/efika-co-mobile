@@ -14,9 +14,25 @@ export class UserModifyService extends SuperService {
         super(holderService);
     }
 
-    public updateuserinfo(user: UserFull): Promise<UserFull> {
+    public createuserinfo(user: UserFull): Promise<UserFull> {
         this.infoResquest = {
             rqst: "post",
+            command: "createuserinfo",
+            timeout: 10000,
+            havetoken: true,
+            otherUrl: this.abcsd + "efika/user",
+            _data: user
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta as UserFull;
+            });
+    }
+
+    public updateuserinfo(user: UserFull): Promise<UserFull> {
+        this.infoResquest = {
+            rqst: "put",
             command: "updateuser",
             timeout: 10000,
             havetoken: true,

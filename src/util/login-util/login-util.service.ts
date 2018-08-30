@@ -25,15 +25,15 @@ export class LoginUtilService {
     public userIsValid(user: UserFull): boolean {
         let valid: boolean = true;
         if (user) {
-            if (user.matricula === null ||
-                user.name === null ||
-                user.email === null ||
-                user.cpf === null ||
+            if (user.matricula === null || user.matricula === "" ||
+                user.name === null || user.name === "" ||
+                user.email === null || user.email === "" ||
+                user.cpf === null || user.cpf === "" ||
                 // user.user.sector ||
-                user.phone === null ||
-                user.cidade === null ||
-                user.cluster === null ||
-                user.dateBorn === null) {
+                user.phone === null || user.phone === "" ||
+                user.cidade === null || user.cidade === "" ||
+                user.cluster === null || user.cluster === "" ||
+                user.dateBorn === null || user.dateBorn === "" || user.dateBorn === undefined) {
                 valid = false;
             }
         }

@@ -27,7 +27,7 @@ export class FabActionComponent implements OnInit {
     }
 
     public userconfig() {
-        this.navCtrl.push(UserModifyComponent);
+        this.navCtrl.push(UserModifyComponent, { comefromfast: true });
     }
 
     public testcase() {

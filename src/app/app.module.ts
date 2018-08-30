@@ -58,6 +58,7 @@ import { UserModifyComponent } from '../pages/login/user-modify/user-modify.comp
 import { TestesRedeComponent } from '../util/testes-rede/testes-rede.component';
 import { WebsocketService } from '../providers/websocket-notification/websocket.service';
 import { GlobalNotificationComponent } from '../util/notification/global-notification.component';
+import { ResetPasswordComponent } from '../pages/login/reset-password/reset-password.component';
 
 @NgModule({
 	declarations: [
@@ -105,7 +106,8 @@ import { GlobalNotificationComponent } from '../util/notification/global-notific
 		IndexValidationsComponent,
 		UserModifyComponent,
 		TestesRedeComponent,
-		GlobalNotificationComponent
+		GlobalNotificationComponent,
+		ResetPasswordComponent
 	],
 	imports: [
 		BrowserModule,
@@ -159,7 +161,8 @@ import { GlobalNotificationComponent } from '../util/notification/global-notific
 		MensagemMuralComponent,
 		IndexValidationsComponent,
 		UserModifyComponent,
-		TestesRedeComponent
+		TestesRedeComponent,
+		ResetPasswordComponent
 	],
 	providers: [
 		StatusBar,

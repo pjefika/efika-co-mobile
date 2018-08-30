@@ -35,11 +35,26 @@ export class UrlService extends LinkService {
                 return this.post(infoResquest);
             case "get":
                 return this.get(infoResquest);
+            case "put":
+                return this.put(infoResquest);
         }
     }
 
     private post(infoResquest: InfoRequest): Promise<any> {
         return this.http.post(this.mountUrl(infoResquest), JSON.stringify(infoResquest._data), this.options)
+            .timeout(infoResquest.timeout)
+            .toPromise()
+            .then(response => {
+                if (infoResquest.gettoken) {
+                    this.settoken(response.headers);
+                }
+                return response.json();
+            })
+            .catch(super.handleErrorKing);
+    }
+
+    private put(infoResquest: InfoRequest): Promise<any> {
+        return this.http.put(this.mountUrl(infoResquest), JSON.stringify(infoResquest._data), this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {

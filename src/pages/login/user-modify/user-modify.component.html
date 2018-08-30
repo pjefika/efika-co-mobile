@@ -7,7 +7,7 @@
 <ion-content padding>
     <ion-item>
         <ion-label color="primary" stacked>Matricula</ion-label>
-        <ion-input type="text" placeholder="Matricula" [(ngModel)]="holderService.user.matricula"></ion-input>
+        <ion-input type="text" placeholder="Matricula" [(ngModel)]="holderService.user.matricula" [disabled]="comefromfast"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label color="primary" stacked>Nome</ion-label>
@@ -30,8 +30,8 @@
         <ion-input type="text" placeholder="Area" [(ngModel)]="holderService.user.setor"></ion-input>
     </ion-item> -->
     <ion-item>
-        <ion-label color="primary" stacked>Contato</ion-label>
-        <ion-input type="tel" placeholder="Contato" [(ngModel)]="holderService.user.phone" pattern="[0-9]*"></ion-input>
+        <ion-label color="primary" stacked>Telefone</ion-label>
+        <ion-input type="tel" placeholder="Telefone" [(ngModel)]="holderService.user.phone" pattern="[0-9]*"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -53,7 +53,7 @@
         <ion-input type="text" [(ngModel)]="holderService.user.password" name="senha" *ngIf="showHidePassword" placeholder="Senha"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item *ngIf="!comefromfast">
         <ion-label color="primary" stacked>Repita a senha</ion-label>
         <ion-input type="password" [(ngModel)]="repeatpassword" name="senha" *ngIf="!showHidePassword"></ion-input>
         <ion-input type="text" [(ngModel)]="repeatpassword" name="senha" *ngIf="showHidePassword" placeholder="Senha"></ion-input>

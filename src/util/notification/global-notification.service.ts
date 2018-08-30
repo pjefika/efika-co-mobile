@@ -11,7 +11,7 @@ export class GlobalNotificationService {
 
     constructor(websocketService: WebsocketService) {
         this.messages = <Subject<string>>websocketService
-            .connect("ws://10.40.196.171:8085/socket")
+            .connect("ws://54.94.208.183:8085/socket")
             .map((response: MessageEvent): string => {
                 console.log(response);
 
