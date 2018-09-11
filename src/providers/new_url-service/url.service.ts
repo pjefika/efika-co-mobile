@@ -98,7 +98,7 @@ export class UrlService extends LinkService {
                     }
                     break;
                 case "post":
-                    this.ajustLink(le[2]);
+                    this.ajustLink(le[0]);
                     break;
             }
             let u = this.returnLink(infoResquest);
