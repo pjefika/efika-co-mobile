@@ -23,7 +23,7 @@ export class InfoMuralService extends SuperService {
     public getInfoMural(): Promise<InfoMural[]> {
         this.infoResquest = {
             rqst: "get",
-            otherUrl: "http://10.40.196.171:8085/notificacao/getall",
+            otherUrl: "http://54.94.208.183/assets/mocks/mural/info-mural.json",
             command: "Efika Info Mural",
             timeout: 5000
         }

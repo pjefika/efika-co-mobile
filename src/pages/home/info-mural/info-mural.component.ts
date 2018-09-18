@@ -29,7 +29,7 @@ export class InfoMuralComponent extends SuperComponentService implements OnInit 
         if (this.holderService.isMock) {
             this.getInfoMuralMock();
         } else {
-            this.getInfoMuralMock();
+            this.getInfoMural();
             // this.getInfoMural();
         }
     }
