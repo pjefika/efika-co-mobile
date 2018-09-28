@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title> Fulltest TV_ </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <button ion-button (click)="doFulltestTV();" color="secondary" block round [disabled]="disableButtonDoFulltestTV">Realizar
+        Diagnóstico HPNA</button>
+    <table *ngIf="holderService.certificationTV">
+        <tbody>
+            <tr>
+                <th class="th-title">Diagnóstico HPNA</th>
+                <td class="td-align">
+                    <ion-icon name="checkmark-circle" *ngIf="holderService.certificationTV.situacao === 'OK'" style="color: green;"></ion-icon>
+                    <ion-icon name="ios-alert" *ngIf="holderService.certificationTV.situacao !== 'OK'" style="color: red;"></ion-icon>
+                </td>
+            </tr>
+            <tr>
+                <th>Mensagem</th>
+                <td class="td-align">{{holderService.certificationTV.mensagem}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table *ngIf="holderService.certificationTV">
+        <tbody>
+            <tr>
+                <th>MAC</th>
+                <!-- <th>BaudRate</th> -->
+                <th>Serial</th>
+                <!-- <th>Recnologia</th>
+                <th>PacketsReceived</th>
+                <th>Attenuation</th>
+                <th>PacketsLost</th>
+                <th>SNR</th>
+                <th>PhyRate</th>
+                <th>Certified</th>
+                <th>IsPvr</th> -->
+            </tr>
+            <tr *ngFor="let stb of holderService.certificationTV.stbs">
+                <td class="td-not-align">{{stb.mac}}</td>
+                <!-- <td>{{stb.baudRate}}</td> -->
+                <td class="td-not-align">{{stb.serial}}</td>
+                <!-- <td>{{stb.tecnologia}}</td>
+                <td>{{stb.packetsReceived}}</td>
+                <td>{{stb.attenuation}}</td>
+                <td>{{stb.packetsLost}}</td>
+                <td>{{stb.snr}}</td>
+                <td>{{stb.phyRate}}</td>
+                <td>{{stb.certified}}</td>
+                <td>{{stb.isPvr}}</td> -->
+            </tr>
+        </tbody>
+    </table>
+
+</ion-content>

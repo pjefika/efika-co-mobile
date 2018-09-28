@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title> Validador Manobra_ </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="!disablemanobraform">
+        <ion-list>
+
+            <ion-item>
+                <ion-label fixed>Ordem de Serviço</ion-label>
+                <ion-input type="text" [(ngModel)]="workerOrderId"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed>Motivo</ion-label>
+                <ion-select [(ngModel)]="motivo">
+                    <ion-option value="AUTH_SINC">Sem Autenticação/Sincronismo</ion-option>
+                    <ion-option value="MUDA">Linha Muda</ion-option>
+                    <ion-option value="QUEDA">Quedas</ion-option>
+                    <ion-option value="RUIDO">Ruído/Chiado</ion-option>
+                    <ion-option value="SEMNAVEG">Não Navega</ion-option>
+                    <ion-option value="NAO_ATINGE">Não Atinge Velocidade</ion-option>
+                </ion-select>
+            </ion-item>
+            <button ion-button block round (click)="doManobra()">Validar Informações</button>
+        </ion-list>
+    </div>
+
+    <div *ngIf="holderService.validManobra && disablemanobraform">
+        <table *ngIf="holderService.validManobra.conclusao">
+            <tbody>
+                <tr>
+                    <th colspan="2" class="th-title"> Conclusão Manobra</th>
+                </tr>
+                <tr *ngIf="holderService.validManobra.conclusao.motivo">
+                    <th>
+                        Motivo
+                    </th>
+                    <td>{{holderService.validManobra.conclusao.motivo}}</td>
+                </tr>
+                <tr>
+                    <th> Frase </th>
+                    <td> {{holderService.validManobra.conclusao.conclusao.frase}} </td>
+                </tr>
+                <tr>
+                    <th> Monobrar? </th>
+                    <td> {{holderService.validManobra.manobrar ? "Manobrar" : "Não manobrar"}} </td>
+                </tr>
+            </tbody>
+        </table>
+        <table *ngIf="holderService.validManobra.analises">
+            <tbody>
+                <tr>
+                    <th colspan="2" class="th-title"> Validações Manobra</th>
+                </tr>
+                <tr *ngFor="let analise of holderService.validManobra.analises">
+                    <th> {{analise.motivo.motivo}} </th>
+                    <td> {{analise.conclusao.frase}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</ion-content>

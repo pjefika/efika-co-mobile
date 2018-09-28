@@ -2,6 +2,7 @@ import { Cadastro } from "../../view-model/cadastro/cadastro";
 import { Injectable } from "@angular/core";
 import { Certification } from "../../view-model/certification/certification";
 import { UserFull } from "../../view-model/usuario/userfull";
+import { RespostaGenerica } from "../../view-model/resposta/resposta-generica";
 
 @Injectable()
 export class HolderService {
@@ -36,6 +37,10 @@ export class HolderService {
     public certification: Certification;
     // Segura o ip local da rede conectada
     public myip: string;
+
+    public validManobra: RespostaGenerica;
+
+    public certificationTV: RespostaGenerica;
 
     /**
     * Variavel de controle de menu do rodapé 

@@ -44,6 +44,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
     }
 
     public getCadastro(mensagem: string) {
+        let qntErro: number = 0;
         if (this.validInstancia()) {
             this.loading(true, mensagem);
             this.startTimer();
@@ -81,9 +82,12 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                             }
                                         }
                                     }, error => {
-                                        this.loading(false);
-                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
-                                        clearInterval(rqSi);
+                                        qntErro++;
+                                        if (qntErro > 3) {
+                                            this.loading(false);
+                                            super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                            clearInterval(rqSi);
+                                        }
                                     });
                                 if (this.count === this.holderService.rcount && !this.holderService.cadastro) {
                                     this.tempobuscaexcedido();

@@ -10,17 +10,5 @@
             "colorbutton": "Dark",
             "linkref": "http://54.94.208.183/tutorial/tutorial.html"
         }
-    },
-    {
-        "titulo": "Participe da <b style='color: red;'>pesquisa</b> do Centro de Operações",
-        "mensagem": "O Centro de Operações tem como compromisso garantir um atendimento com qualidade e eficiência, buscando sempre a resolução das solicitações no primeiro contato. Para que possamos aprimorar ainda mais os nossos serviços, queremos saber a sua opinião sobre o atendimento realizado. Acesse o link e participe da pesquisa até o dia 24/09!",
-        "data_inicio": 0,
-        "data_fim": 0,
-        "action": {
-            "action": true,
-            "namebutton": "Link da Pesquisa",
-            "colorbutton": "Dark",
-            "linkref": "https://vivo.tl/2wtvVzh"
-        }
     }
 ]

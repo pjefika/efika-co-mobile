@@ -16,6 +16,10 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     private count: number = 0;
 
+    private adcRcount: number = 32;
+
+    private adcRtimeout: number = 9000;
+
     constructor(public holderService: HolderService,
         private cadastroService: CadastroService,
         public alertCtrl: AlertController,
@@ -42,6 +46,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     public buscaCadastro(mensagem: string) {
         this.count = 0;
+        let qntErro: number = 0;
         if (this.validInstancia()) {
             this.loading(true, mensagem);
             this.cadastroService
@@ -50,7 +55,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                     if (response) {
                         this.startTimer();
                         let rqSi = setInterval(() => {
-                            if (this.count < this.holderService.rcount) {
+                            if (this.count < this.holderService.rcount + this.adcRcount) {
                                 this.count++;
                                 this.cadastroService
                                     .gettask(response.id)
@@ -83,11 +88,14 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                             }
                                         }
                                     }, error => {
-                                        this.loading(false);
-                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
-                                        clearInterval(rqSi);
+                                        qntErro++;
+                                        if (qntErro > 3) {
+                                            this.loading(false);
+                                            super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                            clearInterval(rqSi);
+                                        }
                                     });
-                                if (this.count === this.holderService.rcount && !this.holderService.cadastro) {
+                                if (this.count === this.holderService.rcount + this.adcRcount && !this.holderService.cadastro) {
                                     this.tempobuscaexcedido();
                                     clearInterval(rqSi);
                                 }
@@ -95,7 +103,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                 this.tempobuscaexcedido();
                                 clearInterval(rqSi);
                             }
-                        }, this.holderService.rtimeout);
+                        }, this.holderService.rtimeout - this.adcRtimeout);
                     } else {
                         this.loading(false);
                         super.showAlert(super.makeexceptionmessageTitle("Erro ao realizar busca de cadastro.", true), super.makeexceptionmessage(response.exceptionMessage, this.holderService.instancia));
@@ -115,7 +123,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
     }
 
     private startTimer() {
-        this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
+        this.doTimer(((this.holderService.rcount + this.adcRcount) * (this.holderService.rtimeout - this.adcRtimeout)) / 1000);
     }
 
     public getCadastroMock(mensagem: string) {
@@ -133,7 +141,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             this.ativo = false;
             this.jaBuscou = true;
             this.holderService.btnFazFulltestAtivo = true;
-        }, 5000);
+        }, 1000);
         // }
     }
 

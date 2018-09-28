@@ -59,6 +59,8 @@ import { TestesRedeComponent } from '../util/testes-rede/testes-rede.component';
 import { WebsocketService } from '../providers/websocket-notification/websocket.service';
 import { GlobalNotificationComponent } from '../util/notification/global-notification.component';
 import { ResetPasswordComponent } from '../pages/login/reset-password/reset-password.component';
+import { ManobraComponent } from '../pages/manobra/manobra.component';
+import { FulltestTVComponent } from '../pages/fulltest-tv/fulltest-tv.component';
 
 @NgModule({
 	declarations: [
@@ -107,7 +109,9 @@ import { ResetPasswordComponent } from '../pages/login/reset-password/reset-pass
 		UserModifyComponent,
 		TestesRedeComponent,
 		GlobalNotificationComponent,
-		ResetPasswordComponent
+		ResetPasswordComponent,
+		ManobraComponent,
+		FulltestTVComponent
 	],
 	imports: [
 		BrowserModule,
@@ -162,7 +166,9 @@ import { ResetPasswordComponent } from '../pages/login/reset-password/reset-pass
 		IndexValidationsComponent,
 		UserModifyComponent,
 		TestesRedeComponent,
-		ResetPasswordComponent
+		ResetPasswordComponent,
+		ManobraComponent,
+		FulltestTVComponent
 	],
 	providers: [
 		StatusBar,

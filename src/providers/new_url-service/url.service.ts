@@ -11,7 +11,7 @@ import 'rxjs/add/operator/timeout';
 export class UrlService extends LinkService {
 
     public urlIpProd = "http://54.94.208.183"  // -- Produção
-    public urlIpQA = "http://10.40.196.172"; // --QA 
+    public urlIpQA = "http://10.40.197.85"; // --QA 
 
     public options;
 
@@ -108,13 +108,18 @@ export class UrlService extends LinkService {
 
     private returnLink(infoResquest: InfoRequest) {
         if (this.holderService.isLinkProd) {
+            console.log(infoResquest);
             if (infoResquest.rqst === "get" && infoResquest._data) {
                 return super.contacMountUrl(this.urlIpProd, this.portLink, infoResquest.command + infoResquest._data);
             } else {
                 return super.contacMountUrl(this.urlIpProd, this.portLink, infoResquest.command);
             }
         } else {
-            return super.contacMountUrl(this.urlIpQA, this.portLink, infoResquest.command);
+            if (infoResquest.rqst === "get" && infoResquest._data) {
+                return super.contacMountUrl(this.urlIpQA, this.portLink, infoResquest.command + infoResquest._data);
+            } else {
+                return super.contacMountUrl(this.urlIpQA, this.portLink, infoResquest.command);
+            }            
         }
     }
 

@@ -21,7 +21,7 @@ export class FulltestService extends SuperService {
         _data = { task: "CERTIFICATION", input: { type: "certification", customer: cadastro }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
-            command: "task/queue",
+            command: "post",
             _data: _data,
             timeout: 180000
         };
@@ -36,7 +36,7 @@ export class FulltestService extends SuperService {
     public gettask(id: String): Promise<any> {
         this.infoResquest = {
             rqst: "get",
-            command: "task/",
+            command: "",
             _data: id,
             timeout: 10000
         }

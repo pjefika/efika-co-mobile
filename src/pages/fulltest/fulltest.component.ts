@@ -43,6 +43,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
 
     public fazFulltest() {
         this.count = 0;
+        let qntErro: number = 0;
         this.loading(true, "Realizando Fulltest");
         this.fulltestService
             .doFulltest(this.holderService.cadastro)
@@ -71,9 +72,12 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                         }
                                     }
                                 }, error => {
-                                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
-                                    this.loading(false);
-                                    clearInterval(rqSi);
+                                    qntErro++;
+                                    if (qntErro > 3) {
+                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                        this.loading(false);
+                                        clearInterval(rqSi);
+                                    }
                                 });
                             if (this.count === this.holderService.rcount && this.holderService.certification) {
                                 this.tempobuscaexcedido();

@@ -18,6 +18,7 @@ export class LinkService extends SuperService {
     }
 
     public contacMountUrl(url, port, command): string {
-        return url + ":" + port + "/queueAPI/" + command;
+        let u = url + ":" + port + "/task/" + command;
+        return u;
     }
 }
