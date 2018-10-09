@@ -1,27 +1,25 @@
 {
-    "id": 1,
-    "matricula": "A0079821",
-    "name": "Tiago Iwamoto",
-    "email": "tiago.iwamoto@telefonica.com",
-    "cpf": "04562799978",
-    "dateBorn": "1984-12-30T00:00:00.000+0000",
-    "password": "iwamoto",
+    "id": "5b86785980f431160d467229",
+    "matricula": "G0034481",
+    "name": "Fabio Henrique Clem da Silva",
+    "email": "fabioh.silva3@telefonica.com",
+    "cpf": "08110367909",
+    "dateBorn": "1992-11-29T00:00:00.000+0000",
+    "password": "Ab010203",
     "sector": null,
-    "phone": "41999999999",
+    "cidade": "CURITIBA",
+    "cluster": "CURITIBA",
+    "phone": "41992557131",
     "dateExpire": null,
-    "dateCreated": null,
-    "creator": null,
+    "dateCreated": "2018-08-29T10:41:29.810+0000",
+    "dateUpdated": "2018-08-29T10:41:29.810+0000",
+    "creator": 1,
     "groups": [
         {
-            "id": 1,
-            "module": "admin"
-        },
-        {
-            "id": 2,
-            "module": "operador"
+            "id": "5b86784c80f431160d467225",
+            "name": "operador",
+            "description": "operador"
         }
     ],
-    "updated": true,
-    "cidade": "Curitiba",
-    "cluster": "Paraná"
+    "updated": true
 }

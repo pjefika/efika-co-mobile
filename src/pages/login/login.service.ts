@@ -15,18 +15,10 @@ export class LoginService extends SuperService {
         super(holderService);
     }
 
-    public entrarnewauthMock(usuario: Usuario): Promise<boolean> {
-        if (usuario.matricula === "1" && usuario.senha === "1") {
-            return Promise.resolve(true);
-        } else {
-            return Promise.resolve(false);
-        }
-    }
-
     public getuserifosMock(): Promise<UserFull> {
-        let userf: UserFull = require("../../assets/mocks/login/login.json");
-        // let user: User = require("../../assets/mocks/login/loginfull.json");
-        return Promise.resolve(userf);
+        // let userf: UserFull = require("../../assets/mocks/login/login.json");
+        let user: UserFull = require("../../assets/mocks/login/loginfull.json");
+        return Promise.resolve(user);
     }
 
     public logarusuario(usuario: Usuario): Promise<boolean> {

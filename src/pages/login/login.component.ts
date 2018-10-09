@@ -52,16 +52,26 @@ export class LoginComponent extends SuperComponentService implements OnInit {
      * Chamada de tela para entrada de login com validação se o mesmo é mock ou produção/qa
      */
     public validEntrar() {
-        if (this.userisvalid()) {
-            if (this.holderService.isMock) {
-                // --Mock   
-                // this.entrarnewauthMock();
-                // this.getinfonewauthmock();
-            } else {
+        if (this.holderService.isMock) {
+            // --Mock   
+            this.getinfonewauthMock();
+        } else {
+            if (this.userisvalid()) {
                 // --Prod / QA
                 this.getinfonewauth();
+                // this.getinfonewauthMock();
             }
         }
+        // if (this.userisvalid()) {
+        //     if (this.holderService.isMock) {
+        //         // --Mock   
+        //         this.getinfonewauthMock();
+        //     } else {
+        //         // --Prod / QA
+        //         // this.getinfonewauth();
+        //         this.getinfonewauthMock();
+        //     }
+        // }
     }
 
     // Validação sessão do usuário de 12 horas caso tempo excedido o mesmo necessitará fazer login novamente caso não irá logar direto.
@@ -72,12 +82,12 @@ export class LoginComponent extends SuperComponentService implements OnInit {
             if (Math.abs(moment().diff(userSession.lastlogin)) < miliday) {
                 this.comefromfastinit = true;
                 // Valido
+                this.usuario.matricula = userSession.user;
+                this.usuario.senha = userSession.password;
                 if (this.holderService.isMock) {
-                    // this.getinfonewauthmock();
+                    this.getinfonewauthMock();
                 } else {
                     // Colocar infos prod
-                    this.usuario.matricula = userSession.user;
-                    this.usuario.senha = userSession.password;
                     this.getinfonewauth();
                 }
             } else {
@@ -123,6 +133,36 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
                 this.loginUtilService.setloginstatus(false);
             });
+    }
+
+    private getinfonewauthMock() {
+        this.loading(true, "Buscando informações do usuário");
+        this.loginService
+            .getuserifosMock()
+            .then(resposta => {
+                this.loading(false);
+                this.holderService.user = resposta;
+                if (this.loginUtilService.userIsValid(resposta)) {
+                    this.logaruserMock();
+                } else {
+                    // open modal with values
+                    if (!this.comefromfastinit) {
+                        setTimeout(() => {
+                            this.navCtrl.push(UserModifyComponent, { usuario: this.usuario.matricula, senha: this.usuario.senha });
+                        }, 500);
+                    } else {
+                        this.logaruserMock();
+                    }
+                }
+            })
+    }
+
+    private logaruserMock() {
+        this.loading(true, "Validando usuário");
+        setTimeout(() => {
+            this.loading(false);
+            this.loginUtilService.setloginstatus(true, this.holderService.user.matricula, this.holderService.user.password);
+        }, 1000);
     }
 
     private logaruser() {
