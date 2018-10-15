@@ -3,6 +3,7 @@ import { Certification } from "../certification/certification";
 import { Valids } from "../fulltest/validacao";
 import { Ont } from "./ont";
 import { Serial } from "./serial";
+import { RespostaGenerica } from "../resposta/resposta-generica";
 
 export class Output {
     type: string;
@@ -26,6 +27,7 @@ export class Output {
     onts?: Ont[];
 
     //Set Serial Case
-    serial: Serial;
+    serial?: Serial;
 
+    resposta?: RespostaGenerica;
 }

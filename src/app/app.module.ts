@@ -53,6 +53,16 @@ import { ClipBoardService } from '../providers/clipboard/clipboard.service';
 import { CounterComponent } from '../util/counter/counter.component';
 import { MensagemMuralComponent } from '../pages/home/info-mural/mensagem-mural/mensagem-mural.component';
 import { IndexValidationsComponent } from '../util/index-validations/index-validations.component';
+import { NotificationService } from '../providers/notification/notification.service';
+import { UserModifyComponent } from '../pages/login/user-modify/user-modify.component';
+import { TestesRedeComponent } from '../util/testes-rede/testes-rede.component';
+import { WebsocketService } from '../providers/websocket-notification/websocket.service';
+import { GlobalNotificationComponent } from '../util/notification/global-notification.component';
+import { ResetPasswordComponent } from '../pages/login/reset-password/reset-password.component';
+import { ManobraComponent } from '../pages/manobra/manobra.component';
+import { FulltestTVComponent } from '../pages/fulltest-tv/fulltest-tv.component';
+import { ToolboxComponent } from '../pages/toolbox/toolbox.component';
+import { BhsComponent } from '../pages/bhs/bhs.component';
 
 @NgModule({
 	declarations: [
@@ -97,14 +107,26 @@ import { IndexValidationsComponent } from '../util/index-validations/index-valid
 		FabActionComponent,
 		CounterComponent,
 		MensagemMuralComponent,
-		IndexValidationsComponent
+		IndexValidationsComponent,
+		UserModifyComponent,
+		TestesRedeComponent,
+		GlobalNotificationComponent,
+		ResetPasswordComponent,
+		ManobraComponent,
+		FulltestTVComponent,
+		ToolboxComponent,
+		BhsComponent
 	],
 	imports: [
 		BrowserModule,
 		HttpModule,
 		IonicModule.forRoot(MyApp, {
 			scrollAssist: true,
-			autoFocusAssist: true
+			autoFocusAssist: true,
+			monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+			monthShortNames: ['jan', 'frv', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+			dayNames: ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'],
+			dayShortNames: ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sab']
 		}),
 		MomentModule
 	],
@@ -145,7 +167,14 @@ import { IndexValidationsComponent } from '../util/index-validations/index-valid
 		InfoMuralComponent,
 		OntsLivrsComponent,
 		MensagemMuralComponent,
-		IndexValidationsComponent
+		IndexValidationsComponent,
+		UserModifyComponent,
+		TestesRedeComponent,
+		ResetPasswordComponent,
+		ManobraComponent,
+		FulltestTVComponent,
+		ToolboxComponent,
+		BhsComponent
 	],
 	providers: [
 		StatusBar,
@@ -156,7 +185,9 @@ import { IndexValidationsComponent } from '../util/index-validations/index-valid
 		LinkService,
 		SuperComponentService,
 		LoginUtilService,
-		ClipBoardService
+		ClipBoardService,
+		NotificationService,
+		WebsocketService
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

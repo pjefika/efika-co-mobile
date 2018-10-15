@@ -30,7 +30,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
         private cadastroService: CadastroService,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() { }
@@ -44,6 +44,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
     }
 
     public getCadastro(mensagem: string) {
+        let qntErro: number = 0;
         if (this.validInstancia()) {
             this.loading(true, mensagem);
             this.startTimer();
@@ -62,7 +63,8 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                                 if (super.validCustomer(resposta.output, this.holderService.instancia)) {
                                                     this.holderService.cadastro = resposta.output.customer;
                                                     this.holderService.tabCadastroAtivo = true;
-                                                    this.validDSLAM();
+                                                    this.holderService.btnFazFulltestAtivo = true;
+                                                    super.validDSLAM(this.holderService.cadastro.rede, this.holderService.instancia);
                                                     this.ativo = false;
                                                     this.msgEventoMassivo();
                                                     this.loading(false);
@@ -71,7 +73,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                                 } else {
                                                     this.loading(false);
                                                     clearInterval(rqSi);
-                                                    this.holderService.btnFazFulltestAtivo = true;
+                                                    this.holderService.btnFazFulltestAtivo = false;
                                                 }
                                             } else {
                                                 this.loading(false);
@@ -80,11 +82,14 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
                                             }
                                         }
                                     }, error => {
-                                        this.loading(false);
-                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
-                                        clearInterval(rqSi);
+                                        qntErro++;
+                                        if (qntErro > 3) {
+                                            this.loading(false);
+                                            super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                            clearInterval(rqSi);
+                                        }
                                     });
-                                if (this.count === this.holderService.rcount) {
+                                if (this.count === this.holderService.rcount && !this.holderService.cadastro) {
                                     this.tempobuscaexcedido();
                                     clearInterval(rqSi);
                                 }
@@ -107,7 +112,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     private startTimer() {
@@ -120,7 +125,7 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
         setTimeout(() => {
             this.holderService.cadastro = this.cadastroService.getCadastroMock().output.customer;
             this.holderService.tabCadastroAtivo = true;
-            this.validDSLAM();
+            super.validDSLAM(this.holderService.cadastro.rede, this.holderService.instancia);
             this.ativo = false;
             this.msgEventoMassivo();
             this.loading(false);
@@ -183,18 +188,4 @@ export class InfoCadastroListComponent extends SuperComponentService implements 
         }
         return false;
     }
-
-    private validDSLAM() {
-        if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
-            || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
-            || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
-            || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
-            || this.holderService.cadastro.rede.modeloDslam === "CCPE"
-            || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
-            || this.holderService.cadastro.rede.modeloDslam === "NVLT"
-            || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
-            super.showAlert(super.makeexceptionmessageTitle("Atenção.", true), "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
-        }
-    }
-
 }

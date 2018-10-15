@@ -19,7 +19,7 @@ export class ConfiabilidadeRedeService extends SuperService {
         _data = { task: "CONF_REDE", input: { type: "certification", instancia: instancia, customer: cadastro }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
-            command: "task/queue",
+            command: "post",
             _data: _data,
             timeout: 120000
         };
@@ -34,7 +34,7 @@ export class ConfiabilidadeRedeService extends SuperService {
     public gettask(id: String): Promise<any> {
         this.infoResquest = {
             rqst: "get",
-            command: "task/",
+            command: "",
             _data: id,
             timeout: 10000
         }

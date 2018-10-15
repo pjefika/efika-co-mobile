@@ -21,11 +21,14 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         private fulltestService: FulltestService,
         public navCtrl: NavController,
         public alertCtrl: AlertController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() {
-        this.validDSLAM();
+        if (this.holderService.errorneedfkid) {
+            this.fazfulltesttogetfkid();
+        }
+
     }
 
     public fulltest() {
@@ -38,16 +41,15 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         }
     }
 
-
-
     public fazFulltest() {
         this.count = 0;
+        let qntErro: number = 0;
         this.loading(true, "Realizando Fulltest");
-        this.startTimer();
         this.fulltestService
             .doFulltest(this.holderService.cadastro)
             .then(response => {
                 if (response) {
+                    this.startTimer();
                     let rqSi = setInterval(() => {
                         if (this.count < this.holderService.rcount) {
                             this.count++;
@@ -58,23 +60,26 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                                         if (super.validState(resposta.output, this.holderService.instancia)) {
                                             this.holderService.certification = resposta.output.certification;
                                             this.holderService.tabFulltestAtivo = true;
-                                            setTimeout(() => {
-                                                this.navCtrl.parent.select(2);
-                                            }, 1);
                                             this.ativo = false;
                                             this.loading(false);
                                             clearInterval(rqSi);
+                                            setTimeout(() => {
+                                                this.navCtrl.parent.select(2);
+                                            }, 1);
                                         } else {
                                             this.loading(false);
                                             clearInterval(rqSi);
                                         }
                                     }
                                 }, error => {
-                                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
-                                    this.loading(false);
-                                    clearInterval(rqSi);
+                                    qntErro++;
+                                    if (qntErro > 3) {
+                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                        this.loading(false);
+                                        clearInterval(rqSi);
+                                    }
                                 });
-                            if (this.count === this.holderService.rcount) {
+                            if (this.count === this.holderService.rcount && this.holderService.certification) {
                                 this.tempobuscaexcedido();
                                 clearInterval(rqSi);
                             }
@@ -97,7 +102,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
     private startTimer() {
@@ -118,19 +123,15 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
         }, 5000);
     }
 
-    public validDSLAM() {
-        // valid dslam type
-        if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
-            || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
-            || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
-            || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
-            || this.holderService.cadastro.rede.modeloDslam === "CCPE"
-            || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
-            || this.holderService.cadastro.rede.modeloDslam === "NVLT"
-            || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
-            super.showAlert(super.makeexceptionmessageTitle("Atenção.", true), "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
-            this.holderService.btnFazFulltestAtivo = false;
-        }
+    public fazfulltesttogetfkid() {
+        this.fulltestService
+            .doFulltest(this.holderService.cadastro)
+            .then(response => {
+
+            }, error => {
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                console.log("Deu erro!!! AMD p(o.o)q");
+            });
     }
 
 }

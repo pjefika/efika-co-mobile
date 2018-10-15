@@ -9,6 +9,7 @@
         <h4>Efika CO Mobile_</h4>
         <p>Para entrar digite sua matricula e senha nos campos abaixo.</p>
     </div>
+    <!-- <button ion-button full round color="secondary" small (click)="solicitarAcesso()">Solicitar Acesso</button> -->
     <ion-list (keyup.enter)="validEntrar()">
         <ion-item class="ion-item-rounded">
             <ion-label floating>Matricula</ion-label>
@@ -29,6 +30,8 @@
 
     <div padding>
         <button ion-button round color="primary" block (click)="validEntrar()">Entrar</button>
+        <br>
+        <button ion-button small round color="secondary" block (click)="resetdesenha()">Resetar Senha</button>
         <counter-component [timer]="timer"></counter-component>
     </div>
     <alert-mensagem-component [ativo]="ativo" [tipo]="tipo" [titulo]="titulo" [mensagem]="mensagem"></alert-mensagem-component>

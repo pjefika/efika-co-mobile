@@ -3,9 +3,12 @@
 <version-component></version-component> -->
 
 <index-validations-component></index-validations-component>
+<!-- <global-notification-component *ngIf="holderService.estalogado"></global-notification-component> -->
 
 <ion-tabs *ngIf="holderService.estalogado">
     <ion-tab tabIcon="home" [root]="home" [enabled]="holderService.tabHomeAtivo && holderService.showhidetab"></ion-tab>
     <ion-tab tabIcon="list-box" [root]="cadastro" [enabled]="holderService.tabCadastroAtivo && holderService.showhidetab"></ion-tab>
     <ion-tab tabIcon="hammer" [root]="fulltestResult" [enabled]="holderService.tabFulltestAtivo && holderService.showhidetab"></ion-tab>
+    <ion-tab tabIcon="swap" [root]="manobra" [enabled]="holderService.tabCadastroAtivo && holderService.showhidetab"></ion-tab>
+    <ion-tab tabIcon="cube" [root]="toolbox" [enabled]="holderService.tabCadastroAtivo && holderService.showhidetab"></ion-tab>
 </ion-tabs>

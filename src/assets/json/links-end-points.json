@@ -2,21 +2,11 @@
     {
         "ftype": "get",
         "nome": "get_1",
-        "port": 8081
+        "port": 8080
     },
     {
         "ftype": "get",
         "nome": "get_2",
-        "port": 8082
-    },
-    {
-        "ftype": "set",
-        "nome": "set_1",
-        "port": 8083
-    },
-    {
-        "ftype": "set",
-        "nome": "set_2",
-        "port": 8084
+        "port": 8080
     }
 ]

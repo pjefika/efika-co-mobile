@@ -16,12 +16,16 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     private count: number = 0;
 
+    private adcRcount: number = 32;
+
+    private adcRtimeout: number = 9000;
+
     constructor(public holderService: HolderService,
         private cadastroService: CadastroService,
         public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
         public navCtrl: NavController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() { }
@@ -42,15 +46,16 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     public buscaCadastro(mensagem: string) {
         this.count = 0;
+        let qntErro: number = 0;
         if (this.validInstancia()) {
             this.loading(true, mensagem);
-            this.startTimer();
             this.cadastroService
                 .getCadastro(this.holderService.instancia)
                 .then(response => {
                     if (response) {
+                        this.startTimer();
                         let rqSi = setInterval(() => {
-                            if (this.count < this.holderService.rcount) {
+                            if (this.count < this.holderService.rcount + this.adcRcount) {
                                 this.count++;
                                 this.cadastroService
                                     .gettask(response.id)
@@ -63,17 +68,17 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                                     setTimeout(() => {
                                                         this.navCtrl.parent.select(1);
                                                     }, 1);
-                                                    this.validDSLAM();
+                                                    this.holderService.btnFazFulltestAtivo = true;
+                                                    super.validDSLAM(this.holderService.cadastro.rede, this.holderService.instancia);
                                                     this.msgEventoMassivo();
+                                                    // this.validbhs();  BHS This
                                                     this.loading(false);
                                                     this.ativo = false;
                                                     this.jaBuscou = true;
-                                                    this.holderService.btnFazFulltestAtivo = true;
                                                     clearInterval(rqSi);
                                                 } else {
                                                     this.loading(false);
                                                     clearInterval(rqSi);
-                                                    this.holderService.btnFazFulltestAtivo = false;
                                                 }
                                             } else {
                                                 this.loading(false);
@@ -83,11 +88,14 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                             }
                                         }
                                     }, error => {
-                                        this.loading(false);
-                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
-                                        clearInterval(rqSi);
+                                        qntErro++;
+                                        if (qntErro > 3) {
+                                            this.loading(false);
+                                            super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                            clearInterval(rqSi);
+                                        }
                                     });
-                                if (this.count === this.holderService.rcount) {
+                                if (this.count === this.holderService.rcount + this.adcRcount && !this.holderService.cadastro) {
                                     this.tempobuscaexcedido();
                                     clearInterval(rqSi);
                                 }
@@ -95,7 +103,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                                 this.tempobuscaexcedido();
                                 clearInterval(rqSi);
                             }
-                        }, this.holderService.rtimeout);
+                        }, this.holderService.rtimeout - this.adcRtimeout);
                     } else {
                         this.loading(false);
                         super.showAlert(super.makeexceptionmessageTitle("Erro ao realizar busca de cadastro.", true), super.makeexceptionmessage(response.exceptionMessage, this.holderService.instancia));
@@ -110,12 +118,12 @@ export class CadastroSearchComponent extends SuperComponentService implements On
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido.", true), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
         this.jaBuscou = true;
     }
 
     private startTimer() {
-        this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
+        this.doTimer(((this.holderService.rcount + this.adcRcount) * (this.holderService.rtimeout - this.adcRtimeout)) / 1000);
     }
 
     public getCadastroMock(mensagem: string) {
@@ -127,13 +135,13 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             setTimeout(() => {
                 this.navCtrl.parent.select(1);
             }, 1);
-            this.validDSLAM();
+            super.validDSLAM(this.holderService.cadastro.rede, this.holderService.instancia);
             this.msgEventoMassivo();
             this.loading(false);
             this.ativo = false;
             this.jaBuscou = true;
             this.holderService.btnFazFulltestAtivo = true;
-        }, 5000);
+        }, 1000);
         // }
     }
 
@@ -174,16 +182,28 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         return valid;
     }
 
-    private validDSLAM() {
-        if (this.holderService.cadastro.rede.modeloDslam === "LIADSLPT48"
-            || this.holderService.cadastro.rede.modeloDslam === "VDSL24"
-            || this.holderService.cadastro.rede.modeloDslam === "VDPE_SIP"
-            || this.holderService.cadastro.rede.modeloDslam === "CCPE_SIP"
-            || this.holderService.cadastro.rede.modeloDslam === "CCPE"
-            || this.holderService.cadastro.rede.modeloDslam === "LI-VDSL24"
-            || this.holderService.cadastro.rede.modeloDslam === "NVLT"
-            || this.holderService.cadastro.rede.modeloDslam === "NVLT-C_SIP") {
-            super.showAlert(super.makeexceptionmessageTitle("Atenção.", true), "Modelo de DSLAM não implementado, não sendo possivel realizar o Fulltest, necessário contato com o Centro de Operações.");
+    public validbhs() {
+        if (this.holderService.cadastro.rede.planta === "VIVO1" &&
+            this.holderService.cadastro.rede.tipo === "GPON" &&
+            !this.holderService.cadastro.rede.bhs) {
+            let alert;
+            alert = this.alertCtrl.create({
+                title: "Configuração HGU",
+                subTitle: "Será utilizado HGU para configurar o cliente.",
+                buttons: [{
+                    text: "Não",
+                    role: "cancel",
+                    handler: () => {
+                        this.holderService.cadastro.rede.bhs = false;
+                    }
+                }, {
+                    text: "Sim",
+                    handler: () => {
+                        this.holderService.cadastro.rede.bhs = true;
+                    }
+                }]
+            });
+            alert.present();
         }
     }
 

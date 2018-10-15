@@ -17,7 +17,7 @@ export class FulltestResultComponent extends SuperComponentService implements On
         public alertCtrl: AlertController,
         public clipBoardService: ClipBoardService,
         public loadingCtrl: LoadingController) {
-        super(alertCtrl, loadingCtrl);
+        super(alertCtrl, loadingCtrl, holderService);
     }
 
     public ngOnInit() { }

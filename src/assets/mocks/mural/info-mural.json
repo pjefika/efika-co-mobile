@@ -1,9 +1,9 @@
-[    
+[
     {
         "titulo": "Tutorial Efika CO Mobile",
         "mensagem": "Neste Link você encontra o tutorial completo do Efika CO Mobile.",
-        "data_inicio": 123456789,
-        "data_fim": 123456789,
+        "data_inicio": 0,
+        "data_fim": 0,
         "action": {
             "action": true,
             "namebutton": "Tutorial Efika CO Mobile",

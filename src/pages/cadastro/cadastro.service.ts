@@ -20,7 +20,7 @@ export class CadastroService extends SuperService {
         _data = { task: "CADASTRO", input: { type: "cadastro", instancia: instancia }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
-            command: "task/queue",
+            command: "post",
             _data: _data,
             timeout: 120000
         };
@@ -35,7 +35,7 @@ export class CadastroService extends SuperService {
     public gettask(id: String): Promise<any> {
         this.infoResquest = {
             rqst: "get",
-            command: "task/",
+            command: "",
             _data: id,
             timeout: 10000
         }

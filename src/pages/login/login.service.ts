@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../view-model/usuario/usuario';
 import { SuperService } from '../../providers/super-service/super.service';
-import { TaskProcess } from '../../view-model/task-process/task-process';
 import { UrlService } from '../../providers/new_url-service/url.service';
 import { HolderService } from '../../providers/holder/holder.service';
+import { UserFull } from '../../view-model/usuario/userfull';
+
+declare var require: any
 
 @Injectable()
 export class LoginService extends SuperService {
@@ -13,42 +15,48 @@ export class LoginService extends SuperService {
         super(holderService);
     }
 
-    public entrar(usuario: Usuario): Promise<TaskProcess> {
-        let _data: { task: string, input: { type: string, login: string, senha: string }, executor: string };
-        _data = { task: "AUTH", input: { type: "auth", login: usuario.matricula, senha: usuario.senha }, executor: "IONIC - Mobile" };
-        this.infoResquest = {
-            rqst: "post",
-            command: "task/queue",
-            _data: _data,
-            timeout: 60000
-        };
-        return this.urlService
-            .request(this.infoResquest)
-            .then(response => {
-                return response as TaskProcess
-            })
-            .catch(super.handleError);
+    public getuserifosMock(): Promise<UserFull> {
+        // let userf: UserFull = require("../../assets/mocks/login/login.json");
+        let user: UserFull = require("../../assets/mocks/login/loginfull.json");
+        return Promise.resolve(user);
     }
 
-    public gettask(id: String): Promise<any> {
+    public logarusuario(usuario: Usuario): Promise<boolean> {
+        let _d: { username: string, password: string };
+        _d = { username: usuario.matricula, password: usuario.senha };
         this.infoResquest = {
-            rqst: "get",
-            command: "task/",
-            _data: id,
+            rqst: "post",
+            otherUrl: this.abcsd + "efika/logar",
+            command: "entrar",
+            _data: _d,
+            gettoken: true,
             timeout: 10000
         }
         return this.urlService
             .request(this.infoResquest)
             .then(resposta => {
-                return resposta as TaskProcess;
-            });
+                return resposta as boolean;
+            })
+            .catch(super.handleError);
     }
 
-    public entrarMock(usuario: Usuario): boolean {
-        if (usuario.matricula === "1" && usuario.senha === "1") {
-            return true;
-        } else {
-            return false;
+    public getuserifos(usuario: Usuario) {
+        let _d: { matricula: string, password: string };
+        _d = { matricula: usuario.matricula, password: usuario.senha };
+        this.infoResquest = {
+            rqst: "post",
+            command: "getuserinfo",
+            timeout: 10000,
+            otherUrl: this.abcsd + "efika/verify",
+            _data: _d,
+            gettoken: true
         }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta;
+            })
+            .catch(this.handleError);
     }
+
 }

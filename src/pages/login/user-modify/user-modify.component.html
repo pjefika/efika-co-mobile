@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Configurações de usuário</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-item>
+        <ion-label color="primary" stacked>Matricula</ion-label>
+        <ion-input type="text" placeholder="Matricula" [(ngModel)]="holderService.user.matricula" [disabled]="comefromfast"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Nome</ion-label>
+        <ion-input type="text" placeholder="Nome" [(ngModel)]="holderService.user.name"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Email</ion-label>
+        <ion-input type="email" placeholder="Email" [(ngModel)]="holderService.user.email"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>CPF</ion-label>
+        <ion-input type="number" placeholder="CPF - Somente números" [(ngModel)]="holderService.user.cpf"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary" stacked>Data de Nascimento</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="datanasc"></ion-datetime>
+    </ion-item>
+    <!-- <ion-item>
+        <ion-label color="primary" stacked>Area</ion-label>
+        <ion-input type="text" placeholder="Area" [(ngModel)]="holderService.user.setor"></ion-input>
+    </ion-item> -->
+    <ion-item>
+        <ion-label color="primary" stacked>Telefone</ion-label>
+        <ion-input type="tel" placeholder="Telefone" [(ngModel)]="holderService.user.phone" pattern="[0-9]*"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Cluster</ion-label>
+        <ion-select [(ngModel)]="holderService.user.cluster" (ionChange)="getcidadeesp()">
+            <ion-option *ngFor="let cluster of lclusters" [value]="cluster">{{cluster}}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>Cidade</ion-label>
+        <ion-select [(ngModel)]="holderService.user.cidade">
+            <ion-option *ngFor="let cidade of lcidades" [value]="cidade">{{cidade}}</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label color="primary" stacked>Senha</ion-label>
+        <ion-input type="password" [(ngModel)]="holderService.user.password" name="senha" *ngIf="!showHidePassword"></ion-input>
+        <ion-input type="text" [(ngModel)]="holderService.user.password" name="senha" *ngIf="showHidePassword" placeholder="Senha"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!comefromfast">
+        <ion-label color="primary" stacked>Repita a senha</ion-label>
+        <ion-input type="password" [(ngModel)]="repeatpassword" name="senha" *ngIf="!showHidePassword"></ion-input>
+        <ion-input type="text" [(ngModel)]="repeatpassword" name="senha" *ngIf="showHidePassword" placeholder="Senha"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Mostrar Senhas</ion-label>
+        <ion-checkbox color="dark" checked="true" [(ngModel)]="showHidePassword"></ion-checkbox>
+    </ion-item>
+
+    <button ion-button color="secondary" full round (click)="doUpdate();">Atualizar</button>
+</ion-content>

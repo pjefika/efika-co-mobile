@@ -1,0 +1,25 @@
+{
+    "id": "5b86785980f431160d467229",
+    "matricula": "G0034481",
+    "name": "Fabio Henrique Clem da Silva",
+    "email": "fabioh.silva3@telefonica.com",
+    "cpf": "08110367909",
+    "dateBorn": "1992-11-29T00:00:00.000+0000",
+    "password": "Ab010203",
+    "sector": null,
+    "cidade": "CURITIBA",
+    "cluster": "CURITIBA",
+    "phone": "41992557131",
+    "dateExpire": null,
+    "dateCreated": "2018-08-29T10:41:29.810+0000",
+    "dateUpdated": "2018-08-29T10:41:29.810+0000",
+    "creator": 1,
+    "groups": [
+        {
+            "id": "5b86784c80f431160d467225",
+            "name": "operador",
+            "description": "operador"
+        }
+    ],
+    "updated": true
+}
