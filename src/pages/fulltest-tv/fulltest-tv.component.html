@@ -1,9 +1,15 @@
-<ion-header>
+<!-- <ion-header>
     <ion-toolbar>
         <ion-title> Fulltest TV_ </ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
+    
+
+</ion-content> -->
+
+<div>
+    <h3>Fulltest TV_</h3>
     <button ion-button (click)="doFulltestTV();" color="secondary" block round [disabled]="disableButtonDoFulltestTV">Realizar
         Diagnóstico HPNA</button>
     <table *ngIf="holderService.certificationTV">
@@ -52,5 +58,4 @@
             </tr>
         </tbody>
     </table>
-
-</ion-content>
+</div>

@@ -61,6 +61,8 @@ import { GlobalNotificationComponent } from '../util/notification/global-notific
 import { ResetPasswordComponent } from '../pages/login/reset-password/reset-password.component';
 import { ManobraComponent } from '../pages/manobra/manobra.component';
 import { FulltestTVComponent } from '../pages/fulltest-tv/fulltest-tv.component';
+import { ToolboxComponent } from '../pages/toolbox/toolbox.component';
+import { BhsComponent } from '../pages/bhs/bhs.component';
 
 @NgModule({
 	declarations: [
@@ -111,7 +113,9 @@ import { FulltestTVComponent } from '../pages/fulltest-tv/fulltest-tv.component'
 		GlobalNotificationComponent,
 		ResetPasswordComponent,
 		ManobraComponent,
-		FulltestTVComponent
+		FulltestTVComponent,
+		ToolboxComponent,
+		BhsComponent
 	],
 	imports: [
 		BrowserModule,
@@ -168,7 +172,9 @@ import { FulltestTVComponent } from '../pages/fulltest-tv/fulltest-tv.component'
 		TestesRedeComponent,
 		ResetPasswordComponent,
 		ManobraComponent,
-		FulltestTVComponent
+		FulltestTVComponent,
+		ToolboxComponent,
+		BhsComponent
 	],
 	providers: [
 		StatusBar,

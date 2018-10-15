@@ -3,7 +3,6 @@ import { RequestOptions, Headers, Http } from '@angular/http';
 import { HolderService } from '../holder/holder.service';
 import { InfoRequest } from '../../view-model/url-service/info-request';
 import { LinkService } from './link.service';
-import { LinksEndPoits } from '../../view-model/url-service/links-end-points';
 
 import 'rxjs/add/operator/timeout';
 
@@ -14,9 +13,6 @@ export class UrlService extends LinkService {
     public urlIpQA = "http://10.40.197.85"; // --QA 
 
     public options;
-
-    private ftypename: string;
-    private portLink: number;
 
     constructor(private http: Http,
         public holderService: HolderService) {
@@ -41,7 +37,7 @@ export class UrlService extends LinkService {
     }
 
     private post(infoResquest: InfoRequest): Promise<any> {
-        return this.http.post(this.mountUrl(infoResquest), JSON.stringify(infoResquest._data), this.options)
+        return this.http.post(this.returnLink(infoResquest), JSON.stringify(infoResquest._data), this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
@@ -54,7 +50,7 @@ export class UrlService extends LinkService {
     }
 
     private put(infoResquest: InfoRequest): Promise<any> {
-        return this.http.put(this.mountUrl(infoResquest), JSON.stringify(infoResquest._data), this.options)
+        return this.http.put(this.returnLink(infoResquest), JSON.stringify(infoResquest._data), this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
@@ -67,7 +63,7 @@ export class UrlService extends LinkService {
     }
 
     private get(infoResquest: InfoRequest): Promise<any> {
-        return this.http.get(this.mountUrl(infoResquest), this.options)
+        return this.http.get(this.returnLink(infoResquest), this.options)
             .timeout(infoResquest.timeout)
             .toPromise()
             .then(response => {
@@ -76,7 +72,7 @@ export class UrlService extends LinkService {
             .catch(super.handleErrorKing);
     }
 
-    private mountUrl(infoResquest: InfoRequest): string {
+    private returnLink(infoResquest: InfoRequest) {
         if (infoResquest.otherUrl) {
             let ol: string = infoResquest.otherUrl;
             if (infoResquest._data && infoResquest.rqst === "get") {
@@ -84,48 +80,20 @@ export class UrlService extends LinkService {
             }
             return ol;
         } else {
-            let le = super.getLinksEndPoints();
-            switch (infoResquest.rqst) {
-                case "get":
-                    if (this.ftypename) {
-                        if (this.ftypename === le[0].nome) {
-                            this.ajustLink(le[1]);
-                        } else {
-                            this.ajustLink(le[0]);
-                        }
-                    } else {
-                        this.ajustLink(le[0]);
-                    }
-                    break;
-                case "post":
-                    this.ajustLink(le[0]);
-                    break;
-            }
-            let u = this.returnLink(infoResquest);
-            return u;
-        }
-    }
-
-    private returnLink(infoResquest: InfoRequest) {
-        if (this.holderService.isLinkProd) {
-            console.log(infoResquest);
-            if (infoResquest.rqst === "get" && infoResquest._data) {
-                return super.contacMountUrl(this.urlIpProd, this.portLink, infoResquest.command + infoResquest._data);
+            if (this.holderService.isLinkProd) {
+                if (infoResquest.rqst === "get" && infoResquest._data) {
+                    return super.contacMountUrl(this.urlIpProd, "8080", infoResquest.command + infoResquest._data);
+                } else {
+                    return super.contacMountUrl(this.urlIpProd, "8080", infoResquest.command);
+                }
             } else {
-                return super.contacMountUrl(this.urlIpProd, this.portLink, infoResquest.command);
+                if (infoResquest.rqst === "get" && infoResquest._data) {
+                    return super.contacMountUrl(this.urlIpQA, "8080", infoResquest.command + infoResquest._data);
+                } else {
+                    return super.contacMountUrl(this.urlIpQA, "8080", infoResquest.command);
+                }
             }
-        } else {
-            if (infoResquest.rqst === "get" && infoResquest._data) {
-                return super.contacMountUrl(this.urlIpQA, this.portLink, infoResquest.command + infoResquest._data);
-            } else {
-                return super.contacMountUrl(this.urlIpQA, this.portLink, infoResquest.command);
-            }            
         }
-    }
-
-    private ajustLink(linksEndPoits: LinksEndPoits) {
-        this.ftypename = linksEndPoits.nome;
-        this.portLink = linksEndPoits.port;
     }
 
     public getIpEthernet() {
