@@ -28,7 +28,7 @@ export class FulltestTVComponent extends SuperComponentService implements OnInit
 
     public ngOnInit() {
         if (this.holderService.cadastro.servicos.tipoTv !== "IPTV") {
-            super.showAlert("Atenção", "Cliente não é IPTV");
+            // super.showAlert("Atenção", "Cliente não é IPTV");
             this.disableButtonDoFulltestTV = true;
         }
     }

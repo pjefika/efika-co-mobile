@@ -19,7 +19,7 @@ export class HolderService {
     * True para Link de Produção 
     * False para Link de QA
     */
-    public isLinkProd: boolean = false;
+    public isLinkProd: boolean = true;
 
     // Variavel para segurar informação se usuário está ou não logado.
     public estalogado: boolean;

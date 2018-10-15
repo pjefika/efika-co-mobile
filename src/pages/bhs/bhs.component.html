@@ -1,0 +1,15 @@
+<div>
+    <h3>Configurar BHS_</h3>
+
+    <ion-item *ngIf="showBhs()">
+        <ion-label>BHS</ion-label>
+        <ion-toggle [(ngModel)]="holderService.cadastro.rede.bhs"></ion-toggle>
+    </ion-item>
+    <div *ngIf="!showBhs()">
+        <ion-card class="cuidado">
+            <ion-card-header> BHS</ion-card-header>
+            <ion-card-content> Cliente não é GPON VIVO1. </ion-card-content>
+        </ion-card>
+    </div>
+
+</div>
