@@ -63,6 +63,7 @@ import { ManobraComponent } from '../pages/manobra/manobra.component';
 import { FulltestTVComponent } from '../pages/fulltest-tv/fulltest-tv.component';
 import { ToolboxComponent } from '../pages/toolbox/toolbox.component';
 import { BhsComponent } from '../pages/bhs/bhs.component';
+import { RoboManobraComponent } from '../pages/robo-manobra/robo-manobra.component';
 
 @NgModule({
 	declarations: [
@@ -115,7 +116,8 @@ import { BhsComponent } from '../pages/bhs/bhs.component';
 		ManobraComponent,
 		FulltestTVComponent,
 		ToolboxComponent,
-		BhsComponent
+		BhsComponent,
+		RoboManobraComponent
 	],
 	imports: [
 		BrowserModule,
@@ -174,7 +176,8 @@ import { BhsComponent } from '../pages/bhs/bhs.component';
 		ManobraComponent,
 		FulltestTVComponent,
 		ToolboxComponent,
-		BhsComponent
+		BhsComponent,
+		RoboManobraComponent
 	],
 	providers: [
 		StatusBar,

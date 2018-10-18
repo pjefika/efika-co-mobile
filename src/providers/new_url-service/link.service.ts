@@ -17,8 +17,8 @@ export class LinkService extends SuperService {
         return linksEndPoits;
     }
 
-    public contacMountUrl(url, port, command): string {
-        let u = url + ":" + port + "/task/" + command;
+    public contacMountUrl(url, command): string {
+        let u = url + "/task/" + command;
         return u;
     }
 }

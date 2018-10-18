@@ -9,8 +9,8 @@ import 'rxjs/add/operator/timeout';
 @Injectable()
 export class UrlService extends LinkService {
 
-    public urlIpProd = "http://54.94.208.183"  // -- Produção
-    public urlIpQA = "http://10.40.197.85"; // --QA 
+    public urlIpProd = "http://54.94.208.183:8080/"  // -- Produção
+    public urlIpQA = "http://10.40.196.172:9091/"; // --QA 
 
     public options;
 
@@ -82,15 +82,15 @@ export class UrlService extends LinkService {
         } else {
             if (this.holderService.isLinkProd) {
                 if (infoResquest.rqst === "get" && infoResquest._data) {
-                    return super.contacMountUrl(this.urlIpProd, "8080", infoResquest.command + infoResquest._data);
+                    return super.contacMountUrl(this.urlIpProd, infoResquest.command + infoResquest._data);
                 } else {
-                    return super.contacMountUrl(this.urlIpProd, "8080", infoResquest.command);
+                    return super.contacMountUrl(this.urlIpProd, infoResquest.command);
                 }
             } else {
                 if (infoResquest.rqst === "get" && infoResquest._data) {
-                    return super.contacMountUrl(this.urlIpQA, "8080", infoResquest.command + infoResquest._data);
+                    return super.contacMountUrl(this.urlIpQA, infoResquest.command + infoResquest._data);
                 } else {
-                    return super.contacMountUrl(this.urlIpQA, "8080", infoResquest.command);
+                    return super.contacMountUrl(this.urlIpQA, infoResquest.command);
                 }
             }
         }

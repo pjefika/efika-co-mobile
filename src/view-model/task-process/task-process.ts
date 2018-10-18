@@ -13,4 +13,5 @@ export class TaskProcess {
     input: Input;
     output: Output;
     exceptionMessage: string;
+    instancia?: string;
 }

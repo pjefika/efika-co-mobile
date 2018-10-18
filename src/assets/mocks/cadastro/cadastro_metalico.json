@@ -1,46 +1,45 @@
 {
-    "id":"5b36738d80f4312cce070b8c",
-    "dateQueueIn":1530295181994,
-    "dateConsumed":1530295182578,
-    "dateQueueOut":1530295304367,
+    "id":"5bc773bc72bb4c658b13c1c7",
+    "dateQueueIn":1539797948536,
+    "dateConsumed":1539797949590,
+    "dateQueueOut":1539797958332,
     "state":"EXECUTED",
     "task":"CADASTRO",
     "executor":"G0034481",
-    "consumer":"worker: aplicationserver/10.40.198.168",
+    "consumer":null,
     "input":{
         "type":"cadastro",
         "instancia":"4131543457"
     },
     "output":{
-        "type":"cadastro",
         "state":"OK",
         "exceptionMessage":null,
         "instancia":"4131543457",
         "customer":{
             "designador":"CTA-81E2J3HSS-013",
             "instancia":"4131543457",
-            "designadorAcesso":"CTA-04887444-069",
+            "designadorAcesso":"SJP-28016742-069",
             "designadorTv":"TV-CTA-81E2J3HST-050",
             "rede":{
                 "tipo":"METALICA",
                 "origem":"ONLINE",
                 "planta":"VIVO2",
-                "ipDslam":"10.200.30.177",
+                "ipDslam":"10.141.229.48",
                 "vendorDslam":"KEYMILE",
-                "modeloDslam":"SUVD11",
+                "modeloDslam":"SUAD3",
                 "idOnt":null,
                 "terminal":null,
                 "ipMulticast":null,
                 "nrc":null,
-                "slot":3,
-                "porta":37,
-                "sequencial":1085,
-                "logica":1085,
-                "rin":74,
-                "vlanVoip":1074,
-                "vlanVod":3074,
-                "vlanMulticast":4000,
-                "cvlan":1185,
+                "slot":14,
+                "porta":40,
+                "sequencial":328,
+                "logica":328,
+                "rin":508,
+                "vlanVoip":0,
+                "vlanVod":3508,
+                "vlanMulticast":0,
+                "cvlan":428,
                 "bhs":null
             },
             "redeExterna":{
@@ -55,10 +54,10 @@
             },
             "servicos":{
                 "origem":null,
-                "velDown":51200,
-                "velUp":5120,
+                "velDown":15360,
+                "velUp":1024,
                 "tipoTv":"DTH",
-                "tipoLinha":"TDM"
+                "tipoLinha":"SIP"
             },
             "linha":{
                 "tipo":"TDM",
@@ -67,29 +66,29 @@
             },
             "radius":{
                 "status":"ATIVO",
-                "armario":"PRCTA_O1C50",
-                "rin":"074",
-                "velocidade":"51200 - 5120",
+                "armario":"PRSJP_O1A12",
+                "rin":"508",
+                "velocidade":"15360 - 1024",
                 "ipFixo":"-",
-                "profile":"r5120b51200",
-                "porta":"1085",
+                "profile":"a1024b15360",
+                "porta":"328",
                 "isIpFixo":false
             },
             "asserts":[
                 {
                     "asserts":"DIVERGENCIA_TBS_RADIUS",
                     "value":false,
-                    "creationDate":1530295495430
+                    "creationDate":1539797958259
                 },
                 {
                     "asserts":"CIRCUITO_ATIVO",
                     "value":true,
-                    "creationDate":1530295495430
+                    "creationDate":1539797958259
                 },
                 {
                     "asserts":"HAS_BLOQUEIO_RADIUS",
                     "value":false,
-                    "creationDate":1530295495430
+                    "creationDate":1539797958259
                 }
             ],
             "eventos":[

@@ -39,7 +39,8 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                 this.getCadastroMock("Consultando Cadastro Mock");
             } else {
                 // --Prod
-                this.buscaCadastro("Consultando Cadastro");
+                // this.buscaCadastro("Consultando Cadastro");
+                this.getCadastroMock("Consultando Cadastro Mock");
             }
         }, 1);
     }

@@ -52,7 +52,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
      * Chamada de tela para entrada de login com validação se o mesmo é mock ou produção/qa
      */
     public validEntrar() {
-        if (this.holderService.isMock) {
+        if (this.holderService.isMock || !this.holderService.isLinkProd) {
             // --Mock   
             this.getinfonewauthMock();
         } else {
@@ -84,7 +84,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
                 // Valido
                 this.usuario.matricula = userSession.user;
                 this.usuario.senha = userSession.password;
-                if (this.holderService.isMock) {
+                if (this.holderService.isMock || !this.holderService.isLinkProd) {
                     this.getinfonewauthMock();
                 } else {
                     // Colocar infos prod

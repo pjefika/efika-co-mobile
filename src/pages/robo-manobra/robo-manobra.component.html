@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Robo Manobra</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <button ion-button block round (click)="verificarDisponibilidadeMock();" *ngIf="!disableBtnVerificarDisp">Verificar
+        Disponibilidade</button>
+
+    <div *ngIf="ableFormRoboManobra">
+        <ion-list>
+            <ion-item>
+                <ion-label fixed>Motivo</ion-label>
+                <ion-select [(ngModel)]="motivoManobra">
+                    <ion-option value="Distância">Distância</ion-option>
+                    <ion-option value="Bloco Incorreto">Bloco Incorreto</ion-option>
+                    <ion-option value="Ocupação Indevida">Ocupação Indevida</ion-option>
+                    <ion-option value="Travessia Irregular">Travessia Irregular</ion-option>
+                    <ion-option value="Correção de cadastro">Correção de cadastro</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed>Primária</ion-label>
+                <ion-input type="text" [(ngModel)]="primaria"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed>Secundária</ion-label>
+                <ion-input type="text" [(ngModel)]="secundaria"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed>CTO</ion-label>
+                <ion-input type="text" [(ngModel)]="CTO"></ion-input>
+            </ion-item>
+
+            <button ion-button block round (click)="doManobrarMock()">Manobrar</button>
+        </ion-list>
+    </div>
+
+    <div *ngIf="showBtnVerificarSituacaoManobra">
+        <p>Aguarde o tempo de resposta pode demorar até 30 minutos, após a realização da manobra.</p>
+        <button ion-button block round (click)="validSituacaoManobraMock();">Verificar
+            Situação</button>
+    </div>
+
+</ion-content>
