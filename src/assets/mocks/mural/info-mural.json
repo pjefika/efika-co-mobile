@@ -8,7 +8,23 @@
             "action": true,
             "namebutton": "Tutorial Efika CO Mobile",
             "colorbutton": "Dark",
-            "linkref": "http://54.94.208.183/tutorial/tutorial.html"
+            "linkref": "http://54.94.208.183/tutorial/tutorial.html",
+            "downloadAction": false,
+            "linkDownload": ""
+        }
+    },
+    {
+        "titulo": "Tutorial Validador Manobra",
+        "mensagem": "Neste Link você encontra o tutorial completo do Validador Manobra.",
+        "data_inicio": 0,
+        "data_fim": 0,
+        "action": {
+            "action": false,
+            "namebutton": "",
+            "colorbutton": "",
+            "linkref": "",
+            "downloadAction": true,
+            "linkDownload": "assets/videos/Video_Tutorial_-_Validador_Manobra_no_EFIKA_Mobile.mp4"
         }
     }
 ]

@@ -36,7 +36,7 @@ export class InfoMuralComponent extends SuperComponentService implements OnInit 
 
     public getInfoMuralMock() {
         this.infoMuralService
-            .getInfoMuralMock()
+            .getInfoMural()
             .then(resposta => {
                 this.infosMural = resposta;
             });
@@ -52,7 +52,7 @@ export class InfoMuralComponent extends SuperComponentService implements OnInit 
             });
     }
 
-    public openInfoMural(im: InfoMural) {
+    public openInfoMural(im: InfoMural) {      
         this.navCtrl.push(MensagemMuralComponent, im);
     }
 

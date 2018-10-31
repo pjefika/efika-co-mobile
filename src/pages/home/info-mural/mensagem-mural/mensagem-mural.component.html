@@ -10,9 +10,16 @@
 
     <p>{{infoMural.mensagem}}</p>
 
-    <div *ngIf="infoMural.action">
-        <button *ngIf="infoMural.action.action" ion-button [color]="infoMural.action.colorbutton === 'Green' ? 'secondary' : infoMural.action.colorbutton === 'Red' ? 'danger' : infoMural.action.colorbutton === 'Dark' ? 'dark': '' "
+    <div *ngIf="infoMural.action.action">
+        <button ion-button [color]="infoMural.action.colorbutton === 'Green' ? 'secondary' : infoMural.action.colorbutton === 'Red' ? 'danger' : infoMural.action.colorbutton === 'Dark' ? 'dark': '' "
             full="true" round="true" (click)="openLink()">{{infoMural.action.namebutton}}</button>
+    </div>
+
+    <div *ngIf="infoMural.action.downloadAction">
+        <!-- <a ion-button full round [href]="url" download>Download</a> -->
+        <video width="100%" height="250" controls>
+            <source [src]="url" type="video/mp4" />
+        </video>
     </div>
 
 </ion-content>

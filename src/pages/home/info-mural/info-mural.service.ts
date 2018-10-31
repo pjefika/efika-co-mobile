@@ -9,7 +9,6 @@ declare var require: any
 @Injectable()
 export class InfoMuralService extends SuperService {
 
-
     constructor(public urlService: UrlService,
         public holderService: HolderService) {
         super(holderService);
@@ -23,7 +22,7 @@ export class InfoMuralService extends SuperService {
     public getInfoMural(): Promise<InfoMural[]> {
         this.infoResquest = {
             rqst: "get",
-            otherUrl: "http://54.94.208.183/assets/mocks/mural/info-mural.json/",
+            otherUrl: window.location.href + "assets/mocks/mural/info-mural.json",
             command: "Efika Info Mural",
             timeout: 5000
         }
