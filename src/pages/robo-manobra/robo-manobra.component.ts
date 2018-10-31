@@ -3,6 +3,9 @@ import { SuperComponentService } from '../../providers/component-service/super-c
 import { AlertController, LoadingController } from 'ionic-angular';
 import { HolderService } from '../../providers/holder/holder.service';
 import { RoboManobraService } from './robo-manobra.service';
+import { Primaria } from '../../view-model/robo-manobra/primaria';
+import { CTO } from '../../view-model/robo-manobra/cto';
+import { Secundaria } from '../../view-model/robo-manobra/secundaria';
 
 @Component({
     selector: 'robo-manobra-component',
@@ -20,9 +23,15 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
 
     public showBtnVerificarSituacaoManobra: boolean = false;
 
-    public tipoTecnologia: string;
+    public tipoTecnologia: string = "FTTA";
     public numeroInstancia: string;
     public motivoManobra: string;
+
+    public selectedPrimaria: Primaria;
+    public selectedCTO: CTO;
+    public selectecSecundaria: Secundaria = new Secundaria();
+
+    public incrementTimeCount: number = 50;
 
     constructor(public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
@@ -33,25 +42,35 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
 
     public ngOnInit() { }
 
+    public doVerificarDisponibilidade() {
+        if (this.holderService.isMock) {
+            this.verificarDisponibilidadeMock();
+        } else {
+            this.verificarDisponibilidade();
+        }
+
+    }
+
     public verificarDisponibilidade() {
         this.count = 0;
         let qntErro: number = 0;
         this.loading(true, "Verificando disponibilidade");
         this.roboManobraService
-            .setTaskRoboManobra(this.tipoTecnologia, this.holderService.cadastro.instancia, this.motivoManobra)
+            .setTaskRoboManobra(this.tipoTecnologia, "1150836325"/*this.holderService.cadastro.instancia*/)
             .then(resposta => {
                 if (resposta) {
                     let rqSi = setInterval(() => {
-                        if (this.count < this.holderService.rcount) {
+                        if (this.count < this.holderService.rcount + this.incrementTimeCount) {
                             this.count++;
                             this.roboManobraService
                                 .gettask(resposta.id)
-                                .then(resposta => {
-                                    if (resposta.state === "EXECUTED") {
-                                        if (super.validState(resposta.output, this.holderService.instancia)) {
-
+                                .then(resposta_1 => {
+                                    if (resposta_1.state === "EXECUTED") {
+                                        if (super.validState(resposta_1.output, this.holderService.instancia)) {
+                                            this.holderService.roboManobra = resposta_1.output;
+                                            this.loading(false);
+                                            this.ableFormRoboManobra = true;
                                             clearInterval(rqSi);
-
                                         }
                                     }
                                 }, error => {
@@ -62,7 +81,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                                         clearInterval(rqSi);
                                     }
                                 });
-                            if (this.count === this.holderService.rcount /*&& this.holderService.certification*/) {
+                            if (this.count === this.holderService.rcount + this.incrementTimeCount) {
                                 this.tempobuscaexcedido();
                                 clearInterval(rqSi);
                             }
@@ -86,83 +105,80 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
             });
     }
 
+    public doManobrar() {
+        this.manobrar();
+        // if (this.holderService.isMock) {
+        // } else {
+        // }
+    }
+
+    private manobrar() {
+        this.count = 0;
+        let qntErro: number = 0;
+        this.loading(true, "Realizando manobra");
+        this.roboManobraService.setTaskRoboManuevers(this.holderService.roboManobra.id_solicitacao, this.holderService.cadastro.instancia, this.motivoManobra, this.tipoTecnologia, this.selectedPrimaria.codprimaria, this.selectecSecundaria.codsecundaria)
+            .then(resposta => {
+                if (resposta) {
+                    let rqSi = setInterval(() => {
+                        if (this.count < this.holderService.rcount + this.incrementTimeCount) {
+                            this.count++;
+                            this.roboManobraService
+                                .gettask(resposta.id)
+                                .then(resposta_1 => {
+                                    if (resposta_1.state === "EXECUTED") {
+                                        if (super.validState(resposta_1.output, this.holderService.instancia)) {
+                                            this.holderService.roboManobrado = resposta_1.output;
+
+
+                                            switch (this.holderService.roboManobrado.resultado_manobra) {
+                                                case "Pendente":
+
+                                                    break;
+                                                case "Em Processamento":
+
+                                                    break;
+                                                case "Erro":
+
+                                                    break;
+                                            }
+
+                                            clearInterval(rqSi);
+                                        }
+                                    }
+                                }, error => {
+                                    qntErro++;
+                                    if (qntErro > 3) {
+                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                        this.loading(false);
+                                        clearInterval(rqSi);
+                                    }
+                                });
+                            if (this.count === this.holderService.rcount + this.incrementTimeCount) {
+                                this.tempobuscaexcedido();
+                                clearInterval(rqSi);
+                            }
+                        } else {
+                            this.loading(false);
+                            this.tempobuscaexcedido();
+                            clearInterval(rqSi);
+                        }
+                    }, this.holderService.rtimeout);
+                }
+            });
+    }
+
     private tempobuscaexcedido() {
         this.loading(false);
         super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
-    public doManobrar() {
-        this.loading(true, "Realizando Manobra");
-        setTimeout(() => {
-            this.loading(false);
-            if (true) {
-                // this.validSituacaoManobra();
-                this.showBtnVerificarSituacaoManobra = true;
-                this.ableFormRoboManobra = false;
-            } else {
-                super.showAlert("Ops, aconteceu algo", "Não foi possivel realizar a manobra");
-            }
-        }, 2000);
-    }
-
-    public validSituacaoManobra() {
-        this.loading(true, "Validando situação da manobra");
-        setTimeout(() => {
-            this.loading(false);
-            if (true) {
-                super.showAlert("Sucesso", "Manobra realizada com sucesso.");
-            } else {
-                super.showAlert("Ops, aconteceu algo", "Situação da manobra sem resposta...");
-            }
-        }, 2000);
-    }
-
     public verificarDisponibilidadeMock() {
         this.loading(true, "Verificando disponibilidade");
         setTimeout(() => {
+            this.holderService.roboManobra = this.roboManobraService.getmanobradispMock().output;
+            this.ableFormRoboManobra = true;
             this.loading(false);
-            if (true) {
-                // habilita form
-                super.showAlert("Disponibilidade", "Disponibilidade ok, por favor preencha o formulário.");
-                this.disableBtnVerificarDisp = true;
-                this.ableFormRoboManobra = true;
-            } else {
-                // Sem Portas  disponiveis
-                super.showAlert("Portas Indisponiveis", "Não há portas disponiveis");
-            }
-        }, 2000);
-    }
-
-    public doManobrarMock() {
-        this.loading(true, "Realizando Manobra");
-        setTimeout(() => {
-            this.loading(false);
-            if (true) {
-                // this.validSituacaoManobra(); 
-                this.showBtnVerificarSituacaoManobra = true;
-                this.ableFormRoboManobra = false;
-            } else {
-                super.showAlert("Ops, aconteceu algo", "Não foi possivel realizar a manobra");
-            }
-        }, 2000);
-    }
-
-    public validSituacaoManobraMock() {
-        this.loading(true, "Validando situação da manobra");
-        setTimeout(() => {
-            this.loading(false);
-            if (true) {
-                super.showAlert("Sucesso", "Manobra realizada com sucesso.");
-            } else {
-                super.showAlert("Ops, aconteceu algo", "Situação da manobra sem resposta...");
-            }
-        }, 2000);
-    }
-
-    public validFields() {
-
-
-
+        }, 100);
     }
 
 }

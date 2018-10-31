@@ -2,11 +2,37 @@
     <h3>Configurar BHS_</h3>
 
     <div *ngIf="showBhs()">
-        <ion-item>
-            <ion-label>BHS</ion-label>
-            <ion-toggle [(ngModel)]="holderService.cadastro.rede.bhs"></ion-toggle>
-        </ion-item>
-        <button ion-button block round color="royal" (click)="configVlan();">Configurar VLAN's</button>
+
+        <div *ngIf="!cmdBHSexecuted">
+            <ion-item>
+                <ion-label>BHS</ion-label>
+                <ion-toggle [(ngModel)]="holderService.cadastro.rede.bhs"></ion-toggle>
+            </ion-item>
+            <button ion-button block round color="royal" (click)="configVlan();">Configurar VLAN's</button>
+        </div>
+        <div *ngIf="cmdBHSexecuted">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="3">Configurações VLAN's</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let vlans of holderService.configBHSVlans">
+                        <th>
+                            {{vlans.nome}}
+                        </th>
+                        <td>
+                            {{vlans.mensagem}}
+                        </td>
+                        <td>
+                            <ion-icon name="checkmark-circle" *ngIf="vlans.resultado" style="color: green;"></ion-icon>
+                            <ion-icon name="ios-alert" *ngIf="!vlans.resultado" style="color: red;"></ion-icon>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div *ngIf="!showBhs()">

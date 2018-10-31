@@ -31,7 +31,7 @@ export class BhsService extends SuperService {
             .catch(super.handleError);
     }
 
-    public gettask(id: String): Promise<any> {
+    public gettask(id: String): Promise<TaskProcess> {
         this.infoResquest = {
             rqst: "get",
             command: "",

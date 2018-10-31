@@ -7,4 +7,40 @@ bhs-component {
         background-color: #FEEFB3;
         border-radius:.5em;
     }
+    
+    table {
+        border: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    table tr {
+        background: #f8f8f8;
+        border: 1px solid #ddd;
+        padding: .35em;
+        border-bottom-width: 50%; 
+    }
+
+    table th {
+        text-align: left;
+        width: 50%;
+        padding: .625em;
+        font-size: .85em;
+        // letter-spacing: .1em;
+        // text-transform: uppercase;
+        font-size: .8em;
+
+    }
+
+    table td {
+        text-align: right;
+        padding: .625em;
+        font-size: .8em;
+        font-size: .8em;
+
+    }
+
+    table tr:last-child {
+        border-bottom: 3px solid #ddd;
+    }
 }

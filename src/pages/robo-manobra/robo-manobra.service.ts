@@ -4,6 +4,8 @@ import { UrlService } from '../../providers/new_url-service/url.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { TaskProcess } from '../../view-model/task-process/task-process';
 
+declare var require: any
+
 @Injectable()
 export class RoboManobraService extends SuperService {
 
@@ -12,10 +14,33 @@ export class RoboManobraService extends SuperService {
         super(holderService);
     }
 
-    public setTaskRoboManobra(tipoTecnologia: string, numeroInstancia: string, motivoManobra: string): Promise<TaskProcess> {
+    public setTaskRoboManobra(tipoTecnologia: string, numeroInstancia: string): Promise<TaskProcess> {
         let userSession = JSON.parse(localStorage.getItem("user"));
-        let _data: { task: string, input: { type: string, tipoTecnologia: string, motivoManobra: string, numeroInstancia: string }, executor: string };
-        _data = { task: "DISPONIBILIDADE", input: { type: "disponibiidade", tipoTecnologia: tipoTecnologia, motivoManobra: motivoManobra, numeroInstancia: numeroInstancia }, executor: userSession.user };
+        let _data: { task: string, input: { type: string, tipo_tecnologia: string, numero_instancia: string }, executor: string };
+        _data = { task: "DISPONIBILIDADE", input: { type: "disponibiidade", tipo_tecnologia: tipoTecnologia, numero_instancia: numeroInstancia }, executor: userSession.user };
+        this.infoResquest = {
+            rqst: "post",
+            command: "post",
+            _data: _data,
+            timeout: 180000
+        };
+        return this.urlService
+            .request(this.infoResquest)
+            .then(response => {
+                return response as TaskProcess
+            })
+            .catch(super.handleError);
+    }
+
+    public setTaskRoboManuevers(idSolicitacao: string,
+        numeroTerminal: string,
+        motivoManobra: string,
+        tipoTecnologia: string,
+        primaria: string,
+        secundaria: string): Promise<TaskProcess> {
+        let userSession = JSON.parse(localStorage.getItem("user"));
+        let _data: { task: string, input: { type: string, id_solicitacao: string, numero_terminal: string, motivo_manobra: string, tipo_tecnologia: string, primaria: string, secundaria: string }, executor: string };
+        _data = { task: "MANUEVERS", input: { type: "manuevers", id_solicitacao: idSolicitacao, numero_terminal: numeroTerminal, motivo_manobra: motivoManobra, tipo_tecnologia: tipoTecnologia, primaria: primaria, secundaria: secundaria }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
             command: "post",
@@ -43,4 +68,10 @@ export class RoboManobraService extends SuperService {
                 return resposta as TaskProcess;
             });
     }
+
+    public getmanobradispMock(): TaskProcess {
+        let info: TaskProcess = require("../../assets/mocks/manobra/mock-manobrar.json");
+        return info
+    }
+
 }

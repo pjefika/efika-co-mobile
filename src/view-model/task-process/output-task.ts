@@ -4,6 +4,7 @@ import { Valids } from "../fulltest/validacao";
 import { Ont } from "./ont";
 import { Serial } from "./serial";
 import { RespostaGenerica } from "../resposta/resposta-generica";
+import { Primaria } from "../robo-manobra/primaria";
 
 export class Output {
     type: string;
@@ -30,4 +31,16 @@ export class Output {
     serial?: Serial;
 
     resposta?: RespostaGenerica;
+
+    // Config BHS GPON VIVO 1
+    vlans?: Valids[];
+
+
+    //Robo-Manobra
+    cto?: string;
+    statusPorta?: string;
+    observacao?: string;
+    id_solicitacao?: string;
+    primaria?: Primaria[];
+    resultado_manobra?: string;
 }

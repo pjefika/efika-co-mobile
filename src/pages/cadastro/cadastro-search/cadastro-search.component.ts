@@ -31,7 +31,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
     public ngOnInit() { }
 
     //Busca cadastro.
-    public getCadastro() {
+    public doGetCadastro() {
         this.resetHolder();
         setTimeout(() => {
             if (this.holderService.isMock) {
@@ -39,8 +39,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
                 this.getCadastroMock("Consultando Cadastro Mock");
             } else {
                 // --Prod
-                // this.buscaCadastro("Consultando Cadastro");
-                this.getCadastroMock("Consultando Cadastro Mock");
+                this.buscaCadastro("Consultando Cadastro");
             }
         }, 1);
     }
@@ -142,7 +141,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
             this.ativo = false;
             this.jaBuscou = true;
             this.holderService.btnFazFulltestAtivo = true;
-        }, 1000);
+        }, 200);
         // }
     }
 

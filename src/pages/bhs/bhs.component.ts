@@ -14,6 +14,8 @@ export class BhsComponent extends SuperComponentService implements OnInit {
 
     private count: number = 0;
 
+    public cmdBHSexecuted: boolean = false;
+
     constructor(public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
         public holderService: HolderService,
@@ -48,10 +50,13 @@ export class BhsComponent extends SuperComponentService implements OnInit {
                                 .then(resposta => {
                                     if (resposta.state === "EXECUTED") {
                                         if (super.validState(resposta.output, this.holderService.instancia)) {
+                                            this.holderService.configBHSVlans = resposta.output.vlans;
+                                            this.cmdBHSexecuted = true;
                                             this.loading(false);
                                             clearInterval(rqSi);
-
-
+                                        } else {
+                                            this.loading(false);
+                                            clearInterval(rqSi);
                                         }
                                     }
                                 }, error => {

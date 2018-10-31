@@ -3,6 +3,9 @@ import { Injectable } from "@angular/core";
 import { Certification } from "../../view-model/certification/certification";
 import { UserFull } from "../../view-model/usuario/userfull";
 import { RespostaGenerica } from "../../view-model/resposta/resposta-generica";
+import { Valids } from "../../view-model/fulltest/validacao";
+import { RoboManobra } from "../../view-model/robo-manobra/robo-manobra";
+import { RoboManobrado } from "../../view-model/robo-manobra/manobrado";
 
 @Injectable()
 export class HolderService {
@@ -12,7 +15,7 @@ export class HolderService {
     * True para Mock.
     * False para Produção/QA - Vide link na UrlService.
     */
-    public isMock: boolean = false;
+    public isMock: boolean = true;
 
     /**
     * Valida o Link se é Produção / QA
@@ -41,6 +44,12 @@ export class HolderService {
     public validManobra: RespostaGenerica;
 
     public certificationTV: RespostaGenerica;
+
+    public configBHSVlans: Valids[];
+
+    public roboManobra: RoboManobra;
+
+    public roboManobrado: RoboManobrado;
 
     /**
     * Variavel de controle de menu do rodapé 
