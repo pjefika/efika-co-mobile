@@ -1,56 +1,109 @@
 {
-    "id":"5bd9a24072bb4c053796044f",
-    "dateQueueIn":1540989504611,
-    "dateConsumed":1540989508906,
-    "dateQueueOut":1540990237422,
-    "state":"EXECUTED",
-    "task":"DISPONIBILIDADE",
-    "executor":"G0034481",
-    "consumer":null,
-    "input":{
-        "type":"disponibiidade",
-        "dataCriacao":1541000055427,
-        "dataAtualizacao":1541000666609,
-        "timesExecuted":1,
-        "syncronized":true,
-        "id_solicitacao":"5bd9a24072bb4c053796044f",
-        "numero_instancia":"1150836325",
-        "motivo_manobra":null,
-        "tipo_tecnologia":"FTTA"
+    "id": "5bdb222c72bb4c053796048e",
+    "dateQueueIn": 1541087788324,
+    "dateConsumed": 1541087790030,
+    "dateQueueOut": 1541088482543,
+    "state": "EXECUTED",
+    "task": "DISPONIBILIDADE",
+    "executor": "G0034481",
+    "consumer": null,
+    "input": {
+        "type": "disponibiidade",
+        "dataCriacao": 1541098332229,
+        "dataAtualizacao": 1541098975910,
+        "timesExecuted": 4,
+        "syncronized": true,
+        "id_solicitacao": "5bdb222c72bb4c053796048e",
+        "numero_instancia": "1150836507",
+        "motivo_manobra": null,
+        "tipo_tecnologia": "FTTA"
     },
-    "output":{
-        "statusPorta":null,
-        "observacao":"Portas Listadas para Escolha",
-        "id_solicitacao":"5bd9a24072bb4c053796044f",
-        "primaria":[
+    "output": {
+        "id_solicitacao": "5bdb222c72bb4c053796048e",
+        "primaria": [
             {
-                "codprimaria":"05-F#103",
-                "CTO":[
+                "codprimaria": "05-F#113",
+                "CTO": [
                     {
-                        "codcto":"05SP103SS3"
+                        "codcto": "05SP113SS5",
+                        "secundaria": [
+                            {
+                                "codsecundaria": "39"
+                            }
+                        ]
+                    },
+                    {
+                        "codcto": "05SP113SS1",
+                        "secundaria": [
+                            {
+                                "codsecundaria": "5"
+                            },
+                            {
+                                "codsecundaria": "6"
+                            },
+                            {
+                                "codsecundaria": "7"
+                            },
+                            {
+                                "codsecundaria": "8"
+                            }
+                        ]
                     }
-                ],
-                "secundaria":null
+                ]
             },
             {
-                "codprimaria":"05-F#103",
-                "CTO":[
+                "codprimaria": "05-F#112",
+                "CTO": [
                     {
-                        "codcto":"05SP103SS3"
+                        "codcto": "05SP112SS8",
+                        "secundaria": [
+                            {
+                                "codsecundaria": "61"
+                            },
+                            {
+                                "codsecundaria": "62"
+                            },
+                            {
+                                "codsecundaria": "63"
+                            },
+                            {
+                                "codsecundaria": "64"
+                            }
+                        ]
                     }
-                ],
-                "secundaria":null
+                ]
             },
             {
-                "codprimaria":"05-F#103",
-                "CTO":[
+                "codprimaria": "05-F#103",
+                "CTO": [
                     {
-                        "codcto":"05SP103SS3"
+                        "codcto": "05SP103SS3",
+                        "secundaria": [
+                            {
+                                "codsecundaria": "19"
+                            },
+                            {
+                                "codsecundaria": "20"
+                            },
+                            {
+                                "codsecundaria": "21"
+                            },
+                            {
+                                "codsecundaria": "22"
+                            },
+                            {
+                                "codsecundaria": "23"
+                            },
+                            {
+                                "codsecundaria": "24"
+                            }
+                        ]
                     }
-                ],
-                "secundaria":null
+                ]
             }
         ],
-        "CTO":null
+        "CTO": null,
+        "status_porta": null,
+        "observacao": "Portas Listadas para Escolha"
     }
 }

@@ -64,6 +64,7 @@ import { FulltestTVComponent } from '../pages/fulltest-tv/fulltest-tv.component'
 import { ToolboxComponent } from '../pages/toolbox/toolbox.component';
 import { BhsComponent } from '../pages/bhs/bhs.component';
 import { RoboManobraComponent } from '../pages/robo-manobra/robo-manobra.component';
+import { RoboHolderIdsService } from '../providers/holder/robo-holder-ids.service';
 
 @NgModule({
 	declarations: [
@@ -190,7 +191,8 @@ import { RoboManobraComponent } from '../pages/robo-manobra/robo-manobra.compone
 		LoginUtilService,
 		ClipBoardService,
 		NotificationService,
-		WebsocketService
+		WebsocketService,
+		RoboHolderIdsService
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

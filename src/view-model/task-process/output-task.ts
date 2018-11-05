@@ -43,4 +43,5 @@ export class Output {
     id_solicitacao?: string;
     primaria?: Primaria[];
     resultado_manobra?: string;
+    alerta?: string;
 }

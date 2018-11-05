@@ -1,12 +1,17 @@
 <ion-header>
     <ion-navbar>
         <ion-title>Robo Manobra</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="areYouSureRefreshManobraInfo()">
+                <ion-icon name="refresh"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-    <div *ngIf="!disableBtnVerificarDisp">
+    <div *ngIf="roboHolderIdsService.ableFormVerifyDispManobra">
         <ion-item>
             <ion-label fixed>Tipo Tecnologia</ion-label>
             <ion-select [(ngModel)]="tipoTecnologia">
@@ -18,7 +23,7 @@
             Disponibilidade</button>
     </div>
 
-    <div *ngIf="ableFormRoboManobra">
+    <div *ngIf="roboHolderIdsService.ableFormRoboManobra">
         <ion-list>
             <ion-item>
                 <ion-label fixed>Motivo</ion-label>
@@ -55,9 +60,9 @@
         </ion-list>
     </div>
 
-    <div *ngIf="showBtnVerificarSituacaoManobra">
+    <div *ngIf="roboHolderIdsService.ableActionVerifySitManobra">
         <p>Aguarde o tempo de resposta pode demorar até 30 minutos, após a realização da manobra.</p>
-        <button ion-button block round (click)="validSituacaoManobraMock();">Verificar
+        <button ion-button block round (click)="doVerifySituacaoManobra();">Verificar
             Situação</button>
     </div>
 

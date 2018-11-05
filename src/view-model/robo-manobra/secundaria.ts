@@ -1,3 +1,3 @@
 export class Secundaria {
-    codsecundaria: string;
+    codsecundaria: string = null;
 }

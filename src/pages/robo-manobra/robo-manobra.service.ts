@@ -37,10 +37,30 @@ export class RoboManobraService extends SuperService {
         motivoManobra: string,
         tipoTecnologia: string,
         primaria: string,
-        secundaria: string): Promise<TaskProcess> {
+        secundaria: string,
+        statusPorta: string,
+        codcto: string): Promise<TaskProcess> {
         let userSession = JSON.parse(localStorage.getItem("user"));
-        let _data: { task: string, input: { type: string, id_solicitacao: string, numero_terminal: string, motivo_manobra: string, tipo_tecnologia: string, primaria: string, secundaria: string }, executor: string };
-        _data = { task: "MANUEVERS", input: { type: "manuevers", id_solicitacao: idSolicitacao, numero_terminal: numeroTerminal, motivo_manobra: motivoManobra, tipo_tecnologia: tipoTecnologia, primaria: primaria, secundaria: secundaria }, executor: userSession.user };
+        let _data: { task: string, input: { type: string, id_solicitacao: string, numero_terminal: string, motivo_manobra: string, tipo_tecnologia: string, primaria: string, secundaria: string, status_porta: string, cto: string }, executor: string };
+        _data = { task: "MANUEVERS", input: { type: "manuevers", id_solicitacao: idSolicitacao, numero_terminal: numeroTerminal, motivo_manobra: motivoManobra, tipo_tecnologia: tipoTecnologia, primaria: primaria, secundaria: secundaria, status_porta: statusPorta, cto: codcto }, executor: userSession.user };
+        this.infoResquest = {
+            rqst: "post",
+            command: "post",
+            _data: _data,
+            timeout: 180000
+        };
+        return this.urlService
+            .request(this.infoResquest)
+            .then(response => {
+                return response as TaskProcess
+            })
+            .catch(super.handleError);
+    }
+
+    public setTaskManobraProvisioning(idSolicitacao: string, numeroTerminal: string): Promise<TaskProcess> {
+        let userSession = JSON.parse(localStorage.getItem("user"));
+        let _data: { task: string, input: { type: string, id_solicitacao: string, numero_terminal: string }, executor: string };
+        _data = { task: "PROVISIONING", input: { type: "provisioning", id_solicitacao: idSolicitacao, numero_terminal: numeroTerminal }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
             command: "post",
@@ -71,6 +91,11 @@ export class RoboManobraService extends SuperService {
 
     public getmanobradispMock(): TaskProcess {
         let info: TaskProcess = require("../../assets/mocks/manobra/mock-manobrar.json");
+        return info
+    }
+
+    public getmanobradoMock(): TaskProcess {
+        let info: TaskProcess = require("../../assets/mocks/manobra/mock-manobrado.json");
         return info
     }
 

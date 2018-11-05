@@ -1,0 +1,26 @@
+{
+    "id": "5be0172e72bb4c05379604b1",
+    "dateQueueIn": 1541412654513,
+    "dateConsumed": 1541412656467,
+    "dateQueueOut": 1541413091322,
+    "state": "EXECUTED",
+    "task": "MANUEVERS",
+    "executor": "G0034481",
+    "consumer": null,
+    "input": {
+        "type": "manuevers",
+        "syncronized": true,
+        "id_solicitacao": "5be0154b72bb4c05379604af",
+        "numero_terminal": "5137223195",
+        "motivo_manobra": "Distância",
+        "tipo_tecnologia": "FTTH",
+        "primaria": "05-F#103",
+        "cto": "05SP103SS2",
+        "secundaria": "11",
+        "status_porta": null
+    },
+    "output": {
+        "id_solicitacao": "5be0154b72bb4c05379604af",
+        "resultado_manobra": "Concluida"
+    }
+}
