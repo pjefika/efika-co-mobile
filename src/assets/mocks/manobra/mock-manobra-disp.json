@@ -1,0 +1,26 @@
+{
+    "id":"5be050bd72bb4c05379604b5",
+    "dateQueueIn":1541427389547,
+    "dateConsumed":1541427394190,
+    "dateQueueOut":1541427855321,
+    "state":"EXECUTED",
+    "task":"DISPONIBILIDADE",
+    "executor":"G0034481",
+    "consumer":null,
+    "input":{
+        "type":"disponibiidade",
+        "dataCriacao":1541437913867,
+        "dataAtualizacao":1541438362419,
+        "timesExecuted":3,
+        "syncronized":true,
+        "id_solicitacao":"5be050bd72bb4c05379604b5",
+        "numero_instancia":"1150661017",
+        "motivo_manobra":null,
+        "tipo_tecnologia":"FTTH"
+    },
+    "output":{
+        "id_solicitacao":"5bdd87f272bb4c05379604a2",
+        "resultado_manobra":"Em Manobra",
+        "alerta":"Aprovisionamento concluído"
+    }
+}

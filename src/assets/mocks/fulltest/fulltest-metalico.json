@@ -1,617 +1,378 @@
 {
-    "id":"5b367fbc80f4312cce072d98",
-    "dateQueueIn":1530298300015,
-    "dateConsumed":1530298303032,
-    "dateQueueOut":1530298424369,
-    "state":"EXECUTED",
-    "task":"CERTIFICATION",
-    "executor":"G0034481",
-    "consumer":"worker: aplicationserver/10.40.198.168",
-    "input":{
-        "type":"certification",
-        "instancia":null,
-        "customer":{
-            "designador":"CTA-81E2J3HSS-013",
-            "instancia":"4131543457",
-            "designadorAcesso":"CTA-04887444-069",
-            "designadorTv":"TV-CTA-81E2J3HST-050",
-            "rede":{
-                "tipo":"METALICA",
-                "origem":"ONLINE",
-                "planta":"VIVO2",
-                "ipDslam":"10.200.30.177",
-                "vendorDslam":"KEYMILE",
-                "modeloDslam":"SUVD11",
-                "idOnt":null,
-                "terminal":null,
-                "ipMulticast":null,
-                "nrc":null,
-                "slot":3,
-                "porta":37,
-                "sequencial":1085,
-                "logica":1085,
-                "rin":74,
-                "vlanVoip":1074,
-                "vlanVod":3074,
-                "vlanMulticast":4000,
-                "cvlan":1185,
-                "bhs":null
+    "id": "5bf2db2772bb4c74b19c5718",
+    "dateQueueIn": 1542642471784,
+    "dateConsumed": 1542642473897,
+    "dateQueueOut": 1542642534652,
+    "state": "EXECUTED",
+    "task": "CERTIFICATION",
+    "executor": "G0034481",
+    "consumer": null,
+    "input": {
+        "type": "certification",
+        "customer": {
+            "designador": "CTA-81E2J3HSS-013",
+            "instancia": "4131543457",
+            "designadorAcesso": "SJP-28016742-069",
+            "designadorTv": "TV-CTA-81E2J3HST-050",
+            "rede": {
+                "tipo": "METALICA",
+                "origem": "ONLINE",
+                "planta": "VIVO2",
+                "ipDslam": "10.141.229.48",
+                "vendorDslam": "KEYMILE",
+                "modeloDslam": "SUAD3",
+                "idOnt": null,
+                "terminal": null,
+                "ipMulticast": null,
+                "nrc": null,
+                "slot": 14,
+                "porta": 40,
+                "sequencial": 328,
+                "logica": 328,
+                "rin": 508,
+                "vlanVoip": 0,
+                "vlanVod": 3508,
+                "vlanMulticast": 0,
+                "cvlan": 428,
+                "bhs": null
             },
-            "redeExterna":{
-                "tipo":null,
-                "origem":null,
-                "planta":null,
-                "splitter1n":null,
-                "splitter2n":null,
-                "caboAlim":null,
-                "fibra1n":null,
-                "fibra2n":null
+            "redeExterna": {
+                "tipo": null,
+                "origem": null,
+                "planta": null,
+                "splitter1n": null,
+                "splitter2n": null,
+                "caboAlim": null,
+                "fibra1n": null,
+                "fibra2n": null
             },
-            "servicos":{
-                "origem":null,
-                "velDown":51200,
-                "velUp":5120,
-                "tipoTv":"DTH",
-                "tipoLinha":"TDM"
+            "servicos": {
+                "origem": null,
+                "velDown": 15360,
+                "velUp": 1024,
+                "tipoTv": "DTH",
+                "tipoLinha": "SIP"
             },
-            "linha":{
-                "tipo":"TDM",
-                "dn":"4131543457",
-                "central":"PRCTA_PVS01"
+            "linha": {
+                "tipo": "TDM",
+                "dn": "4131543457",
+                "central": "PRCTA_PVS01"
             },
-            "radius":{
-                "status":"ATIVO",
-                "armario":"PRCTA_O1C50",
-                "rin":"074",
-                "velocidade":"51200 - 5120",
-                "ipFixo":"-",
-                "profile":"r5120b51200",
-                "porta":"1085",
-                "isIpFixo":false
+            "radius": {
+                "status": "ATIVO",
+                "armario": "PRSJP_O1A12",
+                "rin": "508",
+                "velocidade": "15360 - 1024",
+                "ipFixo": "-",
+                "profile": "a1024b15360",
+                "porta": "328",
+                "isIpFixo": false
             },
-            "asserts":[
+            "asserts": [
                 {
-                    "asserts":"DIVERGENCIA_TBS_RADIUS",
-                    "value":false,
-                    "creationDate":1530295000224
+                    "asserts": "DIVERGENCIA_TBS_RADIUS",
+                    "value": false,
+                    "creationDate": 1542642464263
                 },
                 {
-                    "asserts":"CIRCUITO_ATIVO",
-                    "value":true,
-                    "creationDate":1530295000224
+                    "asserts": "CIRCUITO_ATIVO",
+                    "value": true,
+                    "creationDate": 1542642464263
                 },
                 {
-                    "asserts":"HAS_BLOQUEIO_RADIUS",
-                    "value":false,
-                    "creationDate":1530295000224
+                    "asserts": "HAS_BLOQUEIO_RADIUS",
+                    "value": false,
+                    "creationDate": 1542642464263
                 }
             ],
-            "eventos":[
-
-            ]
+            "eventos": []
         }
     },
-    "output":{
-        "type":"certification",
-        "state":"OK",
-        "exceptionMessage":null,
-        "certification":{
-            "resultado":"FISICAL",
-            "orientacao":"Parâmetros fora dos padrões.",
-            "id":"5b3680f7cb66bf0c142ac896",
-            "blocks":[
-                {
-                    "resultado":"OK",
-                    "orientacao":"OK",
-                    "asserts":[
+    "output": {
+        "state": "OK",
+        "exceptionMessage": null,
+        "certification": {
+            "orientacao": "Bridge configurada corretamente.\nEfetuado correção de bridge, solicite ao cliente que reinicialize o modem e teste novamente.",
+            "resultado": "FIXED",
+            "dataFim": 1542642534536,
+            "fulltest": {
+                "resultado": false,
+                "dataInicio": 1542642473945,
+                "dataFim": 1542642525252,
+                "mensagem": "Efetuado correção de bridge, solicite ao cliente que reinicialize o modem e teste novamente.",
+                "leituraConfirmada": null,
+                "cl": {
+                    "designador": "CTA-81E2J3HSS-013",
+                    "instancia": "4131543457",
+                    "designadorAcesso": "SJP-28016742-069",
+                    "designadorTv": "TV-CTA-81E2J3HST-050",
+                    "rede": {
+                        "tipo": "METALICA",
+                        "origem": "ONLINE",
+                        "planta": "VIVO2",
+                        "ipDslam": "10.141.229.48",
+                        "vendorDslam": "KEYMILE",
+                        "modeloDslam": "SUAD3",
+                        "idOnt": null,
+                        "terminal": null,
+                        "ipMulticast": null,
+                        "nrc": null,
+                        "slot": 14,
+                        "porta": 40,
+                        "sequencial": 328,
+                        "logica": 328,
+                        "rin": 508,
+                        "vlanVoip": 0,
+                        "vlanVod": 3508,
+                        "vlanMulticast": 0,
+                        "cvlan": 428,
+                        "bhs": null
+                    },
+                    "redeExterna": {
+                        "tipo": null,
+                        "origem": null,
+                        "planta": null,
+                        "splitter1n": null,
+                        "splitter2n": null,
+                        "caboAlim": null,
+                        "fibra1n": null,
+                        "fibra2n": null
+                    },
+                    "servicos": {
+                        "origem": null,
+                        "velDown": 15360,
+                        "velUp": 1024,
+                        "tipoTv": "DTH",
+                        "tipoLinha": "SIP"
+                    },
+                    "linha": {
+                        "tipo": "TDM",
+                        "dn": "4131543457",
+                        "central": "PRCTA_PVS01"
+                    },
+                    "radius": {
+                        "status": "ATIVO",
+                        "armario": "PRSJP_O1A12",
+                        "rin": "508",
+                        "velocidade": "15360 - 1024",
+                        "ipFixo": "-",
+                        "profile": "a1024b15360",
+                        "porta": "328",
+                        "isIpFixo": false
+                    },
+                    "asserts": [
                         {
-                            "resultado":"OK",
-                            "orientacao":"Não há bloqueio no Radius.",
-                            "nome":"HAS_BLOQ_RADIUS"
+                            "asserts": "DIVERGENCIA_TBS_RADIUS",
+                            "value": false,
+                            "creationDate": 1542642464263
                         },
                         {
-                            "resultado":"OK",
-                            "orientacao":"Radius e Inventário de Rede OK.",
-                            "nome":"IS_INV_REDE_EQUALS_RADIUS"
+                            "asserts": "CIRCUITO_ATIVO",
+                            "value": true,
+                            "creationDate": 1542642464263
                         },
                         {
-                            "resultado":"OK",
-                            "orientacao":"Inventário de Rede OK.",
-                            "nome":"HAS_INV_REDE"
-                        },
-                        {
-                            "resultado":"OK",
-                            "orientacao":"Inventário de Serviços OK.",
-                            "nome":"HAS_INV_SERV"
+                            "asserts": "HAS_BLOQUEIO_RADIUS",
+                            "value": false,
+                            "creationDate": 1542642464263
                         }
                     ],
-                    "nome":{
-                        "beautyName":"Cadastro",
-                        "name":"CADASTRO"
-                    }
+                    "eventos": []
                 },
-                {
-                    "resultado":"OK",
-                    "orientacao":"OK",
-                    "asserts":[
-                        {
-                            "resultado":"OK",
-                            "orientacao":"Rede confiável.",
-                            "nome":"IS_REDE_BANDA_OK"
-                        }
-                    ],
-                    "nome":{
-                        "beautyName":"Performance",
-                        "name":"PERFORMANCE"
-                    }
-                },
-                {
-                    "resultado":"OK",
-                    "orientacao":"OK",
-                    "asserts":[
-                        {
-                            "resultado":"OK",
-                            "orientacao":"Vlan de Banda configurado corretamente.",
-                            "nome":"IS_VLANS_OK"
-                        },
-                        {
-                            "resultado":"OK",
-                            "orientacao":"Profile configurado corretamente.",
-                            "nome":"IS_PROFILE_OK"
-                        }
-                    ],
-                    "nome":{
-                        "beautyName":"Serviços",
-                        "name":"SERVICOS"
-                    }
-                },
-                {
-                    "resultado":"FISICAL",
-                    "orientacao":"Parâmetros fora dos padrões.",
-                    "asserts":[
-                        {
-                            "resultado":"OK",
-                            "orientacao":"Porta Ativada (Adm state Up).",
-                            "nome":"IS_ADM_UP"
-                        },
-                        {
-                            "resultado":"OK",
-                            "orientacao":"Sincronismo/Link OK.",
-                            "nome":"IS_OPER_UP"
-                        },
-                        {
-                            "resultado":"FISICAL",
-                            "orientacao":"Parâmetros fora dos padrões.",
-                            "nome":"IS_PARAM_OK"
-                        },
-                        {
-                            "resultado":"OK",
-                            "orientacao":"Modulação configurada corretamente.",
-                            "nome":"IS_MODUL_OK"
-                        },
-                        {
-                            "resultado":"OK",
-                            "orientacao":"Mac identificado 28:C8:7A:19:67:18.",
-                            "nome":"HAS_MAC_DSLAM"
-                        }
-                    ],
-                    "nome":{
-                        "beautyName":"Conectividade",
-                        "name":"CONECTIVIDADE"
-                    }
-                }
-            ],
-            "dataInicio":1530298580844,
-            "dataFim":1530298613469,
-            "customer":{
-                "designador":"CTA-81E2J3HSS-013",
-                "instancia":"4131543457",
-                "designadorAcesso":"CTA-04887444-069",
-                "designadorTv":"TV-CTA-81E2J3HST-050",
-                "rede":{
-                    "tipo":"METALICA",
-                    "origem":"ONLINE",
-                    "planta":"VIVO2",
-                    "ipDslam":"10.200.30.177",
-                    "vendorDslam":"KEYMILE",
-                    "modeloDslam":"SUVD11",
-                    "idOnt":null,
-                    "terminal":null,
-                    "ipMulticast":null,
-                    "nrc":null,
-                    "slot":3,
-                    "porta":37,
-                    "sequencial":1085,
-                    "logica":1085,
-                    "rin":74,
-                    "vlanVoip":1074,
-                    "vlanVod":3074,
-                    "vlanMulticast":4000,
-                    "cvlan":1185,
-                    "bhs":null
-                },
-                "redeExterna":{
-                    "tipo":null,
-                    "origem":null,
-                    "planta":null,
-                    "splitter1n":null,
-                    "splitter2n":null,
-                    "caboAlim":null,
-                    "fibra1n":null,
-                    "fibra2n":null
-                },
-                "servicos":{
-                    "origem":null,
-                    "velDown":51200,
-                    "velUp":5120,
-                    "tipoTv":"DTH",
-                    "tipoLinha":"TDM"
-                },
-                "linha":{
-                    "tipo":"TDM",
-                    "dn":"4131543457",
-                    "central":"PRCTA_PVS01"
-                },
-                "radius":{
-                    "status":"ATIVO",
-                    "armario":"PRCTA_O1C50",
-                    "rin":"074",
-                    "velocidade":"51200 - 5120",
-                    "ipFixo":"-",
-                    "profile":"r5120b51200",
-                    "porta":"1085",
-                    "isIpFixo":false
-                },
-                "asserts":[
+                "solucoes": null,
+                "valids": [
                     {
-                        "asserts":"DIVERGENCIA_TBS_RADIUS",
-                        "value":false,
-                        "creationDate":1530295000224
-                    },
-                    {
-                        "asserts":"CIRCUITO_ATIVO",
-                        "value":true,
-                        "creationDate":1530295000224
-                    },
-                    {
-                        "asserts":"HAS_BLOQUEIO_RADIUS",
-                        "value":false,
-                        "creationDate":1530295000224
-                    }
-                ],
-                "eventos":[
-
-                ]
-            },
-            "executor":"G0034481",
-            "fkId":"FK-F41od64",
-            "fulltest":{
-                "resultado":false,
-                "dataInicio":1530298580849,
-                "dataFim":1530298613461,
-                "mensagem":"Parâmetros fora dos padrões.",
-                "id":null,
-                "cl":{
-                    "designador":"CTA-81E2J3HSS-013",
-                    "instancia":"4131543457",
-                    "designadorAcesso":"CTA-04887444-069",
-                    "designadorTv":"TV-CTA-81E2J3HST-050",
-                    "rede":{
-                        "tipo":"METALICA",
-                        "origem":"ONLINE",
-                        "planta":"VIVO2",
-                        "ipDslam":"10.200.30.177",
-                        "vendorDslam":"KEYMILE",
-                        "modeloDslam":"SUVD11",
-                        "idOnt":null,
-                        "terminal":null,
-                        "ipMulticast":null,
-                        "nrc":null,
-                        "slot":3,
-                        "porta":37,
-                        "sequencial":1085,
-                        "logica":1085,
-                        "rin":74,
-                        "vlanVoip":1074,
-                        "vlanVod":3074,
-                        "vlanMulticast":4000,
-                        "cvlan":1185,
-                        "bhs":null
-                    },
-                    "redeExterna":{
-                        "tipo":null,
-                        "origem":null,
-                        "planta":null,
-                        "splitter1n":null,
-                        "splitter2n":null,
-                        "caboAlim":null,
-                        "fibra1n":null,
-                        "fibra2n":null
-                    },
-                    "servicos":{
-                        "origem":null,
-                        "velDown":51200,
-                        "velUp":5120,
-                        "tipoTv":"DTH",
-                        "tipoLinha":"TDM"
-                    },
-                    "linha":{
-                        "tipo":"TDM",
-                        "dn":"4131543457",
-                        "central":"PRCTA_PVS01"
-                    },
-                    "radius":{
-                        "status":"ATIVO",
-                        "armario":"PRCTA_O1C50",
-                        "rin":"074",
-                        "velocidade":"51200 - 5120",
-                        "ipFixo":"-",
-                        "profile":"r5120b51200",
-                        "porta":"1085",
-                        "isIpFixo":false
-                    },
-                    "asserts":[
-                        {
-                            "asserts":"DIVERGENCIA_TBS_RADIUS",
-                            "value":false,
-                            "creationDate":1530295000224
-                        },
-                        {
-                            "asserts":"CIRCUITO_ATIVO",
-                            "value":true,
-                            "creationDate":1530295000224
-                        },
-                        {
-                            "asserts":"HAS_BLOQUEIO_RADIUS",
-                            "value":false,
-                            "creationDate":1530295000224
-                        }
-                    ],
-                    "eventos":[
-
-                    ]
-                },
-                "valids":[
-                    {
-                        "nome":"Estado Administrativo da Porta",
-                        "mensagem":"Porta Ativada (Adm state Up).",
-                        "resultado":true,
-                        "foiCorrigido":false,
-                        "result":{
-                            "nome":"Estado da Porta",
-                            "type":"br.net.gvt.efika.fulltest.model.telecom.properties.EstadoDaPorta",
-                            "interacoes":[
+                        "nome": "Estado Administrativo da Porta",
+                        "mensagem": "Porta Ativada (Adm state Up).",
+                        "resultado": true,
+                        "foiCorrigido": false,
+                        "result": {
+                            "nome": "Estado da Porta",
+                            "type": "br.net.gvt.efika.fulltest.model.telecom.properties.EstadoDaPorta",
+                            "interacoes": [
                                 {
-                                    "sintax":"get /unit-3/port-37/main/AdministrativeStatus",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/main/AdministrativeStatus",
+                                    "sintax": "get /unit-14/port-40/main/AdministrativeStatus",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/main/AdministrativeStatus",
                                         "                                                                   \\ # AdministrativeStatus",
                                         "Up                                                                 \\ # State"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 },
                                 {
-                                    "sintax":"get /unit-3/port-37/main/OperationalStatus",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/main/OperationalStatus",
+                                    "sintax": "get /unit-14/port-40/main/OperationalStatus",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/main/OperationalStatus",
                                         "                                                                   \\ # OperationalStatus",
                                         "Up                                                                 \\ # State"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 }
                             ],
-                            "adminState":true,
-                            "operState":true
+                            "adminState": true,
+                            "operState": true
                         },
-                        "preresult":null
+                        "preresult": null
                     },
                     {
-                        "nome":"Estado Operacional da Porta",
-                        "mensagem":"Sincronismo OK.",
-                        "resultado":true,
-                        "foiCorrigido":null,
-                        "result":{
-                            "nome":"Estado da Porta",
-                            "type":"br.net.gvt.efika.fulltest.model.telecom.properties.EstadoDaPorta",
-                            "interacoes":[
+                        "nome": "Estado Operacional da Porta",
+                        "mensagem": "Sincronismo/Link OK.",
+                        "resultado": true,
+                        "foiCorrigido": null,
+                        "result": {
+                            "nome": "Estado da Porta",
+                            "type": "br.net.gvt.efika.fulltest.model.telecom.properties.EstadoDaPorta",
+                            "interacoes": [
                                 {
-                                    "sintax":"get /unit-3/port-37/main/AdministrativeStatus",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/main/AdministrativeStatus",
+                                    "sintax": "get /unit-14/port-40/main/AdministrativeStatus",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/main/AdministrativeStatus",
                                         "                                                                   \\ # AdministrativeStatus",
                                         "Up                                                                 \\ # State"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 },
                                 {
-                                    "sintax":"get /unit-3/port-37/main/OperationalStatus",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/main/OperationalStatus",
+                                    "sintax": "get /unit-14/port-40/main/OperationalStatus",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/main/OperationalStatus",
                                         "                                                                   \\ # OperationalStatus",
                                         "Up                                                                 \\ # State"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 }
                             ],
-                            "adminState":true,
-                            "operState":true
+                            "adminState": true,
+                            "operState": true
                         },
-                        "preresult":null
+                        "preresult": null
                     },
                     {
-                        "nome":"Parâmetros",
-                        "mensagem":"Parâmetros fora dos padrões.",
-                        "resultado":false,
-                        "foiCorrigido":null,
-                        "result":{
-                            "nome":"Parâmetros",
-                            "type":"br.net.gvt.efika.fulltest.model.telecom.properties.metalico.TabelaParametrosMetalicoVdsl",
-                            "interacoes":[
+                        "nome": "Parâmetros",
+                        "mensagem": "Parâmetros dentro do padrão.",
+                        "resultado": true,
+                        "foiCorrigido": null,
+                        "result": {
+                            "nome": "Parâmetros",
+                            "type": "br.net.gvt.efika.fulltest.model.telecom.properties.metalico.TabelaParametrosMetalico",
+                            "interacoes": [
                                 {
-                                    "sintax":"get /unit-3/port-37/chan-1/status/status",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/chan-1/status/status",
+                                    "sintax": "get /unit-14/port-40/chan-1/status/status",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/chan-1/status/status",
                                         "                                                                   \\ # Status",
                                         "                                                                   \\ # Downstream",
-                                        "54996                                                              \\ # CurrentRate",
-                                        "54996                                                              \\ # PreviousRate",
-                                        "8                                                                  \\ # CurrentDelay",
-                                        "3.7E0                                                              \\ # CurrentImpulse",
-                                        "54996                                                              \\ # ActualNetDataRate",
-                                        "0.0E0                                                              \\ # ActualINPAgainstREIN",
+                                        "17663                                                              \\ # CurrentRate",
+                                        "17663                                                              \\ # PreviousRate",
+                                        "7                                                                  \\ # CurrentDelay",
                                         "                                                                   \\ # Upstream",
-                                        "5996                                                               \\ # CurrentRate",
-                                        "5996                                                               \\ # PreviousRate",
-                                        "8                                                                  \\ # CurrentDelay",
-                                        "3.2E0                                                              \\ # CurrentImpulse",
-                                        "5996                                                               \\ # ActualNetDataRate",
-                                        "0.0E0                                                              \\ # ActualINPAgainstREIN"
+                                        "1279                                                               \\ # CurrentRate",
+                                        "1279                                                               \\ # PreviousRate",
+                                        "8                                                                  \\ # CurrentDelay"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 },
                                 {
-                                    "sintax":"get /unit-3/port-37/status/bandstatus",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/status/bandstatus",
-                                        "{                                                                  \\ # BandTable",
-                                        "  \\ # [0] #",
-                                        "                                                                   \\ # BandStatusEntry",
-                                        "  Upstream0                                                        \\ # BandId",
-                                        "  6.6E0                                                            \\ # CurrAttenuation",
-                                        "  3.8E0                                                            \\ # CurrSnrMargin",
-                                        "  6.3E0                                                            \\ # SignalAttenuation",
-                                        "  25                                                               \\ # StartFreq",
-                                        "  138                                                              \\ # StopFreq",
-                                        "; \\ # [1] #",
-                                        "                                                                   \\ # BandStatusEntry",
-                                        "  Upstream1                                                        \\ # BandId",
-                                        "  2.88E1                                                           \\ # CurrAttenuation",
-                                        "  1.55E1                                                           \\ # CurrSnrMargin",
-                                        "  2.87E1                                                           \\ # SignalAttenuation",
-                                        "  3750                                                             \\ # StartFreq",
-                                        "  5200                                                             \\ # StopFreq",
-                                        "; \\ # [2] #",
-                                        "                                                                   \\ # BandStatusEntry",
-                                        "  Upstream2                                                        \\ # BandId",
-                                        "  4.28E1                                                           \\ # CurrAttenuation",
-                                        "  1.38E1                                                           \\ # CurrSnrMargin",
-                                        "  4.27E1                                                           \\ # SignalAttenuation",
-                                        "  8500                                                             \\ # StartFreq",
-                                        "  12000                                                            \\ # StopFreq",
-                                        "; \\ # [3] #",
-                                        "                                                                   \\ # BandStatusEntry",
-                                        "  Downstream1                                                      \\ # BandId",
-                                        "  1.52E1                                                           \\ # CurrAttenuation",
-                                        "  7.2E0                                                            \\ # CurrSnrMargin",
-                                        "  1.52E1                                                           \\ # SignalAttenuation",
-                                        "  138                                                              \\ # StartFreq",
-                                        "  3750                                                             \\ # StopFreq",
-                                        "; \\ # [4] #",
-                                        "                                                                   \\ # BandStatusEntry",
-                                        "  Downstream2                                                      \\ # BandId",
-                                        "  3.55E1                                                           \\ # CurrAttenuation",
-                                        "  7.2E0                                                            \\ # CurrSnrMargin",
-                                        "  3.54E1                                                           \\ # SignalAttenuation",
-                                        "  5200                                                             \\ # StartFreq",
-                                        "  8500                                                             \\ # StopFreq",
-                                        "; \\ # [5] #",
-                                        "                                                                   \\ # BandStatusEntry",
-                                        "  Downstream3                                                      \\ # BandId",
-                                        "  5.34E1                                                           \\ # CurrAttenuation",
-                                        "  7.2E0                                                            \\ # CurrSnrMargin",
-                                        "  5.34E1                                                           \\ # SignalAttenuation",
-                                        "  12000                                                            \\ # StartFreq",
-                                        "  17664                                                            \\ # StopFreq",
-                                        ";                                                                  \\",
-                                        "}                                                                  \\"
+                                    "sintax": "get /unit-14/port-40/status/attenuation",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/status/attenuation",
+                                        "                                                                   \\ # Attenuation",
+                                        "1.4E1                                                              \\ # Downstream",
+                                        "9.0E0                                                              \\ # Upstream"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 },
                                 {
-                                    "sintax":"get /unit-3/port-37/status/attainablerate",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/status/attainablerate",
+                                    "sintax": "get /unit-14/port-40/status/snrmargin",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/status/snrmargin",
+                                        "                                                                   \\ # SnrMargin",
+                                        "1.5E1                                                              \\ # Downstream",
+                                        "1.0E1                                                              \\ # Upstream"
+                                    ],
+                                    "hasRetorno": false
+                                },
+                                {
+                                    "sintax": "get /unit-14/port-40/status/attainablerate",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/status/attainablerate",
                                         "                                                                   \\ # AttainableRate",
-                                        "68332                                                              \\ # Downstream",
-                                        "16344                                                              \\ # Upstream"
+                                        "23512                                                              \\ # Downstream",
+                                        "1364                                                               \\ # Upstream"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 }
                             ],
-                            "snrDown":7.2,
-                            "snrUp":3.8,
-                            "atnDown":15.2,
-                            "atnUp":6.6,
-                            "velSincDown":54996.0,
-                            "velSincUp":5996.0,
-                            "velMaxDown":68332.0,
-                            "velMaxUp":16344.0,
-                            "snrDown1":7.2,
-                            "snrDown2":7.2,
-                            "snrUp1":15.5,
-                            "snrUp2":13.8,
-                            "atnDown1":35.5,
-                            "atnDown2":53.4,
-                            "atnUp1":28.8,
-                            "atnUp2":42.8
+                            "snrDown": 15.0,
+                            "snrUp": 10.0,
+                            "atnDown": 14.0,
+                            "atnUp": 9.0,
+                            "velSincDown": 17663.0,
+                            "velSincUp": 1279.0,
+                            "velMaxDown": 23512.0,
+                            "velMaxUp": 1364.0
                         },
-                        "preresult":null
+                        "preresult": null
                     },
                     {
-                        "nome":"Confiabilidade de Rede",
-                        "mensagem":"Rede confiável.",
-                        "resultado":true,
-                        "foiCorrigido":false,
-                        "result":{
-                            "nome":"Confiabilidade de Rede",
-                            "type":"br.net.gvt.efika.fulltest.model.telecom.properties.metalico.TabelaRedeMetalico",
-                            "interacoes":[
+                        "nome": "Confiabilidade de Rede",
+                        "mensagem": "Rede confiável.",
+                        "resultado": true,
+                        "foiCorrigido": false,
+                        "result": {
+                            "nome": "Confiabilidade de Rede",
+                            "type": "br.net.gvt.efika.fulltest.model.telecom.properties.metalico.TabelaRedeMetalico",
+                            "interacoes": [
                                 {
-                                    "sintax":"get /unit-3/port-37/pm/usercountertable",
-                                    "sleep":3000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/pm/usercountertable",
+                                    "sintax": "get /unit-14/port-40/pm/usercountertable",
+                                    "sleep": 4500,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/pm/usercountertable",
                                         "{                                                                  \\ # UserCounterTable",
                                         "  \\ # [0] #",
                                         "  \"Start Time (UTC)\"                                               \\ # Name",
-                                        "  \"2018-05-29T13:50:00\"                                            \\ # Value",
+                                        "  \"2018-10-02T18:47:00\"                                            \\ # Value",
                                         "; \\ # [1] #",
                                         "  \"Elapsed Time\"                                                   \\ # Name",
-                                        "  \"031 05:03:09\"                                                   \\ # Value",
+                                        "  \"047 23:51:39\"                                                   \\ # Value",
                                         "; \\ # [2] #",
                                         "  \"IGMP RX Total Packets\"                                          \\ # Name",
-                                        "  \"3288\"                                                           \\ # Value",
+                                        "  \"0\"                                                              \\ # Value",
                                         "; \\ # [3] #",
                                         "  \"IGMP RX Version Errors\"                                         \\ # Name",
                                         "  \"0\"                                                              \\ # Value",
@@ -626,40 +387,40 @@
                                         "  \"0\"                                                              \\ # Value",
                                         "; \\ # [7] #",
                                         "  \"IGMP TX Total Packets\"                                          \\ # Name",
-                                        "  \"21570\"                                                          \\ # Value",
+                                        "  \"33204\"                                                          \\ # Value",
                                         "; \\ # [8] #",
                                         "  \"IGMP TX Discarded Packets \"                                     \\ # Name",
-                                        "  \"19\"                                                             \\ # Value",
+                                        "  \"1867\"                                                           \\ # Value",
                                         "; \\ # [9] #",
                                         "  \"In Octets\"                                                      \\ # Name",
-                                        "  \"25731785022\"                                                    \\ # Value",
+                                        "  \"7416274447\"                                                     \\ # Value",
                                         "; \\ # [10] #",
                                         "  \"In Unicast Packets\"                                             \\ # Name",
-                                        "  \"178214090\"                                                      \\ # Value",
+                                        "  \"56822488\"                                                       \\ # Value",
                                         "; \\ # [11] #",
                                         "  \"In Discards\"                                                    \\ # Name",
-                                        "  \"7\"                                                              \\ # Value",
+                                        "  \"116121\"                                                         \\ # Value",
                                         "; \\ # [12] #",
                                         "  \"Out Octets\"                                                     \\ # Name",
-                                        "  \"540070176297\"                                                   \\ # Value",
+                                        "  \"123706151762\"                                                   \\ # Value",
                                         "; \\ # [13] #",
                                         "  \"Out Unicast Packets\"                                            \\ # Name",
-                                        "  \"405374059\"                                                      \\ # Value",
+                                        "  \"91388822\"                                                       \\ # Value",
                                         "; \\ # [14] #",
                                         "  \"Out Discards\"                                                   \\ # Name",
-                                        "  \"11767900\"                                                       \\ # Value",
+                                        "  \"116121\"                                                         \\ # Value",
                                         "; \\ # [15] #",
                                         "  \"NPMGMT Ingress Bytes Dropped\"                                   \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
+                                        "  \"8630565828\"                                                     \\ # Value",
                                         "; \\ # [16] #",
                                         "  \"NPMGMT Egress Bytes Dropped\"                                    \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
+                                        "  \"8630565828\"                                                     \\ # Value",
                                         "; \\ # [17] #",
                                         "  \"Near End FECS\"                                                  \\ # Name",
-                                        "  \"506\"                                                            \\ # Value",
+                                        "  \"5\"                                                              \\ # Value",
                                         "; \\ # [18] #",
                                         "  \"Near End ES\"                                                    \\ # Name",
-                                        "  \"1\"                                                              \\ # Value",
+                                        "  \"4\"                                                              \\ # Value",
                                         "; \\ # [19] #",
                                         "  \"Near End SES\"                                                   \\ # Name",
                                         "  \"0\"                                                              \\ # Value",
@@ -668,19 +429,19 @@
                                         "  \"0\"                                                              \\ # Value",
                                         "; \\ # [21] #",
                                         "  \"Near End UAS\"                                                   \\ # Name",
-                                        "  \"71\"                                                             \\ # Value",
+                                        "  \"44\"                                                             \\ # Value",
                                         "; \\ # [22] #",
                                         "  \"Near End Full Init Count\"                                       \\ # Name",
-                                        "  \"13\"                                                             \\ # Value",
+                                        "  \"31\"                                                             \\ # Value",
                                         "; \\ # [23] #",
                                         "  \"Near End Failed Full Init Count\"                                \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
+                                        "  \"1\"                                                              \\ # Value",
                                         "; \\ # [24] #",
                                         "  \"Far End FECS\"                                                   \\ # Name",
-                                        "  \"8569\"                                                           \\ # Value",
+                                        "  \"26\"                                                             \\ # Value",
                                         "; \\ # [25] #",
                                         "  \"Far End ES\"                                                     \\ # Name",
-                                        "  \"330\"                                                            \\ # Value",
+                                        "  \"1\"                                                              \\ # Value",
                                         "; \\ # [26] #",
                                         "  \"Far End SES\"                                                    \\ # Name",
                                         "  \"0\"                                                              \\ # Value",
@@ -689,275 +450,577 @@
                                         "  \"0\"                                                              \\ # Value",
                                         "; \\ # [28] #",
                                         "  \"Far End UAS\"                                                    \\ # Name",
-                                        "  \"60\"                                                             \\ # Value",
-                                        "; \\ # [29] #",
-                                        "  \"Near End LEFTR Defects Seconds\"                                 \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [30] #",
-                                        "  \"Near End Error-Free Bits\"                                       \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [31] #",
-                                        "  \"Near End Minimum Error-Free Throughput\"                         \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [32] #",
-                                        "  \"Near End Uncorrected DTU\"                                       \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [33] #",
-                                        "  \"Near End Corrected DTU\"                                         \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [34] #",
-                                        "  \"Near End Retransmitted DTU\"                                     \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [35] #",
-                                        "  \"Far End LEFTR Defects Seconds\"                                  \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [36] #",
-                                        "  \"Far End Error-Free Bits\"                                        \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [37] #",
-                                        "  \"Far End Minimum Error-Free Throughput\"                          \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [38] #",
-                                        "  \"Far End Uncorrected DTU\"                                        \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [39] #",
-                                        "  \"Far End Corrected DTU\"                                          \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
-                                        "; \\ # [40] #",
-                                        "  \"Far End Retransmitted DTU\"                                      \\ # Name",
-                                        "  \"0\"                                                              \\ # Value",
+                                        "  \"44\"                                                             \\ # Value",
                                         ";                                                                  \\",
                                         "}                                                                  \\"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 }
                             ],
-                            "pctDown":178214090,
-                            "pctUp":405374059,
-                            "crcDown":1,
-                            "crcUp":330,
-                            "fecDown":506,
-                            "fecUp":8569,
-                            "resync":0,
-                            "tempoMedicao":2678400,
-                            "crcOk":true,
-                            "pctSuficiente":true
+                            "pctDown": 56822488,
+                            "pctUp": 91388822,
+                            "crcDown": 4,
+                            "crcUp": 1,
+                            "fecDown": 5,
+                            "fecUp": 26,
+                            "resync": 1,
+                            "tempoMedicao": 4060800,
+                            "crcOk": true,
+                            "pctSuficiente": true
                         },
-                        "preresult":null
+                        "preresult": null
                     },
                     {
-                        "nome":"Modulação",
-                        "mensagem":"Modulação configurada corretamente.",
-                        "resultado":true,
-                        "foiCorrigido":false,
-                        "result":{
-                            "nome":"Modulação",
-                            "type":"br.net.gvt.efika.fulltest.model.telecom.properties.metalico.Modulacao",
-                            "interacoes":[
+                        "nome": "Modulação",
+                        "mensagem": "Modulação configurada corretamente.",
+                        "resultado": true,
+                        "foiCorrigido": false,
+                        "result": {
+                            "nome": "Modulação",
+                            "type": "br.net.gvt.efika.fulltest.model.telecom.properties.metalico.Modulacao",
+                            "interacoes": [
                                 {
-                                    "sintax":"get /unit-3/port-37/cfgm/portprofiles",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/cfgm/portprofiles",
-                                        "                                                                   \\ # Profiles",
-                                        "                                                                   \\ # VDSLxPrio1",
-                                        "true                                                               \\ # Enabled",
-                                        "VDSL_17A_B8_12_SUV                                                 \\ # Name",
-                                        "0.0E0                                                              \\ # MaxElectricalLoopLength",
-                                        "                                                                   \\ # VDSLxPrio2",
-                                        "false                                                              \\ # Enabled",
-                                        "default                                                            \\ # Name",
-                                        "0.0E0                                                              \\ # MaxElectricalLoopLength",
-                                        "                                                                   \\ # VDSLxPrio3",
-                                        "false                                                              \\ # Enabled",
-                                        "default                                                            \\ # Name",
-                                        "0.0E0                                                              \\ # MaxElectricalLoopLength",
-                                        "                                                                   \\ # ADSLxPrio4",
-                                        "false                                                              \\ # Enabled",
-                                        "default                                                            \\ # Name",
-                                        "                                                                   \\ # AutomaticProfileSwitching",
-                                        "Priority                                                           \\ # Mode"
+                                    "sintax": "get /unit-14/port-40/cfgm/portprofile",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/cfgm/portprofile",
+                                        "                                                                   \\ # PortProfile",
+                                        "ADSL2PLUS_ONLY_SUAD                                                \\ # Name"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 }
                             ],
-                            "modulacao":"VDSL_17A_B8_12_SUV",
-                            "modulEnum":"VDSL"
+                            "modulacao": "ADSL2PLUS_ONLY_SUAD",
+                            "modulEnum": "ADSL"
                         },
-                        "preresult":null
+                        "preresult": null
                     },
                     {
-                        "nome":"Profile",
-                        "mensagem":"Profile configurado corretamente.",
-                        "resultado":true,
-                        "foiCorrigido":false,
-                        "result":{
-                            "nome":"Profile",
-                            "type":"br.net.gvt.efika.fulltest.model.telecom.properties.ProfileMetalico",
-                            "interacoes":[
+                        "nome": "Profile",
+                        "mensagem": "Profile configurado corretamente.",
+                        "resultado": true,
+                        "foiCorrigido": false,
+                        "result": {
+                            "nome": "Profile",
+                            "type": "br.net.gvt.efika.fulltest.model.telecom.properties.ProfileMetalico",
+                            "interacoes": [
                                 {
-                                    "sintax":"get /unit-3/port-37/chan-1/cfgm/chanprofile",
-                                    "sleep":3000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/chan-1/cfgm/chanprofile",
+                                    "sintax": "get /unit-14/port-40/chan-1/cfgm/profilename",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/chan-1/cfgm/profilename",
                                         "                                                                   \\ # ChannelProfile",
-                                        "HSI_50Mb_5Mb                                                       \\ # Name"
+                                        "HSI_15Mb_1Mb                                                       \\ # Name"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 }
                             ],
-                            "profileUp":"5",
-                            "profileDown":"50",
-                            "down":"VEL_51200",
-                            "up":"VEL_5120"
+                            "profileUp": "1",
+                            "profileDown": "15",
+                            "down": "VEL_15360",
+                            "up": "VEL_1024"
                         },
-                        "preresult":null
+                        "preresult": null
                     },
                     {
-                        "nome":"Vlan Banda Larga",
-                        "mensagem":"Vlan de Banda configurado corretamente.",
-                        "resultado":true,
-                        "foiCorrigido":false,
-                        "result":{
-                            "nome":"Vlan Banda Larga",
-                            "type":"br.net.gvt.efika.fulltest.model.telecom.properties.VlanBanda",
-                            "interacoes":[
+                        "nome": "Vlan Banda Larga",
+                        "mensagem": "Bridge configurada corretamente.",
+                        "resultado": true,
+                        "foiCorrigido": false,
+                        "result": {
+                            "nome": "Vlan Banda Larga",
+                            "type": "br.net.gvt.efika.fulltest.model.telecom.properties.VlanBanda",
+                            "interacoes": [
                                 {
-                                    "sintax":"get /unit-3/port-37/chan-1/interface-1/status/ServiceStatus",
-                                    "sleep":3000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/chan-1/interface-1/status/ServiceStatus",
+                                    "sintax": "get /unit-14/port-40/chan-1/vcc-1/status/servicestatus",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/chan-1/vcc-1/status/servicestatus",
                                         "                                                                   \\ # serviceStatus",
                                         "1                                                                  \\ # NumberOfConnectedServices",
                                         "true                                                               \\ # ReconfigurationAllowed",
-                                        "\"1to1DoubleTag/srvc-105;\"                                          \\ # ServicesCurrentConnected"
+                                        "\"1to1DoubleTag/srvc-885;\"                                          \\ # ServicesCurrentConnected"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 },
                                 {
-                                    "sintax":"get /unit-3/port-37/chan-1/interface-1/cfgm/macsourcefilteringmode",
-                                    "sleep":3000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/chan-1/interface-1/cfgm/macsourcefilteringmode",
+                                    "sintax": "get /unit-14/port-40/chan-1/vcc-1/cfgm/macsourcefilteringmode",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/chan-1/vcc-1/cfgm/macsourcefilteringmode",
                                         "                                                                   \\ # MACSourceFilteringMode",
                                         "None                                                               \\ # MACSRCFilter"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 },
                                 {
-                                    "sintax":"get /services/packet/1to1DoubleTag/srvc-105/cfgm/Service",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /services/packet/1to1DoubleTag/srvc-105/cfgm/Service",
+                                    "sintax": "get /services/packet/1to1DoubleTag/srvc-885/cfgm/Service",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /services/packet/1to1DoubleTag/srvc-885/cfgm/Service",
                                         "                                                                   \\ # OnetoOneDoubleTagAccessService",
                                         "                                                                   \\ # Interface",
-                                        "/unit-3/port-37/chan-1/interface-1                                 \\ # Address",
+                                        "/unit-14/port-40/chan-1/vcc-1                                      \\ # Address",
                                         "                                                                   \\ # Specific",
-                                        "1185                                                               \\ # CVID",
+                                        "428                                                                \\ # CVID",
                                         "CoS0                                                               \\ # CTagPriority",
-                                        "74                                                                 \\ # Svid",
+                                        "508                                                                \\ # Svid",
                                         "CoS0                                                               \\ # STagPriority",
-                                        "Swap                                                               \\ # VlanHandling"
+                                        "Add                                                                \\ # VlanHandling"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 }
                             ],
-                            "cvlan":1185,
-                            "svlan":74,
-                            "pctDown":null,
-                            "pctUp":null,
-                            "state":"UP"
+                            "cvlan": 428,
+                            "svlan": 508,
+                            "pctDown": null,
+                            "pctUp": null,
+                            "state": "UP"
                         },
-                        "preresult":null
+                        "preresult": null
                     },
                     {
-                        "nome":"Vlan VoIP",
-                        "mensagem":"Cliente sem VoIP.",
-                        "resultado":true,
-                        "foiCorrigido":false,
-                        "result":null,
-                        "preresult":null
-                    },
-                    {
-                        "nome":"Vlan VoD/IPTV",
-                        "mensagem":"Cliente sem TV Híbrida/IPTV.",
-                        "resultado":true,
-                        "foiCorrigido":false,
-                        "result":null,
-                        "preresult":null
-                    },
-                    {
-                        "nome":"MAC do Equipamento",
-                        "mensagem":"Mac identificado 28:C8:7A:19:67:18.",
-                        "resultado":true,
-                        "foiCorrigido":null,
-                        "result":{
-                            "nome":"MAC do Equipamento",
-                            "type":"br.net.gvt.efika.fulltest.model.telecom.properties.DeviceMAC",
-                            "interacoes":[
+                        "nome": "Vlan VoIP",
+                        "mensagem": "Efetuado correção de bridge, solicite ao cliente que reinicialize o modem e teste novamente.",
+                        "resultado": false,
+                        "foiCorrigido": true,
+                        "result": {
+                            "nome": "Vlan VoIP",
+                            "type": "br.net.gvt.efika.fulltest.model.telecom.properties.VlanVoip",
+                            "interacoes": [
                                 {
-                                    "sintax":"set /unit-3/port-37/chan-1/interface-1/cfgm/macsourcefilteringmode floodingprevention",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "set /unit-3/port-37/chan-1/interface-1/cfgm/macsourcefilteringmode floodingprevention"
+                                    "sintax": "cd /services/packet/1to1doubletag/cfgm",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": "createservice /unit-14/port-40/chan-1/vcc-2 428 cos5 0 cos5 add",
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "cd /services/packet/1to1doubletag/cfgm",
+                                        "/services/packet/1to1doubletag/cfgm> createservice /unit-14/port-40/chan-1/vcc-2 428 cos5 0 cos5 add",
+                                        "error: invalid parameter"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 },
                                 {
-                                    "sintax":"get /unit-3/port-37/status/one2onemacforwardinglist",
-                                    "sleep":3000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "get /unit-3/port-37/status/one2onemacforwardinglist",
+                                    "sintax": "set /unit-14/port-40/chan-1/vcc-2/cfgm/macsourcefilteringmode none",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "set /unit-14/port-40/chan-1/vcc-2/cfgm/macsourcefilteringmode none"
+                                    ],
+                                    "hasRetorno": false
+                                },
+                                {
+                                    "sintax": "get /unit-14/port-40/chan-1/vcc-2/status/servicestatus",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/chan-1/vcc-2/status/servicestatus",
+                                        "                                                                   \\ # serviceStatus",
+                                        "0                                                                  \\ # NumberOfConnectedServices",
+                                        "true                                                               \\ # ReconfigurationAllowed",
+                                        "\"no service connected\"                                             \\ # ServicesCurrentConnected"
+                                    ],
+                                    "hasRetorno": false
+                                },
+                                {
+                                    "sintax": "get /unit-14/port-40/chan-1/vcc-2/cfgm/macsourcefilteringmode",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/chan-1/vcc-2/cfgm/macsourcefilteringmode",
+                                        "                                                                   \\ # MACSourceFilteringMode",
+                                        "None                                                               \\ # MACSRCFilter"
+                                    ],
+                                    "hasRetorno": false
+                                }
+                            ],
+                            "cvlan": 0,
+                            "svlan": 0,
+                            "pctDown": null,
+                            "pctUp": null,
+                            "state": "UP"
+                        },
+                        "preresult": [
+                            {
+                                "nome": "Vlan VoIP",
+                                "type": "br.net.gvt.efika.fulltest.model.telecom.properties.VlanVoip",
+                                "interacoes": [
+                                    {
+                                        "sintax": "get /unit-14/port-40/chan-1/vcc-2/status/servicestatus",
+                                        "sleep": 1000,
+                                        "sleepAux": 1000,
+                                        "sintaxAux": null,
+                                        "sintaxAux2": null,
+                                        "retorno": [
+                                            "get /unit-14/port-40/chan-1/vcc-2/status/servicestatus",
+                                            "                                                                   \\ # serviceStatus",
+                                            "0                                                                  \\ # NumberOfConnectedServices",
+                                            "true                                                               \\ # ReconfigurationAllowed",
+                                            "\"no service connected\"                                             \\ # ServicesCurrentConnected"
+                                        ],
+                                        "hasRetorno": false
+                                    },
+                                    {
+                                        "sintax": "get /unit-14/port-40/chan-1/vcc-2/cfgm/macsourcefilteringmode",
+                                        "sleep": 1000,
+                                        "sleepAux": 1000,
+                                        "sintaxAux": null,
+                                        "sintaxAux2": null,
+                                        "retorno": [
+                                            "get /unit-14/port-40/chan-1/vcc-2/cfgm/macsourcefilteringmode",
+                                            "                                                                   \\ # MACSourceFilteringMode",
+                                            "None                                                               \\ # MACSRCFilter"
+                                        ],
+                                        "hasRetorno": false
+                                    }
+                                ],
+                                "cvlan": 0,
+                                "svlan": 0,
+                                "pctDown": null,
+                                "pctUp": null,
+                                "state": "UP"
+                            },
+                            {
+                                "nome": "Vlan VoIP",
+                                "type": "br.net.gvt.efika.fulltest.model.telecom.properties.VlanVoip",
+                                "interacoes": [
+                                    {
+                                        "sintax": "get /unit-14/port-40/chan-1/vcc-2/status/ServiceStatus",
+                                        "sleep": 1000,
+                                        "sleepAux": 1000,
+                                        "sintaxAux": null,
+                                        "sintaxAux2": null,
+                                        "retorno": [
+                                            "get /unit-14/port-40/chan-1/vcc-2/status/ServiceStatus",
+                                            "                                                                   \\ # serviceStatus",
+                                            "0                                                                  \\ # NumberOfConnectedServices",
+                                            "true                                                               \\ # ReconfigurationAllowed",
+                                            "\"no service connected\"                                             \\ # ServicesCurrentConnected"
+                                        ],
+                                        "hasRetorno": false
+                                    },
+                                    {
+                                        "sintax": "get /unit-14/port-40/chan-1/vcc-2/status/servicestatus",
+                                        "sleep": 1000,
+                                        "sleepAux": 1000,
+                                        "sintaxAux": null,
+                                        "sintaxAux2": null,
+                                        "retorno": [
+                                            "get /unit-14/port-40/chan-1/vcc-2/status/servicestatus",
+                                            "                                                                   \\ # serviceStatus",
+                                            "0                                                                  \\ # NumberOfConnectedServices",
+                                            "true                                                               \\ # ReconfigurationAllowed",
+                                            "\"no service connected\"                                             \\ # ServicesCurrentConnected"
+                                        ],
+                                        "hasRetorno": false
+                                    },
+                                    {
+                                        "sintax": "get /unit-14/port-40/chan-1/vcc-2/cfgm/macsourcefilteringmode",
+                                        "sleep": 1000,
+                                        "sleepAux": 1000,
+                                        "sintaxAux": null,
+                                        "sintaxAux2": null,
+                                        "retorno": [
+                                            "get /unit-14/port-40/chan-1/vcc-2/cfgm/macsourcefilteringmode",
+                                            "                                                                   \\ # MACSourceFilteringMode",
+                                            "None                                                               \\ # MACSRCFilter"
+                                        ],
+                                        "hasRetorno": false
+                                    }
+                                ],
+                                "cvlan": 0,
+                                "svlan": 0,
+                                "pctDown": null,
+                                "pctUp": null,
+                                "state": "UP"
+                            }
+                        ]
+                    },
+                    {
+                        "nome": "Vlan VoD/IPTV",
+                        "mensagem": "Cliente sem TV Híbrida/IPTV.",
+                        "resultado": true,
+                        "foiCorrigido": false,
+                        "result": null,
+                        "preresult": null
+                    },
+                    {
+                        "nome": "MAC do Equipamento",
+                        "mensagem": "Mac identificado 8C:10:D4:DA:15:50.",
+                        "resultado": true,
+                        "foiCorrigido": null,
+                        "result": {
+                            "nome": "MAC do Equipamento",
+                            "type": "br.net.gvt.efika.fulltest.model.telecom.properties.DeviceMAC",
+                            "interacoes": [
+                                {
+                                    "sintax": "set /unit-14/port-40/chan-1/vcc-1/cfgm/macsourcefilteringmode floodingprevention",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "set /unit-14/port-40/chan-1/vcc-1/cfgm/macsourcefilteringmode floodingprevention"
+                                    ],
+                                    "hasRetorno": false
+                                },
+                                {
+                                    "sintax": "get /unit-14/port-40/status/one2onemacforwardinglist",
+                                    "sleep": 3000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/status/one2onemacforwardinglist",
+                                        "{                                                                  \\ # MacForwardingList",
+                                        "}                                                                  \\"
+                                    ],
+                                    "hasRetorno": false
+                                },
+                                {
+                                    "sintax": "get /unit-14/port-40/status/one2onemacforwardinglist",
+                                    "sleep": 3000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "get /unit-14/port-40/status/one2onemacforwardinglist",
                                         "{                                                                  \\ # MacForwardingList",
                                         "  \\ # [0] #",
                                         "                                                                   \\ # DynamicMacEntry",
                                         "  1                                                                \\ # Index",
-                                        "  28C87A196718                                                     \\ # MacAddress",
-                                        "  74                                                               \\ # VlanId",
+                                        "  8C10D4DA1550                                                     \\ # MacAddress",
+                                        "  508                                                              \\ # VlanId",
                                         ";                                                                  \\",
                                         "}                                                                  \\"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 },
                                 {
-                                    "sintax":"set /unit-3/port-37/chan-1/interface-1/cfgm/macsourcefilteringmode none",
-                                    "sleep":1000,
-                                    "sleepAux":1000,
-                                    "sintaxAux":null,
-                                    "sintaxAux2":null,
-                                    "retorno":[
-                                        "set /unit-3/port-37/chan-1/interface-1/cfgm/macsourcefilteringmode none"
+                                    "sintax": "set /unit-14/port-40/chan-1/vcc-1/cfgm/macsourcefilteringmode none",
+                                    "sleep": 1000,
+                                    "sleepAux": 1000,
+                                    "sintaxAux": null,
+                                    "sintaxAux2": null,
+                                    "retorno": [
+                                        "set /unit-14/port-40/chan-1/vcc-1/cfgm/macsourcefilteringmode none"
                                     ],
-                                    "hasRetorno":false
+                                    "hasRetorno": false
                                 }
                             ],
-                            "mac":"28:C8:7A:19:67:18"
+                            "mac": "8C:10:D4:DA:15:50"
                         },
-                        "preresult":null
+                        "preresult": null
                     }
-                ]
-            }
+                ],
+                "owner": "5bf2db2972bb4c5e4850738f"
+            },
+            "blocks": [
+                {
+                    "resultado": "OK",
+                    "orientacao": "OK",
+                    "asserts": [
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Não há bloqueio no Radius.",
+                            "nome": "HAS_BLOQ_RADIUS"
+                        },
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Radius e Inventário de Rede OK.",
+                            "nome": "IS_INV_REDE_EQUALS_RADIUS"
+                        },
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Inventário de Rede OK.",
+                            "nome": "HAS_INV_REDE"
+                        },
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Inventário de Serviços OK.",
+                            "nome": "HAS_INV_SERV"
+                        }
+                    ],
+                    "nome": {
+                        "beautyName": "Cadastro",
+                        "name": "CADASTRO"
+                    }
+                },
+                {
+                    "resultado": "OK",
+                    "orientacao": "OK",
+                    "asserts": [
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Rede confiável.",
+                            "nome": "IS_REDE_BANDA_OK"
+                        }
+                    ],
+                    "nome": {
+                        "beautyName": "Performance",
+                        "name": "PERFORMANCE"
+                    }
+                },
+                {
+                    "resultado": "FIXED",
+                    "orientacao": "Bridge configurada corretamente.\nEfetuado correção de bridge, solicite ao cliente que reinicialize o modem e teste novamente.",
+                    "asserts": [
+                        {
+                            "resultado": "FIXED",
+                            "orientacao": "Bridge configurada corretamente.\nEfetuado correção de bridge, solicite ao cliente que reinicialize o modem e teste novamente.",
+                            "nome": "IS_VLANS_OK"
+                        },
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Profile configurado corretamente.",
+                            "nome": "IS_PROFILE_OK"
+                        }
+                    ],
+                    "nome": {
+                        "beautyName": "Serviços",
+                        "name": "SERVICOS"
+                    }
+                },
+                {
+                    "resultado": "OK",
+                    "orientacao": "OK",
+                    "asserts": [
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Porta Ativada (Adm state Up).",
+                            "nome": "IS_ADM_UP"
+                        },
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Sincronismo/Link OK.",
+                            "nome": "IS_OPER_UP"
+                        },
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Parâmetros dentro do padrão.",
+                            "nome": "IS_PARAM_OK"
+                        },
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Modulação configurada corretamente.",
+                            "nome": "IS_MODUL_OK"
+                        },
+                        {
+                            "resultado": "OK",
+                            "orientacao": "Mac identificado 8C:10:D4:DA:15:50.",
+                            "nome": "HAS_MAC_DSLAM"
+                        }
+                    ],
+                    "nome": {
+                        "beautyName": "Conectividade",
+                        "name": "CONECTIVIDADE"
+                    }
+                }
+            ],
+            "executor": "G0034481",
+            "id": "5bf2db2972bb4c0e1e77d0ed",
+            "dataInicio": 1542642473915,
+            "customer": {
+                "designador": "CTA-81E2J3HSS-013",
+                "instancia": "4131543457",
+                "designadorAcesso": "SJP-28016742-069",
+                "designadorTv": "TV-CTA-81E2J3HST-050",
+                "rede": {
+                    "tipo": "METALICA",
+                    "origem": "ONLINE",
+                    "planta": "VIVO2",
+                    "ipDslam": "10.141.229.48",
+                    "vendorDslam": "KEYMILE",
+                    "modeloDslam": "SUAD3",
+                    "idOnt": null,
+                    "terminal": null,
+                    "ipMulticast": null,
+                    "nrc": null,
+                    "slot": 14,
+                    "porta": 40,
+                    "sequencial": 328,
+                    "logica": 328,
+                    "rin": 508,
+                    "vlanVoip": 0,
+                    "vlanVod": 3508,
+                    "vlanMulticast": 0,
+                    "cvlan": 428,
+                    "bhs": null
+                },
+                "redeExterna": {
+                    "tipo": null,
+                    "origem": null,
+                    "planta": null,
+                    "splitter1n": null,
+                    "splitter2n": null,
+                    "caboAlim": null,
+                    "fibra1n": null,
+                    "fibra2n": null
+                },
+                "servicos": {
+                    "origem": null,
+                    "velDown": 15360,
+                    "velUp": 1024,
+                    "tipoTv": "DTH",
+                    "tipoLinha": "SIP"
+                },
+                "linha": {
+                    "tipo": "TDM",
+                    "dn": "4131543457",
+                    "central": "PRCTA_PVS01"
+                },
+                "radius": {
+                    "status": "ATIVO",
+                    "armario": "PRSJP_O1A12",
+                    "rin": "508",
+                    "velocidade": "15360 - 1024",
+                    "ipFixo": "-",
+                    "profile": "a1024b15360",
+                    "porta": "328",
+                    "isIpFixo": false
+                },
+                "asserts": [
+                    {
+                        "asserts": "DIVERGENCIA_TBS_RADIUS",
+                        "value": false,
+                        "creationDate": 1542642464263
+                    },
+                    {
+                        "asserts": "CIRCUITO_ATIVO",
+                        "value": true,
+                        "creationDate": 1542642464263
+                    },
+                    {
+                        "asserts": "HAS_BLOQUEIO_RADIUS",
+                        "value": false,
+                        "creationDate": 1542642464263
+                    }
+                ],
+                "eventos": []
+            },
+            "fkId": "FK-F41Epaj"
         }
     }
 }

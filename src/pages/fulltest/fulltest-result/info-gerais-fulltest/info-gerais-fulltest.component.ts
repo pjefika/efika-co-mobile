@@ -1,22 +1,37 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Certification } from '../../../../view-model/certification/certification';
 import { HolderService } from '../../../../providers/holder/holder.service';
+import { ProbSolucao } from '../../../../view-model/fulltest/prob_solucao';
+import { AlertController, LoadingController } from 'ionic-angular';
+import { FulltestService } from '../../fulltest.service';
+import { SuperComponentService } from '../../../../providers/component-service/super-component.service';
 
 @Component({
     selector: 'info-gerais-fulltest-component',
-    templateUrl: 'info-gerais-fulltest.component.html'
+    templateUrl: 'info-gerais-fulltest.component.html',
+    providers: [FulltestService]
 })
 
-export class InfoGeraisFulltestComponent implements OnInit {
+export class InfoGeraisFulltestComponent extends SuperComponentService implements OnInit {
 
     public numero: string;
     public sequencia: string;
 
     @Input() public certification: Certification;
 
-    constructor(public holderService: HolderService) { }
+    private popupMessageProbSolucao: ProbSolucao;
+
+    public haveMessageForPopUp: boolean = false;
+
+    constructor(public holderService: HolderService,
+        public alertCtrl: AlertController,
+        private fulltestService: FulltestService,
+        public loadingCtrl: LoadingController) {
+        super(alertCtrl, loadingCtrl, holderService);
+    }
 
     public ngOnInit() {
+        this.validMessageFromFulltest();
         this.numberValid();
     }
 
@@ -34,7 +49,43 @@ export class InfoGeraisFulltestComponent implements OnInit {
             this.numero = "08006012032";
             //this.sequencia = "3-2-5";
         }
+    }
 
+    private validMessageFromFulltest() {
+        let msg: string = this.holderService.certification.fulltest.mensagem;
+        let index = this.holderService
+            .probSolucao
+            .findIndex(p =>
+                p.problema.includes(msg)
+            );
+        if (index != -1) {
+            this.popupMessageProbSolucao = this.holderService.probSolucao[index];
+            this.haveMessageForPopUp = true;
+        }
+    }
+
+    public openPopUpToValid() {
+        let confLeitura = this.alertCtrl.create({
+            title: "Confirmação de leitura",
+            message: this.popupMessageProbSolucao.solucao,
+            buttons: [
+                {
+                    text: "Confirmo",
+                    handler: () => {
+                        this.fulltestService
+                            .doConfirmMessage(this.holderService.certification.id)
+                            .then(resposta => {
+                                this.haveMessageForPopUp = false;
+                                // super.showAlert("Confirmação", "Leitura confirmada");
+                            }, error => {
+                                super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                            });
+                    }
+                }
+            ],
+            enableBackdropDismiss: false
+        });
+        confLeitura.present();
     }
 
 }

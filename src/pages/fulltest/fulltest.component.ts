@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController, AlertController, NavController } from 'ionic-angular';
 import { FulltestService } from './fulltest.service';
-import { NavController } from 'ionic-angular';
 import { HolderService } from '../../providers/holder/holder.service';
-import { AlertController } from 'ionic-angular';
 import { SuperComponentService } from '../../providers/component-service/super-component.service';
 
 @Component({
@@ -31,7 +29,18 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
 
     }
 
+    public getMotivosFulltest() {
+        this.fulltestService
+            .getMotivosFulltest()
+            .then(resposta => {
+                this.holderService.probSolucao = resposta;
+            }, error => {
+                super.showAlert(error.tError, "Ocorreu um problema ao carregar lista de Soluções e Problemas");
+            });
+    }
+
     public fulltest() {
+        this.getMotivosFulltest();
         if (this.holderService.isMock) {
             // --Mock        
             this.fazFulltestMock();
@@ -120,7 +129,7 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
             }, 1);
             this.ativo = false;
             this.loading(false);
-        }, 5000);
+        }, 1000);
     }
 
     public fazfulltesttogetfkid() {
@@ -132,6 +141,6 @@ export class FulltestComponent extends SuperComponentService implements OnInit {
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
                 console.log("Deu erro!!! AMD p(o.o)q");
             });
-    }
+    }   
 
 }

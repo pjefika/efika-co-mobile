@@ -24,8 +24,9 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
     public ngOnInit() { }
 
     public getConfRede() {
+        this.count = 0;
+        let qntErro: number = 0;
         this.loading(true, "Aguarde, carregando informações...");
-
         this.confiabilidadeRedeService
             .getConfRede(this.holderService.instancia, this.holderService.cadastro)
             .then(response => {
@@ -38,21 +39,23 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                                 .gettask(response.id)
                                 .then(resposta => {
                                     if (resposta.state === "EXECUTED") {
+                                        this.loading(false);
                                         if (super.validState(resposta.output, this.holderService.instancia)) {
                                             this.valid = resposta.output.tabRede;
                                             super.showAlert("Sucesso", "Tabela de confiabilidade de rede atualizada com sucesso.");
                                             this.ativo = false;
-                                            this.loading(false);
                                             clearInterval(rqSi);
                                         } else {
-                                            this.loading(false);
                                             clearInterval(rqSi);
                                         }
                                     }
                                 }, error => {
-                                    super.showAlert(error.tError, error.mError);
-                                    this.loading(false);
-                                    clearInterval(rqSi);
+                                    qntErro++;
+                                    if (qntErro > 3) {
+                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                        this.loading(false);
+                                        clearInterval(rqSi);
+                                    }
                                 });
                             if (this.count === this.holderService.rcount) {
                                 this.tempobuscaexcedido();
@@ -66,15 +69,15 @@ export class ConfiabilidadeRedeComponent extends SuperConfPortaService implement
                 }
             }, error => {
                 this.loading(false);
-                super.showAlert(error.tError, error.mError);
-            })
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+            });
     }
 
     private tempobuscaexcedido() {
         this.loading(false);
         super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
-
+    
     private startTimer() {
         this.doTimer((this.holderService.rcount * this.holderService.rtimeout) / 1000);
     }

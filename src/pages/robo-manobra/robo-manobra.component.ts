@@ -25,7 +25,11 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
     public selectedCTO: CTO;
     public selectecSecundaria: Secundaria = new Secundaria();
 
-    public incrementTimeCount: number = 50;
+    public primariaInput: string;
+
+    public incrementTimeCount: number = 80;
+
+    public equipamento: string;
 
     constructor(public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
@@ -36,18 +40,24 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
     }
 
     public ngOnInit() {
+        console.log(this.holderService.cadastro.instancia);
+        
         if (this.roboHolderIdsService.ableFormRoboManobra !== true && this.roboHolderIdsService.ableActionVerifySitManobra !== true) {
             this.roboHolderIdsService.ableFormVerifyDispManobra = true;
         }
     }
 
     public doVerificarDisponibilidade() {
+        // if (this.validFormDisponibilidade()) {
         if (this.holderService.isMock) {
-            this.verificarDisponibilidadeMock();
-            // this.verificarDisponibilidade();
+            // this.verificarDisponibilidadeMock();
+            this.verificarDisponibilidade();
         } else {
             this.verificarDisponibilidade();
         }
+        // } else {
+        //     super.showAlert("Formulário incorreto", "Por favor preencha todos os campos do formulário");
+        // }
     }
 
     public verificarDisponibilidade() {
@@ -55,7 +65,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
         let qntErro: number = 0;
         this.loading(true, "Verificando disponibilidade");
         this.roboManobraService
-            .setTaskRoboManobra(this.tipoTecnologia, "1150661017"/*this.holderService.cadastro.instancia*/)
+            .setTaskRoboManobra(this.tipoTecnologia, this.holderService.cadastro.instancia, this.primariaInput, this.equipamento)
             .then(resposta => {
                 if (resposta) {
                     let rqSi = setInterval(() => {
@@ -74,7 +84,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                                                 super.showAlert("Ops, aconteceu algo", resposta_1.output.observacao);
                                             }
                                         } else {
-                                            super.showAlert("Ops, aconteceu algo", "resposta_1.output.observacao");
+                                            super.showAlert("Ops, aconteceu algo", resposta_1.output.observacao);
                                         }
                                         this.loading(false);
                                         clearInterval(rqSi);
@@ -111,12 +121,32 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
             });
     }
 
+    public verificarDisponibilidadeMock() {
+        this.loading(true, "Verificando disponibilidade");
+        setTimeout(() => {
+            this.holderService.roboManobra = this.roboManobraService.getmanobradispMock().output;
+            this.roboHolderIdsService.ableFormVerifyDispManobra = false;
+            this.roboHolderIdsService.ableFormRoboManobra = true;
+            this.loading(false);
+        }, 60000);
+    }
+
+    public validFormDisponibilidade(): boolean {
+        let valid: boolean = false;
+        if (this.primariaInput /*|| this.idSpliter || this.tipoTecnologia*/) {
+            valid = true;
+        }
+        return valid;
+    }
+
     public doManobrar() {
-        if (this.holderService.isMock) {
-            this.manobrarMock();
-            // this.manobrar();
-        } else {
-            this.manobrar();
+        if (this.validFormManobrar()) {
+            if (this.holderService.isMock) {
+                // this.manobrarMock();
+                this.manobrar();
+            } else {
+                this.manobrar();
+            }
         }
     }
 
@@ -187,11 +217,20 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                 super.showAlert("Informação", "Status da manobra: " + this.holderService.roboManobrado.resultado_manobra);
             }
             this.loading(false);
-        }, 100);
+        }, 60000);
+    }
+
+    private validFormManobrar(): boolean {
+        let valid: boolean = false;
+        if (this.motivoManobra || this.selectedPrimaria || this.selectecSecundaria) {
+            valid = true;
+        }
+        return valid;
     }
 
     public doVerifySituacaoManobra() {
         if (this.holderService.isMock) {
+            // this.getVerifySituacaoManobraMock();
             this.getVerifySituacaoManobra();
         } else {
             this.getVerifySituacaoManobra();
@@ -201,9 +240,9 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
     private getVerifySituacaoManobra() {
         this.count = 0;
         let qntErro: number = 0;
-        this.loading(true, "Realizando manobra");
+        this.loading(true, "Verificando manobra");
         this.roboManobraService
-            .setTaskManobraProvisioning(this.holderService.roboManobrado.id_solicitacao, "1150661017"/*this.holderService.cadastro.instancia*/)
+            .setTaskManobraProvisioning(this.holderService.roboManobrado.id_solicitacao, this.holderService.cadastro.instancia)
             .then(resposta => {
                 if (resposta) {
                     let rqSi = setInterval(() => {
@@ -218,8 +257,8 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                                             this.roboHolderIdsService.ableActionVerifySitManobra = true;
                                         } else {
                                             this.roboHolderIdsService.ableActionVerifySitManobra = false;
-                                            super.showAlert("Sucesso", "Mensagem: " + resposta_1.output.resultado_manobra + " / " + resposta_1.output.alerta);
                                         }
+                                        super.showAlert("Sucesso", "Mensagem: " + resposta_1.output.resultado_manobra + " / " + resposta_1.output.alerta);
                                         this.loading(false);
                                         clearInterval(rqSi);
                                     }
@@ -245,26 +284,41 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
             });
     }
 
+    public getVerifySituacaoManobraMock() {
+        this.loading(true, "Verificando manobra");
+        setTimeout(() => {
+            this.holderService.roboManobrado = this.roboManobraService.getsituacaomanobraMock().output;
+            if (this.holderService.roboManobrado.resultado_manobra === "Em Manobra"
+                || this.holderService.roboManobrado.resultado_manobra === "Ativo Parcial Insadi") {
+                this.roboHolderIdsService.ableActionVerifySitManobra = true;
+            } else {
+                this.roboHolderIdsService.ableActionVerifySitManobra = false;
+            }
+            super.showAlert("Sucesso", "Mensagem: " + this.holderService.roboManobrado.resultado_manobra + " / " + this.holderService.roboManobrado.alerta);
+            this.loading(false);
+
+            this.loading(false);
+        }, 60000);
+
+    }
+
     private tempobuscaexcedido() {
         this.loading(false);
         super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
-    }
-
-    public verificarDisponibilidadeMock() {
-        this.loading(true, "Verificando disponibilidade");
-        setTimeout(() => {
-            this.holderService.roboManobra = this.roboManobraService.getmanobradispMock().output;
-            this.roboHolderIdsService.ableFormVerifyDispManobra = false;
-            this.roboHolderIdsService.ableFormRoboManobra = true;
-            this.loading(false);
-        }, 100);
     }
 
     private resetAllStatusManobra() {
         this.roboHolderIdsService.ableFormRoboManobra = false;
         this.roboHolderIdsService.ableActionVerifySitManobra = false;
 
+        this.tipoTecnologia = "FTTA";
+        this.primariaInput = "";
+        this.equipamento = "";
+
         this.motivoManobra = null;
+        this.selectedPrimaria = null;
+        this.selectedCTO = null;
+
         this.holderService.roboManobra = null;
         this.holderService.roboManobrado = null;
 

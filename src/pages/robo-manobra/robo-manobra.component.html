@@ -12,13 +12,23 @@
 <ion-content padding>
 
     <div *ngIf="roboHolderIdsService.ableFormVerifyDispManobra">
-        <ion-item>
-            <ion-label fixed>Tipo Tecnologia</ion-label>
-            <ion-select [(ngModel)]="tipoTecnologia">
-                <ion-option value="FTTA">FTTA</ion-option>
-                <ion-option value="FTTH">FTTH</ion-option>
-            </ion-select>
-        </ion-item>
+        <ion-list>
+            <ion-item>
+                <ion-label fixed>Tipo Tecnologia</ion-label>
+                <ion-select [(ngModel)]="tipoTecnologia">
+                    <ion-option value="FTTA">FTTA</ion-option>
+                    <ion-option value="FTTH">FTTH</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Primária</ion-label>
+                <ion-input type="text" [(ngModel)]="primariaInput"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Equipamento</ion-label>
+                <ion-input type="text" [(ngModel)]="equipamento"></ion-input>
+            </ion-item>
+        </ion-list>
         <button ion-button block round (click)="doVerificarDisponibilidade();">Verificar
             Disponibilidade</button>
     </div>
@@ -44,7 +54,7 @@
             </ion-item>
 
             <ion-item *ngIf="selectedPrimaria">
-                <ion-label fixed>CTO</ion-label>
+                <ion-label fixed>Equipamento</ion-label>
                 <ion-select [(ngModel)]="selectedCTO">
                     <ion-option *ngFor="let cto of selectedPrimaria.CTO" [value]="cto">{{cto.codcto}}</ion-option>
                 </ion-select>

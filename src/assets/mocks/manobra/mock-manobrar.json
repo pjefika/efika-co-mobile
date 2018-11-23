@@ -1,81 +1,52 @@
 {
-    "id": "5bdb222c72bb4c053796048e",
-    "dateQueueIn": 1541087788324,
-    "dateConsumed": 1541087790030,
-    "dateQueueOut": 1541088482543,
+    "id": "5be050bd72bb4c05379604b5",
+    "dateQueueIn": 1541427389547,
+    "dateConsumed": 1541427394190,
+    "dateQueueOut": 1541427855321,
     "state": "EXECUTED",
     "task": "DISPONIBILIDADE",
     "executor": "G0034481",
     "consumer": null,
     "input": {
         "type": "disponibiidade",
-        "dataCriacao": 1541098332229,
-        "dataAtualizacao": 1541098975910,
-        "timesExecuted": 4,
+        "dataCriacao": 1541437913867,
+        "dataAtualizacao": 1541438362419,
+        "timesExecuted": 3,
         "syncronized": true,
-        "id_solicitacao": "5bdb222c72bb4c053796048e",
-        "numero_instancia": "1150836507",
+        "id_solicitacao": "5be050bd72bb4c05379604b5",
+        "numero_instancia": "1150661017",
         "motivo_manobra": null,
-        "tipo_tecnologia": "FTTA"
+        "tipo_tecnologia": "FTTH"
     },
     "output": {
-        "id_solicitacao": "5bdb222c72bb4c053796048e",
+        "id_solicitacao": "5be050bd72bb4c05379604b5",
         "primaria": [
-            {
-                "codprimaria": "05-F#113",
-                "CTO": [
-                    {
-                        "codcto": "05SP113SS5",
-                        "secundaria": [
-                            {
-                                "codsecundaria": "39"
-                            }
-                        ]
-                    },
-                    {
-                        "codcto": "05SP113SS1",
-                        "secundaria": [
-                            {
-                                "codsecundaria": "5"
-                            },
-                            {
-                                "codsecundaria": "6"
-                            },
-                            {
-                                "codsecundaria": "7"
-                            },
-                            {
-                                "codsecundaria": "8"
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "codprimaria": "05-F#112",
-                "CTO": [
-                    {
-                        "codcto": "05SP112SS8",
-                        "secundaria": [
-                            {
-                                "codsecundaria": "61"
-                            },
-                            {
-                                "codsecundaria": "62"
-                            },
-                            {
-                                "codsecundaria": "63"
-                            },
-                            {
-                                "codsecundaria": "64"
-                            }
-                        ]
-                    }
-                ]
-            },
             {
                 "codprimaria": "05-F#103",
                 "CTO": [
+                    {
+                        "codcto": "05SP103SS2",
+                        "secundaria": [
+                            {
+                                "codsecundaria": "11"
+                            },
+                            {
+                                "codsecundaria": "12"
+                            },
+                            {
+                                "codsecundaria": "13"
+                            },
+                            {
+                                "codsecundaria": "14"
+                            },
+                            {
+                                "codsecundaria": "15"
+                            },
+                            {
+                                "codsecundaria": "16"
+                            }
+                        ]
+                    },
                     {
                         "codcto": "05SP103SS3",
                         "secundaria": [
@@ -100,10 +71,10 @@
                         ]
                     }
                 ]
-            }
+            }            
         ],
         "CTO": null,
         "status_porta": null,
-        "observacao": "Portas Listadas para Escolha"
+        "observacao": "Em Processamento"
     }
 }

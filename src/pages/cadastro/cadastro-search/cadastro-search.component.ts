@@ -132,6 +132,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         setTimeout(() => {
             this.holderService.cadastro = this.cadastroService.getCadastroMock().output.customer;
             this.holderService.tabCadastroAtivo = true;
+            this.holderService.cadastro.instancia = this.holderService.instancia;
             setTimeout(() => {
                 this.navCtrl.parent.select(1);
             }, 1);

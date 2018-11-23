@@ -4,6 +4,7 @@ import { Cadastro } from '../../view-model/cadastro/cadastro';
 import { TaskProcess } from '../../view-model/task-process/task-process';
 import { UrlService } from '../../providers/new_url-service/url.service';
 import { HolderService } from '../../providers/holder/holder.service';
+import { ProbSolucao } from '../../view-model/fulltest/prob_solucao';
 
 declare var require: any
 
@@ -33,6 +34,24 @@ export class FulltestService extends SuperService {
             .catch(super.handleError);
     }
 
+    public doConfirmMessage(id: string): Promise<TaskProcess> {
+        let userSession = JSON.parse(localStorage.getItem("user"));
+        let _data: { task: string, input: { type: string, fulltest: string }, executor: string };
+        _data = { task: "CONFIRMALEITURA", input: { type: "confirma_leitura", fulltest: id }, executor: userSession.user };
+        this.infoResquest = {
+            rqst: "post",
+            command: "post",
+            _data: _data,
+            timeout: 180000
+        };
+        return this.urlService
+            .request(this.infoResquest)
+            .then(response => {
+                return response as TaskProcess
+            })
+            .catch(super.handleError);
+    }
+
     public gettask(id: String): Promise<any> {
         this.infoResquest = {
             rqst: "get",
@@ -48,8 +67,8 @@ export class FulltestService extends SuperService {
     }
 
     public doFulltestMock(): TaskProcess {
-        // let cert: TaskProcess = require('../../assets/mocks/fulltest/fulltest-metalico.json'); // Metalico
-        let cert: TaskProcess = require('../../assets/mocks/fulltest/fulltest-gpon.json'); // GPON
+        let cert: TaskProcess = require('../../assets/mocks/fulltest/fulltest-metalico.json'); // Metalico
+        // let cert: TaskProcess = require('../../assets/mocks/fulltest/fulltest-gpon.json'); // GPON
 
         // console.log(f);
         //GPON
@@ -57,6 +76,20 @@ export class FulltestService extends SuperService {
         return cert;
     }
 
+    public getMotivosFulltest(): Promise<ProbSolucao[]> {
+        this.infoResquest = {
+            rqst: "get",
+            command: "getsolucoes",
+            timeout: 10000,
+            // otherUrl: "http://10.40.196.172:9092/solucoes"
+            otherUrl: "http://54.94.208.183:8080/solucoes"
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta as ProbSolucao[];
+            });
+    }
 
 
 }
