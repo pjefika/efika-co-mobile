@@ -27,7 +27,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
 
     public primariaInput: string;
 
-    public incrementTimeCount: number = 80;
+    public incrementTimeCount: number = 16;
 
     public equipamento: string;
 
@@ -40,8 +40,6 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
     }
 
     public ngOnInit() {
-        console.log(this.holderService.cadastro.instancia);
-        
         if (this.roboHolderIdsService.ableFormRoboManobra !== true && this.roboHolderIdsService.ableActionVerifySitManobra !== true) {
             this.roboHolderIdsService.ableFormVerifyDispManobra = true;
         }
@@ -65,7 +63,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
         let qntErro: number = 0;
         this.loading(true, "Verificando disponibilidade");
         this.roboManobraService
-            .setTaskRoboManobra(this.tipoTecnologia, this.holderService.cadastro.instancia, this.primariaInput, this.equipamento)
+            .setTaskRoboManobra(this.tipoTecnologia, this.holderService.instancia, this.primariaInput, this.equipamento)
             .then(resposta => {
                 if (resposta) {
                     let rqSi = setInterval(() => {
@@ -76,7 +74,9 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                                 .then(resposta_1 => {
                                     if (resposta_1.state === "EXECUTED") {
                                         if (resposta_1.output.primaria) {
-                                            if (resposta_1.output.primaria.length > 0 || resposta_1.output.observacao !== "Tecnologia não confere com o físico. Necessário contatar o Backoffice") {
+                                            if (resposta_1.output.primaria.length > 0
+                                                || resposta_1.output.observacao !== "Tecnologia não confere com o físico. Necessário contatar o Backoffice"
+                                                || !resposta_1.output.observacao.includes("Erro")) {
                                                 this.holderService.roboManobra = resposta_1.output;
                                                 this.roboHolderIdsService.ableFormVerifyDispManobra = false;
                                                 this.roboHolderIdsService.ableFormRoboManobra = true;
@@ -156,7 +156,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
         this.loading(true, "Realizando manobra");
         this.roboManobraService
             .setTaskRoboManuevers(this.holderService.roboManobra.id_solicitacao,
-                this.holderService.cadastro.instancia,
+                this.holderService.instancia,
                 this.motivoManobra,
                 this.tipoTecnologia,
                 this.selectedPrimaria.codprimaria,
@@ -173,7 +173,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                                 .then(resposta_1 => {
                                     if (resposta_1.state === "EXECUTED") {
                                         this.holderService.roboManobrado = resposta_1.output;
-                                        if (resposta_1.output.resultado_manobra === "Concluido") {
+                                        if (resposta_1.output.resultado_manobra === "Concluida") {
                                             super.showAlert("Informação", "Status da manobra: " + this.holderService.roboManobrado.resultado_manobra);
                                             this.roboHolderIdsService.ableFormRoboManobra = false;
                                             this.roboHolderIdsService.ableActionVerifySitManobra = true;
@@ -242,7 +242,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
         let qntErro: number = 0;
         this.loading(true, "Verificando manobra");
         this.roboManobraService
-            .setTaskManobraProvisioning(this.holderService.roboManobrado.id_solicitacao, this.holderService.cadastro.instancia)
+            .setTaskManobraProvisioning(this.holderService.roboManobrado.id_solicitacao, this.holderService.instancia)
             .then(resposta => {
                 if (resposta) {
                     let rqSi = setInterval(() => {
