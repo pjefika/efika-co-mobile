@@ -24,6 +24,7 @@ export class RoboManobraService extends SuperService {
             _data: _data,
             timeout: 180000
         };
+        console.log(this.infoResquest);
         return this.urlService
             .request(this.infoResquest)
             .then(response => {

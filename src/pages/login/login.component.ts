@@ -9,6 +9,7 @@ import { LoginUtilService } from '../../util/login-util/login-util.service';
 import * as moment from 'moment';
 import { UserModifyComponent } from './user-modify/user-modify.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { LoginList } from '../../view-model/login/login';
 
 @Component({
     selector: 'login-component',
@@ -30,6 +31,8 @@ export class LoginComponent extends SuperComponentService implements OnInit {
     // Valida se o mesmo veio da inicialização rapida (se já esta logado)
     private comefromfastinit: boolean = false;
 
+    private userList: LoginList[];
+
     constructor(private loginService: LoginService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -41,6 +44,7 @@ export class LoginComponent extends SuperComponentService implements OnInit {
 
     public ngOnInit() {
         this.validwheninit();
+        this.getAproveList();
         if (this.loginUtilService.isLogado()) {
             this.holderService.estalogado = true;
             this.holderService.showhidetab = true;
@@ -52,27 +56,38 @@ export class LoginComponent extends SuperComponentService implements OnInit {
      * Chamada de tela para entrada de login com validação se o mesmo é mock ou produção/qa
      */
     public validEntrar() {
-        if (this.holderService.isMock || !this.holderService.isLinkProd) {
-            // --Mock   
-            this.getinfonewauthMock();
-        } else {
-            if (this.userisvalid()) {
-                // --Prod / QA
-                this.getinfonewauth();
-                // this.getinfonewauthMock();
+        // if (this.validAproveList()) {
+            if (this.holderService.isMock || !this.holderService.isLinkProd) {
+                // --Mock   
+                this.getinfonewauthMock();
+            } else {
+                if (this.userisvalid()) {
+                    // --Prod / QA
+                    this.getinfonewauth();
+                    // this.getinfonewauthMock();
+                }
             }
-        }
-        // if (this.userisvalid()) {
-        //     if (this.holderService.isMock) {
-        //         // --Mock   
-        //         this.getinfonewauthMock();
-        //     } else {
-        //         // --Prod / QA
-        //         // this.getinfonewauth();
-        //         this.getinfonewauthMock();
-        //     }
+        // } else {
+        //     super.showAlert("Alerta", "Sem permissão para utilizar esta ferramenta");
         // }
     }
+
+    public getAproveList() {
+        this.loginService
+            .getApplyList()
+            .then(resposta => {
+                this.userList = resposta;
+            });
+    }
+
+    public validAproveList() {
+        let valid: boolean = false;
+        if (this.userList.findIndex(i => i.matricula.includes(this.usuario.matricula)) !== -1) {
+            valid = true;
+        }
+        return valid;
+    }
+
 
     // Validação sessão do usuário de 12 horas caso tempo excedido o mesmo necessitará fazer login novamente caso não irá logar direto.
     public validwheninit() {

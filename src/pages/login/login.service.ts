@@ -4,6 +4,7 @@ import { SuperService } from '../../providers/super-service/super.service';
 import { UrlService } from '../../providers/new_url-service/url.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { UserFull } from '../../view-model/usuario/userfull';
+import { LoginList } from '../../view-model/login/login';
 
 declare var require: any
 
@@ -19,6 +20,23 @@ export class LoginService extends SuperService {
         // let userf: UserFull = require("../../assets/mocks/login/login.json");
         let user: UserFull = require("../../assets/mocks/login/loginfull.json");
         return Promise.resolve(user);
+    }
+
+    public getApplyList(): Promise<LoginList[]> {
+        // let list = require("../../assets/mocks/login/login-list.json");
+        // return list;
+        this.infoResquest = {
+            rqst: "get",
+            otherUrl: window.location.href + "assets/mocks/login/login-list.json",
+            command: "Efika Info Mural",
+            timeout: 5000
+        }
+       
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta as LoginList[];
+            });
     }
 
     public logarusuario(usuario: Usuario): Promise<boolean> {

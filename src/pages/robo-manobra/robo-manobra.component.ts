@@ -26,10 +26,13 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
     public selectecSecundaria: Secundaria = new Secundaria();
 
     public primariaInput: string;
-
-    public incrementTimeCount: number = 16;
-
     public equipamento: string;
+
+    public cabo: string;
+    public primaria: string;
+    public spliterSec: string;
+
+    public incrementTimeCount: number = 29;
 
     constructor(public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
@@ -46,22 +49,28 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
     }
 
     public doVerificarDisponibilidade() {
-        // if (this.validFormDisponibilidade()) {
-        if (this.holderService.isMock) {
-            // this.verificarDisponibilidadeMock();
-            this.verificarDisponibilidade();
+        if (this.validFormDisponibilidade()) {
+            if (this.holderService.isMock) {
+                // this.verificarDisponibilidadeMock();
+                this.verificarDisponibilidade();
+            } else {
+                this.verificarDisponibilidade();
+            }
         } else {
-            this.verificarDisponibilidade();
+            super.showAlert("Formulário incorreto", "Por favor preencha todos os campos do formulário");
         }
-        // } else {
-        //     super.showAlert("Formulário incorreto", "Por favor preencha todos os campos do formulário");
-        // }
+    }
+
+    public mountCampo() {
+        this.primariaInput = this.cabo + "-F#" + this.primaria;
+        this.equipamento = this.cabo + "SP" + this.primaria + "SS" + this.spliterSec;
     }
 
     public verificarDisponibilidade() {
         this.count = 0;
         let qntErro: number = 0;
         this.loading(true, "Verificando disponibilidade");
+        // this.mountCampo();
         this.roboManobraService
             .setTaskRoboManobra(this.tipoTecnologia, this.holderService.instancia, this.primariaInput, this.equipamento)
             .then(resposta => {
@@ -111,10 +120,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                     this.loading(false);
                     super.showAlert(super.makeexceptionmessageTitle("Ocorreu algo.", true), super.makeexceptionmessage(resposta.exceptionMessage, this.holderService.instancia));
                 }
-                // console.log(resposta);
-                // this.loading(false);
-                // this.disableBtnVerificarDisp = true;
-                // this.ableFormRoboManobra = true;
+                this.loading(false);
             }, error => {
                 this.loading(false);
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
@@ -133,7 +139,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
 
     public validFormDisponibilidade(): boolean {
         let valid: boolean = false;
-        if (this.primariaInput /*|| this.idSpliter || this.tipoTecnologia*/) {
+        if (this.primaria && this.cabo && this.spliterSec /*&& this.tipoTecnologia*/) {
             valid = true;
         }
         return valid;
@@ -340,6 +346,26 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
             }]
         });
         alert.present();
+    }
+
+    public valueFieldsChangeValidation(what) {
+        switch (what) {
+            case "cabo":
+                if (this.cabo.length > 2) {
+                    this.cabo = this.cabo.substring(0, 2);
+                }
+                break;
+            case "primaria":
+                if (this.primaria.length > 2) {
+                    this.primaria = this.primaria.substring(0, 2);
+                }
+                break;
+            case "spliter":
+                if (this.spliterSec.length > 2) {
+                    this.spliterSec = this.spliterSec.substring(0, 2);
+                }
+                break;
+        }
     }
 
 }
