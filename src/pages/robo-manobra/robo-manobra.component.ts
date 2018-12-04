@@ -49,16 +49,16 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
     }
 
     public doVerificarDisponibilidade() {
-        if (this.validFormDisponibilidade()) {
-            if (this.holderService.isMock) {
-                // this.verificarDisponibilidadeMock();
-                this.verificarDisponibilidade();
-            } else {
-                this.verificarDisponibilidade();
-            }
+        // if (this.validFormDisponibilidade()) {
+        if (this.holderService.isMock) {
+            // this.verificarDisponibilidadeMock();
+            this.verificarDisponibilidade();
         } else {
-            super.showAlert("Formulário incorreto", "Por favor preencha todos os campos do formulário");
+            this.verificarDisponibilidade();
         }
+        // } else {
+        //     super.showAlert("Formulário incorreto", "Por favor preencha todos os campos do formulário");
+        // }
     }
 
     public mountCampo() {
@@ -120,7 +120,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                     this.loading(false);
                     super.showAlert(super.makeexceptionmessageTitle("Ocorreu algo.", true), super.makeexceptionmessage(resposta.exceptionMessage, this.holderService.instancia));
                 }
-                this.loading(false);
+                // this.loading(false);
             }, error => {
                 this.loading(false);
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
