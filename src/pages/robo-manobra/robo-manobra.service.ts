@@ -3,6 +3,7 @@ import { SuperService } from '../../providers/super-service/super.service';
 import { UrlService } from '../../providers/new_url-service/url.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { TaskProcess } from '../../view-model/task-process/task-process';
+import { Output } from '../../view-model/task-process/output-task';
 
 declare var require: any
 
@@ -89,8 +90,8 @@ export class RoboManobraService extends SuperService {
             });
     }
 
-    public getmanobradispMock(): TaskProcess {
-        let info: TaskProcess = require("../../assets/mocks/manobra/mock-manobrar.json");
+    public getmanobradispMock(): Output {
+        let info: Output = require("../../assets/mocks/manobra/mock-manobrar.json");
         return info
     }
 

@@ -12,49 +12,43 @@
 <ion-content padding>
 
     <div *ngIf="roboHolderIdsService.ableFormVerifyDispManobra">
-        <!-- <ion-list>
-            <ion-item>
-                <ion-label fixed>Tipo Tecnologia</ion-label>
-                <ion-select [(ngModel)]="tipoTecnologia">
-                    <ion-option value="FTTA">FTTA</ion-option>
-                    <ion-option value="FTTH">FTTH</ion-option>
-                </ion-select>
-            </ion-item>
-            <ion-item>
-                <ion-label fixed>Cabo</ion-label>
-                <ion-input type="number" [(ngModel)]="cabo" (change)="valueFieldsChangeValidation('cabo')"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label fixed>Primária</ion-label>
-                <ion-input type="number" [(ngModel)]="primaria" (change)="valueFieldsChangeValidation('primaria')"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label fixed>Spliter Secundário</ion-label>
-                <ion-input type="number" [(ngModel)]="spliterSec" (change)="valueFieldsChangeValidation('spliter')"></ion-input>
-            </ion-item>
-        </ion-list> -->
-
         <ion-list>
             <ion-item>
-                <ion-label fixed>Tipo Tecnologia</ion-label>
+                <ion-label>Tecnologia no Físico</ion-label>
                 <ion-select [(ngModel)]="tipoTecnologia">
                     <ion-option value="FTTA">FTTA</ion-option>
                     <ion-option value="FTTH">FTTH</ion-option>
                 </ion-select>
             </ion-item>
-            <ion-item>
-                <ion-label fixed>Primária</ion-label>
-                <ion-input type="text" [(ngModel)]="primariaInput"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label fixed>Equipamento</ion-label>
-                <ion-input type="text" [(ngModel)]="equipamento"></ion-input>
-            </ion-item>
+
+            <button ion-button block round (click)="doVerificarDisponibilidade()">Consultar Fibras Vagas</button>
+            <br>
+
         </ion-list>
 
+        <div *ngIf="tipoTecnologia==='FTTA'" class="stylethediv">
+            <br>
+            <ion-list class="putsomemargin">
+                <ion-item>
+                    <ion-label>Cabo</ion-label>
+                    <ion-input type="number" [(ngModel)]="cabo" (change)="valueFieldsChangeValidation('cabo')">
+                    </ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Primária</ion-label>
+                    <ion-input type="number" [(ngModel)]="primaria" (change)="valueFieldsChangeValidation('primaria')"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Spliter Secundário</ion-label>
+                    <ion-input type="number" [(ngModel)]="spliterSec" (change)="valueFieldsChangeValidation('spliter')"></ion-input>
+                </ion-item>
+            </ion-list>
 
-        <button ion-button block round (click)="doVerificarDisponibilidade();">Verificar
-            Disponibilidade</button>
+            <button ion-button block round (click)="doVerificarDisponibilidadeForm();" color="secondary">Consultar
+                manualmente as Facilidades</button>
+
+        </div>
+
     </div>
 
     <div *ngIf="roboHolderIdsService.ableFormRoboManobra">

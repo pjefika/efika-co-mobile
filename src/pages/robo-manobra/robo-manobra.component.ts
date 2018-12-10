@@ -7,6 +7,7 @@ import { Primaria } from '../../view-model/robo-manobra/primaria';
 import { CTO } from '../../view-model/robo-manobra/cto';
 import { Secundaria } from '../../view-model/robo-manobra/secundaria';
 import { RoboHolderIdsService } from '../../providers/holder/robo-holder-ids.service';
+import { Output } from '../../view-model/task-process/output-task';
 
 @Component({
     selector: 'robo-manobra-component',
@@ -32,7 +33,9 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
     public primaria: string;
     public spliterSec: string;
 
-    public incrementTimeCount: number = 29;
+    public incrementTimeCount: number = 68;
+
+    public ableFormManual: boolean = false;
 
     constructor(public alertCtrl: AlertController,
         public loadingCtrl: LoadingController,
@@ -49,28 +52,54 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
     }
 
     public doVerificarDisponibilidade() {
-        // if (this.validFormDisponibilidade()) {
+        this.primariaInput = null;
+        this.equipamento = null;
         if (this.holderService.isMock) {
-            // this.verificarDisponibilidadeMock();
-            this.verificarDisponibilidade();
+            this.verificarDisponibilidadeMock();
+            // this.verificarDisponibilidade();
         } else {
             this.verificarDisponibilidade();
         }
-        // } else {
-        //     super.showAlert("Formulário incorreto", "Por favor preencha todos os campos do formulário");
-        // }
+
     }
 
-    public mountCampo() {
-        this.primariaInput = this.cabo + "-F#" + this.primaria;
-        this.equipamento = this.cabo + "SP" + this.primaria + "SS" + this.spliterSec;
+    public doVerificarDisponibilidadeForm() {
+        if (this.mountCampo()) {
+            if (this.holderService.isMock) {
+                this.verificarDisponibilidadeMock();
+                // this.verificarDisponibilidade();
+            } else {
+                this.verificarDisponibilidade();
+            }
+        }
+    }
+
+    public validFormDisponibilidade(): boolean {
+        let value: boolean = false;
+        if (this.primaria || this.cabo || this.spliterSec) {
+            value = this.mountCampo();
+        } else {
+            value = true;
+        }
+        return value;
+    }
+
+    public mountCampo(): boolean {
+        let valid: boolean = false;
+        if (this.primaria && this.cabo && this.spliterSec /*&& this.tipoTecnologia*/) {
+            valid = true
+            this.primariaInput = this.cabo + "-F#" + this.primaria;
+            this.equipamento = this.cabo + "SP" + this.primaria + "SS" + this.spliterSec;
+        } else {
+            super.showAlert("Formulário incorreto", "Por favor preencha todos os campos do formulário");
+        }
+        return valid;
     }
 
     public verificarDisponibilidade() {
         this.count = 0;
         let qntErro: number = 0;
         this.loading(true, "Verificando disponibilidade");
-        // this.mountCampo();
         this.roboManobraService
             .setTaskRoboManobra(this.tipoTecnologia, this.holderService.instancia, this.primariaInput, this.equipamento)
             .then(resposta => {
@@ -82,16 +111,10 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                                 .gettask(resposta.id)
                                 .then(resposta_1 => {
                                     if (resposta_1.state === "EXECUTED") {
-                                        if (resposta_1.output.primaria) {
-                                            if (resposta_1.output.primaria.length > 0
-                                                || resposta_1.output.observacao !== "Tecnologia não confere com o físico. Necessário contatar o Backoffice"
-                                                || !resposta_1.output.observacao.includes("Erro")) {
-                                                this.holderService.roboManobra = resposta_1.output;
-                                                this.roboHolderIdsService.ableFormVerifyDispManobra = false;
-                                                this.roboHolderIdsService.ableFormRoboManobra = true;
-                                            } else {
-                                                super.showAlert("Ops, aconteceu algo", resposta_1.output.observacao);
-                                            }
+                                        if (this.validDisponibilidadeAnswer(resposta_1.output)) {
+                                            this.holderService.roboManobra = resposta_1.output;
+                                            this.roboHolderIdsService.ableFormVerifyDispManobra = false;
+                                            this.roboHolderIdsService.ableFormRoboManobra = true;
                                         } else {
                                             super.showAlert("Ops, aconteceu algo", resposta_1.output.observacao);
                                         }
@@ -127,22 +150,34 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
             });
     }
 
+    public validDisponibilidadeAnswer(output: Output): boolean {
+        let valid: boolean = false;
+        if (!output.observacao.includes("Tecnologia não confere com o físico. Necessário contatar o Backoffice")
+            || !output.observacao.includes("Erro")) {
+            if (output.primaria) {
+                if (output.primaria.length > 0) {
+                    valid = true;
+                }
+            }
+        }
+        return valid;
+    }
+
     public verificarDisponibilidadeMock() {
         this.loading(true, "Verificando disponibilidade");
         setTimeout(() => {
-            this.holderService.roboManobra = this.roboManobraService.getmanobradispMock().output;
-            this.roboHolderIdsService.ableFormVerifyDispManobra = false;
-            this.roboHolderIdsService.ableFormRoboManobra = true;
+            this.holderService.roboManobra = this.roboManobraService.getmanobradispMock();
+            console.log(this.roboManobraService.getmanobradispMock());
+            if (this.validDisponibilidadeAnswer(this.roboManobraService.getmanobradispMock())) {
+                this.holderService.roboManobra = this.holderService.roboManobra
+                this.roboHolderIdsService.ableFormVerifyDispManobra = false;
+                this.roboHolderIdsService.ableFormRoboManobra = true;
+            } else {
+                super.showAlert("Ops, aconteceu algo", this.holderService.roboManobra.observacao);
+            }
             this.loading(false);
-        }, 60000);
-    }
 
-    public validFormDisponibilidade(): boolean {
-        let valid: boolean = false;
-        if (this.primaria && this.cabo && this.spliterSec /*&& this.tipoTecnologia*/) {
-            valid = true;
-        }
-        return valid;
+        }, 500);
     }
 
     public doManobrar() {
@@ -318,12 +353,20 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
         this.roboHolderIdsService.ableActionVerifySitManobra = false;
 
         this.tipoTecnologia = "FTTA";
-        this.primariaInput = "";
-        this.equipamento = "";
+
+        this.cabo = "";
+        this.primaria = "";
+        this.spliterSec = "";
+
+        // this.primariaInput = "";
+        // this.equipamento = "";
 
         this.motivoManobra = null;
         this.selectedPrimaria = null;
         this.selectedCTO = null;
+
+        this.primariaInput = null;
+        this.equipamento = null;
 
         this.holderService.roboManobra = null;
         this.holderService.roboManobrado = null;
@@ -353,16 +396,27 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
             case "cabo":
                 if (this.cabo.length > 2) {
                     this.cabo = this.cabo.substring(0, 2);
+
+                }
+                if (this.cabo.length < 2) {
+                    this.cabo = "0" + this.cabo;
                 }
                 break;
             case "primaria":
                 if (this.primaria.length > 2) {
                     this.primaria = this.primaria.substring(0, 2);
+
+                }
+                if (this.primaria.length < 2) {
+                    this.primaria = "0" + this.primaria;
                 }
                 break;
             case "spliter":
                 if (this.spliterSec.length > 2) {
                     this.spliterSec = this.spliterSec.substring(0, 2);
+                }
+                if (this.spliterSec.length < 2) {
+                    this.spliterSec = "0" + this.spliterSec;
                 }
                 break;
         }
