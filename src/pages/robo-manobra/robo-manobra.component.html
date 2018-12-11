@@ -12,19 +12,55 @@
 <ion-content padding>
 
     <div *ngIf="roboHolderIdsService.ableFormVerifyDispManobra">
-        <ion-list>
+        <!-- <ion-list>
+
             <ion-item>
                 <ion-label>Tecnologia no Físico</ion-label>
                 <ion-select [(ngModel)]="tipoTecnologia">
+                    <ion-option value="">Selecione</ion-option>
                     <ion-option value="FTTA">FTTA</ion-option>
                     <ion-option value="FTTH">FTTH</ion-option>
                 </ion-select>
             </ion-item>
 
-            <button ion-button block round (click)="doVerificarDisponibilidade()">Consultar Fibras Vagas</button>
+            <ion-item>
+                <ion-label>Primária</ion-label>
+                <ion-input type="number" [(ngModel)]="primariaInput" (change)="changeValidationOld('primaria')">
+                </ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Equipamento</ion-label>
+                <ion-input type="number" [(ngModel)]="equipamento" (change)="changeValidationOld('equipamento')">
+                </ion-input>
+            </ion-item>
+
+            <button ion-button block round (click)="doVerificarDisponibilidade()" [disabled]="tipoTecnologia === ''">Verificar
+                Disponibilidade</button>
+
+        </ion-list> -->
+
+        <ion-list>
+            <ion-item>
+                <ion-label>Tecnologia no Físico</ion-label>
+                <ion-select [(ngModel)]="tipoTecnologia">
+                    <ion-option value="">Selecione</ion-option>
+                    <ion-option value="FTTA">FTTA</ion-option>
+                    <ion-option value="FTTH">FTTH</ion-option>
+                </ion-select>
+            </ion-item>
+
+            <button ion-button block round (click)="doVerificarDisponibilidade()" *ngIf="tipoTecnologia != ''">Consultar
+                Fibras Vagas</button>
             <br>
 
         </ion-list>
+
+        <div *ngIf="tipoTecnologia==='FTTA'" style="text-align: center">
+            <hr>
+            <span>OU</span>
+            <hr>
+        </div>
 
         <div *ngIf="tipoTecnologia==='FTTA'" class="stylethediv">
             <br>
@@ -50,6 +86,8 @@
         </div>
 
     </div>
+
+
 
     <div *ngIf="roboHolderIdsService.ableFormRoboManobra">
         <ion-list>

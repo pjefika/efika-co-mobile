@@ -19,7 +19,7 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
 
     private count: number = 0;
 
-    public tipoTecnologia: string = "FTTA";
+    public tipoTecnologia: string = "";
     public motivoManobra: string;
 
     public selectedPrimaria: Primaria;
@@ -394,8 +394,8 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
     public valueFieldsChangeValidation(what) {
         switch (what) {
             case "cabo":
-                if (this.cabo.length > 2) {
-                    this.cabo = this.cabo.substring(0, 2);
+                if (this.cabo.length > 4) {
+                    this.cabo = this.cabo.substring(0, 4);
 
                 }
                 if (this.cabo.length < 2) {
@@ -403,8 +403,8 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                 }
                 break;
             case "primaria":
-                if (this.primaria.length > 2) {
-                    this.primaria = this.primaria.substring(0, 2);
+                if (this.primaria.length > 4) {
+                    this.primaria = this.primaria.substring(0, 4);
 
                 }
                 if (this.primaria.length < 2) {
@@ -412,11 +412,34 @@ export class RoboManobraComponent extends SuperComponentService implements OnIni
                 }
                 break;
             case "spliter":
-                if (this.spliterSec.length > 2) {
-                    this.spliterSec = this.spliterSec.substring(0, 2);
+                if (this.spliterSec.length > 4) {
+                    this.spliterSec = this.spliterSec.substring(0, 4);
                 }
                 if (this.spliterSec.length < 2) {
                     this.spliterSec = "0" + this.spliterSec;
+                }
+                break;
+        }
+    }
+
+    public changeValidationOld(what) {
+        switch (what) {
+            case "primaria":
+                if (this.primariaInput.length > 4) {
+                    this.primariaInput = this.primariaInput.substring(0, 4);
+
+                }
+                if (this.primariaInput.length < 2) {
+                    this.primariaInput = "0" + this.primariaInput;
+                }
+                break;
+            case "equipamento":
+                if (this.equipamento.length > 4) {
+                    this.equipamento = this.equipamento.substring(0, 4);
+
+                }
+                if (this.equipamento.length < 2) {
+                    this.equipamento = "0" + this.equipamento;
                 }
                 break;
         }
