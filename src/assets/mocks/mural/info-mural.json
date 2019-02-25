@@ -26,5 +26,19 @@
             "downloadAction": true,
             "linkDownload": "assets/videos/Video_Tutorial_-_Validador_Manobra_no_EFIKA_Mobile.mp4"
         }
+    },
+    {
+        "titulo": "Tutorial Efika Fulltest",
+        "mensagem": "Neste Link você encontra o tutorial completo do Efika Fulltest.",
+        "data_inicio": 0,
+        "data_fim": 0,
+        "action": {
+            "action": false,
+            "namebutton": "",
+            "colorbutton": "",
+            "linkref": "",
+            "downloadAction": true,
+            "linkDownload": "assets/videos/Dicas_de_uso_do_EFIKA_FULLTEST.mp4"
+        }
     }
 ]
