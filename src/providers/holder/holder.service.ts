@@ -4,8 +4,6 @@ import { Certification } from "../../view-model/certification/certification";
 import { UserFull } from "../../view-model/usuario/userfull";
 import { RespostaGenerica } from "../../view-model/resposta/resposta-generica";
 import { Valids } from "../../view-model/fulltest/validacao";
-import { RoboManobra } from "../../view-model/robo-manobra/robo-manobra";
-import { RoboManobrado } from "../../view-model/robo-manobra/manobrado";
 import { ProbSolucao } from "../../view-model/fulltest/prob_solucao";
 
 @Injectable()
@@ -47,10 +45,6 @@ export class HolderService {
     public certificationTV: RespostaGenerica;
 
     public configBHSVlans: Valids[];
-
-    public roboManobra: RoboManobra;
-
-    public roboManobrado: RoboManobrado;
 
     public probSolucao: ProbSolucao[];
 

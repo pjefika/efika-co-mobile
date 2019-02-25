@@ -63,8 +63,6 @@ import { ManobraComponent } from '../pages/manobra/manobra.component';
 import { FulltestTVComponent } from '../pages/fulltest-tv/fulltest-tv.component';
 import { ToolboxComponent } from '../pages/toolbox/toolbox.component';
 import { BhsComponent } from '../pages/bhs/bhs.component';
-import { RoboManobraComponent } from '../pages/robo-manobra/robo-manobra.component';
-import { RoboHolderIdsService } from '../providers/holder/robo-holder-ids.service';
 
 @NgModule({
 	declarations: [
@@ -117,8 +115,7 @@ import { RoboHolderIdsService } from '../providers/holder/robo-holder-ids.servic
 		ManobraComponent,
 		FulltestTVComponent,
 		ToolboxComponent,
-		BhsComponent,
-		RoboManobraComponent
+		BhsComponent		
 	],
 	imports: [
 		BrowserModule,
@@ -177,8 +174,7 @@ import { RoboHolderIdsService } from '../providers/holder/robo-holder-ids.servic
 		ManobraComponent,
 		FulltestTVComponent,
 		ToolboxComponent,
-		BhsComponent,
-		RoboManobraComponent
+		BhsComponent
 	],
 	providers: [
 		StatusBar,
@@ -191,8 +187,7 @@ import { RoboHolderIdsService } from '../providers/holder/robo-holder-ids.servic
 		LoginUtilService,
 		ClipBoardService,
 		NotificationService,
-		WebsocketService,
-		RoboHolderIdsService
+		WebsocketService		
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
