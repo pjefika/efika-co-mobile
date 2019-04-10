@@ -29,7 +29,7 @@
     },
     {
         "titulo": "Tutorial Efika Fulltest",
-        "mensagem": "Neste Link você encontra o tutorial completo do Efika Fulltest.",
+        "mensagem": "Neste Link você encontra o tutorial completo do Efika Fulltest Vivo 2.",
         "data_inicio": 0,
         "data_fim": 0,
         "action": {
@@ -39,6 +39,20 @@
             "linkref": "",
             "downloadAction": true,
             "linkDownload": "assets/videos/Dicas_de_uso_do_EFIKA_FULLTEST.mp4"
+        }
+    },
+    {
+        "titulo": "Tutorial Efika Fulltest",
+        "mensagem": "Neste Link você encontra o tutorial completo do Efika Fulltest Vivo 1.",
+        "data_inicio": 0,
+        "data_fim": 0,
+        "action": {
+            "action": false,
+            "namebutton": "",
+            "colorbutton": "",
+            "linkref": "",
+            "downloadAction": true,
+            "linkDownload": "assets/videos/Dicas_de_uso_do_EFIKA_FULLTEST_vivo1.mp4"
         }
     }
 ]
