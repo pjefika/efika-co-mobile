@@ -63,6 +63,8 @@ import { ManobraComponent } from '../pages/manobra/manobra.component';
 import { FulltestTVComponent } from '../pages/fulltest-tv/fulltest-tv.component';
 import { ToolboxComponent } from '../pages/toolbox/toolbox.component';
 import { BhsComponent } from '../pages/bhs/bhs.component';
+import { FormAtendimentoDigitalComponent } from '../pages/atendimento-digital/form-atendimento-digital/form-atendimento-digital.component';
+import { ListAtendimentoDigitalComponent } from '../pages/atendimento-digital/list-atendimento-digital/list-atendimento-digital.component';
 
 @NgModule({
 	declarations: [
@@ -115,7 +117,9 @@ import { BhsComponent } from '../pages/bhs/bhs.component';
 		ManobraComponent,
 		FulltestTVComponent,
 		ToolboxComponent,
-		BhsComponent		
+		BhsComponent,
+		FormAtendimentoDigitalComponent,
+		ListAtendimentoDigitalComponent
 	],
 	imports: [
 		BrowserModule,
@@ -174,7 +178,9 @@ import { BhsComponent } from '../pages/bhs/bhs.component';
 		ManobraComponent,
 		FulltestTVComponent,
 		ToolboxComponent,
-		BhsComponent
+		BhsComponent,
+		FormAtendimentoDigitalComponent,
+		ListAtendimentoDigitalComponent
 	],
 	providers: [
 		StatusBar,
@@ -187,7 +193,7 @@ import { BhsComponent } from '../pages/bhs/bhs.component';
 		LoginUtilService,
 		ClipBoardService,
 		NotificationService,
-		WebsocketService		
+		WebsocketService
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

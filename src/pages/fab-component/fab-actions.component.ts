@@ -4,6 +4,7 @@ import { HolderService } from '../../providers/holder/holder.service';
 import { NavController } from 'ionic-angular';
 import { UserModifyComponent } from '../login/user-modify/user-modify.component';
 import { TestesRedeComponent } from '../../util/testes-rede/testes-rede.component';
+import { ListAtendimentoDigitalComponent } from '../atendimento-digital/list-atendimento-digital/list-atendimento-digital.component';
 
 @Component({
     selector: 'fab-action-component',
@@ -32,6 +33,10 @@ export class FabActionComponent implements OnInit {
 
     public testcase() {
         this.navCtrl.push(TestesRedeComponent);
+    }
+
+    public listAtendimentoDigital() {
+        this.navCtrl.push(ListAtendimentoDigitalComponent)
     }
 
 }

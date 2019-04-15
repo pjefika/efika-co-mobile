@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Atendimento Digital_ </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div>
+        <ion-item>
+            <ion-label>SS</ion-label>
+            <ion-input [(ngModel)]="atendimentoDigital.ss"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Motivo</ion-label>
+            <ion-input [(ngModel)]="atendimentoDigital.motivo"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Descrição</ion-label>
+            <ion-textarea [(ngModel)]="atendimentoDigital.descricao"></ion-textarea>
+        </ion-item>
+
+        <button ion-button block round (click)="setAtendimento()">Enviar</button>
+    </div>
+</ion-content>

@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Certification } from '../../../../view-model/certification/certification';
 import { HolderService } from '../../../../providers/holder/holder.service';
 import { ProbSolucao } from '../../../../view-model/fulltest/prob_solucao';
-import { AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { FulltestService } from '../../fulltest.service';
 import { SuperComponentService } from '../../../../providers/component-service/super-component.service';
+import { FormAtendimentoDigitalComponent } from '../../../atendimento-digital/form-atendimento-digital/form-atendimento-digital.component';
 
 @Component({
     selector: 'info-gerais-fulltest-component',
@@ -26,7 +27,8 @@ export class InfoGeraisFulltestComponent extends SuperComponentService implement
     constructor(public holderService: HolderService,
         public alertCtrl: AlertController,
         private fulltestService: FulltestService,
-        public loadingCtrl: LoadingController) {
+        public loadingCtrl: LoadingController,
+        public navCtrl: NavController) {
         super(alertCtrl, loadingCtrl, holderService);
     }
 
@@ -86,6 +88,10 @@ export class InfoGeraisFulltestComponent extends SuperComponentService implement
             enableBackdropDismiss: false
         });
         confLeitura.present();
+    }
+
+    public openAtendimentoDigital() {
+        this.navCtrl.push(FormAtendimentoDigitalComponent);
     }
 
 }

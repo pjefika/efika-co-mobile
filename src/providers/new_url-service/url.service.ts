@@ -10,7 +10,8 @@ import 'rxjs/add/operator/timeout';
 export class UrlService extends LinkService {
 
     public urlIpProd = "http://54.94.208.183:8080"  // -- Produção
-    public urlIpQA = "http://10.40.196.172:9091"; // --QA 
+    // public urlIpQA = "http://10.40.196.172:9091"; // --QA
+    public urlIpQA = "http://10.40.188.224:9091"; // --QA
 
     public options;
 
