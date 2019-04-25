@@ -13,7 +13,7 @@ export class AtendimentoDigitalService extends SuperService {
         super(holderService);
     }
 
-    public setAtendimento(atendimentoDigital: AtendimentoDigital) {
+    public setAtendimento(atendimentoDigital: AtendimentoDigital): Promise<TaskProcess> {
         let userSession = JSON.parse(localStorage.getItem("user"));
         let _data: { task: string, input: AtendimentoDigital, executor: string };
         _data = { task: "ATDG", input: atendimentoDigital, executor: userSession.user };
@@ -33,6 +33,21 @@ export class AtendimentoDigitalService extends SuperService {
 
     public getAtendimentos() {
 
+    }
+
+
+    public gettask(id: String): Promise<TaskProcess> {
+        this.infoResquest = {
+            rqst: "get",
+            command: "",
+            _data: id,
+            timeout: 10000
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta as TaskProcess;
+            });
     }
 
 }

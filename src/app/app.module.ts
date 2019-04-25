@@ -65,6 +65,8 @@ import { ToolboxComponent } from '../pages/toolbox/toolbox.component';
 import { BhsComponent } from '../pages/bhs/bhs.component';
 import { FormAtendimentoDigitalComponent } from '../pages/atendimento-digital/form-atendimento-digital/form-atendimento-digital.component';
 import { ListAtendimentoDigitalComponent } from '../pages/atendimento-digital/list-atendimento-digital/list-atendimento-digital.component';
+import { MAcMaskDirective } from '../providers/directive/mac-mask.directive';
+import { DescAtendimentoDigitalComponent } from '../pages/atendimento-digital/list-atendimento-digital/desc-atendimento-digital/desc-atendimento-digital.component';
 
 @NgModule({
 	declarations: [
@@ -119,7 +121,9 @@ import { ListAtendimentoDigitalComponent } from '../pages/atendimento-digital/li
 		ToolboxComponent,
 		BhsComponent,
 		FormAtendimentoDigitalComponent,
-		ListAtendimentoDigitalComponent
+		ListAtendimentoDigitalComponent,
+		MAcMaskDirective,
+		DescAtendimentoDigitalComponent
 	],
 	imports: [
 		BrowserModule,
@@ -180,7 +184,8 @@ import { ListAtendimentoDigitalComponent } from '../pages/atendimento-digital/li
 		ToolboxComponent,
 		BhsComponent,
 		FormAtendimentoDigitalComponent,
-		ListAtendimentoDigitalComponent
+		ListAtendimentoDigitalComponent,
+		DescAtendimentoDigitalComponent
 	],
 	providers: [
 		StatusBar,
