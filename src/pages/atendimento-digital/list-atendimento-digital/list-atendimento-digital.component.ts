@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AtendimentoDigitalService } from '../atendimento-digital.service';
-import { NavController } from 'ionic-angular';
+import { AlertController, LoadingController, NavController } from 'ionic-angular';
 import { DescAtendimentoDigitalComponent } from './desc-atendimento-digital/desc-atendimento-digital.component';
+import { HolderService } from '../../../providers/holder/holder.service';
+import { SuperComponentService } from '../../../providers/component-service/super-component.service';
+import { AtendimentoDigitalOutput } from '../../../view-model/atendimento-digital/atendimento-digital-output';
 
 @Component({
     selector: 'list-atendimento-digital',
@@ -9,20 +12,120 @@ import { DescAtendimentoDigitalComponent } from './desc-atendimento-digital/desc
     providers: [AtendimentoDigitalService]
 })
 
-export class ListAtendimentoDigitalComponent implements OnInit {
+export class ListAtendimentoDigitalComponent extends SuperComponentService implements OnInit {
+
+    private count: number = 0;
+
+    private rqSi: any;
+
+    public atendimentoDigitalOutput: AtendimentoDigitalOutput[];
 
     constructor(private atendimentoDigitalService: AtendimentoDigitalService,
-        public navCtrl: NavController) { }
+        public navCtrl: NavController,
+        public holderService: HolderService,
+        public loadingCtrl: LoadingController,
+        public alertCtrl: AlertController) {
+        super(alertCtrl, loadingCtrl, holderService);
 
-    public ngOnInit() { }
+    }
+
+    public ngOnInit() {
+        this.getAtendimentos();
+    }
 
     public getAtendimentos() {
-        this.atendimentoDigitalService.getAtendimentos();
+
+        this.count = 0;
+        let qntErro: number = 0;
+        this.loading(true, "Buscando atendimentos");
+
+        this.atendimentoDigitalService
+            .getAtendimentos()
+            .then(resposta => {
+
+                if (resposta) {
+                    this.rqSi = setInterval(() => {
+                        if (this.count < this.holderService.rcount) {
+                            this.count++;
+                            this.atendimentoDigitalService
+                                .gettask(resposta.id)
+                                .then(resposta_1 => {
+                                    if (resposta_1.state === "EXECUTED") {
+                                        this.atendimentoDigitalOutput = resposta_1.output.tickets;
+                                        clearInterval(this.rqSi);
+                                        this.loading(false);
+                                    }
+                                }, error => {
+                                    qntErro++;
+                                    if (qntErro > 3) {
+                                        this.loading(false);
+                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                        clearInterval(this.rqSi);
+                                    }
+                                });
+                        } else {
+                            this.tempobuscaexcedido();
+                            clearInterval(this.rqSi);
+                        }
+                    }, this.holderService.rtimeout);
+                }
+
+            }, error => {
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                this.loading(false);
+            })
     }
 
-    public openDescAtendimentoDigital() {
-        this.navCtrl.push(DescAtendimentoDigitalComponent);
+    private tempobuscaexcedido() {
+        this.loading(false);
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
+    public openDescAtendimentoDigital(idAtdg: number) {
+
+        this.count = 0;
+        let qntErro: number = 0;
+        this.loading(true, "Carregando atendimento");
+
+        this.atendimentoDigitalService
+            .getAtendimento(idAtdg)
+            .then(resposta => {
+                if (resposta) {
+                    this.rqSi = setInterval(() => {
+                        if (this.count < this.holderService.rcount) {
+                            this.count++;
+                            this.atendimentoDigitalService
+                                .gettask(resposta.id)
+                                .then(resposta_1 => {
+                                    if (resposta_1.state === "EXECUTED") {
+                                        this.navCtrl.push(DescAtendimentoDigitalComponent, { desc: resposta_1 });
+                                        clearInterval(this.rqSi);
+                                        this.loading(false);
+                                    }
+                                }, error => {
+                                    qntErro++;
+                                    if (qntErro > 3) {
+                                        this.loading(false);
+                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                        clearInterval(this.rqSi);
+                                    }
+                                });
+                        } else {
+                            this.tempobuscaexcedido();
+                            clearInterval(this.rqSi);
+                        }
+                    }, this.holderService.rtimeout);
+                }
+            }, error => {
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                this.loading(false);
+            })
+
+
+    }
+
+    public ngOnDestroy() {
+        clearInterval(this.rqSi);
+    }
 
 }

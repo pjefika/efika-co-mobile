@@ -16,7 +16,7 @@ export class AtendimentoDigitalService extends SuperService {
     public setAtendimento(atendimentoDigital: AtendimentoDigital): Promise<TaskProcess> {
         let userSession = JSON.parse(localStorage.getItem("user"));
         let _data: { task: string, input: AtendimentoDigital, executor: string };
-        _data = { task: "ATDG", input: atendimentoDigital, executor: userSession.user };
+        _data = { task: "ATDG_POST", input: atendimentoDigital, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
             command: "post",
@@ -31,10 +31,47 @@ export class AtendimentoDigitalService extends SuperService {
             .catch(super.handleError);
     }
 
-    public getAtendimentos() {
-
+    public getAtendimentos(): Promise<TaskProcess> {
+        let userSession = JSON.parse(localStorage.getItem("user"));
+        let _data: { task: string, input: any, executor: string };
+        _data = { task: "ATDG_LIST", input: null, executor: userSession.user };
+        this.infoResquest = {
+            rqst: "post",
+            command: "post",
+            _data: _data,
+            timeout: 120000
+        };
+        return this.urlService
+            .request(this.infoResquest)
+            .then(response => {
+                return response as TaskProcess
+            })
+            .catch(super.handleError);
     }
 
+    public getAtendimento(idAtdg: number): Promise<TaskProcess> {
+        // ATDG_ATENDIMENTO
+        let userSession = JSON.parse(localStorage.getItem("user"));
+        let _data: { task: string, input: { id: number }, executor: string };
+        _data = { task: "ATDG_ATENDIMENTO", input: { id: idAtdg }, executor: userSession.user };
+        this.infoResquest = {
+            rqst: "post",
+            command: "post",
+            _data: _data,
+            timeout: 120000
+        };
+        return this.urlService
+            .request(this.infoResquest)
+            .then(response => {
+                return response as TaskProcess
+            })
+            .catch(super.handleError);
+    }
+
+    public updateAtendimento() {
+        // ATDG_UPDATE
+
+    }
 
     public gettask(id: String): Promise<TaskProcess> {
         this.infoResquest = {

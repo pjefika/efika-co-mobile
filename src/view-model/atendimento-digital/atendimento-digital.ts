@@ -10,27 +10,28 @@ export class AtendimentoDigital {
     telefoneTecnico: string;
     emailTecnico: string;
 
-    infos?: AtendimentoDigitalModel;
-
-}
-
-
-export class AtendimentoDigitalModel {
-
     //Global para 1 & 2
     modeloHG: string;
     macHG: string;
 
     // Ativação VOIP - 1
-    chkATA?: string;
+    chkATA?: boolean;
     modeloATA?: string;
     macATA?: string;
     serialATA?: string;
 
     // Ativação TV - 2
-    chkTVH?: string;
+    chkTVH?: boolean;
     lsIPTV?: string;
     ptIPTV?: string;
     lsTVH?: string;
     ptTVH?: string;
+
+}
+
+export class ReOpenAntendimentoDigital {
+    tecnico: number;
+    user: number;
+    atendimento: number;
+    observacao: string;
 }
