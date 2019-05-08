@@ -6,26 +6,30 @@
 <ion-content padding>
     <div>
 
-        <h3>Atendimento: Lorem ipsum dolor sit amet</h3>
-
-        <h5>Consectetur adipiscing elit</h5>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent efficitur velit mi, efficitur consequat
-            risus mattis sed. Morbi nec orci risus. Morbi quis nisi et ipsum dapibus hendrerit vel malesuada justo.
-            Suspendisse sit amet massa nisl. Nam auctor orci ac ex condimentum, vel placerat lectus viverra.
-        </p>
+        <h3>Atendimento: {{atendimentoDigitalOututDetail.ticket.instancia}} /
+            {{atendimentoDigitalOututDetail.ticket.motivo}}</h3>
 
         <hr>
 
-        <h5>Resposta</h5>
+        <h5>Resposta: </h5>
 
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent efficitur velit mi, efficitur consequat
-            risus mattis sed. Morbi nec orci risus. Morbi quis nisi et ipsum dapibus hendrerit vel malesuada justo.
-            Suspendisse sit amet massa nisl. Nam auctor orci ac ex condimentum, vel placerat lectus viverra.
+            {{atendimentoDigitalOututDetail.atendimento}}
         </p>
 
-        <button ion-button block round>Reabrir</button>
+        <div *ngIf="atendimentoDigitalOututDetail.atendimentoInteracoes">
+            <h5>Info Reaberturas</h5>
+
+            <ion-list>
+                <ion-item *ngFor="let iteracao of atendimentoDigitalOututDetail.atendimentoInteracoes"
+                    (click)="openObservacoesReaberturas(iteracao.observacao)">
+                    <ion-label>{{iteracao.observacao}}</ion-label>
+                </ion-item>
+            </ion-list>
+
+        </div>
+
+        <button ion-button block round (click)="openPopUpReOpenAtend()">Reabrir</button>
 
     </div>
 </ion-content>

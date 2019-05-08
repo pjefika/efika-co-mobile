@@ -67,6 +67,9 @@ import { FormAtendimentoDigitalComponent } from '../pages/atendimento-digital/fo
 import { ListAtendimentoDigitalComponent } from '../pages/atendimento-digital/list-atendimento-digital/list-atendimento-digital.component';
 import { MAcMaskDirective } from '../providers/directive/mac-mask.directive';
 import { DescAtendimentoDigitalComponent } from '../pages/atendimento-digital/list-atendimento-digital/desc-atendimento-digital/desc-atendimento-digital.component';
+import { AptvComponent } from '../pages/atendimento-digital/form-atendimento-digital/aptv/aptv.component';
+import { AtsipComponent } from '../pages/atendimento-digital/form-atendimento-digital/atsip/atsip.component';
+import { NotValidAttrsComponent } from '../pages/atendimento-digital/form-atendimento-digital/notvalidattrs/notvalidattrs.component';
 
 @NgModule({
 	declarations: [
@@ -123,7 +126,10 @@ import { DescAtendimentoDigitalComponent } from '../pages/atendimento-digital/li
 		FormAtendimentoDigitalComponent,
 		ListAtendimentoDigitalComponent,
 		MAcMaskDirective,
-		DescAtendimentoDigitalComponent
+		DescAtendimentoDigitalComponent,
+		AptvComponent,
+		AtsipComponent,
+		NotValidAttrsComponent
 	],
 	imports: [
 		BrowserModule,

@@ -67,7 +67,7 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                             this.tempobuscaexcedido();
                             clearInterval(this.rqSi);
                         }
-                    }, this.holderService.rtimeout);
+                    }, this.holderService.rtimeout - 12000);
                 }
 
             }, error => {
@@ -98,9 +98,15 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                                 .gettask(resposta.id)
                                 .then(resposta_1 => {
                                     if (resposta_1.state === "EXECUTED") {
-                                        this.navCtrl.push(DescAtendimentoDigitalComponent, { desc: resposta_1 });
-                                        clearInterval(this.rqSi);
-                                        this.loading(false);
+                                        if (resposta_1.output && resposta_1.output.atendimento && resposta_1.output.atendimento.id != null) {
+                                            this.navCtrl.push(DescAtendimentoDigitalComponent, { desc: resposta_1.output.atendimento });
+                                            clearInterval(this.rqSi);
+                                            this.loading(false);
+                                        } else {
+                                            clearInterval(this.rqSi);
+                                            this.loading(false);
+                                            super.showAlert("Atendimento não tratado", "Atendimento ainda não foi tratado, por favor aguarde.");
+                                        }
                                     }
                                 }, error => {
                                     qntErro++;
@@ -114,14 +120,12 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                             this.tempobuscaexcedido();
                             clearInterval(this.rqSi);
                         }
-                    }, this.holderService.rtimeout);
+                    }, this.holderService.rtimeout - 12000);
                 }
             }, error => {
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
                 this.loading(false);
-            })
-
-
+            });
     }
 
     public ngOnDestroy() {

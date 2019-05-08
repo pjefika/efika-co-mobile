@@ -7,8 +7,8 @@
     <div>
 
         <ion-item>
-            <ion-label fixed>Motivo</ion-label>
-            <ion-select [(ngModel)]="atendimentoDigital.motivo" (ionChange)="changeMotivos()">
+            <ion-label>Motivo</ion-label>
+            <ion-select [(ngModel)]="motivo" (ionChange)="changeMotivos()">
                 <ion-option value="ATSIP">ATSIP</ion-option>
                 <ion-option value="APTV">APTV</ion-option>
 
@@ -17,142 +17,15 @@
             </ion-select>
         </ion-item>
 
-        <hr>
+        <hr *ngIf="motivo">
 
-        <!-- Validação se não atendeu requisitos -->
-        <div *ngIf="atendimentoDigital.motivo && !isValidAttrs">
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Rede</th>
-                        <td [class]="atendimentoDigitalTabelaValidacao.rede ? 'success' : 'error'">
-                            {{atendimentoDigitalTabelaValidacao.rede}}</td>
-                    </tr>
-                    <tr>
-                        <th>Tecnologia</th>
-                        <td [class]="atendimentoDigitalTabelaValidacao.tecnologia ? 'success' : 'error'">
-                            {{atendimentoDigitalTabelaValidacao.tecnologia}}</td>
-                    </tr>
-                    <tr>
-                        <th>Banda Larga Ok</th>
-                        <td [class]="atendimentoDigitalTabelaValidacao.bandaLargaOk ? 'success' : 'error'">
-                            {{atendimentoDigitalTabelaValidacao.bandaLargaOk}}</td>
-                    </tr>
-                    <tr>
-                        <th>É IP TV</th>
-                        <td [class]="atendimentoDigitalTabelaValidacao.isIPTv ? 'success' : 'error'">
-                            {{atendimentoDigitalTabelaValidacao.isIPTv}}</td>
-                    </tr>
-                    <tr>
-                        <th>É Tv Hibrida</th>
-                        <td [class]="atendimentoDigitalTabelaValidacao.isTvHibrida ? 'success' : 'error'">
-                            {{atendimentoDigitalTabelaValidacao.isTvHibrida}}</td>
-                    </tr>
-                    <tr>
-                        <th>É Tv DTH</th>
-                        <td [class]="atendimentoDigitalTabelaValidacao.isTvDTH ? 'success' : 'error'">
-                            {{atendimentoDigitalTabelaValidacao.isTvDTH}}</td>
-                    </tr>
-                    <tr>
-                        <th>É SIP</th>
-                        <td [class]="atendimentoDigitalTabelaValidacao.IsSIP ? 'success' : 'error'">
-                            {{atendimentoDigitalTabelaValidacao.IsSIP}}</td>
-                    </tr>
-                    <tr>
-                        <th>É Linha Metalico</th>
-                        <td [class]="atendimentoDigitalTabelaValidacao.isLinhaMetalicoy ? 'success' : 'error'">
-                            {{atendimentoDigitalTabelaValidacao.isLinhaMetalico}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div *ngIf="atendimentoDigital.motivo && isValidAttrs">
-
-            <ion-item *ngIf="atendimentoDigital.motivo == 'ATSIP' || atendimentoDigital.motivo == 'APTV'">
-                <ion-label>Modelo HG</ion-label>
-                <ion-select [(ngModel)]="atendimentoDigital.modeloHG">
-                    <ion-option value="Um">Um</ion-option>
-                    <ion-option value="Dois">Dois</ion-option>
-                    <ion-option value="Tres">Três</ion-option>
-                    <ion-option value="Quatro">Quatro</ion-option>
-                </ion-select>
-            </ion-item>
-
-            <ion-item *ngIf="atendimentoDigital.motivo == 'ATSIP' || atendimentoDigital.motivo == 'APTV'">
-                <ion-label>Mac HG</ion-label>
-                <ion-input [(ngModel)]="atendimentoDigital.macHG" [macMask]
-                    pattern=^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$>
-                </ion-input>
-            </ion-item>
-
-            <!-- Possivel separação para melhor organizar os Forms... -->
-
-            <!-- Form para ATSIP -->
-            <ion-item *ngIf="atendimentoDigital.motivo == 'ATSIP'">
-                <ion-label>Modem ATA</ion-label>
-                <!-- <ion-input [(ngModel)]="atendimentoDigital.chkATA"></ion-input> -->
-                <ion-checkbox [(ngModel)]="atendimentoDigital.chkATA"></ion-checkbox>
-            </ion-item>
-
-            <ion-item *ngIf="atendimentoDigital.motivo == 'ATSIP' && atendimentoDigital.chkATA">
-                <ion-label>Modelo ATA</ion-label>
-                <ion-input [(ngModel)]="atendimentoDigital.modeloATA"></ion-input>
-            </ion-item>
-
-            <ion-item *ngIf="atendimentoDigital.motivo == 'ATSIP' && atendimentoDigital.chkATA">
-                <ion-label>Mac ATA</ion-label>
-                <ion-input [(ngModel)]="atendimentoDigital.macATA" [macMask]
-                    pattern=^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$></ion-input>
-            </ion-item>
-
-            <ion-item *ngIf="atendimentoDigital.motivo == 'ATSIP' && atendimentoDigital.chkATA">
-                <ion-label>Serial ATA</ion-label>
-                <ion-input [(ngModel)]="atendimentoDigital.serialATA"></ion-input>
-            </ion-item>
+        <notvalidattrs-component *ngIf="motivo && !isValidAttrs"
+            [atendimentoDigitalTabelaValidacao]="atendimentoDigitalTabelaValidacao"></notvalidattrs-component>
 
 
+        <aptv-component *ngIf="motivo && motivo == 'APTV' && isValidAttrs" [motivo]="motivo"></aptv-component>
 
-            <!-- Form para APTV -->
-            <ion-item *ngIf="atendimentoDigital.motivo == 'APTV'">
-                <ion-label>TV Hibrida</ion-label>
-                <!-- <ion-input [(ngModel)]="atendimentoDigital.chkTVH"></ion-input> -->
-                <ion-checkbox [(ngModel)]="atendimentoDigital.chkTVH"></ion-checkbox>
-            </ion-item>
-
-            <ion-item *ngIf="atendimentoDigital.motivo == 'APTV' && !atendimentoDigital.chkTVH">
-                <ion-label>lsIPTV</ion-label>
-                <!-- <ion-input [(ngModel)]="atendimentoDigital.lsIPTV"></ion-input> -->
-                <ion-select [(ngModel)]="atendimentoDigital.lsIPTV">
-                    <ion-option value="Um">Um</ion-option>
-                    <ion-option value="Dois">Dois</ion-option>
-                    <ion-option value="Tres">Três</ion-option>
-                    <ion-option value="Quatro">Quatro</ion-option>
-                </ion-select>
-            </ion-item>
-
-            <ion-item *ngIf="atendimentoDigital.motivo == 'APTV' && !atendimentoDigital.chkTVH">
-                <ion-label>ptIPTV</ion-label>
-                <ion-input [(ngModel)]="atendimentoDigital.ptIPTV"></ion-input>
-            </ion-item>
-
-            <ion-item *ngIf="atendimentoDigital.motivo == 'APTV' && atendimentoDigital.chkTVH">
-                <ion-label>lsTVH</ion-label>
-                <!-- <ion-input [(ngModel)]="atendimentoDigital.lsTVH"></ion-input> -->
-                <ion-select [(ngModel)]="atendimentoDigital.lsTVH">
-                    <ion-option value="Um">Um</ion-option>
-                    <ion-option value="Dois">Dois</ion-option>
-                    <ion-option value="Tres">Três</ion-option>
-                    <ion-option value="Quatro">Quatro</ion-option>
-                </ion-select>
-            </ion-item>
-
-            <ion-item *ngIf="atendimentoDigital.motivo == 'APTV' && atendimentoDigital.chkTVH">
-                <ion-label>ptTVH</ion-label>
-                <ion-input [(ngModel)]="atendimentoDigital.ptTVH"></ion-input>
-            </ion-item>
-
-            <button ion-button block round (click)="setAtendimento()">Enviar</button>
-        </div>
+        <atsip-component *ngIf="motivo && motivo == 'ATSIP' && isValidAttrs" [motivo]="motivo"></atsip-component>
 
     </div>
 </ion-content>

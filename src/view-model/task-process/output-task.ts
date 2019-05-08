@@ -4,7 +4,7 @@ import { Valids } from "../fulltest/validacao";
 import { Ont } from "./ont";
 import { Serial } from "./serial";
 import { RespostaGenerica } from "../resposta/resposta-generica";
-import { AtendimentoDigitalOutput } from "../atendimento-digital/atendimento-digital-output";
+import { AtendimentoDigitalOutput, AtendimentoDigitalOututDetail } from "../atendimento-digital/atendimento-digital-output";
 
 export class Output {
     type: string;
@@ -36,5 +36,6 @@ export class Output {
     vlans?: Valids[];
 
     tickets?: AtendimentoDigitalOutput[];
+    atendimento: AtendimentoDigitalOututDetail;
 
 }

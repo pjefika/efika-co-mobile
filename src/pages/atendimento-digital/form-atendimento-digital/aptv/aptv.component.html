@@ -1,0 +1,62 @@
+<div>
+
+    <ion-item>
+        <ion-label>Modelo HG</ion-label>
+        <ion-select [(ngModel)]="atendimentoDigital.modeloHG">
+            <ion-option value="" selected>Selecione</ion-option>
+            <ion-option value="Um">Um</ion-option>
+            <ion-option value="Dois">Dois</ion-option>
+            <ion-option value="Tres">Três</ion-option>
+            <ion-option value="Quatro">Quatro</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Mac HG</ion-label>
+        <ion-input [(ngModel)]="atendimentoDigital.macHG" [macMask] pattern=^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$>
+        </ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>{{atendimentoDigital.chkModelo ? 'TV Hibrida' : 'IP TV'}}</ion-label>
+        <ion-checkbox [(ngModel)]="atendimentoDigital.chkModelo"></ion-checkbox>
+    </ion-item>
+
+    <hr>
+
+    <p>Para adicionar os pontos preencha as informações abaixo.</p>
+
+    <ion-item>
+        <ion-label>Mac</ion-label>
+        <ion-input [(ngModel)]="pontoMac" [macMask]></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Serial</ion-label>
+        <ion-input [(ngModel)]="pontoSerial" maxlength="20"></ion-input>
+    </ion-item>
+
+    <button color="secondary" ion-button block round (click)="addPonto()">Adicionar
+        Ponto</button>
+
+    <hr>
+
+    <p>Lista de Pontos adicionados: </p>
+
+    <ion-list *ngIf="atendimentoDigital.pontos">
+        <ion-item-sliding *ngFor="let ponto of atendimentoDigital.pontos">
+            <ion-item>
+                <h2>MAC: {{ponto.mac}}</h2>
+                <p>Serial: {{ponto.serial}}</p>
+            </ion-item>
+            <ion-item-options side="end">
+                <button ion-button color="danger" (click)="removePonto(ponto)">
+                    <ion-icon name="close-circle"></ion-icon>
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+    <button ion-button block round (click)="setAtendimento()">Enviar</button>
+
+
+</div>

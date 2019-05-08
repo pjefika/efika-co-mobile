@@ -16,16 +16,19 @@ export class AtendimentoDigital {
 
     // Ativação VOIP - 1
     chkATA?: boolean;
-    modeloATA?: string;
-    macATA?: string;
-    serialATA?: string;
 
     // Ativação TV - 2
-    chkTVH?: boolean;
-    lsIPTV?: string;
-    ptIPTV?: string;
-    lsTVH?: string;
-    ptTVH?: string;
+    chkModelo?: boolean;
+
+    pontos: AddPontos[] = [];
+
+}
+
+export class AddPontos {
+
+    mac: string;
+    serial: string;
+    modeloAta?: string;
 
 }
 

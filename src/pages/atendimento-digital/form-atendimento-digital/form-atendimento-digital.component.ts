@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AtendimentoDigitalService } from '../atendimento-digital.service';
-import { AtendimentoDigital } from '../../../view-model/atendimento-digital/atendimento-digital';
+import { AtendimentoDigital, AddPontos } from '../../../view-model/atendimento-digital/atendimento-digital';
 import { HolderService } from '../../../providers/holder/holder.service';
 import { SuperComponentService } from '../../../providers/component-service/super-component.service';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
@@ -14,13 +14,13 @@ import { AtendimentoDigitalTabelaValidacao } from '../../../view-model/atendimen
 
 export class FormAtendimentoDigitalComponent extends SuperComponentService implements OnInit {
 
-    private count: number = 0;
-
-    public atendimentoDigital: AtendimentoDigital;
 
     public isValidAttrs: boolean = false;
 
+    public motivo: string;
+
     public atendimentoDigitalTabelaValidacao: AtendimentoDigitalTabelaValidacao;
+
 
     constructor(private atendimentoDigitalService: AtendimentoDigitalService,
         public holderService: HolderService,
@@ -31,7 +31,7 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
     }
 
     public ngOnInit() {
-        this.atendimentoDigital = new AtendimentoDigital();
+
     }
 
     // public setAtendimento() {
@@ -49,63 +49,61 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
     //     // this.atendimentoDigital = new AtendimentoDigital();
     // }
 
-    public setAtendimento() {
-        this.count = 0;
-        let qntErro: number = 0;
-        this.loading(true, "Enviando atendimento");
-        this.atendimentoDigital.nomeTecnico = this.holderService.user.name;
-        this.atendimentoDigital.matriculaTecnico = this.holderService.user.matricula;
-        this.atendimentoDigital.telefoneTecnico = this.holderService.user.phone;
-        this.atendimentoDigital.emailTecnico = this.holderService.user.email;
+    // public setAtendimento() {
+    //     this.count = 0;
+    //     let qntErro: number = 0;
+    //     this.loading(true, "Enviando atendimento");
+    //     this.atendimentoDigital.nomeTecnico = this.holderService.user.name;
+    //     this.atendimentoDigital.matriculaTecnico = this.holderService.user.matricula;
+    //     this.atendimentoDigital.telefoneTecnico = this.holderService.user.phone;
+    //     this.atendimentoDigital.emailTecnico = this.holderService.user.email;
 
-        this.atendimentoDigital.fkId = this.holderService.certification.fkId;
-        this.atendimentoDigital.instancia = this.holderService.certification.customer.instancia;
+    //     this.atendimentoDigital.fkId = this.holderService.certification.fkId;
+    //     this.atendimentoDigital.instancia = this.holderService.certification.customer.instancia;
 
-        this.atendimentoDigitalService
-            .setAtendimento(this.atendimentoDigital)
-            .then(resposta => {
-                if (resposta) {
-                    let rqSi = setInterval(() => {
-                        if (this.count < this.holderService.rcount) {
-                            this.count++;
-                            this.atendimentoDigitalService
-                                .gettask(resposta.id)
-                                .then(response_1 => {
-                                    if (response_1.state === "EXECUTED") {
-                                        super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
-                                        this.navCtrl.pop();
-                                        this.loading(false);
-                                        clearInterval(rqSi);
-                                    }
-                                }, error => {
-                                    qntErro++;
-                                    if (qntErro > 3) {
-                                        this.loading(false);
-                                        super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
-                                        clearInterval(rqSi);
-                                    }
-                                });
-                        } else {
-                            this.tempobuscaexcedido();
-                            clearInterval(rqSi);
-                        }
-                    }, this.holderService.rtimeout);
-                }
-            }, error => {
-                this.loading(false);
-                super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
-            });
-    }
+    //     this.atendimentoDigitalService
+    //         .setAtendimento(this.atendimentoDigital)
+    //         .then(resposta => {
+    //             if (resposta) {
+    //                 let rqSi = setInterval(() => {
+    //                     if (this.count < this.holderService.rcount) {
+    //                         this.count++;
+    //                         this.atendimentoDigitalService
+    //                             .gettask(resposta.id)
+    //                             .then(response_1 => {
+    //                                 if (response_1.state === "EXECUTED") {
+    //                                     super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
+    //                                     this.navCtrl.pop();
+    //                                     this.loading(false);
+    //                                     clearInterval(rqSi);
+    //                                 }
+    //                             }, error => {
+    //                                 qntErro++;
+    //                                 if (qntErro > 3) {
+    //                                     this.loading(false);
+    //                                     super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+    //                                     clearInterval(rqSi);
+    //                                 }
+    //                             });
+    //                     } else {
+    //                         this.tempobuscaexcedido();
+    //                         clearInterval(rqSi);
+    //                     }
+    //                 }, this.holderService.rtimeout);
+    //             }
+    //         }, error => {
+    //             this.loading(false);
+    //             super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+    //         });
+    // }
 
-    private tempobuscaexcedido() {
-        this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
-    }
-
+    // private tempobuscaexcedido() {
+    //     this.loading(false);
+    //     super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+    // }
 
     public changeMotivos() {
-        this.atendimentoDigitalTabelaValidacao = new AtendimentoDigitalTabelaValidacao();
-        switch (this.atendimentoDigital.motivo) {
+        switch (this.motivo) {
             case "ATSIP":
                 this.validacaoATSIP();
                 break;
