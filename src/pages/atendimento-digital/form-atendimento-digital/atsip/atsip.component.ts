@@ -20,7 +20,7 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
 
     public pontoMac: string;
     public pontoSerial: string;
-    public modeloAta: string;
+    public modeloAta: number;
 
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -42,7 +42,7 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
                 this.pontoMac = this.pontoMac.substring(0, (this.pontoMac.length - 1));
             }
 
-            if (this.pontoMac.length === 17) {
+            if (this.pontoMac.length === 17 && this.pontoSerial && this.modeloAta) {
                 let addPontos: AddPontos;
                 addPontos = {
                     mac: this.pontoMac,

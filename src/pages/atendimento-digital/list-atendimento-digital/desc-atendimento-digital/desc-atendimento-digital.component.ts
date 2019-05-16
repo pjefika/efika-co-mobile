@@ -127,4 +127,27 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
         alert.present();
     }
 
+    public getMotivosTranslate() {
+        let nome: string;
+        switch (this.atendimentoDigitalOututDetail.ticket.motivo) {
+            case "APTV":
+                return nome = "Aprovisionamento TV";
+                break;
+            case "ATSIP":
+                return nome = "Ativação SIP";
+                break;
+        }
+        return nome;
+    }
+
+    public nomesMatriculas(matriculaTecnico: string, matriculaUser: string) {
+        let nome: string;
+        if (this.holderService.user.matricula === matriculaTecnico) {
+            nome = "Você: "
+        } else {
+            nome = matriculaUser + ": ";
+        }
+        return nome;
+    }
+
 }

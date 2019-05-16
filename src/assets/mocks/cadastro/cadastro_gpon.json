@@ -24,7 +24,7 @@
             "rede": {
                 "tipo": "GPON",
                 "origem": "ONLINE",
-                "planta": "VIVO2",
+                "planta": "VIVO1",
                 "ipDslam": "10.218.9.3",
                 "vendorDslam": "ALCATEL",
                 "modeloDslam": "GPON_CARD",

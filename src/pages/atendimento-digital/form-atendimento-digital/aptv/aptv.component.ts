@@ -20,6 +20,8 @@ export class AptvComponent extends SuperComponentService implements OnInit {
 
     public pontoMac: string;
     public pontoSerial: string;
+    public ca_id: string;
+    public smartcard: string;
 
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -32,6 +34,9 @@ export class AptvComponent extends SuperComponentService implements OnInit {
     public ngOnInit() {
         this.atendimentoDigital = new AtendimentoDigital();
         this.atendimentoDigital.motivo = this.motivo;
+        this.findTipoTV();
+        console.log(this.holderService.cadastro.rede.planta);
+        
     }
 
     public addPonto() {
@@ -39,11 +44,15 @@ export class AptvComponent extends SuperComponentService implements OnInit {
             let addPontos: AddPontos;
             addPontos = {
                 mac: this.pontoMac,
-                serial: this.pontoSerial
+                serial: this.pontoSerial,
+                smartCard: this.smartcard,
+                caId: this.ca_id
             }
             this.atendimentoDigital.pontos.push(addPontos);
             this.pontoMac = null;
             this.pontoSerial = null;
+            this.smartcard = null;
+            this.ca_id = null;
         } else {
             super.showAlert("Preencher todos os campos", "Por favor preencha todos os campos Serial e Mac.");
         }
@@ -55,6 +64,7 @@ export class AptvComponent extends SuperComponentService implements OnInit {
     }
 
     public setAtendimento() {
+        // if (!this.validSendButton()) {
         let count: number = 0;
         let qntErro: number = 0;
         this.loading(true, "Enviando atendimento");
@@ -100,6 +110,9 @@ export class AptvComponent extends SuperComponentService implements OnInit {
                 this.loading(false);
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
             });
+        // } else {
+        //     super.showAlert("Campos nãos preenchidos", "Por favor selecione o tipo de TV e Adicione os pontos");
+        // }
     }
 
     private tempobuscaexcedido() {
@@ -107,5 +120,43 @@ export class AptvComponent extends SuperComponentService implements OnInit {
         super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
     }
 
+    public findTipoTV() {
+        if (this.holderService.cadastro.servicos.tipoTv) {
+            if (this.holderService.cadastro.servicos.tipoTv.includes("DTH")) {
+                this.atendimentoDigital.modeloTV === "TVDTH"
+            } else if (this.holderService.cadastro.servicos.tipoTv.includes("HIBRIDO")) {
+                this.atendimentoDigital.modeloTV === "TVHIBRIDA"
+            } else if (this.holderService.cadastro.servicos.tipoTv.includes("IPV")) {
+                this.atendimentoDigital.modeloTV === "IPTV"
+            }
+        }
+    }
+
+    public changeTipoTV() {
+        // if (this.atendimentoDigital.tipoTV === "DVR") {
+        this.atendimentoDigital.modeloTV = null;
+        this.atendimentoDigital.detailIPTV = null;
+        this.ca_id = null;
+        this.smartcard = null;
+        // }
+    }
+
+    public changeModeloTV() {
+        this.atendimentoDigital.detailIPTV = null;
+        this.ca_id = null;
+        this.smartcard = null;
+        if (this.holderService.cadastro.rede.planta === "VIVO2") {
+            this.atendimentoDigital.detailIPTV = "OPEN_PLATAFORM";
+        }
+    }
+
+    public validSendButton(): boolean {
+        // debugger
+        let valid: boolean = false;
+        if (!this.atendimentoDigital.tipoTV || this.atendimentoDigital.pontos.length <= 0) {
+            valid = true;
+        }
+        return valid;
+    }
 
 }

@@ -98,15 +98,19 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                                 .gettask(resposta.id)
                                 .then(resposta_1 => {
                                     if (resposta_1.state === "EXECUTED") {
-                                        if (resposta_1.output && resposta_1.output.atendimento && resposta_1.output.atendimento.id != null) {
-                                            this.navCtrl.push(DescAtendimentoDigitalComponent, { desc: resposta_1.output.atendimento });
-                                            clearInterval(this.rqSi);
-                                            this.loading(false);
+                                        if (resposta_1.output.atendimento.situacao === "EM_ATENDIMENTO") {
+                                            super.showAlert("Ticket em atendimento", "Ticket está em atendimento por favor aguarde.");
                                         } else {
-                                            clearInterval(this.rqSi);
-                                            this.loading(false);
-                                            super.showAlert("Atendimento não tratado", "Atendimento ainda não foi tratado, por favor aguarde.");
-                                        }
+                                            if (resposta_1.output && resposta_1.output.atendimento && resposta_1.output.atendimento.id != null) {
+                                                this.navCtrl.push(DescAtendimentoDigitalComponent, { desc: resposta_1.output.atendimento });
+                                                clearInterval(this.rqSi);
+                                                this.loading(false);
+                                            } else {
+                                                clearInterval(this.rqSi);
+                                                this.loading(false);
+                                                super.showAlert("Atendimento não tratado", "Atendimento ainda não foi tratado, por favor aguarde.");
+                                            }
+                                        }                                        
                                     }
                                 }, error => {
                                     qntErro++;

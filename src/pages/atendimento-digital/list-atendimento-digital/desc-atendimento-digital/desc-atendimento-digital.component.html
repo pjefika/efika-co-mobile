@@ -7,7 +7,7 @@
     <div>
 
         <h3>Atendimento: {{atendimentoDigitalOututDetail.ticket.instancia}} /
-            {{atendimentoDigitalOututDetail.ticket.motivo}}</h3>
+            {{getMotivosTranslate()}}</h3>
 
         <hr>
 
@@ -23,7 +23,8 @@
             <ion-list>
                 <ion-item *ngFor="let iteracao of atendimentoDigitalOututDetail.atendimentoInteracoes"
                     (click)="openObservacoesReaberturas(iteracao.observacao)">
-                    <ion-label>{{iteracao.observacao}}</ion-label>
+                    <ion-label>{{nomesMatriculas(iteracao.tecnico.matricula, iteracao.user.matricula)}}
+                        {{iteracao.observacao}}</ion-label>
                 </ion-item>
             </ion-list>
 

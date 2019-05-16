@@ -9,11 +9,11 @@
         <ion-item>
             <ion-label>Motivo</ion-label>
             <ion-select [(ngModel)]="motivo" (ionChange)="changeMotivos()">
-                <ion-option value="ATSIP">ATSIP</ion-option>
-                <ion-option value="APTV">APTV</ion-option>
+                <ion-option value="ATSIP">Ativação SIP</ion-option>
+                <ion-option value="APTV">Aprovisionamento TV</ion-option>
 
-                <ion-option value="ATSIPE">ATSIP Error</ion-option>
-                <ion-option value="APTVE">APTV Error</ion-option>
+                <ion-option value="ATSIPE">Ativação SIP Error</ion-option>
+                <ion-option value="APTVE">Aprovisionamento TV Error</ion-option>
             </ion-select>
         </ion-item>
 
@@ -21,7 +21,6 @@
 
         <notvalidattrs-component *ngIf="motivo && !isValidAttrs"
             [atendimentoDigitalTabelaValidacao]="atendimentoDigitalTabelaValidacao"></notvalidattrs-component>
-
 
         <aptv-component *ngIf="motivo && motivo == 'APTV' && isValidAttrs" [motivo]="motivo"></aptv-component>
 

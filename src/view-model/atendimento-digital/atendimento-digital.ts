@@ -11,14 +11,16 @@ export class AtendimentoDigital {
     emailTecnico: string;
 
     //Global para 1 & 2
-    modeloHG: string;
     macHG: string;
+    serialHG: string;
 
     // Ativação VOIP - 1
     chkATA?: boolean;
 
     // Ativação TV - 2
-    chkModelo?: boolean;
+    tipoTV?: string;
+    modeloTV?: string;
+    detailIPTV?: string;
 
     pontos: AddPontos[] = [];
 
@@ -28,7 +30,10 @@ export class AddPontos {
 
     mac: string;
     serial: string;
-    modeloAta?: string;
+    modeloAta?: number;
+
+    caId?: string;
+    smartCard?: string;
 
 }
 
