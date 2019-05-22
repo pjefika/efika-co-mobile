@@ -131,10 +131,10 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
         let nome: string;
         switch (this.atendimentoDigitalOututDetail.ticket.motivo) {
             case "APTV":
-                return nome = "Aprovisionamento TV";
+                nome = "Aprovisionamento TV";
                 break;
             case "ATSIP":
-                return nome = "Ativação SIP";
+                nome = "Ativação SIP";
                 break;
         }
         return nome;

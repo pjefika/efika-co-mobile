@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AtendimentoDigitalService } from '../atendimento-digital.service';
-import { AtendimentoDigital, AddPontos } from '../../../view-model/atendimento-digital/atendimento-digital';
 import { HolderService } from '../../../providers/holder/holder.service';
 import { SuperComponentService } from '../../../providers/component-service/super-component.service';
 import { AlertController, LoadingController, NavController } from 'ionic-angular';
@@ -22,7 +21,8 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
     public atendimentoDigitalTabelaValidacao: AtendimentoDigitalTabelaValidacao;
 
 
-    constructor(private atendimentoDigitalService: AtendimentoDigitalService,
+    constructor(
+        // private atendimentoDigitalService: AtendimentoDigitalService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
@@ -95,42 +95,42 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
 
 
     public validacaoATSIP() {
-        // this.atendimentoDigitalTabelaValidacao = {
-        //     rede: "N/A",
-        //     tecnologia: "N/A",
-        //     bandaLargaOk: this.holderService.certification.fulltest.resultado,
-        //     isIPTv: "N/A",
-        //     isTvHibrida: "N/A",
-        //     isTvDTH: "N/A",
-        //     IsSIP: this.holderService.cadastro.servicos.tipoLinha === "SIP",
-        //     isLinhaMetalico: this.holderService.cadastro.servicos.tipoLinha === "TDM"
-        // }
-        // if (this.atendimentoDigitalTabelaValidacao.bandaLargaOk
-        //     && this.atendimentoDigitalTabelaValidacao.IsSIP
-        //     && !this.atendimentoDigitalTabelaValidacao.isLinhaMetalico) {
-        //     this.isValidAttrs = true;
-        // }
+        this.atendimentoDigitalTabelaValidacao = {
+            rede: "N/A",
+            tecnologia: "N/A",
+            bandaLargaOk: this.holderService.certification.fulltest.resultado,
+            isIPTv: "N/A",
+            isTvHibrida: "N/A",
+            isTvDTH: "N/A",
+            IsSIP: this.holderService.cadastro.servicos.tipoLinha === "SIP",
+            isLinhaMetalico: this.holderService.cadastro.servicos.tipoLinha === "TDM"
+        }
+        if (this.atendimentoDigitalTabelaValidacao.bandaLargaOk
+            && this.atendimentoDigitalTabelaValidacao.IsSIP
+            && !this.atendimentoDigitalTabelaValidacao.isLinhaMetalico) {
+            this.isValidAttrs = true;
+        }
         this.isValidAttrs = true;
     }
 
     public validacaoAPTV() {
-        // this.atendimentoDigitalTabelaValidacao = {
-        //     rede: "N/A",
-        //     tecnologia: this.holderService.cadastro.rede.tipo === "GPON",
-        //     bandaLargaOk: this.holderService.certification.fulltest.resultado,
-        //     isIPTv: this.holderService.cadastro.servicos.tipoTv != null || this.holderService.cadastro.servicos.tipoTv != "IPTV",
-        //     isTvHibrida: this.holderService.cadastro.servicos.tipoTv != null || this.holderService.cadastro.servicos.tipoTv != "Hibrido",
-        //     isTvDTH: this.holderService.cadastro.servicos.tipoTv != null || this.holderService.cadastro.servicos.tipoTv === "DTH",
-        //     IsSIP: "N/A",
-        //     isLinhaMetalico: "N/A"
-        // }
-        // if (this.atendimentoDigitalTabelaValidacao.tecnologia
-        //     && this.atendimentoDigitalTabelaValidacao.bandaLargaOk
-        //     && this.atendimentoDigitalTabelaValidacao.isIPTv
-        //     && this.atendimentoDigitalTabelaValidacao.isTvHibrida
-        //     && !this.atendimentoDigitalTabelaValidacao.isTvDTH) {
-        //     this.isValidAttrs = true;
-        // }
+        this.atendimentoDigitalTabelaValidacao = {
+            rede: "N/A",
+            tecnologia: this.holderService.cadastro.rede.tipo === "GPON",
+            bandaLargaOk: this.holderService.certification.fulltest.resultado,
+            isIPTv: this.holderService.cadastro.servicos.tipoTv != null || this.holderService.cadastro.servicos.tipoTv != "IPTV",
+            isTvHibrida: this.holderService.cadastro.servicos.tipoTv != null || this.holderService.cadastro.servicos.tipoTv != "Hibrido",
+            isTvDTH: this.holderService.cadastro.servicos.tipoTv != null || this.holderService.cadastro.servicos.tipoTv === "DTH",
+            IsSIP: "N/A",
+            isLinhaMetalico: "N/A"
+        }
+        if (this.atendimentoDigitalTabelaValidacao.tecnologia
+            && this.atendimentoDigitalTabelaValidacao.bandaLargaOk
+            && this.atendimentoDigitalTabelaValidacao.isIPTv
+            && this.atendimentoDigitalTabelaValidacao.isTvHibrida
+            && !this.atendimentoDigitalTabelaValidacao.isTvDTH) {
+            this.isValidAttrs = true;
+        }
         this.isValidAttrs = true;
     }
 

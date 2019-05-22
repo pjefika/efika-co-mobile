@@ -33,7 +33,7 @@ export class InfoGeraisFulltestComponent extends SuperComponentService implement
     }
 
     public ngOnInit() {
-        this.validMessageFromFulltest();
+        // this.validMessageFromFulltest();
         this.numberValid();
     }
 
@@ -53,7 +53,7 @@ export class InfoGeraisFulltestComponent extends SuperComponentService implement
         }
     }
 
-    private validMessageFromFulltest() {
+    public validMessageFromFulltest() {
         let msg: string = this.holderService.certification.fulltest.mensagem;
         let index = this.holderService
             .probSolucao

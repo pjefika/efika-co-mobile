@@ -71,55 +71,52 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
 
         if (this.validForm()) {
 
-            let count: number = 0;
-            let qntErro: number = 0;
-            this.loading(true, "Enviando atendimento");
-            this.atendimentoDigital.nomeTecnico = this.holderService.user.name;
-            this.atendimentoDigital.matriculaTecnico = this.holderService.user.matricula;
-            this.atendimentoDigital.telefoneTecnico = this.holderService.user.phone;
-            this.atendimentoDigital.emailTecnico = this.holderService.user.email;
+            // let count: number = 0;
+            // let qntErro: number = 0;
+            // this.loading(true, "Enviando atendimento");
+            // this.atendimentoDigital.nomeTecnico = this.holderService.user.name;
+            // this.atendimentoDigital.matriculaTecnico = this.holderService.user.matricula;
+            // this.atendimentoDigital.telefoneTecnico = this.holderService.user.phone;
+            // this.atendimentoDigital.emailTecnico = this.holderService.user.email;
 
-            this.atendimentoDigital.fkId = this.holderService.certification.fkId;
-            this.atendimentoDigital.instancia = this.holderService.certification.customer.instancia;
+            // this.atendimentoDigital.fkId = this.holderService.certification.fkId;
+            // this.atendimentoDigital.instancia = this.holderService.certification.customer.instancia;
 
-            this.atendimentoDigitalService
-                .setAtendimento(this.atendimentoDigital)
-                .then(resposta => {
-                    if (resposta) {
-                        let rqSi = setInterval(() => {
-                            if (count < this.holderService.rcount) {
-                                count++;
-                                this.atendimentoDigitalService
-                                    .gettask(resposta.id)
-                                    .then(response_1 => {
-                                        if (response_1.state === "EXECUTED") {
-                                            super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
-                                            this.navCtrl.pop();
-                                            this.loading(false);
-                                            clearInterval(rqSi);
-                                        }
-                                    }, error => {
-                                        qntErro++;
-                                        if (qntErro > 3) {
-                                            this.loading(false);
-                                            super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
-                                            clearInterval(rqSi);
-                                        }
-                                    });
-                            } else {
-                                this.tempobuscaexcedido();
-                                clearInterval(rqSi);
-                            }
-                        }, this.holderService.rtimeout);
-                    }
-                }, error => {
-                    this.loading(false);
-                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
-                });
-
+            // this.atendimentoDigitalService
+            //     .setAtendimento(this.atendimentoDigital)
+            //     .then(resposta => {
+            //         if (resposta) {
+            //             let rqSi = setInterval(() => {
+            //                 if (count < this.holderService.rcount) {
+            //                     count++;
+            //                     this.atendimentoDigitalService
+            //                         .gettask(resposta.id)
+            //                         .then(response_1 => {
+            //                             if (response_1.state === "EXECUTED") {
+            //                                 super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
+            //                                 this.navCtrl.pop();
+            //                                 this.loading(false);
+            //                                 clearInterval(rqSi);
+            //                             }
+            //                         }, error => {
+            //                             qntErro++;
+            //                             if (qntErro > 3) {
+            //                                 this.loading(false);
+            //                                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+            //                                 clearInterval(rqSi);
+            //                             }
+            //                         });
+            //                 } else {
+            //                     this.tempobuscaexcedido();
+            //                     clearInterval(rqSi);
+            //                 }
+            //             }, this.holderService.rtimeout);
+            //         }
+            //     }, error => {
+            //         this.loading(false);
+            //         super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+            //     });
         }
-
-
     }
 
     private tempobuscaexcedido() {
@@ -128,6 +125,7 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
     }
 
     public validForm(): boolean {
+        debugger
         let valid: boolean = true;
         if (this.atendimentoDigital.motivo) {
 

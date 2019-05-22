@@ -35,12 +35,16 @@
                     </ion-icon>
                 </td>
                 <td>
-                    <button ion-button block round (click)="openAtendimentoDigital()">Atendimento Digital</button>
+                    <!-- <button ion-button block round (click)="openAtendimentoDigital()"
+                        *ngIf="certification.resultado === 'OK' || certification.resultado === 'FORWARDED_CO'">Atendimento
+                        Digital</button> -->
+                    <button ion-button block round (click)="openAtendimentoDigital()">Atendimento
+                        Digital</button>
                 </td>
-                <td *ngIf="haveMessageForPopUp">
+                <!-- <td *ngIf="haveMessageForPopUp">
                     <button ion-button block (click)="openPopUpToValid()" style="background-color: orange;"
                         round>Executar Ações</button>
-                </td>
+                </td> -->
             </tr>
         </tbody>
     </table>
