@@ -22,7 +22,6 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
 
 
     constructor(
-        // private atendimentoDigitalService: AtendimentoDigitalService,
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
@@ -110,7 +109,7 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
             && !this.atendimentoDigitalTabelaValidacao.isLinhaMetalico) {
             this.isValidAttrs = true;
         }
-        this.isValidAttrs = true;
+        // this.isValidAttrs = true;
     }
 
     public validacaoAPTV() {
@@ -131,7 +130,7 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
             && !this.atendimentoDigitalTabelaValidacao.isTvDTH) {
             this.isValidAttrs = true;
         }
-        this.isValidAttrs = true;
+        // this.isValidAttrs = true;
     }
 
 }
