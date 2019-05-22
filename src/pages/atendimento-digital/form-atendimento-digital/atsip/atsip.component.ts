@@ -125,25 +125,27 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
     }
 
     public validForm(): boolean {
-        debugger
         let valid: boolean = true;
         if (this.atendimentoDigital.motivo) {
-
             if (this.atendimentoDigital.macHG) {
                 if (this.atendimentoDigital.macHG.length > 17) {
                     this.atendimentoDigital.macHG = this.atendimentoDigital.macHG.substring(0, (this.atendimentoDigital.macHG.length - 1));
                 }
-
-                if (this.atendimentoDigital.macHG.length != 17) {
-                    valid = false;
+                if (this.atendimentoDigital.macHG) {
+                    let macFormat = this.atendimentoDigital.macHG.replace(/:/g, "");
+                    macFormat = macFormat.match(/.{1,2}/g).join(':');
+                    this.atendimentoDigital.macHG = macFormat;
+                    if (!this.testMAC(this.atendimentoDigital.macHG)) {
+                        super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
+                        valid = false;
+                    }
+                } else {
                     super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
                 }
-
             } else {
                 super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
                 valid = false;
             }
-
             if (this.atendimentoDigital.chkATA && this.atendimentoDigital.pontos.length < 1) {
                 super.showAlert("Pontos ATA", "Por favor insira pelo menos um ATA.");
                 valid = false;
@@ -154,6 +156,11 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
             valid = false;
         }
         return valid;
+    }
+
+    public testMAC(mac: string) {
+        let regex = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
+        return regex.test(mac);
     }
 
 }

@@ -8,7 +8,7 @@
 
     <ion-item>
         <ion-label>Mac HG</ion-label>
-        <ion-input [(ngModel)]="atendimentoDigital.macHG" [macMask] pattern=^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$>
+        <ion-input [(ngModel)]="atendimentoDigital.macHG" [macMask]>
         </ion-input>
     </ion-item>
 
@@ -26,7 +26,7 @@
 
         <ion-item>
             <ion-label>Mac</ion-label>
-            <ion-input [(ngModel)]="pontoMac" [macMask]></ion-input>
+            <ion-input [(ngModel)]="pontoMac" macMask></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Serial</ion-label>

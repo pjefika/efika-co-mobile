@@ -70,6 +70,7 @@ import { DescAtendimentoDigitalComponent } from '../pages/atendimento-digital/li
 import { AptvComponent } from '../pages/atendimento-digital/form-atendimento-digital/aptv/aptv.component';
 import { AtsipComponent } from '../pages/atendimento-digital/form-atendimento-digital/atsip/atsip.component';
 import { NotValidAttrsComponent } from '../pages/atendimento-digital/form-atendimento-digital/notvalidattrs/notvalidattrs.component';
+import { MacMaskPipe } from '../providers/pipe/mac-mask.pipe';
 
 @NgModule({
 	declarations: [
@@ -129,7 +130,8 @@ import { NotValidAttrsComponent } from '../pages/atendimento-digital/form-atendi
 		DescAtendimentoDigitalComponent,
 		AptvComponent,
 		AtsipComponent,
-		NotValidAttrsComponent
+		NotValidAttrsComponent,
+		MacMaskPipe
 	],
 	imports: [
 		BrowserModule,

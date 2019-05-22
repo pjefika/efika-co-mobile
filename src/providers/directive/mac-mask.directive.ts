@@ -19,6 +19,7 @@ export class MAcMaskDirective {
         }
         newVal = str.slice(0, 17);
         this.ngControl.valueAccessor.writeValue(newVal);
+
     }
 
 }
