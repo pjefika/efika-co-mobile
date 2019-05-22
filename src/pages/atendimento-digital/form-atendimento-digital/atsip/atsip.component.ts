@@ -68,54 +68,52 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
     }
 
     public setAtendimento() {
-
         if (this.validForm()) {
+            let count: number = 0;
+            let qntErro: number = 0;
+            this.loading(true, "Enviando atendimento");
+            this.atendimentoDigital.nomeTecnico = this.holderService.user.name;
+            this.atendimentoDigital.matriculaTecnico = this.holderService.user.matricula;
+            this.atendimentoDigital.telefoneTecnico = this.holderService.user.phone;
+            this.atendimentoDigital.emailTecnico = this.holderService.user.email;
 
-            // let count: number = 0;
-            // let qntErro: number = 0;
-            // this.loading(true, "Enviando atendimento");
-            // this.atendimentoDigital.nomeTecnico = this.holderService.user.name;
-            // this.atendimentoDigital.matriculaTecnico = this.holderService.user.matricula;
-            // this.atendimentoDigital.telefoneTecnico = this.holderService.user.phone;
-            // this.atendimentoDigital.emailTecnico = this.holderService.user.email;
+            this.atendimentoDigital.fkId = this.holderService.certification.fkId;
+            this.atendimentoDigital.instancia = this.holderService.certification.customer.instancia;
 
-            // this.atendimentoDigital.fkId = this.holderService.certification.fkId;
-            // this.atendimentoDigital.instancia = this.holderService.certification.customer.instancia;
-
-            // this.atendimentoDigitalService
-            //     .setAtendimento(this.atendimentoDigital)
-            //     .then(resposta => {
-            //         if (resposta) {
-            //             let rqSi = setInterval(() => {
-            //                 if (count < this.holderService.rcount) {
-            //                     count++;
-            //                     this.atendimentoDigitalService
-            //                         .gettask(resposta.id)
-            //                         .then(response_1 => {
-            //                             if (response_1.state === "EXECUTED") {
-            //                                 super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
-            //                                 this.navCtrl.pop();
-            //                                 this.loading(false);
-            //                                 clearInterval(rqSi);
-            //                             }
-            //                         }, error => {
-            //                             qntErro++;
-            //                             if (qntErro > 3) {
-            //                                 this.loading(false);
-            //                                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
-            //                                 clearInterval(rqSi);
-            //                             }
-            //                         });
-            //                 } else {
-            //                     this.tempobuscaexcedido();
-            //                     clearInterval(rqSi);
-            //                 }
-            //             }, this.holderService.rtimeout);
-            //         }
-            //     }, error => {
-            //         this.loading(false);
-            //         super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
-            //     });
+            this.atendimentoDigitalService
+                .setAtendimento(this.atendimentoDigital)
+                .then(resposta => {
+                    if (resposta) {
+                        let rqSi = setInterval(() => {
+                            if (count < this.holderService.rcount) {
+                                count++;
+                                this.atendimentoDigitalService
+                                    .gettask(resposta.id)
+                                    .then(response_1 => {
+                                        if (response_1.state === "EXECUTED") {
+                                            super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
+                                            this.navCtrl.pop();
+                                            this.loading(false);
+                                            clearInterval(rqSi);
+                                        }
+                                    }, error => {
+                                        qntErro++;
+                                        if (qntErro > 3) {
+                                            this.loading(false);
+                                            super.showAlert(error.tError, super.makeexceptionmessage(error.mError, this.holderService.instancia));
+                                            clearInterval(rqSi);
+                                        }
+                                    });
+                            } else {
+                                this.tempobuscaexcedido();
+                                clearInterval(rqSi);
+                            }
+                        }, this.holderService.rtimeout);
+                    }
+                }, error => {
+                    this.loading(false);
+                    super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                });
         }
     }
 
@@ -132,8 +130,8 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
                     this.atendimentoDigital.macHG = this.atendimentoDigital.macHG.substring(0, (this.atendimentoDigital.macHG.length - 1));
                 }
                 if (this.atendimentoDigital.macHG) {
-                    let macFormat = this.atendimentoDigital.macHG.replace(/:/g, "");
-                    macFormat = macFormat.match(/.{1,2}/g).join(':');
+                    let macFormat = this.atendimentoDigital.macHG.replace(/:/g, "").match(/.{1,2}/g).join(':');
+                    // macFormat = macFormat.match(/.{1,2}/g).join(':');
                     this.atendimentoDigital.macHG = macFormat;
                     if (!this.testMAC(this.atendimentoDigital.macHG)) {
                         super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
