@@ -179,10 +179,10 @@ export class AptvComponent extends SuperComponentService implements OnInit {
                 super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
                 valid = false;
             }
-            if (this.atendimentoDigital.chkATA && this.atendimentoDigital.pontos.length < 1) {
-                super.showAlert("Pontos ATA", "Por favor insira pelo menos um ATA.");
-                valid = false;
-            }
+            // if (!this.atendimentoDigital.tipoTV && this.atendimentoDigital.pontos.length < 1) {
+            //     super.showAlert("Pontos ATA", "Por favor insira pelo menos um ATA.");
+            //     valid = false;
+            // }
 
         } else {
             super.showAlert("Motivo", "Por favor selecione um motivo");
