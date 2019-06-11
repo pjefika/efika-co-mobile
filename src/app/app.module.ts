@@ -71,6 +71,8 @@ import { AptvComponent } from '../pages/atendimento-digital/form-atendimento-dig
 import { AtsipComponent } from '../pages/atendimento-digital/form-atendimento-digital/atsip/atsip.component';
 import { NotValidAttrsComponent } from '../pages/atendimento-digital/form-atendimento-digital/notvalidattrs/notvalidattrs.component';
 import { MacMaskPipe } from '../providers/pipe/mac-mask.pipe';
+import { AprovisionamentoComponent } from '../pages/aprovisionamento/aprovisionamento.component';
+import { AprovisionamentoService } from '../pages/aprovisionamento/aprovisionamento.service';
 
 @NgModule({
 	declarations: [
@@ -131,7 +133,8 @@ import { MacMaskPipe } from '../providers/pipe/mac-mask.pipe';
 		AptvComponent,
 		AtsipComponent,
 		NotValidAttrsComponent,
-		MacMaskPipe
+		MacMaskPipe,
+		AprovisionamentoComponent
 	],
 	imports: [
 		BrowserModule,
@@ -193,7 +196,8 @@ import { MacMaskPipe } from '../providers/pipe/mac-mask.pipe';
 		BhsComponent,
 		FormAtendimentoDigitalComponent,
 		ListAtendimentoDigitalComponent,
-		DescAtendimentoDigitalComponent
+		DescAtendimentoDigitalComponent,
+		AprovisionamentoComponent
 	],
 	providers: [
 		StatusBar,
@@ -206,7 +210,8 @@ import { MacMaskPipe } from '../providers/pipe/mac-mask.pipe';
 		LoginUtilService,
 		ClipBoardService,
 		NotificationService,
-		WebsocketService
+		WebsocketService,
+		AprovisionamentoService
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

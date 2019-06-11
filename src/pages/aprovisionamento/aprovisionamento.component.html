@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Aprovisionamento_ </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+
+    <ion-item *ngIf="!jafoiss">
+        <ion-label>SS</ion-label>
+        <ion-input [(ngModel)]="ss" (keyup.enter)="getSlots()">
+        </ion-input>
+        <button color="secondary" ion-button block round (click)="getSlots()">Consultar Slots</button>
+        
+    </ion-item>
+    <counter-component [timer]="timer"></counter-component>
+    <div *ngIf="!leDevice">
+        <ion-card *ngFor="let device of devices">
+            <ion-card-header>
+                {{device.tipo}}
+            </ion-card-header>
+            <ion-card-content (click)="chooseDevice(device)">
+                <ion-row>
+                    <ion-col>Modelo/Fabricante</ion-col>
+                    <ion-col>{{device.modelo}}/{{device.fabricante}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>Serial</ion-col>
+                    <ion-col>{{device.serial}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>MAC</ion-col>
+                    <ion-col>{{device.mac}}</ion-col>
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+    </div>
+    <div *ngIf="leDevice">
+        <ion-item>
+            <ion-label>Serial</ion-label>
+            <ion-input [(ngModel)]="leDevice.serial"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>MAC</ion-label>
+            <ion-input [(ngModel)]="leDevice.mac" [macMask]></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Fabricante</ion-label>
+            <ion-input [(ngModel)]="leDevice.fabricante"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Modelo</ion-label>
+            <ion-input [(ngModel)]="leDevice.modelo"></ion-input>
+        </ion-item>
+        <button color="secondary" ion-button block round (click)="aprovisionamento()">Aprovisionar</button>
+    </div>
+
+</ion-content>

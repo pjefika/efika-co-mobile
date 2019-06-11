@@ -6,6 +6,7 @@ import { NavController, AlertController, LoadingController } from 'ionic-angular
 import { FulltestService } from '../../fulltest.service';
 import { SuperComponentService } from '../../../../providers/component-service/super-component.service';
 import { FormAtendimentoDigitalComponent } from '../../../atendimento-digital/form-atendimento-digital/form-atendimento-digital.component';
+import { AprovisionamentoComponent } from '../../../aprovisionamento/aprovisionamento.component';
 
 @Component({
     selector: 'info-gerais-fulltest-component',
@@ -92,6 +93,10 @@ export class InfoGeraisFulltestComponent extends SuperComponentService implement
 
     public openAtendimentoDigital() {
         this.navCtrl.push(FormAtendimentoDigitalComponent);
+    }
+
+    public openAprovisionamento() {
+        this.navCtrl.push(AprovisionamentoComponent);
     }
 
 }

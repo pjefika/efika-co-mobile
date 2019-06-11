@@ -34,12 +34,15 @@
                     <ion-icon name="ios-alert" *ngIf="certification.resultado === 'FIXED'" style="color: orange">
                     </ion-icon>
                 </td>
-                <td>
-                    <button ion-button block round (click)="openAtendimentoDigital()"
+
+                <!--  <button ion-button block round (click)="openAtendimentoDigital()"
                         *ngIf="certification.resultado === 'OK' || certification.resultado === 'FORWARDED_CO'">Atendimento
                         Digital</button>
-                    <!-- <button ion-button block round (click)="openAtendimentoDigital()">Atendimento
+                    <button ion-button block round (click)="openAtendimentoDigital()">Atendimento
                         Digital</button> -->
+                <td>
+                    <!-- <td *ngIf="certification.orientacao === 'Nem todos os equipamentos de TV estão aprovisionados.' && holderService.cadastro.servicos.tipoTv==='HIBRIDA'"> -->
+                    <button ion-button block round (click)="openAprovisionamento()">Aprovisionamento</button>
                 </td>
                 <!-- <td *ngIf="haveMessageForPopUp">
                     <button ion-button block (click)="openPopUpToValid()" style="background-color: orange;"

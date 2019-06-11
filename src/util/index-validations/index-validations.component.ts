@@ -33,7 +33,7 @@ export class IndexValidationsComponent extends SuperComponentService implements 
         this.version = super.getVersion();
         // this.getIpEthernet();
         this.ipsprivateandpublicisequeal();
-        this.getInfosSystem();
+        // this.getInfosSystem();
         this.notificationService.allowNotify();
     }
 

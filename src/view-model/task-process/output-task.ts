@@ -5,6 +5,7 @@ import { Ont } from "./ont";
 import { Serial } from "./serial";
 import { RespostaGenerica } from "../resposta/resposta-generica";
 import { AtendimentoDigitalOutput, AtendimentoDigitalOututDetail } from "../atendimento-digital/atendimento-digital-output";
+import { Device } from "../aprovisionamento/device";
 
 export class Output {
     type: string;
@@ -36,6 +37,10 @@ export class Output {
     vlans?: Valids[];
 
     tickets?: AtendimentoDigitalOutput[];
+
+    //Aprovisionamento
+    devices?: Device[];
+
     atendimento: AtendimentoDigitalOututDetail;
 
 }
