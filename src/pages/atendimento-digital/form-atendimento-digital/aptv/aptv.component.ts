@@ -16,12 +16,16 @@ export class AptvComponent extends SuperComponentService implements OnInit {
     @Input()
     public motivo: string;
 
-    public atendimentoDigital: AtendimentoDigital;
+    public atendimento: AtendimentoDigital;
 
-    public pontoMac: string;
-    public pontoSerial: string;
-    public ca_id: string;
-    public smartcard: string;
+
+    public addMacPonto: string;
+    public addSerialPonto: string;
+
+    public addCaIDPonto: string;
+    public addSmartCardPonto: string;
+
+    public tipoEquipamento: string;
 
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -32,52 +36,144 @@ export class AptvComponent extends SuperComponentService implements OnInit {
     }
 
     public ngOnInit() {
-        this.atendimentoDigital = new AtendimentoDigital();
-        this.atendimentoDigital.motivo = this.motivo;
-        this.findTipoTV();
-        console.log(this.holderService.cadastro.rede.planta);
+        this.atendimento = new AtendimentoDigital();
+        this.atendimento.motivo = this.motivo;
 
     }
 
-    public addPonto() {
-        if (this.pontoMac && this.pontoSerial) {
-            let addPontos: AddPontos;
-            addPontos = {
-                mac: this.pontoMac,
-                serial: this.pontoSerial,
-                smartCard: this.smartcard,
-                caId: this.ca_id
+    public validContinueFormATDG() {
+        let valid: boolean = false;
+        // Validações IPTV
+        if (this.atendimento.tecnologiaTV === 'IPTV') {
+            if (this.atendimento.tipoTV && this.tipoEquipamento) {
+                valid = true;
             }
-            this.atendimentoDigital.pontos.push(addPontos);
-            this.pontoMac = null;
-            this.pontoSerial = null;
-            this.smartcard = null;
-            this.ca_id = null;
         } else {
-            super.showAlert("Preencher todos os campos", "Por favor preencha todos os campos Serial e Mac.");
+            if (this.tipoEquipamento) {
+                valid = true;
+            }
+        }
+        return valid;
+    }
+
+    public addPontos() {
+        if (this.validAddPonto()) {
+            if (this.validMAC()) {
+                let addPontos: AddPontos = new AddPontos();
+                addPontos = {
+                    mac: this.addMacPonto,
+                    serial: this.addSerialPonto,
+                    smartCard: this.addSmartCardPonto,
+                    caId: this.addCaIDPonto,
+                    tipoEquipamento: this.tipoEquipamento
+                }
+                this.atendimento.pontos.push(addPontos);
+                this.addMacPonto = null;
+                this.addSerialPonto = null;
+                this.addSmartCardPonto = null;
+                this.addCaIDPonto = null;
+                // this.tipoEquipamento = null;
+            } else {
+                super.showAlert("Campo MAC", "Por favor digite um MAC valido para o ponto.");
+            }
+        } else {
+            super.showAlert("Preencher todos os campos", "Por favor preencha todos os campos do formulário.");
         }
     }
 
     public removePonto(addPontos: AddPontos) {
-        let index: number = this.atendimentoDigital.pontos.findIndex(x => x.serial === addPontos.serial);
-        this.atendimentoDigital.pontos.splice(index, 1);
+        let index: number = this.atendimento.pontos.findIndex(x => x.serial === addPontos.serial);
+        this.atendimento.pontos.splice(index, 1);
     }
 
-    public setAtendimento() {
-        if (this.validForm()) {
-            let count: number = 0;
-            let qntErro: number = 0;
-            this.loading(true, "Enviando atendimento");
-            this.atendimentoDigital.nomeTecnico = this.holderService.user.name;
-            this.atendimentoDigital.matriculaTecnico = this.holderService.user.matricula;
-            this.atendimentoDigital.telefoneTecnico = this.holderService.user.phone;
-            this.atendimentoDigital.emailTecnico = this.holderService.user.email;
+    public validAddPonto() {
+        let valid: boolean = false;
+        if (this.addMacPonto && this.addSerialPonto) {
+            if (this.atendimento.tecnologiaTV === 'IPTV'
+                && this.atendimento.tipoTV === 'OPEN_PLATAFORM'
+                && (this.tipoEquipamento === 'STB'
+                    || this.tipoEquipamento === 'DVR')) {
+                if (this.addSmartCardPonto) {
+                    valid = true;
+                }
+            } else if (this.atendimento.tecnologiaTV === 'DTH'
+                && (this.tipoEquipamento === 'DECODER'
+                    || this.tipoEquipamento === 'DVR')) {
+                if (this.addSmartCardPonto) {
+                    valid = true;
+                }
+            } else {
+                valid = true;
+            }
+        }
+        return valid;
+    }
 
-            this.atendimentoDigital.fkId = this.holderService.certification.fkId;
-            this.atendimentoDigital.instancia = this.holderService.certification.customer.instancia;
+    public validMAC() {
+        let valid: boolean = false;
+        if (this.addMacPonto.length > 17) {
+            this.addMacPonto = this.addMacPonto.substring(0, (this.addMacPonto.length - 1));
+        }
+        let macFormat = this.addMacPonto.replace(/:/g, "").match(/.{1,2}/g).join(':');
+        this.addMacPonto = macFormat;
+        if (this.testMAC(this.addMacPonto)) {
+            valid = true;
+        }
+        return valid;
+    }
+
+    public validSeEnviaForm() {
+        let valid: boolean = false;
+        if (this.atendimento.serial && this.atendimento.mac && this.atendimento.pontos.length > 0) {
+            valid = true;
+        }
+        return valid;
+    }
+
+    public testMAC(mac: string) {
+        let regex = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
+        return regex.test(mac);
+    }
+
+    public changeTecnologiaTV() {
+        this.atendimento.tipoTV = null;
+        this.tipoEquipamento = null;
+        this.clearPontos();
+    }
+
+    public changeTipoTV() {
+        this.tipoEquipamento = null;
+        this.clearPontos();
+    }
+
+    public changeEquipamento() {
+        this.clearPontos();
+    }
+
+    public clearPontos() { }
+
+    public setAtendimento() {
+        let count: number = 0;
+        let qntErro: number = 0;
+        this.loading(true, "Enviando atendimento");
+
+        if (this.atendimento.mac.length > 17) {
+            this.atendimento.mac = this.atendimento.mac.substring(0, (this.atendimento.mac.length - 1));
+        }
+        let macFormat = this.atendimento.mac.replace(/:/g, "").match(/.{1,2}/g).join(':');
+        this.atendimento.mac = macFormat;
+        if (this.testMAC(this.atendimento.mac)) {
+
+            this.atendimento.nomeTecnico = this.holderService.user.name;
+            this.atendimento.matriculaTecnico = this.holderService.user.matricula;
+            this.atendimento.telefoneTecnico = this.holderService.user.phone;
+            this.atendimento.emailTecnico = this.holderService.user.email;
+
+            this.atendimento.fkId = this.holderService.certification.fkId;
+            this.atendimento.instancia = this.holderService.certification.customer.instancia;
 
             this.atendimentoDigitalService
-                .setAtendimento(this.atendimentoDigital)
+                .setAtendimento(this.atendimento)
                 .then(resposta => {
                     if (resposta) {
                         let rqSi = setInterval(() => {
@@ -85,8 +181,8 @@ export class AptvComponent extends SuperComponentService implements OnInit {
                                 count++;
                                 this.atendimentoDigitalService
                                     .gettask(resposta.id)
-                                    .then(response_1 => {
-                                        if (response_1.state === "EXECUTED") {
+                                    .then(_resposta => {
+                                        if (_resposta.state === "EXECUTED") {
                                             super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
                                             this.navCtrl.pop();
                                             this.loading(false);
@@ -102,7 +198,7 @@ export class AptvComponent extends SuperComponentService implements OnInit {
                                     });
                             } else {
                                 this.tempobuscaexcedido();
-                                clearInterval(rqSi);
+                                clearInterval(rqSi)
                             }
                         }, this.holderService.rtimeout);
                     }
@@ -110,90 +206,18 @@ export class AptvComponent extends SuperComponentService implements OnInit {
                     this.loading(false);
                     super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
                 });
+
+        } else {
+            this.loading(false);
+            super.showAlert("Campo MAC", "Por favor digite um MAC valido para o modem.");
         }
+
+
     }
 
     private tempobuscaexcedido() {
         this.loading(false);
         super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
-    }
-
-    public findTipoTV() {
-        if (this.holderService.cadastro.servicos.tipoTv) {
-            if (this.holderService.cadastro.servicos.tipoTv.includes("DTH")) {
-                this.atendimentoDigital.modeloTV === "TVDTH"
-            } else if (this.holderService.cadastro.servicos.tipoTv.includes("HIBRIDO")) {
-                this.atendimentoDigital.modeloTV === "TVHIBRIDA"
-            } else if (this.holderService.cadastro.servicos.tipoTv.includes("IPV")) {
-                this.atendimentoDigital.modeloTV === "IPTV"
-            }
-        }
-    }
-
-    public changeTipoTV() {
-        // if (this.atendimentoDigital.tipoTV === "DVR") {
-        this.atendimentoDigital.modeloTV = null;
-        this.atendimentoDigital.detailIPTV = null;
-        this.ca_id = null;
-        this.smartcard = null;
-        // }
-    }
-
-    public changeModeloTV() {
-        this.atendimentoDigital.detailIPTV = null;
-        this.ca_id = null;
-        this.smartcard = null;
-        if (this.holderService.cadastro.rede.planta === "VIVO2") {
-            this.atendimentoDigital.detailIPTV = "OPEN_PLATAFORM";
-        }
-    }
-
-    public validSendButton(): boolean {
-        // debugger
-        let valid: boolean = false;
-        if (!this.atendimentoDigital.tipoTV || this.atendimentoDigital.pontos.length <= 0) {
-            valid = true;
-        }
-        return valid;
-    }
-
-    public validForm(): boolean {
-        let valid: boolean = true;
-        if (this.atendimentoDigital.motivo) {
-            if (this.atendimentoDigital.macHG) {
-                if (this.atendimentoDigital.macHG.length > 17) {
-                    this.atendimentoDigital.macHG = this.atendimentoDigital.macHG.substring(0, (this.atendimentoDigital.macHG.length - 1));
-                }
-                if (this.atendimentoDigital.macHG) {
-                    let macFormat = this.atendimentoDigital.macHG.replace(/:/g, "").match(/.{1,2}/g).join(':');
-                    // macFormat = macFormat.match(/.{1,2}/g).join(':');
-                    this.atendimentoDigital.macHG = macFormat;
-                    if (!this.testMAC(this.atendimentoDigital.macHG)) {
-                        super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
-                        valid = false;
-                    }
-                } else {
-                    super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
-                }
-            } else {
-                super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
-                valid = false;
-            }
-            // if (!this.atendimentoDigital.tipoTV && this.atendimentoDigital.pontos.length < 1) {
-            //     super.showAlert("Pontos ATA", "Por favor insira pelo menos um ATA.");
-            //     valid = false;
-            // }
-
-        } else {
-            super.showAlert("Motivo", "Por favor selecione um motivo");
-            valid = false;
-        }
-        return valid;
-    }
-
-    public testMAC(mac: string) {
-        let regex = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
-        return regex.test(mac);
     }
 
 }

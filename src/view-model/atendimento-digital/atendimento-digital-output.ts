@@ -12,6 +12,11 @@ export class AtendimentoDigitalOutput {
     dataAtualizacao: Date;
 }
 
+export class AtendimentoHold {
+    atendimento: AtendimentoDigitalOututDetail;
+    historico: AtendimentoDigitalOututDetail[];
+}
+
 export class AtendimentoDigitalOututDetail {
     id: number;
     atendimento: string;

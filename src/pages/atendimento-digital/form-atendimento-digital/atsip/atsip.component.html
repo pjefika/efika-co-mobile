@@ -2,13 +2,13 @@
     <!-- Infos de Modem Pede para todos -->
     <ion-item>
         <ion-label>Serial HG</ion-label>
-        <ion-input [(ngModel)]="atendimentoDigital.serialHG" max='20'>
+        <ion-input [(ngModel)]="atendimentoDigital.serial" max='25'>
         </ion-input>
     </ion-item>
 
     <ion-item>
         <ion-label>Mac HG</ion-label>
-        <ion-input [(ngModel)]="atendimentoDigital.macHG" [macMask]>
+        <ion-input [(ngModel)]="atendimentoDigital.mac" [macMask]>
         </ion-input>
     </ion-item>
 
@@ -30,21 +30,9 @@
         </ion-item>
         <ion-item>
             <ion-label>Serial</ion-label>
-            <ion-input [(ngModel)]="pontoSerial" maxlength="20"></ion-input>
+            <ion-input [(ngModel)]="pontoSerial" maxlength="25"></ion-input>
         </ion-item>
-
-        <ion-item>
-            <ion-label>Modelo ATA Portas</ion-label>
-            <ion-select [(ngModel)]="modeloAta">
-                <ion-option value=2>2</ion-option>
-                <ion-option value=4>4</ion-option>
-                <ion-option value=6>6</ion-option>
-                <ion-option value=8>8</ion-option>
-                <ion-option value=10>10</ion-option>
-                <ion-option value=12>12</ion-option>
-            </ion-select>
-        </ion-item>
-
+        
         <button color="secondary" ion-button block round (click)="addPonto()">Adicionar
             Ponto</button>
 

@@ -98,11 +98,16 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                                 .gettask(resposta.id)
                                 .then(resposta_1 => {
                                     if (resposta_1.state === "EXECUTED") {
-                                        if (resposta_1.output.atendimento.situacao === "EM_ATENDIMENTO") {
+                                        if (resposta_1.output.atendimento.atendimento.situacao === "EM_ATENDIMENTO") {
+                                            clearInterval(this.rqSi);
                                             super.showAlert("Ticket em atendimento", "Ticket está em atendimento por favor aguarde.");
+                                            this.loading(false);
                                         } else {
-                                            if (resposta_1.output && resposta_1.output.atendimento && resposta_1.output.atendimento.id != null) {
-                                                this.navCtrl.push(DescAtendimentoDigitalComponent, { desc: resposta_1.output.atendimento });
+                                            if (resposta_1.output
+                                                && resposta_1.output.atendimento
+                                                && resposta_1.output.atendimento.atendimento
+                                                && resposta_1.output.atendimento.atendimento.id != null) {
+                                                this.navCtrl.push(DescAtendimentoDigitalComponent, { desc: resposta_1.output.atendimento.atendimento });
                                                 clearInterval(this.rqSi);
                                                 this.loading(false);
                                             } else {
@@ -110,7 +115,7 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                                                 this.loading(false);
                                                 super.showAlert("Atendimento não tratado", "Atendimento ainda não foi tratado, por favor aguarde.");
                                             }
-                                        }                                        
+                                        }
                                     }
                                 }, error => {
                                     qntErro++;

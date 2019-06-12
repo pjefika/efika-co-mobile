@@ -5,22 +5,28 @@ export class AtendimentoDigital {
     ss: string;
     motivo: string;
 
+    tipo: string;
+    tipoEquipamento: string;
+    situacao: string;
+    descricao: string;
+    queueTaskId: string;
+    mac: string;
+    serial: string;
+
+    chkATA: boolean;
+
+    detailIPTV: string;
+
+    tecnologiaTV: string;
+
+    tipoTV: string;
+
+
+    // tecnico
     nomeTecnico: string;
     matriculaTecnico: string;
     telefoneTecnico: string;
     emailTecnico: string;
-
-    //Global para 1 & 2
-    macHG: string;
-    serialHG: string;
-
-    // Ativação VOIP - 1
-    chkATA?: boolean;
-
-    // Ativação TV - 2
-    tipoTV?: string;
-    modeloTV?: string;
-    detailIPTV?: string;
 
     pontos: AddPontos[] = [];
 
@@ -30,7 +36,8 @@ export class AddPontos {
 
     mac: string;
     serial: string;
-    modeloAta?: number;
+
+    tipoEquipamento: string;
 
     caId?: string;
     smartCard?: string;

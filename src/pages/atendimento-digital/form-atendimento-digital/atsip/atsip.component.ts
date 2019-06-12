@@ -20,7 +20,6 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
 
     public pontoMac: string;
     public pontoSerial: string;
-    public modeloAta: number;
 
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
@@ -36,29 +35,22 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
     }
 
     public addPonto() {
-        if (this.pontoMac && this.pontoSerial) {
-
-            if (this.pontoMac.length > 17) {
-                this.pontoMac = this.pontoMac.substring(0, (this.pontoMac.length - 1));
-            }
-
-            if (this.pontoMac.length === 17 && this.pontoSerial && this.modeloAta) {
+        if (this.validAddPonto()) {
+            if (this.validMAC()) {
                 let addPontos: AddPontos;
                 addPontos = {
                     mac: this.pontoMac,
                     serial: this.pontoSerial,
-                    modeloAta: this.modeloAta
+                    tipoEquipamento: ""
                 }
                 this.atendimentoDigital.pontos.push(addPontos);
                 this.pontoMac = null;
                 this.pontoSerial = null;
-                this.modeloAta = null;
             } else {
-                super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
+                super.showAlert("Campo MAC", "Por favor digite um MAC valido para o ponto.");
             }
-
         } else {
-            super.showAlert("Preencher todos os campos", "Por favor preencha todos os campos Serial e Mac Modelo Ata.");
+            super.showAlert("Preencher todos os campos", "Por favor preencha todos os campos Serial e Mac.");
         }
     }
 
@@ -114,6 +106,8 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
                     this.loading(false);
                     super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
                 });
+        } else {
+            super.showAlert("Preencher todos os campos", "Por favor preencha todos os campos do formulário.");
         }
     }
 
@@ -123,42 +117,54 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
     }
 
     public validForm(): boolean {
-        let valid: boolean = true;
-        if (this.atendimentoDigital.motivo) {
-            if (this.atendimentoDigital.macHG) {
-                if (this.atendimentoDigital.macHG.length > 17) {
-                    this.atendimentoDigital.macHG = this.atendimentoDigital.macHG.substring(0, (this.atendimentoDigital.macHG.length - 1));
-                }
-                if (this.atendimentoDigital.macHG) {
-                    let macFormat = this.atendimentoDigital.macHG.replace(/:/g, "").match(/.{1,2}/g).join(':');
-                    // macFormat = macFormat.match(/.{1,2}/g).join(':');
-                    this.atendimentoDigital.macHG = macFormat;
-                    if (!this.testMAC(this.atendimentoDigital.macHG)) {
-                        super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
-                        valid = false;
+        let valid: boolean = false;
+        if (this.atendimentoDigital.mac) {
+
+            if (this.atendimentoDigital.mac.length > 17) {
+                this.atendimentoDigital.mac = this.atendimentoDigital.mac.substring(0, (this.atendimentoDigital.mac.length - 1));
+            }
+            let macFormat = this.atendimentoDigital.mac.replace(/:/g, "").match(/.{1,2}/g).join(':');
+            this.atendimentoDigital.mac = macFormat;
+
+            if (this.testMAC(this.atendimentoDigital.mac) && this.atendimentoDigital.serial) {
+                if (this.atendimentoDigital.chkATA) {
+                    if (this.atendimentoDigital.pontos.length > 0) {
+                        valid = true;
                     }
                 } else {
-                    super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
+                    valid = true;
                 }
-            } else {
-                super.showAlert("Campo MAC", "Por favor digite um MAC valido.");
-                valid = false;
-            }
-            if (this.atendimentoDigital.chkATA && this.atendimentoDigital.pontos.length < 1) {
-                super.showAlert("Pontos ATA", "Por favor insira pelo menos um ATA.");
-                valid = false;
             }
 
-        } else {
-            super.showAlert("Motivo", "Por favor selecione um motivo");
-            valid = false;
         }
+
         return valid;
     }
 
     public testMAC(mac: string) {
         let regex = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
         return regex.test(mac);
+    }
+
+    public validAddPonto() {
+        let valid: boolean = false;
+        if (this.pontoMac && this.pontoSerial) {
+            valid = true;
+        }
+        return valid;
+    }
+
+    public validMAC() {
+        let valid: boolean = false;
+        if (this.pontoMac.length > 17) {
+            this.pontoMac = this.pontoMac.substring(0, (this.pontoMac.length - 1));
+        }
+        let macFormat = this.pontoMac.replace(/:/g, "").match(/.{1,2}/g).join(':');
+        this.pontoMac = macFormat;
+        if (this.testMAC(this.pontoMac)) {
+            valid = true;
+        }
+        return valid;
     }
 
 }
