@@ -20,6 +20,19 @@
         </ion-select>
     </ion-item>
 
+    <ion-item *ngIf="atendimento.tecnologiaTV && listErrorMotivo">
+        <ion-label>Erro TV</ion-label>
+        <ion-select [(ngModel)]="atendimento.erroTV">
+
+            <ng-container *ngFor="let m of listErrorMotivo">
+                <ion-option [value]="m.nome" *ngIf="validShowOptionsInMotivosError(m.nome)">
+                    {{m.nome}}
+                </ion-option>
+            </ng-container>
+
+        </ion-select>
+    </ion-item>
+
     <ion-item *ngIf="atendimento.tecnologiaTV === 'IPTV'">
         <ion-label>Tecnologia de IPTV</ion-label>
         <ion-select [(ngModel)]="atendimento.tipoTV" (ionChange)="changeTipoTV()">
@@ -28,7 +41,7 @@
         </ion-select>
     </ion-item>
 
-    <ion-item *ngIf="atendimento.tecnologiaTV">
+    <ion-item *ngIf="atendimento.erroTV">
         <ion-label>Tipo de Equipamento</ion-label>
         <ion-select [(ngModel)]="tipoEquipamento">
             <ion-option *ngIf="atendimento.tecnologiaTV === 'TVDTH' || atendimento.tecnologiaTV === 'TVHIBRIDA'"

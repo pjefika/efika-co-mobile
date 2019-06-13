@@ -4,6 +4,7 @@ import { SuperComponentService } from '../../../../providers/component-service/s
 import { HolderService } from '../../../../providers/holder/holder.service';
 import { LoadingController, AlertController, NavController } from 'ionic-angular';
 import { AtendimentoDigitalService } from '../../atendimento-digital.service';
+import { MotivoErroAtendimentoDigital } from '../../../../view-model/atendimento-digital/motivo-erro-atendimento-digital';
 
 @Component({
     selector: 'aptv-component',
@@ -27,6 +28,8 @@ export class AptvComponent extends SuperComponentService implements OnInit {
 
     public tipoEquipamento: string;
 
+    public listErrorMotivo: MotivoErroAtendimentoDigital[];
+
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
@@ -38,7 +41,7 @@ export class AptvComponent extends SuperComponentService implements OnInit {
     public ngOnInit() {
         this.atendimento = new AtendimentoDigital();
         this.atendimento.motivo = this.motivo;
-
+        this.getMotivos();
     }
 
     public validContinueFormATDG() {
@@ -138,19 +141,12 @@ export class AptvComponent extends SuperComponentService implements OnInit {
     public changeTecnologiaTV() {
         this.atendimento.tipoTV = null;
         this.tipoEquipamento = null;
-        this.clearPontos();
     }
 
     public changeTipoTV() {
         this.tipoEquipamento = null;
-        this.clearPontos();
     }
 
-    public changeEquipamento() {
-        this.clearPontos();
-    }
-
-    public clearPontos() { }
 
     public setAtendimento() {
         let count: number = 0;
@@ -211,13 +207,33 @@ export class AptvComponent extends SuperComponentService implements OnInit {
             this.loading(false);
             super.showAlert("Campo MAC", "Por favor digite um MAC valido para o modem.");
         }
-
-
     }
 
     private tempobuscaexcedido() {
         this.loading(false);
         super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+    }
+
+    public getMotivos() {
+        this.atendimentoDigitalService
+            .getMotivos()
+            .then(resposta => {
+                this.listErrorMotivo = resposta;
+            }, error => {
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                this.loading(false);
+            });
+    }
+
+    public validShowOptionsInMotivosError(nomeErro: string) {
+        // debugger
+        if (nomeErro.includes('Tela de Aprovisionamento') && this.atendimento.tecnologiaTV === 'TVDTH') {
+            return true;
+        } else if (nomeErro.includes('Erro 1401') && this.atendimento.tecnologiaTV === 'TVHIBRIDA') {
+            return true;
+        } else if (nomeErro.includes('Erro X3') && this.atendimento.tecnologiaTV === 'IPTV') {
+            return true;
+        }
     }
 
 }

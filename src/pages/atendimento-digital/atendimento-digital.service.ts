@@ -4,6 +4,7 @@ import { UrlService } from '../../providers/new_url-service/url.service';
 import { HolderService } from '../../providers/holder/holder.service';
 import { AtendimentoDigital, ReOpenAntendimentoDigital } from '../../view-model/atendimento-digital/atendimento-digital';
 import { TaskProcess } from '../../view-model/task-process/task-process';
+import { MotivoErroAtendimentoDigital } from '../../view-model/atendimento-digital/motivo-erro-atendimento-digital';
 
 @Injectable()
 export class AtendimentoDigitalService extends SuperService {
@@ -98,6 +99,19 @@ export class AtendimentoDigitalService extends SuperService {
             .request(this.infoResquest)
             .then(resposta => {
                 return resposta as TaskProcess;
+            });
+    }
+
+    public getMotivos(): Promise<MotivoErroAtendimentoDigital[]> {
+        this.infoResquest = {
+            rqst: "get",
+            command: "atdg/motivos",
+            timeout: 10000
+        }
+        return this.urlService
+            .request(this.infoResquest)
+            .then(resposta => {
+                return resposta as MotivoErroAtendimentoDigital[];
             });
     }
 

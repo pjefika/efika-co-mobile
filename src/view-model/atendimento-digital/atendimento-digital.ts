@@ -30,6 +30,8 @@ export class AtendimentoDigital {
 
     pontos: AddPontos[] = [];
 
+    erroTV: string;
+
 }
 
 export class AddPontos {

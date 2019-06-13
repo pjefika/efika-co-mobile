@@ -5,6 +5,7 @@ import { HolderService } from '../../../../providers/holder/holder.service';
 import { ReOpenAntendimentoDigital } from '../../../../view-model/atendimento-digital/atendimento-digital';
 import { AtendimentoDigitalOututDetail } from '../../../../view-model/atendimento-digital/atendimento-digital-output';
 import { AtendimentoDigitalService } from '../../atendimento-digital.service';
+import { MotivoErroAtendimentoDigital } from '../../../../view-model/atendimento-digital/motivo-erro-atendimento-digital';
 
 @Component({
     selector: 'desc-atendimento-digital',
@@ -22,6 +23,8 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
 
     private rqSi: any;
 
+    public listMotivoErro: MotivoErroAtendimentoDigital[];
+
     constructor(public holderService: HolderService,
         public loadingCtrl: LoadingController,
         public alertCtrl: AlertController,
@@ -34,6 +37,7 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
     public ngOnInit() {
         // console.log(this.navParams.get('desc'));
         this.atendimentoDigitalOututDetail = this.navParams.get('desc') as AtendimentoDigitalOututDetail;
+        this.getMotivos();
     }
 
     public reOpenAtendimento() {
@@ -91,6 +95,17 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
 
 
     public openPopUpReOpenAtend() {
+        // const mountListError = [];
+        // this.listMotivoErro.forEach((me, i) => {
+        //     let obj;
+        //     obj = {
+        //         name: i,
+        //         type: 'radio',
+        //         label: me.nome,
+        //         value: me
+        //     }
+        //     mountListError.push(obj);
+        // });
         const alert = this.alertCtrl.create({
             title: "Deseja reabrir o atendimento",
             subTitle: "Digite uma observação para reabertura.",
@@ -148,6 +163,17 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
             nome = matriculaUser + ": ";
         }
         return nome;
+    }
+
+    public getMotivos() {
+        this.atendimentoDigitalService
+            .getMotivos()
+            .then(resposta => {
+                this.listMotivoErro = resposta;
+            }, error => {
+                super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+                this.loading(false);
+            });
     }
 
 }
