@@ -98,7 +98,7 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                                 .gettask(resposta.id)
                                 .then(resposta_1 => {
                                     if (resposta_1.state === "EXECUTED") {
-                                        if (resposta_1.output.atendimento.atendimento.situacao === "EM_ATENDIMENTO") {
+                                        if (resposta_1.output.atendimento.atendimento && resposta_1.output.atendimento.atendimento.situacao === "EM_ATENDIMENTO") {
                                             clearInterval(this.rqSi);
                                             super.showAlert("Ticket em atendimento", "Ticket está em atendimento por favor aguarde.");
                                             this.loading(false);

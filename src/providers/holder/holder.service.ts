@@ -14,14 +14,14 @@ export class HolderService {
     * True para Mock.
     * False para Produção/QA - Vide link na UrlService.
     */
-    public isMock: boolean = true;
+    public isMock: boolean = false;
 
     /**
     * Valida o Link se é Produção / QA
     * True para Link de Produção 
     * False para Link de QA
     */
-    public isLinkProd: boolean = false;
+    public isLinkProd: boolean = true;
 
     // Variavel para segurar informação se usuário está ou não logado.
     public estalogado: boolean;
@@ -75,7 +75,7 @@ export class HolderService {
 
     public headerToken: string;
 
-    public errorneedfkid: boolean = false;   
+    public errorneedfkid: boolean = false;
 
     constructor() { }
 
