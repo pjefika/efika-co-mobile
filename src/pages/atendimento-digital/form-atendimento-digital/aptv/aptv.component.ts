@@ -134,13 +134,14 @@ export class AptvComponent extends SuperComponentService implements OnInit {
     }
 
     public testMAC(mac: string) {
-        let regex = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
+        let regex = /^([a-fA-F0-9]{2}[:-]){5}([a-fA-F0-9]{2})$/;
         return regex.test(mac);
     }
 
     public changeTecnologiaTV() {
         this.atendimento.tipoTV = null;
         this.tipoEquipamento = null;
+        this.atendimento.pontos = [];
     }
 
     public changeTipoTV() {
@@ -166,7 +167,7 @@ export class AptvComponent extends SuperComponentService implements OnInit {
             this.atendimento.emailTecnico = this.holderService.user.email;
 
             this.atendimento.fkId = this.holderService.certification.fkId;
-            this.atendimento.instancia = this.holderService.certification.customer.instancia;
+            this.atendimento.instancia = this.holderService.instancia;
 
             this.atendimentoDigitalService
                 .setAtendimento(this.atendimento)
@@ -179,7 +180,15 @@ export class AptvComponent extends SuperComponentService implements OnInit {
                                     .gettask(resposta.id)
                                     .then(_resposta => {
                                         if (_resposta.state === "EXECUTED") {
-                                            super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
+                                            if (_resposta.output.state != "EXCEPTION") {
+                                                if (_resposta.output.solicitacao.httpStatus === "ALREADY_REPORTED") {
+                                                    super.showAlert("Alerta", "Solicitação já enviada, não sendo possivel enviar para ao mesmo motivo.");
+                                                } else {
+                                                    super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
+                                                }
+                                            } else {
+                                                super.showAlert("Ops aconteceu algo", "Ocorreu um erro ao enviar esta solicitação, por favor tente novamente. " + _resposta.output.resultado);
+                                            }
                                             this.navCtrl.pop();
                                             this.loading(false);
                                             clearInterval(rqSi);
@@ -202,7 +211,6 @@ export class AptvComponent extends SuperComponentService implements OnInit {
                     this.loading(false);
                     super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
                 });
-
         } else {
             this.loading(false);
             super.showAlert("Campo MAC", "Por favor digite um MAC valido para o modem.");

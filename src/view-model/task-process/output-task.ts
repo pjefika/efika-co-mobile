@@ -5,11 +5,13 @@ import { Ont } from "./ont";
 import { Serial } from "./serial";
 import { RespostaGenerica } from "../resposta/resposta-generica";
 import { AtendimentoDigitalOutput, AtendimentoHold } from "../atendimento-digital/atendimento-digital-output";
+import { Solicitacao } from "./solicitacao";
 
 export class Output {
     type: string;
     state: string;
     exceptionMessage: string;
+    resultado: string;
 
     //Login Case
     match?: boolean;
@@ -37,5 +39,7 @@ export class Output {
 
     tickets?: AtendimentoDigitalOutput[];
     atendimento: AtendimentoHold;
+
+    solicitacao: Solicitacao;
 
 }

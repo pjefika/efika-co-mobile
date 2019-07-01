@@ -130,6 +130,7 @@ export class CadastroSearchComponent extends SuperComponentService implements On
         this.loading(true, mensagem);
         this.startTimer();
         setTimeout(() => {
+            this.holderService.instancia = "4131543457";
             this.holderService.cadastro = this.cadastroService.getCadastroMock().output.customer;
             this.holderService.tabCadastroAtivo = true;
             this.holderService.cadastro.instancia = this.holderService.instancia;

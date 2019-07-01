@@ -39,7 +39,7 @@ export class AddPontos {
     mac: string;
     serial: string;
 
-    tipoEquipamento: string;
+    tipoEquipamento?: string;
 
     caId?: string;
     smartCard?: string;

@@ -10,10 +10,12 @@
             <ion-item *ngFor="let atdg of atendimentoDigitalOutput" (click)="openDescAtendimentoDigital(atdg.id)">
                 <ion-label>
                     <h3>Instância: {{atdg.instancia}}</h3>
-                    <p>Motivo: {{atdg.motivo}}</p>
+                    <p>Motivo: {{atdg.motivoBeauty}}</p>
+                    <p>Data de Criação: {{atdg.dataCriacao | amDateFormat:'DD/MM/YYYY HH:mm:ss'}}</p>
+                    <p>Data de Atualização: {{atdg.dataAtualizacao | amDateFormat:'DD/MM/YYYY HH:mm:ss'}}</p>
                 </ion-label>
             </ion-item>
 
-        </ion-list>        
+        </ion-list>
     </div>
 </ion-content>

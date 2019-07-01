@@ -40,8 +40,7 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
                 let addPontos: AddPontos;
                 addPontos = {
                     mac: this.pontoMac,
-                    serial: this.pontoSerial,
-                    tipoEquipamento: ""
+                    serial: this.pontoSerial
                 }
                 this.atendimentoDigital.pontos.push(addPontos);
                 this.pontoMac = null;
@@ -68,10 +67,8 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
             this.atendimentoDigital.matriculaTecnico = this.holderService.user.matricula;
             this.atendimentoDigital.telefoneTecnico = this.holderService.user.phone;
             this.atendimentoDigital.emailTecnico = this.holderService.user.email;
-
             this.atendimentoDigital.fkId = this.holderService.certification.fkId;
-            this.atendimentoDigital.instancia = this.holderService.certification.customer.instancia;
-
+            this.atendimentoDigital.instancia = this.holderService.instancia;
             this.atendimentoDigitalService
                 .setAtendimento(this.atendimentoDigital)
                 .then(resposta => {
@@ -83,7 +80,15 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
                                     .gettask(resposta.id)
                                     .then(response_1 => {
                                         if (response_1.state === "EXECUTED") {
-                                            super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
+                                            if (response_1.output.state != "EXCEPTION") {
+                                                if (response_1.output.solicitacao.httpStatus === "ALREADY_REPORTED") {
+                                                    super.showAlert("Alerta", "Solicitação já enviada, não sendo possivel enviar para ao mesmo motivo.");
+                                                } else {
+                                                    super.showAlert("Sucesso", "Atendimento Enviado com sucesso, por favor aguarde.");
+                                                }
+                                            } else {
+                                                super.showAlert("Ops aconteceu algo", "Ocorreu um erro ao enviar esta solicitação, por favor tente novamente. " + response_1.output.resultado);
+                                            }
                                             this.navCtrl.pop();
                                             this.loading(false);
                                             clearInterval(rqSi);
@@ -142,7 +147,7 @@ export class AtsipComponent extends SuperComponentService implements OnInit {
     }
 
     public testMAC(mac: string) {
-        let regex = /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/;
+        let regex = /^([a-fA-F0-9]{2}[:-]){5}([a-fA-F0-9]{2})$/;
         return regex.test(mac);
     }
 
