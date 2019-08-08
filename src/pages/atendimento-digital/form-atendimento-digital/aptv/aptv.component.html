@@ -1,8 +1,8 @@
 <div>
 
     <ion-item>
-        <ion-label>Número de Serial do Modem</ion-label>
-        <ion-input [(ngModel)]="atendimento.serial" maxlength="25"></ion-input>
+        <ion-label>Serial do Modem</ion-label>
+        <ion-input [(ngModel)]="atendimento.serial" type="text" [serialMask]></ion-input>
     </ion-item>
 
     <ion-item>
@@ -63,20 +63,20 @@
         </ion-item>
         <ion-item>
             <ion-label>Serial</ion-label>
-            <ion-input [(ngModel)]="addSerialPonto" maxlength="25"></ion-input>
+            <ion-input type="text" [(ngModel)]="addSerialPonto" [serialMask]></ion-input>
         </ion-item>
 
 
         <ion-item *ngIf="atendimento.tecnologiaTV === 'IPTV' && atendimento.tipoTV === 'OPENPLATAFORM' 
             && (tipoEquipamento === 'STB' || tipoEquipamento === 'DVR')">
             <ion-label>CA_ID</ion-label>
-            <ion-input [(ngModel)]="addCaIDPonto" maxlength="20"></ion-input>
+            <ion-input type="text" [(ngModel)]="addCaIDPonto" [serialMask]></ion-input>
         </ion-item>
 
         <ion-item
             *ngIf="atendimento.tecnologiaTV === 'TVDTH' && (tipoEquipamento === 'DECODER' || tipoEquipamento === 'DVR')">
             <ion-label>Smart Card</ion-label>
-            <ion-input [(ngModel)]="addSmartCardPonto" maxlength="20"></ion-input>
+            <ion-input type="text" [(ngModel)]="addSmartCardPonto" [serialMask]></ion-input>
         </ion-item>
 
 

@@ -71,6 +71,7 @@ import { AptvComponent } from '../pages/atendimento-digital/form-atendimento-dig
 import { AtsipComponent } from '../pages/atendimento-digital/form-atendimento-digital/atsip/atsip.component';
 import { NotValidAttrsComponent } from '../pages/atendimento-digital/form-atendimento-digital/notvalidattrs/notvalidattrs.component';
 import { MacMaskPipe } from '../providers/pipe/mac-mask.pipe';
+import { SerialMaskDirective } from '../providers/directive/serial-mask.directive';
 
 @NgModule({
 	declarations: [
@@ -131,7 +132,8 @@ import { MacMaskPipe } from '../providers/pipe/mac-mask.pipe';
 		AptvComponent,
 		AtsipComponent,
 		NotValidAttrsComponent,
-		MacMaskPipe
+		MacMaskPipe,
+		SerialMaskDirective
 	],
 	imports: [
 		BrowserModule,

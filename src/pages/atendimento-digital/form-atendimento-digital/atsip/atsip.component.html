@@ -2,7 +2,7 @@
     <!-- Infos de Modem Pede para todos -->
     <ion-item>
         <ion-label>Serial HG</ion-label>
-        <ion-input [(ngModel)]="atendimentoDigital.serial"  maxlength="25">
+        <ion-input type="text" [(ngModel)]="atendimentoDigital.serial" [serialMask]>
         </ion-input>
     </ion-item>
 
@@ -30,9 +30,9 @@
         </ion-item>
         <ion-item>
             <ion-label>Serial</ion-label>
-            <ion-input [(ngModel)]="pontoSerial" maxlength="25"></ion-input>
+            <ion-input type="text" [(ngModel)]="pontoSerial" [serialMask]></ion-input>
         </ion-item>
-        
+
         <button color="secondary" ion-button block round (click)="addPonto()">Adicionar
             Ponto</button>
 

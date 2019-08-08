@@ -107,7 +107,7 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                                                 && resposta_1.output.atendimento
                                                 && resposta_1.output.atendimento.atendimento
                                                 && resposta_1.output.atendimento.atendimento.id != null) {
-                                                this.navCtrl.push(DescAtendimentoDigitalComponent, { desc: resposta_1.output.atendimento.atendimento });
+                                                this.navCtrl.push(DescAtendimentoDigitalComponent, { desc: resposta_1.output.atendimento });
                                                 clearInterval(this.rqSi);
                                                 this.loading(false);
                                             } else {

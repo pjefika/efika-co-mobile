@@ -3,7 +3,7 @@ import { SuperComponentService } from '../../../../providers/component-service/s
 import { LoadingController, AlertController, NavParams, NavController } from 'ionic-angular';
 import { HolderService } from '../../../../providers/holder/holder.service';
 import { ReOpenAntendimentoDigital } from '../../../../view-model/atendimento-digital/atendimento-digital';
-import { AtendimentoDigitalOututDetail } from '../../../../view-model/atendimento-digital/atendimento-digital-output';
+import { AtendimentoHold } from '../../../../view-model/atendimento-digital/atendimento-digital-output';
 import { AtendimentoDigitalService } from '../../atendimento-digital.service';
 import { MotivoErroAtendimentoDigital } from '../../../../view-model/atendimento-digital/motivo-erro-atendimento-digital';
 
@@ -19,7 +19,7 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
 
     public reOpenAntendimentoDigital: ReOpenAntendimentoDigital;
 
-    public atendimentoDigitalOututDetail: AtendimentoDigitalOututDetail;
+    public atendimentoHold: AtendimentoHold;
 
     private rqSi: any;
 
@@ -36,15 +36,16 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
 
     public ngOnInit() {
         // console.log(this.navParams.get('desc'));
-        this.atendimentoDigitalOututDetail = this.navParams.get('desc') as AtendimentoDigitalOututDetail;
+        // mudar para atendimentohold <-
+        this.atendimentoHold = this.navParams.get('desc') as AtendimentoHold;
         this.getMotivos();
     }
 
     public reOpenAtendimento() {
         this.reOpenAntendimentoDigital = {
-            atendimento: this.atendimentoDigitalOututDetail.id,
-            tecnico: this.atendimentoDigitalOututDetail.tecnico.id,
-            user: this.atendimentoDigitalOututDetail.user.id,
+            atendimento: this.atendimentoHold.atendimento.id,
+            tecnico: this.atendimentoHold.atendimento.tecnico.id,
+            user: this.atendimentoHold.atendimento.user.id,
             observacao: this.observacao
         }
         // console.log(this.reOpenAntendimentoDigital);
@@ -144,7 +145,7 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
 
     public getMotivosTranslate() {
         let nome: string;
-        switch (this.atendimentoDigitalOututDetail.ticket.motivo) {
+        switch (this.atendimentoHold.atendimento.ticket.motivo) {
             case "APTV":
                 nome = "Aprovisionamento TV";
                 break;

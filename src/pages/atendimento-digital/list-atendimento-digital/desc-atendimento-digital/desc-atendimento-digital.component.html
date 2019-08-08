@@ -5,32 +5,22 @@
 </ion-header>
 <ion-content padding>
     <div>
-
-        <h3>Atendimento: {{atendimentoDigitalOututDetail.ticket.instancia}} /
-            {{getMotivosTranslate()}}</h3>
-
+        <h3>Atendimento: {{atendimentoHold.atendimento.ticket.instancia}} / {{getMotivosTranslate()}} </h3>
         <hr>
-
         <h5>Resposta: </h5>
-
-        <p>
-            {{atendimentoDigitalOututDetail.atendimento}}
-        </p>
-
-        <div *ngIf="atendimentoDigitalOututDetail.atendimentoInteracoes">
-            <h5>Info Reaberturas</h5>
-
+        <p> {{atendimentoHold.atendimento.atendimento}} </p>
+        <div *ngIf="atendimentoHold.historico">
+            <h5>Respotas Reaberturas</h5>
             <ion-list>
-                <ion-item *ngFor="let iteracao of atendimentoDigitalOututDetail.atendimentoInteracoes"
-                    (click)="openObservacoesReaberturas(iteracao.observacao)">
-                    <ion-label>{{nomesMatriculas(iteracao.tecnico.matricula, iteracao.user.matricula)}}
-                        {{iteracao.observacao}}</ion-label>
+                <ion-item *ngFor="let hist of atendimentoHold.historico"
+                    (click)="openObservacoesReaberturas(hist.atendimento)">
+                    <ion-label>
+                        <!-- {{nomesMatriculas(hist.tecnico.matricula, hist.user.matricula)}}  -->
+                        {{hist.atendimento}}
+                    </ion-label>
                 </ion-item>
             </ion-list>
-
         </div>
-
         <button ion-button block round (click)="openPopUpReOpenAtend()">Reabrir</button>
-
     </div>
 </ion-content>

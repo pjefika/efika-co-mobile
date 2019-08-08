@@ -223,14 +223,17 @@ export class AptvComponent extends SuperComponentService implements OnInit {
     }
 
     public getMotivos() {
+        this.loading(true, "Buscando motivos");
         this.atendimentoDigitalService
             .getMotivos()
             .then(resposta => {
                 this.listErrorMotivo = resposta;
             }, error => {
                 super.showAlert(error.tError, super.makeexceptionmessage(error.mError));
+            })
+            .then(() => {
                 this.loading(false);
-            });
+            })
     }
 
     public validShowOptionsInMotivosError(nomeErro: string) {
