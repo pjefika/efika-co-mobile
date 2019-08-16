@@ -20,7 +20,16 @@
         </ion-select>
     </ion-item>
 
-    <ion-item *ngIf="atendimento.tecnologiaTV && listErrorMotivo">
+
+    <ion-item *ngIf="atendimento.tecnologiaTV === 'IPTV'">
+        <ion-label>Tecnologia de IPTV</ion-label>
+        <ion-select [(ngModel)]="atendimento.tipoTV" (ionChange)="changeTipoTV()">
+            <ion-option value="MEDIAROOM">MediaRoom</ion-option>
+            <ion-option value="OPENPLATAFORM">Open Plataform</ion-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="(atendimento.tipoTV || atendimento.tecnologiaTV != 'IPTV') && listErrorMotivo">
         <ion-label>Erro TV</ion-label>
         <ion-select [(ngModel)]="atendimento.erroTV">
 
@@ -33,13 +42,7 @@
         </ion-select>
     </ion-item>
 
-    <ion-item *ngIf="atendimento.tecnologiaTV === 'IPTV'">
-        <ion-label>Tecnologia de IPTV</ion-label>
-        <ion-select [(ngModel)]="atendimento.tipoTV" (ionChange)="changeTipoTV()">
-            <ion-option value="MEDIAROOM">MediaRoom</ion-option>
-            <ion-option value="OPENPLATAFORM">Open Plataform</ion-option>
-        </ion-select>
-    </ion-item>
+
 
     <ion-item *ngIf="atendimento.erroTV">
         <ion-label>Tipo de Equipamento</ion-label>

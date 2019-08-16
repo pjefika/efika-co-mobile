@@ -242,7 +242,9 @@ export class AptvComponent extends SuperComponentService implements OnInit {
             return true;
         } else if (nomeErro.includes('Erro 1401') && this.atendimento.tecnologiaTV === 'TVHIBRIDA') {
             return true;
-        } else if (nomeErro.includes('Erro X3') && this.atendimento.tecnologiaTV === 'IPTV') {
+        } else if (nomeErro.includes('5/12') && this.atendimento.tipoTV === 'OPENPLATAFORM') {
+            return true;
+        } else if (nomeErro.includes('X3') && this.atendimento.tipoTV === 'MEDIAROOM') {
             return true;
         }
     }

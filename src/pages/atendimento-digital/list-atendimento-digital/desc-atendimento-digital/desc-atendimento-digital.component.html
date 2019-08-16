@@ -10,7 +10,7 @@
         <h5>Resposta: </h5>
         <p> {{atendimentoHold.atendimento.atendimento}} </p>
         <div *ngIf="atendimentoHold.historico">
-            <h5>Respotas Reaberturas</h5>
+            <h5>Respostas Reaberturas</h5>
             <ion-list>
                 <ion-item *ngFor="let hist of atendimentoHold.historico"
                     (click)="openObservacoesReaberturas(hist.atendimento)">

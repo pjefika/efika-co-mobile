@@ -41,79 +41,30 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
             case "ERROR_TV":
                 this.validacaoAPTV();
                 break;
-            case "ATSIPE":
-                this.validacaoATSIPE();
-                break;
-            case "ERROR_TVE":
-                this.validacaoAPTVE();
-                break;
-        }
-    }
-
-    public validacaoATSIPE() {
-        this.atendimentoDigitalTabelaValidacao = {
-            rede: "N/A",
-            tecnologia: "N/A",
-            bandaLargaOk: false,
-            isIPTv: "N/A",
-            isTvHibrida: "N/A",
-            isTvDTH: "N/A",
-            IsSIP: false,
-            isLinhaMetalico: false
-        }
-        if (this.atendimentoDigitalTabelaValidacao.bandaLargaOk
-            && this.atendimentoDigitalTabelaValidacao.IsSIP
-            && !this.atendimentoDigitalTabelaValidacao.isLinhaMetalico) {
-            this.isValidAttrs = true;
-        } else {
-            this.isValidAttrs = false;
-        }
-    }
-
-    public validacaoAPTVE() {
-        this.atendimentoDigitalTabelaValidacao = {
-            rede: "N/A",
-            tecnologia: false,
-            bandaLargaOk: false,
-            isIPTv: false,
-            isTvHibrida: false,
-            isTvDTH: false,
-            IsSIP: "N/A",
-            isLinhaMetalico: "N/A"
-        }
-        if (this.atendimentoDigitalTabelaValidacao.tecnologia
-            && this.atendimentoDigitalTabelaValidacao.bandaLargaOk
-            && this.atendimentoDigitalTabelaValidacao.isIPTv
-            && this.atendimentoDigitalTabelaValidacao.isTvHibrida
-            && !this.atendimentoDigitalTabelaValidacao.isTvDTH) {
-            this.isValidAttrs = true;
-        } else {
-            this.isValidAttrs = false;
         }
     }
 
     public validacaoATSIP() {
-        this.atendimentoDigitalTabelaValidacao = {
-            rede: "N/A",
-            tecnologia: "N/A",
-            bandaLargaOk: this.holderService.certification.fulltest.resultado,
-            isIPTv: "N/A",
-            isTvHibrida: "N/A",
-            isTvDTH: "N/A",
-            IsSIP: this.holderService.cadastro.servicos.tipoLinha === "SIP",
-            isLinhaMetalico: this.holderService.cadastro.servicos.tipoLinha === "TDM"
-        }
-        if (
-            // this.atendimentoDigitalTabelaValidacao.bandaLargaOk
-            // &&
-            this.atendimentoDigitalTabelaValidacao.IsSIP
-            && !this.atendimentoDigitalTabelaValidacao.isLinhaMetalico) {
-            this.isValidAttrs = true;
-        }
-        // this.isValidAttrs = true;
+        this.isValidAttrs = false;
+        // this.atendimentoDigitalTabelaValidacao = {
+        //     rede: "N/A",
+        //     tecnologia: "N/A",
+        //     bandaLargaOk: this.holderService.certification.fulltest.resultado,
+        //     isIPTv: "N/A",
+        //     isTvHibrida: "N/A",
+        //     isTvDTH: "N/A",
+        //     IsSIP: this.holderService.cadastro.servicos.tipoLinha === "SIP",
+        //     isLinhaMetalico: this.holderService.cadastro.servicos.tipoLinha === "TDM"
+        // }
+        // if (this.atendimentoDigitalTabelaValidacao.IsSIP
+        //     && !this.atendimentoDigitalTabelaValidacao.isLinhaMetalico) {
+        //     this.isValidAttrs = true;
+        // }
+        this.isValidAttrs = true;
     }
 
     public validacaoAPTV() {
+        this.isValidAttrs = false;
         // this.atendimentoDigitalTabelaValidacao = {
         //     rede: "N/A",
         //     tecnologia: this.holderService.cadastro.rede.tipo === "GPON",
@@ -124,11 +75,7 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
         //     IsSIP: "N/A",
         //     isLinhaMetalico: "N/A"
         // }
-        // if (
-        //     // this.atendimentoDigitalTabelaValidacao.tecnologia
-        //     // && this.atendimentoDigitalTabelaValidacao.bandaLargaOk
-        //     // && 
-        //     this.atendimentoDigitalTabelaValidacao.isIPTv
+        // if (this.atendimentoDigitalTabelaValidacao.isIPTv
         //     && this.atendimentoDigitalTabelaValidacao.isTvHibrida
         //     && !this.atendimentoDigitalTabelaValidacao.isTvDTH) {
         //     this.isValidAttrs = true;
