@@ -34,9 +34,11 @@
         <ion-select [(ngModel)]="atendimento.erroTV">
 
             <ng-container *ngFor="let m of listErrorMotivo">
-                <ion-option [value]="m.nome" *ngIf="validShowOptionsInMotivosError(m.nome)">
-                    {{m.nome}}
-                </ion-option>
+                <ng-container *ngIf="m.ativo">
+                    <ion-option [value]="m.nome" *ngIf="validShowOptionsInMotivosError(m.nome)">
+                        {{m.nome}}
+                    </ion-option>
+                </ng-container>
             </ng-container>
 
         </ion-select>
