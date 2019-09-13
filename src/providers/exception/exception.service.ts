@@ -30,7 +30,7 @@ export class ExceptionService {
         if (error.message === "Timeout has occurred") {
             er = {
                 tError: "Tempo Excedido. Cod.10",
-                mError: "Tempo de busca excedido, por favor realize a busca novamente. "
+                mError: "Tempo de busca excedido, por favor realize a busca novamente. Para avaliação de manobra, ligar no CO"
             }
             console.log(er);
             return Promise.reject(er);
@@ -41,20 +41,20 @@ export class ExceptionService {
                 case 503:
                     er = {
                         tError: "Ops, Aconteceu algo. Cod.30.1",
-                        mError: "Serviço Indisponível, caso problema persista por favor entrar em contato com o administrador do sistema."
+                        mError: "Serviço Indisponível, caso problema persista por favor entrar em contato com o administrador do sistema. Para avaliação de manobra, ligar no CO"
                     }
                     break;
                 case 0:
                     er = {
                         tError: "Erro (\"Requisição invalida\"). Cod.30.1",
-                        mError: "Não foi possivel realizar requisição podendo ser um possivel problema de conexão, por favor verifique."
+                        mError: "Não foi possivel realizar requisição podendo ser um possivel problema de conexão, por favor verifique. Para avaliação de manobra, ligar no CO"
                     }
                     break;
                 default:
                     let casterror = error.json();
                     er = {
                         tError: "Ops, Aconteceu algo. Cod.30",
-                        mError: "Erro: " + casterror.message
+                        mError: "Erro: " + casterror.message + " Para avaliação de manobra, ligar no CO"
                     }
                     break;
             }

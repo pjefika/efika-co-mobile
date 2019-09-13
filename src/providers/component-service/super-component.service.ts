@@ -75,7 +75,7 @@ export class SuperComponentService extends ExceptionService {
                 break;
             case "EXCEPTION":
                 v = false;
-                this.showAlert(super.makeexceptionmessageTitle("Ops, aconteceu algo.", true), super.makeexceptionmessage(output.exceptionMessage, instancia));
+                this.showAlert(super.makeexceptionmessageTitle("Ops, aconteceu algo.", true), super.makeexceptionmessage(output.exceptionMessage + " Para avaliação de manobra, ligar no CO", instancia));
                 console.log("Deu erro -- EXCEPTION IN: " + output.type + " -- !!! AMD p(o.o)q");
                 break;
         }
@@ -93,7 +93,7 @@ export class SuperComponentService extends ExceptionService {
             v = true;
         }
         if (!output.customer.rede.ipDslam) {
-            this.showAlert(super.makeexceptionmessageTitle("Ops, aconteceu algo. Cod.40", false), super.makeexceptionmessage("Não foram identificados informações de rede do cliente, não sendo possivel realizar testes, gerado FKID.", instancia));
+            this.showAlert(super.makeexceptionmessageTitle("Ops, aconteceu algo. Cod.40", false), super.makeexceptionmessage("Não foram identificados informações de rede do cliente, não sendo possivel realizar testes, gerado FKID. Para avaliação de manobra, ligar no CO", instancia));
         }
         if (output.customer.designador && !output.customer.rede.ipDslam) {
             this.holderService.errorneedfkid = true;

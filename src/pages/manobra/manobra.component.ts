@@ -65,7 +65,7 @@ export class ManobraComponent extends SuperComponentService implements OnInit {
                                         if (_resposta.output.state === "EXCEPTION") {
                                             this.loading(false);
                                             clearInterval(rqSi);
-                                            super.showAlert("Ops, Aconteceu algo", super.makeexceptionmessage(_resposta.output.exceptionMessage, this.holderService.instancia));
+                                            super.showAlert("Ops, Aconteceu algo", super.makeexceptionmessage(_resposta.output.exceptionMessage + " Para avaliação de manobra, ligar no CO", this.holderService.instancia));
                                         } else {
                                             this.holderService.validManobra = _resposta.output.resposta;
                                             this.disablemanobraform = true;
@@ -115,7 +115,7 @@ export class ManobraComponent extends SuperComponentService implements OnInit {
 
     private tempobuscaexcedido() {
         this.loading(false);
-        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. ", this.holderService.instancia));
+        super.showAlert(super.makeexceptionmessageTitle("Tempo Excedido. Cod.10", false), super.makeexceptionmessage("Tempo de busca excedido por favor tente novamente. Para avaliação de manobra, ligar no CO", this.holderService.instancia));
     }
 
 }
