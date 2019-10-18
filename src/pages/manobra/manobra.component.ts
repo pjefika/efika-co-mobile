@@ -65,9 +65,9 @@ export class ManobraComponent extends SuperComponentService implements OnInit {
                                         if (_resposta.output.state === "EXCEPTION") {
                                             this.loading(false);
                                             clearInterval(rqSi);
-                                            super.showAlert("Ops, Aconteceu algo", super.makeexceptionmessage(_resposta.output + " Para avaliação de manobra, ligar no CO", this.holderService.instancia));
+                                            super.showAlert("Ops, Aconteceu algo", super.makeexceptionmessage(_resposta.output.exceptionMessage + " Para avaliação de manobra, ligar no CO", this.holderService.instancia));
                                         } else {
-                                            this.holderService.validManobra = _resposta.output.state;
+                                            this.holderService.validManobra = _resposta.output.resposta;
                                             this.disablemanobraform = true;
                                             this.loading(false);
                                             clearInterval(rqSi);
