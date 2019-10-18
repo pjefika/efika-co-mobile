@@ -49,6 +49,6 @@ export class AddPontos {
 export class ReOpenAntendimentoDigital {
     tecnico: number;
     user: number;
-    atendimento: number;
+    atendimento: any;
     observacao: string;
 }

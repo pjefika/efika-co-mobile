@@ -6,13 +6,14 @@ import { Serial } from "./serial";
 import { RespostaGenerica } from "../resposta/resposta-generica";
 import { AtendimentoDigitalOutput, AtendimentoHold } from "../atendimento-digital/atendimento-digital-output";
 import { Solicitacao } from "./solicitacao";
+// import { Tickets } from "./task-process";
+import { Tickets } from "./ticket-output";
 
 export class Output {
     type: string;
     state: string;
     exceptionMessage: string;
     resultado: string;
-
     //Login Case
     match?: boolean;
 
@@ -37,7 +38,7 @@ export class Output {
     // Config BHS GPON VIVO 1
     vlans?: Valids[];
 
-    tickets?: AtendimentoDigitalOutput[];
+    tickets?: Tickets[];
     atendimento: AtendimentoHold;
 
     solicitacao: Solicitacao;

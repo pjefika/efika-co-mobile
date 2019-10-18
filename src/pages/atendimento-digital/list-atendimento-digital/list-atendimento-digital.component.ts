@@ -4,8 +4,11 @@ import { AlertController, LoadingController, NavController } from 'ionic-angular
 import { DescAtendimentoDigitalComponent } from './desc-atendimento-digital/desc-atendimento-digital.component';
 import { HolderService } from '../../../providers/holder/holder.service';
 import { SuperComponentService } from '../../../providers/component-service/super-component.service';
-import { AtendimentoDigitalOutput } from '../../../view-model/atendimento-digital/atendimento-digital-output';
-import { Tickets, TaskProcess, Output, Attendances } from '../../../view-model/task-process/task-process';
+// import { AtendimentoDigitalOutput } from '../../../view-model/atendimento-digital/atendimento-digital-output';
+import { Attendances, Tickets } from '../../../view-model/task-process/ticket-output';
+import { TaskProcess } from '../../../view-model/task-process/task-process';
+import { Output } from '../../../view-model/task-process/output-task';
+
 
 @Component({
     selector: 'list-atendimento-digital',
@@ -19,7 +22,7 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
 
     private rqSi: any;
 
-    public atendimentoDigitalOutput: Tickets;
+    public atendimentoDigitalOutput: Tickets[] = [];
 
     public attendances: Attendances[] = [];
 
@@ -54,9 +57,10 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                                 .gettask(resposta.id)
                                 .then(resposta_1 => {
                                     if (resposta_1.state === "EXECUTED") {
-                                
+                                        debugger
+                                        this.atendimentoDigitalOutput = [];
                                         this.atendimentoDigitalOutput = resposta_1.output.tickets;
-                                       
+                                        console.log(this.atendimentoDigitalOutput);
                                         clearInterval(this.rqSi);
                                         this.loading(false);
                                  

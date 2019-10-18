@@ -20,11 +20,19 @@
                 <ion-card-title *ngIf="atendimento.status">
                     <ion-badge color="dark">{{atendimento.status.beautyName}}</ion-badge>
                     <br>
-                    <ion-badge color="primary" *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[0].value === false">cadastro sem divergência</ion-badge>
-                    <ion-badge color="danger" *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[0].value === true">cadastro com divergência</ion-badge>
+                    <ion-badge color="primary"
+                        *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[0].value === false">
+                        cadastro sem divergência</ion-badge>
+                    <ion-badge color="danger"
+                        *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[0].value === true">
+                        cadastro com divergência</ion-badge>
                     <br>
-                    <ion-badge color="primary" *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[2].value === false">sem bloqueio radius</ion-badge>
-                    <ion-badge color="danger" *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[2].value === true">com bloqueio radius</ion-badge>
+                    <ion-badge color="primary"
+                        *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[2].value === false">
+                        sem bloqueio radius</ion-badge>
+                    <ion-badge color="danger"
+                        *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[2].value === true">
+                        com bloqueio radius</ion-badge>
                 </ion-card-title>
             </ion-card-header>
 
@@ -44,8 +52,8 @@
                     </ion-label>
                 </ion-chip>
                 <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.technician">
-                        <ion-label>Técnico: <b>{{atendimento.technician.login}} - {{atendimento.technician.name}}</b>
-                        </ion-label>
+                    <ion-label>Técnico: <b>{{atendimento.technician.login}} - {{atendimento.technician.name}}</b>
+                    </ion-label>
                 </ion-chip>
                 <!-- <ion-list>
                     <ion-item *ngFor="let atendimento of attendances">
