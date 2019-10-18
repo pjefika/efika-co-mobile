@@ -1,21 +1,59 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Atendimento Digital_ </ion-title>
+        <ion-chip>
+            <ion-icon name="pin"></ion-icon>
+            <ion-label> Minhas Solicitações </ion-label>
+        </ion-chip>
     </ion-navbar>
 </ion-header>
 <ion-content padding>
     <div>
 
-        <ion-list>
-            <ion-item *ngFor="let atdg of atendimentoDigitalOutput" (click)="openDescAtendimentoDigital(atdg.id)">
-                <ion-label>
-                    <h3>Instância: {{atdg.instancia}}</h3>
-                    <p>Motivo: {{atdg.motivoBeauty}}</p>
-                    <p>Data de Criação: {{atdg.dataCriacao | amDateFormat:'DD/MM/YYYY HH:mm:ss'}}</p>
-                    <p>Data de Atualização: {{atdg.dataAtualizacao | amDateFormat:'DD/MM/YYYY HH:mm:ss'}}</p>
-                </ion-label>
-            </ion-item>
+        <ion-card *ngFor="let atendimento of atendimentoDigitalOutput">
+            <ion-card-header *ngIf="atendimento && atendimento.customer">
+                <ion-card-subtitle>
+                    <ion-chip>
+                        <ion-icon name="person"></ion-icon>
+                        <ion-label>cliente: {{atendimento.customer.instancia}}</ion-label>
+                    </ion-chip>
+                </ion-card-subtitle>
+                <ion-card-title *ngIf="atendimento.status">
+                    <ion-badge color="dark">{{atendimento.status.beautyName}}</ion-badge>
+                    <br>
+                    <ion-badge color="primary" *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[0].value === false">cadastro sem divergência</ion-badge>
+                    <ion-badge color="danger" *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[0].value === true">cadastro com divergência</ion-badge>
+                    <br>
+                    <ion-badge color="primary" *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[2].value === false">sem bloqueio radius</ion-badge>
+                    <ion-badge color="danger" *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[2].value === true">com bloqueio radius</ion-badge>
+                </ion-card-title>
+            </ion-card-header>
 
-        </ion-list>
+            <ion-card-content>
+                <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.ss">
+                    <ion-label>SS: {{atendimento.ss}}</ion-label>
+                </ion-chip>
+                <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.leType">
+                    <ion-label>Tipo: <b>{{atendimento.leType}}</b></ion-label>
+                </ion-chip>
+                <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.creationDate">
+                    <ion-label>Data de Criação: <b>{{atendimento.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</b>
+                    </ion-label>
+                </ion-chip>
+                <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.lastModifiedDate">
+                    <ion-label>Última Alteração: <b>{{atendimento.lastModifiedDate | date:'dd/MM/yyyy HH:mm:ss'}}</b>
+                    </ion-label>
+                </ion-chip>
+                <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.technician">
+                        <ion-label>Técnico: <b>{{atendimento.technician.login}} - {{atendimento.technician.name}}</b>
+                        </ion-label>
+                </ion-chip>
+                <!-- <ion-list>
+                    <ion-item *ngFor="let atendimento of attendances">
+                        <ion-label>Atendimento</ion-label>
+                    </ion-item>
+                </ion-list> -->
+            </ion-card-content>
+        </ion-card>
+
     </div>
 </ion-content>

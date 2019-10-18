@@ -1,6 +1,9 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Aviso</ion-title>
+        <ion-chip>
+            <ion-icon name="help-buoy"></ion-icon>
+            <ion-label full>Mural de Avisos</ion-label>
+        </ion-chip>
     </ion-navbar>
 </ion-header>
 
@@ -11,7 +14,8 @@
     <p>{{infoMural.mensagem}}</p>
 
     <div *ngIf="infoMural.action.action">
-        <button ion-button [color]="infoMural.action.colorbutton === 'Green' ? 'secondary' : infoMural.action.colorbutton === 'Red' ? 'danger' : infoMural.action.colorbutton === 'Dark' ? 'dark': '' "
+        <button ion-button
+            [color]="infoMural.action.colorbutton === 'Green' ? 'secondary' : infoMural.action.colorbutton === 'Red' ? 'danger' : infoMural.action.colorbutton === 'Dark' ? 'dark': '' "
             full="true" round="true" (click)="openLink()">{{infoMural.action.namebutton}}</button>
     </div>
 

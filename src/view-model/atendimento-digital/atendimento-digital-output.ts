@@ -1,7 +1,7 @@
 import { AtendimentoDigital } from "./atendimento-digital";
 
 export class AtendimentoDigitalOutput {
-    id: number;
+    id: string;
     fkId: string;
     ss: string;
     instancia: string;
@@ -18,7 +18,7 @@ export class AtendimentoHold {
 }
 
 export class AtendimentoDigitalOututDetail {
-    id: number;
+    id: string;
     atendimento: string;
     nomeContato: string;
     numeroContato: string;

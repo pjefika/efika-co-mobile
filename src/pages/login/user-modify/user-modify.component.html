@@ -1,13 +1,16 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Configurações de usuário</ion-title>
+        <ion-chip> 
+            <ion-icon name="person"></ion-icon>
+            <ion-label full>Configurações de usuário</ion-label>
+          </ion-chip>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
     <ion-item>
         <ion-label color="primary" stacked>Matricula</ion-label>
-        <ion-input type="text" placeholder="Matricula" [(ngModel)]="holderService.user.matricula" [disabled]="comefromfast"></ion-input>
+        <ion-input type="text" placeholder="Matricula" [(ngModel)]="holderService.user.matricula" [disabled]="comefromfast" onkeyup="this.value = this.value.toUpperCase();"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label color="primary" stacked>Nome</ion-label>
@@ -15,7 +18,7 @@
     </ion-item>
     <ion-item>
         <ion-label color="primary" stacked>Email</ion-label>
-        <ion-input type="email" placeholder="Email" [(ngModel)]="holderService.user.email"></ion-input>
+        <ion-input type="email" placeholder="Email" [(ngModel)]="holderService.user.email" onkeyup="this.value = this.value.toLowerCase();"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label color="primary" stacked>CPF</ion-label>

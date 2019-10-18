@@ -1,7 +1,9 @@
 <div class="mural-mg-top">
     <h5>
-        <ion-icon name="information-circle" item-start style="color: #25b0f7;"></ion-icon>
-        Mural de avisos.
+        <ion-chip>
+            <ion-icon name="help-buoy"></ion-icon>
+            <ion-label full>Mural de Avisos</ion-label>
+        </ion-chip>
     </h5>
     <ion-list>
         <ion-item *ngFor="let im of infosMural" (click)="openInfoMural(im)">

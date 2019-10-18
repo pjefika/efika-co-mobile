@@ -5,6 +5,7 @@ import { DescAtendimentoDigitalComponent } from './desc-atendimento-digital/desc
 import { HolderService } from '../../../providers/holder/holder.service';
 import { SuperComponentService } from '../../../providers/component-service/super-component.service';
 import { AtendimentoDigitalOutput } from '../../../view-model/atendimento-digital/atendimento-digital-output';
+import { Tickets, TaskProcess, Output, Attendances } from '../../../view-model/task-process/task-process';
 
 @Component({
     selector: 'list-atendimento-digital',
@@ -18,7 +19,9 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
 
     private rqSi: any;
 
-    public atendimentoDigitalOutput: AtendimentoDigitalOutput[];
+    public atendimentoDigitalOutput: Tickets;
+
+    public attendances: Attendances[] = [];
 
     constructor(private atendimentoDigitalService: AtendimentoDigitalService,
         public navCtrl: NavController,
@@ -51,9 +54,13 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                                 .gettask(resposta.id)
                                 .then(resposta_1 => {
                                     if (resposta_1.state === "EXECUTED") {
+                                
                                         this.atendimentoDigitalOutput = resposta_1.output.tickets;
+                                       
                                         clearInterval(this.rqSi);
                                         this.loading(false);
+                                 
+                                        
                                     }
                                 }, error => {
                                     qntErro++;
