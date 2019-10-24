@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title> Validador Manobra_ </ion-title>
+        <ion-title> Validador Efika</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content padding>
@@ -8,8 +8,16 @@
         <ion-list>
 
             <ion-item>
-                <ion-label fixed>Ordem POM</ion-label>
+                <ion-label fixed>Ordem/SS</ion-label>
                 <ion-input type="text" [(ngModel)]="workerOrderId"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed>Tipo de Validação</ion-label>
+                <ion-select [(ngModel)]="tipo">
+                    <ion-option value="MANOBRA">Manobra</ion-option>
+                    <ion-option value="DOWNGRADE">Downgrade</ion-option>
+                </ion-select>
             </ion-item>
 
             <ion-item>
