@@ -57,7 +57,6 @@ export class ListAtendimentoDigitalComponent extends SuperComponentService imple
                                 .gettask(resposta.id)
                                 .then(resposta_1 => {
                                     if (resposta_1.state === "EXECUTED") {
-                                        debugger
                                         this.atendimentoDigitalOutput = [];
                                         this.atendimentoDigitalOutput = resposta_1.output.tickets;
                                         console.log(this.atendimentoDigitalOutput);

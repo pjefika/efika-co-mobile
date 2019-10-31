@@ -23,7 +23,6 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
     // Lista de cidades
     public lcidades: string[];
 
-    // Data de nascimento para formatação do input 
     public datanasc: string;
 
     public repeatpassword: string;
@@ -77,6 +76,7 @@ export class UserModifyComponent extends SuperComponentService implements OnInit
         if (this.validpasswordupdate()) {
             this.holderService.user.dateBorn = this.datanasc;
             if (this.uservalid()) {
+                this.holderService.user.name = this.holderService.user.name.toUpperCase()
                 this.userModifyService
                     .updateuserinfo(this.holderService.user)
                     .then(resposta => {

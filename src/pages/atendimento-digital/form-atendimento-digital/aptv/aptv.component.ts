@@ -237,7 +237,6 @@ export class AptvComponent extends SuperComponentService implements OnInit {
     }
 
     public validShowOptionsInMotivosError(nomeErro: string) {
-        // debugger
         if (nomeErro.includes('Tela de Aprovisionamento') && this.atendimento.tecnologiaTV === 'TVDTH') {
             return true;
         } else if (nomeErro.includes('Erro 1401') && this.atendimento.tecnologiaTV === 'TVHIBRIDA') {

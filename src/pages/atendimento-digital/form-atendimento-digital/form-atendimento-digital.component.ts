@@ -46,40 +46,11 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
 
     public validacaoATSIP() {
         this.isValidAttrs = false;
-        // this.atendimentoDigitalTabelaValidacao = {
-        //     rede: "N/A",
-        //     tecnologia: "N/A",
-        //     bandaLargaOk: this.holderService.certification.fulltest.resultado,
-        //     isIPTv: "N/A",
-        //     isTvHibrida: "N/A",
-        //     isTvDTH: "N/A",
-        //     IsSIP: this.holderService.cadastro.servicos.tipoLinha === "SIP",
-        //     isLinhaMetalico: this.holderService.cadastro.servicos.tipoLinha === "TDM"
-        // }
-        // if (this.atendimentoDigitalTabelaValidacao.IsSIP
-        //     && !this.atendimentoDigitalTabelaValidacao.isLinhaMetalico) {
-        //     this.isValidAttrs = true;
-        // }
         this.isValidAttrs = true;
     }
 
     public validacaoAPTV() {
         this.isValidAttrs = false;
-        // this.atendimentoDigitalTabelaValidacao = {
-        //     rede: "N/A",
-        //     tecnologia: this.holderService.cadastro.rede.tipo === "GPON",
-        //     bandaLargaOk: this.holderService.certification.fulltest.resultado,
-        //     isIPTv: this.holderService.cadastro.servicos.tipoTv != null || this.holderService.cadastro.servicos.tipoTv != "IPTV",
-        //     isTvHibrida: this.holderService.cadastro.servicos.tipoTv != null || this.holderService.cadastro.servicos.tipoTv != "Hibrido",
-        //     isTvDTH: this.holderService.cadastro.servicos.tipoTv != null || this.holderService.cadastro.servicos.tipoTv === "DTH",
-        //     IsSIP: "N/A",
-        //     isLinhaMetalico: "N/A"
-        // }
-        // if (this.atendimentoDigitalTabelaValidacao.isIPTv
-        //     && this.atendimentoDigitalTabelaValidacao.isTvHibrida
-        //     && !this.atendimentoDigitalTabelaValidacao.isTvDTH) {
-        //     this.isValidAttrs = true;
-        // }
         this.isValidAttrs = true;
     }
 
