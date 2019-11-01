@@ -4,9 +4,8 @@ import { Valids } from "../fulltest/validacao";
 import { Ont } from "./ont";
 import { Serial } from "./serial";
 import { RespostaGenerica } from "../resposta/resposta-generica";
-import { AtendimentoDigitalOutput, AtendimentoHold } from "../atendimento-digital/atendimento-digital-output";
+import { AtendimentoHold } from "../atendimento-digital/atendimento-digital-output";
 import { Solicitacao } from "./solicitacao";
-// import { Tickets } from "./task-process";
 import { Tickets } from "./ticket-output";
 
 export class Output {
