@@ -47,8 +47,7 @@ export class AddPontos {
 }
 
 export class ReOpenAntendimentoDigital {
-    tecnico: number;
-    user: number;
-    atendimento: any;
-    observacao: string;
+    ticketId: string;
+    tecNote: string;
+    login: string;
 }

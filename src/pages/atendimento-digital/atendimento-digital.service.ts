@@ -70,10 +70,9 @@ export class AtendimentoDigitalService extends SuperService {
     }
 
     public updateAtendimento(atendimento: ReOpenAntendimentoDigital) {
-        // ATDG_UPDATE
         let userSession = JSON.parse(localStorage.getItem("user"));
-        let _data: { task: string, input: { user: number, tecnico: number, atendimento: number, observacao: string }, executor: string };
-        _data = { task: "ATDG_UPDATE", input: { user: atendimento.user, tecnico: atendimento.tecnico, observacao: atendimento.observacao, atendimento: atendimento.atendimento }, executor: userSession.user };
+        let _data: { task: string, input: { login: string, tecNote: string, ticketId: string }, executor: string };
+        _data = { task: "ATDG_UPDATE", input: { login: atendimento.login, tecNote: atendimento.tecNote, ticketId: atendimento.ticketId }, executor: userSession.user };
         this.infoResquest = {
             rqst: "post",
             command: "post",

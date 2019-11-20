@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AtendimentoDigitalService } from '../atendimento-digital.service';
 import { HolderService } from '../../../providers/holder/holder.service';
 import { SuperComponentService } from '../../../providers/component-service/super-component.service';
-import { AlertController, LoadingController, NavController } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, ModalController } from 'ionic-angular';
 import { AtendimentoDigitalTabelaValidacao } from '../../../view-model/atendimento-digital/atendimento-digital-tabela-validacao';
 
 @Component({
@@ -24,6 +24,7 @@ export class FormAtendimentoDigitalComponent extends SuperComponentService imple
     constructor(
         public holderService: HolderService,
         public loadingCtrl: LoadingController,
+        public modalCtrl: ModalController,
         public alertCtrl: AlertController,
         public navCtrl: NavController) {
         super(alertCtrl, loadingCtrl, holderService);

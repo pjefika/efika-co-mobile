@@ -1,0 +1,123 @@
+#container {
+	width: 600px;
+	margin: 20px auto;
+}
+
+#accordion {
+	margin-top: 20px;
+}
+
+#accordion .item {
+	width: 280px;
+	height: 45px; /* height = total height of A child element */ 
+	overflow:hidden;
+  
+	transition: height ease-in-out 500ms; /* css3 transition */
+	-o-transition: height ease-in-out 500ms;
+	-moz-transition: height ease-in-out 500ms;
+	-webkit-transition: height ease-in-out 500ms;
+	
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	
+	margin-bottom: 2px;
+}
+
+#accordion a {
+	display: block;
+	line-height: 35px;
+	background: #e6e6e6;
+	padding: 5px;
+	color: #1e1e1e;
+	text-decoration: none;
+}
+
+#accordion p {
+	height: auto;
+	padding: 15px;
+}
+
+#accordion div:hover {
+	height: auto;
+}
+
+#accordion div:hover a {
+	border-bottom: 1px solid #ccc;
+}
+
+.chip-md {
+    border-radius: 16px;
+    height: 32px;
+    font-size: 13px;
+    line-height: 32px;
+    color: rgba(0, 0, 0, 0.87);
+    background: rgba(0, 0, 0, 0.12);
+    margin: 2px 0;
+    width: 100%;
+}
+
+.item-md {
+    padding-left: 0px;
+    padding-right: 0;
+    position: relative;
+    font-size: 1.6rem;
+    font-weight: normal;
+    text-transform: none;
+    color: #000;
+    background-color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.item-md {
+    padding-left: 0px;
+    padding-right: 0;
+    position: relative;
+    font-size: 1.6rem;
+    font-weight: normal;
+    text-transform: none;
+    color: #000;
+    background-color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.item-md {
+    padding-left: 0px;
+    padding-right: 0;
+    position: relative;
+    font-size: 1.6rem;
+    font-weight: normal;
+    text-transform: none;
+    color: #000;
+    background-color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.item-md {
+    padding-left: 0px;
+    padding-right: 0;
+    position: relative;
+    font-size: 1.6rem;
+    font-weight: normal;
+    text-transform: none;
+    color: #000;
+    background-color: #fff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-content-md {
+    padding: 10px;
+    font-size: 1.4rem;
+    line-height: 1.5;
+}

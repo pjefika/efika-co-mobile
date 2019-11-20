@@ -42,12 +42,7 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
     }
 
     public reOpenAtendimento() {
-        this.reOpenAntendimentoDigital = {
-            atendimento: this.atendimentoHold.atendimento.id,
-            tecnico: this.atendimentoHold.atendimento.tecnico.id,
-            user: this.atendimentoHold.atendimento.user.id,
-            observacao: this.observacao
-        }
+        
         // console.log(this.reOpenAntendimentoDigital);
         let count: number = 0;
         let qntErro: number = 0;
@@ -96,17 +91,6 @@ export class DescAtendimentoDigitalComponent extends SuperComponentService imple
 
 
     public openPopUpReOpenAtend() {
-        // const mountListError = [];
-        // this.listMotivoErro.forEach((me, i) => {
-        //     let obj;
-        //     obj = {
-        //         name: i,
-        //         type: 'radio',
-        //         label: me.nome,
-        //         value: me
-        //     }
-        //     mountListError.push(obj);
-        // });
         const alert = this.alertCtrl.create({
             title: "Deseja reabrir o atendimento",
             subTitle: "Digite uma observação para reabertura.",

@@ -9,72 +9,202 @@
 </ion-header>
 <ion-content padding>
     <div>
-
+        <ion-card-subtitle>
+            <ion-chip>
+                <ion-icon name="cog"></ion-icon>
+                <ion-label>Atendimentos ATDG</ion-label>
+            </ion-chip>
+        </ion-card-subtitle>
         <ion-card *ngFor="let atendimento of atendimentoDigitalOutput">
-            <ion-card-header *ngIf="atendimento && atendimento.customer">
-                <ion-card-subtitle>
-                    <ion-chip>
-                        <ion-icon name="person"></ion-icon>
-                        <ion-label>cliente: {{atendimento.customer.instancia}}</ion-label>
-                    </ion-chip>
-                </ion-card-subtitle>
-                <ion-card-title *ngIf="atendimento.status">
-                    <ion-badge color="dark">{{atendimento.status.beautyName}}</ion-badge>
-                    <br>
-                    <ion-badge color="primary"
-                        *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[0].value === false">
-                        cadastro sem divergência</ion-badge>
-                    <ion-badge color="danger"
-                        *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[0].value === true">
-                        cadastro com divergência</ion-badge>
-                    <br>
-                    <ion-badge color="primary"
-                        *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[2].value === false">
-                        sem bloqueio radius</ion-badge>
-                    <ion-badge color="danger"
-                        *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[2].value === true">
-                        com bloqueio radius</ion-badge>
-                </ion-card-title>
-            </ion-card-header>
-
             <ion-card-content>
-                <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.ss">
-                    <ion-label>SS: {{atendimento.ss}}</ion-label>
-                </ion-chip>
-                <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.leType">
-                    <ion-label>Tipo: <b>{{atendimento.leType}}</b></ion-label>
-                </ion-chip>
-                <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.creationDate">
-                    <ion-label>Data de Criação: <b>{{atendimento.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</b>
-                    </ion-label>
-                </ion-chip>
-                <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.lastModifiedDate">
-                    <ion-label>Última Alteração: <b>{{atendimento.lastModifiedDate | date:'dd/MM/yyyy HH:mm:ss'}}</b>
-                    </ion-label>
-                </ion-chip>
-                <ion-chip style="width: 100%" *ngIf="atendimento && atendimento.technician">
-                    <ion-label>Técnico: <b>{{atendimento.technician.login}} - {{atendimento.technician.name}}</b>
-                    </ion-label>
-                </ion-chip>
-                
-                <ion-item-group style="width: 100%" *ngFor="let att of atendimento.attendances">
-                <span *ngIf="att.endDate">
-                    <ion-item-divider>
-                        <ion-label>Atendido às: {{att.endDate | date:'dd/MM/yyyy HH:mm:ss'}}</ion-label>
-                    </ion-item-divider>
-                    <ion-item>
-                        <ion-label *ngIf="att && att.login">Atendente: <b>{{att.login}}</b></ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label *ngIf="att && att.closure">Encerramento CO: <b>{{att.closure.name}}</b></ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label *ngIf="att && att.note">Nota: <b>{{att.note}}</b></ion-label>
-                    </ion-item>
-                    <ion-item>
-                        <button ion-button block round (click)="openPopUpReOpenAtend()">Reabrir</button>
-                    </ion-item>
-                </span>
+                <ion-item>
+                    Cliente: <b>{{atendimento.customer.instancia}}</b>
+                    <ion-badge item-end>{{atendimento.lastModifiedDate | date:'dd/MM HH:mm'}}</ion-badge>
+                </ion-item>
+                <ion-item-group>
+                    <div id="container">
+                        <div id="accordion">
+                            <div class="item" *ngFor="let att of atendimento.attendances">
+                                <a href="#">
+                                    Atendimento de {{att.login}} - {{att.endDate | date:'dd/MM HH:mm'}}&nbsp;
+                                </a>
+                                <p>
+                                    <ion-card-title *ngIf="atendimento.status">
+
+                                        <ion-badge color="light"
+                                            *ngIf="atendimento.status.beautyName == 'Aguardando Atendimento Novamente'">
+                                            Status: &nbsp;{{atendimento.status.beautyName}}
+                                        </ion-badge>
+
+                                        <ion-badge color="light"
+                                            *ngIf="atendimento.status.beautyName == 'Aguardando Atendimento'">
+                                            Status: &nbsp;{{atendimento.status.beautyName}}
+                                        </ion-badge>
+                                        <ion-badge color="light"
+                                            *ngIf="atendimento.status.beautyName == 'Em Atendimento'">
+                                            Status: &nbsp;{{atendimento.status.beautyName}}
+                                        </ion-badge>
+                                        <ion-badge color="light" *ngIf="atendimento.status.beautyName == 'Tratado'">
+                                            Status: &nbsp;{{atendimento.status.beautyName}}
+                                        </ion-badge>
+                                        <br />
+                                        <br />
+
+                                        <ion-badge color="light"
+                                            *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[0].value === false">
+                                            cadastro sem divergência
+                                        </ion-badge>
+                                        <ion-badge color="light"
+                                            *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[0].value === true">
+                                            cadastro com divergência
+                                        </ion-badge>
+
+                                        <br>
+
+                                        <ion-badge color="light"
+                                            *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[2].value === false">
+                                            sem bloqueio radius
+                                        </ion-badge>
+                                        <ion-badge color="light"
+                                            *ngIf="atendimento && atendimento.customer && atendimento.customer.asserts[2].value === true">
+                                            com bloqueio radius
+                                        </ion-badge>
+                                        <br />
+                                        <ion-chip *ngIf="atendimento && atendimento.ss">
+                                            <ion-label>SS: {{atendimento.ss}}</ion-label>
+                                        </ion-chip>
+                                        <ion-chip *ngIf="atendimento && atendimento.leType">
+                                            <ion-label>Tipo: <b>{{atendimento.leType}}</b></ion-label>
+                                        </ion-chip>
+                                        <ion-chip *ngIf="atendimento && atendimento.creationDate">
+                                            <ion-label>Data de Criação:
+                                                <b>{{atendimento.creationDate | date:'dd/MM/yyyy HH:mm:ss'}}</b>
+                                            </ion-label>
+                                        </ion-chip>
+                                        <ion-chip *ngIf="atendimento && atendimento.lastModifiedDate">
+                                            <ion-label>Última Alteração:
+                                                <b>{{atendimento.lastModifiedDate | date:'dd/MM/yyyy HH:mm:ss'}}</b>
+                                            </ion-label>
+                                        </ion-chip>
+                                        <ion-chip *ngIf="atendimento && atendimento.technician">
+                                            <ion-label>Técnico: <b>{{atendimento.technician.login}} -
+                                                    {{atendimento.technician.name}}</b>
+                                            </ion-label>
+                                        </ion-chip>
+                                        <ion-chip
+                                            *ngIf="atendimento && atendimento.attendances && atendimento.attendances.login">
+                                            <ion-label>Atendente: <b>{{atendimento.attendances.login}}</b></ion-label>
+                                        </ion-chip>
+                                        <ion-chip
+                                            *ngIf="atendimento && atendimento.attendances && atendimento.attendances.note">
+                                            <ion-label>Checklist: <b>{{atendimento.attendances.note}}</b></ion-label>
+                                        </ion-chip>
+                                        <ion-chip
+                                            *ngIf="atendimento && atendimento.attendances && atendimento.attendances.endDate">
+                                            <ion-label>Encerramento:
+                                                <b>{{atendimento.attendances.endDate | date:'dd/MM/yyyy HH:mm:ss'}}</b>
+                                            </ion-label>
+                                        </ion-chip>
+                                        <ion-card style="margin: 10px;">
+                                            <ion-card-header>
+                                                <b>Checklist Atendimento:</b>
+                                            </ion-card-header>
+                                            <ion-card-content>
+                                                {{att.note}}
+                                            </ion-card-content>
+                                        </ion-card>
+                                    </ion-card-title>
+                                    <br />
+                                    <span *ngIf="att && att.endDate">
+                                        <form *ngIf="att && att.endDate">
+                                            <ion-item style="display: none;">
+                                                <ion-label position="fixed">ID do Atendimento</ion-label>
+                                                <ion-input type="text" [(ngModel)]="atendimento.id" disabled name="id">
+                                                </ion-input>
+                                            </ion-item>
+                                            <ion-item style="display: none;">
+                                                <ion-label position="fixed">Técnico Solicitante</ion-label>
+                                                <ion-input type="text" [(ngModel)]="atendimento.technician.login"
+                                                    value="atendimento.technician.login" disabled name="technician">
+                                                </ion-input>
+                                            </ion-item>
+                                            <ion-item style="display: none;">
+                                                <ion-label position="fixed">Atendente</ion-label>
+                                                <ion-input type="text" [(ngModel)]="att.login" disabled name="login">
+                                                </ion-input>
+                                            </ion-item>
+                                            <ion-chip *ngIf="att && att.endDate">
+                                                <ion-icon name="refresh-circle" color="primary"></ion-icon>
+                                                <ion-label>Reabrir Atendimento</ion-label>
+                                            </ion-chip>
+
+                                            <span *ngIf="att && att.endDate">
+                                                <ion-textarea rows="6" cols="20" placeholder="" [(ngModel)]="tecNote"
+                                                    name="tecNote"
+                                                    style="border: 1px solid #9a9a9a; border-radius: 8px; padding: 10px;"
+                                                    placeholder="MOTIVO: Descreva o motivo da reabertura aqui">
+                                                </ion-textarea>
+                                            </span>
+                                            <button ion-button block round (click)="reOpenAtendimento(atendimento)"
+                                                *ngIf="att && att.endDate">Reabrir</button>
+                                        </form>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <span *ngIf="att && att.closure && att.closure.name && att.closure.name">
+                        <form *ngIf="att && att.closure && att.closure.name">
+                            <ion-chip>
+                                <ion-icon name="cog" color="primary"></ion-icon>
+                                <ion-label>Atendimento</ion-label>
+                            </ion-chip>
+                            <ion-item>
+                                <ion-label position="fixed">ID do Atendimento</ion-label>
+                                <ion-input type="text" [(ngModel)]="atendimento.id" disabled name="id"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="fixed">Técnico Solicitante</ion-label>
+                                <ion-input type="text" [(ngModel)]="atendimento.technician.login"
+                                    value="atendimento.technician.login" disabled name="technician"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="fixed">Atendente</ion-label>
+                                <ion-input type="text" [(ngModel)]="att.login" disabled name="login">
+                                </ion-input>
+                            </ion-item>
+                            <ion-chip *ngIf="reabertura == true">
+                                <ion-icon name="create" color="primary"></ion-icon>
+                                <ion-label>Comentário do Atendente</ion-label>
+                            </ion-chip>
+                            <ion-card>
+                                <ion-card-header>
+                                    <ion-card-subtitle>Nota do Operador</ion-card-subtitle>
+                                </ion-card-header>
+                                <ion-card-content>
+                                    {{att.note}}
+                                </ion-card-content>
+                            </ion-card>
+                            <ion-chip *ngIf="att && att.endDate">
+                                <ion-icon name="refresh-circle" color="primary"></ion-icon>
+                                <ion-label>Reabrir Atendimento</ion-label>
+                            </ion-chip>
+                            <ion-item *ngIf="att && att.endDate">
+                                <br />
+                                <br />
+                                <ion-textarea rows="6" cols="20" placeholder="" [(ngModel)]="tecNote" name="tecNote"
+                                    style="border: 1px solid #9a9a9a; border-radius: 8px; padding: 10px;"
+                                    placeholder="MOTIVO: Descreva o motivo da reabertura aqui">
+                                </ion-textarea>
+                            </ion-item>
+                            <button ion-button block round (click)="reOpenAtendimento(atendimento)"
+                                *ngIf="att && att.endDate">Reabrir</button>
+                            <br />
+                            <button ion-button block round color="danger" *ngIf="att && att.endDate"
+                                (click)="reabertura = false">Cancelar Reabertura</button>
+                        </form>
+                    </span> -->
                 </ion-item-group>
 
             </ion-card-content>

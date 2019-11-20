@@ -1,6 +1,6 @@
 export class Tickets {
     ata: Ata
-    attendances: Attendances[]
+    attendances: Attendances
     creationDate: Date
     customer: Customer
     id: string
@@ -12,7 +12,7 @@ export class Tickets {
     responsibleLogin: string
     ss: string
     status: { 
-        beautyName: string, 
+        beautyName: any, 
         name: string 
     }
     tecNote: null
